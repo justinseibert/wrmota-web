@@ -1,0 +1,23 @@
+.u-hide,
+  display: none
+  opacity: 0
+  visibility: hidden
+  z-index: $z-hide
+
+.u-load,
+.u-load-shape
+  display: block
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: $white
+  opacity: 1
+  z-index: $z-load
+
+@media (min-width: $tablet-min)
+  .u-reverse
+    direction: rtl
+    & .grid
+      direction: ltr

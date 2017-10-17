@@ -1,0 +1,78 @@
+=animate($name,$time,$iteration)
+  -webkit-animation-name: $name
+  animation-name: $name
+  -webkit-animation-duration: $time
+  animation-duration: $time
+  -webkit-animation-iteration-count: $iteration
+  animation-iteration-count: $iteration
+  animation-fill-mode: both
+
+=delay($time)
+  -webkit-animation-delay: $time
+  animation-delay: $time
+
+.loading-animation
+  +animate(loading,1s,infinite)
+
+@-webkit-keyframes loading
+  from,
+  to
+    opacity: 1
+  50%
+    opacity: .5
+
+@keyframes loading
+  from,
+  to
+    opacity: 1
+  50%
+    opacity: .5
+
+.title-animation
+  +animate(title, .6s, 1)
+
+@-webkit-keyframes title
+  from
+    opacity: 0
+    -webkit-transform: translate3d(0, 10%, 0)
+  to
+    opacity: 1
+    -webkit-transform: none
+
+@keyframes title
+  from
+    opacity: 0
+    transform: translate3d(0, 10%, 0)
+  to
+    opacity: 1
+    transform: none
+
+.image-animation
+  +animate(image, 1s, 1)
+
+.delay-a
+  +delay(.1s)
+.delay-b
+  +delay(.2s)
+.delay-c
+  +delay(.3s)
+.delay-d
+  +delay(.4s)
+
+@-webkit-keyframes image
+  from
+    opacity: 0
+    -webkit-transform: translate3d(0, -10%, 0)
+  80%
+    -webkit-transform: none
+  to
+    opacity: 1
+
+@keyframes image
+  from
+    opacity: 0
+    transform: translate3d(0, -10%, 0)
+  80%
+    transform: none
+  to
+    opacity: 1

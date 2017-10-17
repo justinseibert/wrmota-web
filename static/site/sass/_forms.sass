@@ -1,0 +1,48 @@
+input,
+input[type='text'],
+input[type='email'],
+input[type='submit'],
+  +no-outline
+  display: inline-block
+  margin-bottom: $light
+  padding: 0.5rem 0.75rem
+  line-height: 1.1
+  font-size: 1.4rem
+  height: 2.5rem
+  min-width: 2.5rem
+  &::placeholder
+    color: $medium-grey
+
+input[type='submit']
+  @extend .blue
+
+label
+  display: inline-block
+  text-align: left
+  line-height: 0.5
+  &.boolean-label
+    padding-left: 50px
+    & span
+      font-size: 60%
+      line-height: 1.3
+    & span::before
+      content: ''
+      display: block
+      position: absolute
+      top: 5px
+      left: 0
+      background: $light-grey
+      width: 35px
+      height: 35px
+    & input[type='checkbox']
+      display: none
+      &:checked + span::before
+        background: $blue
+
+.grecaptcha-badge
+  display: none
+
+input svg,
+label svg,
+button svg
+  height: 100%

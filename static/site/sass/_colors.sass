@@ -1,0 +1,75 @@
+.grey,
+a.grey
+  background: $light-grey
+  color: $text
+  &:hover,
+  &:active,
+  &:focus
+    background: $light-grey-select
+    color: $text
+
+.blue,
+a.blue
+  background: $blue
+  color: $white
+  &:hover,
+  &:active,
+  &:focus
+    background: $green
+
+.pink,
+a.pink
+  background: $pink
+  color: $white
+  &:hover,
+  &:active,
+    color: $text
+    background: $yellow
+
+.yellow
+  background: $yellow
+
+.disabled
+  &.blue,
+  &.blue:hover,
+  &.blue:active
+    background: $light-grey
+    color: $medium-grey
+    transform: scale3d(1,1,1)
+    cursor: not-allowed
+
+.color-list ul
+  list-style: none
+  margin: 0
+  padding: 0
+  & li
+    position: relative
+    padding: 0.3rem 1.2rem
+    line-height: 1
+    &:before
+      display: block
+      position: absolute
+      left: 0
+      top: 0.35rem
+      content: ''
+      width: 0.5rem
+      height: 0.5rem
+      border: 0.1rem solid #000
+
+li.blu:before
+  background: #00F
+
+li.bla:before
+  background: #000
+
+li.red:before
+  background: red
+
+li.yel:before
+  background: #FF0
+
+li.whi:before
+  background: #fff
+
+li.gre:before
+  background: #19ab21

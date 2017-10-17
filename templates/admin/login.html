@@ -1,0 +1,10 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+<h1>login</h1>
+<form method="post" action="/login" class="row">
+  {{ form.csrf_token }}
+  {{ form.username(class="grey five grid",placeholder="user") }}
+  {{ form.password(class="grey five grid",placeholder="pass") }}
+  <input class="two grid" type="submit" value="submit">
+</form>
+{% endblock body %}

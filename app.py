@@ -1,5 +1,5 @@
 import os
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, flash
 from flask_assets import Environment, Bundle
 from flask_wtf.csrf import CSRFProtect
 
@@ -27,6 +27,7 @@ def create_app(config='PRODUCTION', app_name=None):
 
 def configure_app(app, configurations):
     app.config.from_object(configurations)
+    app.url_map.default_subdomain = ''
 
 def configure_blueprints(app, blueprints):
     for blueprint in blueprints:
@@ -59,9 +60,15 @@ def configure_logging(app):
 def configure_error_handlers(app):
     @app.errorhandler(500)
     def server_error_page(error):
-        return render_template('error/500.html', error='500'), 404
+        message = 'server thing'
+        return render_template('site/error.html', message=message, type=500)
 
     @app.errorhandler(404)
     def notfound_error_page(error):
-        return render_template('error/404.html', error='404'), 404
+        message = 'nothing here'
+        return render_template('site/error.html', message=message, type=404)
 
+    @app.errorhandler(403)
+    def forbidden_error_page(error):
+        message = 'not allowed'
+        return render_template('site/error.html', message=message, type=403)

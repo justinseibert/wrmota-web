@@ -1,0 +1,55 @@
+.align-left
+  text-align: left
+.float-left
+  float: left
+
+.align-right
+  text-align: right
+.float-right
+  float: right
+
+.align-center
+  text-align: center
+.float-center
+  margin: 0 auto
+
+@media (min-width: $tablet-max)
+  .flex-center
+    display: flex
+    align-items: center
+    & p
+      margin-bottom: 0
+
+
+.frame-light
+  padding: $light
+.frame-medium
+  padding: $medium
+.frame-heavy
+  padding: $heavy
+
+.unframe-left
+  padding-left: 0
+.unframe-right
+  padding-right: 0
+.unframe-top
+  padding-top: 0
+.unframe-bottom
+  padding-bottom: 0
+.unframe-y
+  @extend .unframe-top
+  @extend .unframe-bottom
+.unframe-x
+  @extend .unframe-left
+  @extend .unframe-right
+
+.break-light
+  margin-bottom: $light
+.break-medium
+  margin-bottom: $medium
+.break-heavy
+  margin-bottom: $heavy
+
+.fix-bottom
+  position: fixed
+  bottom: 0

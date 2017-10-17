@@ -1,0 +1,102 @@
+.container
+  @extend div
+  max-width: 1200px
+  margin: 0 auto
+  padding: $light
+
+.row
+  @extend div
+  margin: 0
+  overflow: hidden
+
+.grid
+  position: relative
+  float: left
+  box-sizing: border-box
+  width: 100%
+  &.float-center
+    float: none
+
+.u-fix .grid
+  &.one
+    width: 8.333334%
+  &.two
+    width: 16.66667%
+  &.three
+    width: 25%
+  &.four
+    width: 33.33334%
+  &.five
+    width: 41.66667%
+  &.six
+    width: 50%
+  &.seven
+    width: 58.33333%
+  &.eight
+    width: 66.66666%
+  &.nine
+    width: 74.99999%
+  &.ten
+    width: 83.33333%
+  &.eleven
+    width: 91.66666%
+
+@media (min-width: $desktop-min)
+  .grid
+    &.one
+      width: 8.333334%
+    &.two
+      width: 16.66667%
+    &.three
+      width: 25%
+    &.four
+      width: 33.33334%
+    &.five
+      width: 41.66667%
+    &.six
+      width: 50%
+    &.seven
+      width: 58.33333%
+    &.eight
+      width: 66.66666%
+    &.nine
+      width: 74.99999%
+    &.ten
+      width: 83.33333%
+    &.eleven
+      width: 91.66666%
+
+.grid.shape
+  padding: 0
+  & img
+    width: 100%
+
+@media (max-width: $mobile-max)
+  .grid.shape
+    width: 16.8%
+    margin: 2%
+    &:first-child,
+    &:nth-child(5n+1)
+      margin-left: 0
+    &:nth-child(5n+5)
+      margin-right: 0
+
+@media (min-width: $tablet-min) and (max-width: $tablet-max)
+  .grid.shape
+    width: 10.4%
+    margin: 1.2%
+    &:first-child,
+    &:nth-child(8n+1)
+      margin-left: 0
+    &:nth-child(8n+8)
+      margin-right: 0
+
+@media (min-width: $desktop-min)
+  .grid.shape
+    width: 8.2%
+    margin: 1%
+    &:first-child,
+    &:nth-child(10n+1)
+      margin-left: 0
+    &:nth-child(10n+10)
+      margin-right: 0

@@ -1,0 +1,26 @@
+.button
+  @extend input
+
+.answer
+  +no-outline
+  position: relative
+  float: left
+  display: block
+  width: 23.5%
+  background: $white
+  margin: 1%
+  +reach-ends
+  &:focus
+    padding: 4px
+    border: 1px solid $green
+  &:active
+    padding: 0
+    border: none
+  +activate
+
+.nav-button
+  @extend input
+  text-align: center
+  margin: $light
+  padding: 5px
+  +activate

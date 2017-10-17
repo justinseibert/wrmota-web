@@ -1,0 +1,58 @@
+.page
+  max-width: 400px
+  margin-left: auto
+  margin-right: auto
+
+@page
+  size: Letter
+  margin: 0
+  padding: 0
+
+@media print
+  head,
+  script,
+    display: none
+
+  html,
+  body,
+  div,
+  header,
+  section,
+  footer,
+  nav,
+  article,
+  .grid,
+  .row,
+  .container
+    display: inline
+    margin: 0
+    padding: 0
+    border: 0
+
+  .page
+    display: block
+    border: 0
+    margin: 0
+    padding: 0
+    border-radius: 0
+    width: 8.5in
+    max-width: 100%
+    min-height: 11in
+    box-shadow: none
+    background: #FFF
+    page-break-after: always
+
+  .subpage,
+  img.subpage
+    display: block
+    margin: 0
+    padding: 0
+    width: 8.5in
+    height: 11in
+
+  .no-print
+    display: none
+    opacity: 0
+    width: 0
+    height: 0
+    position: fixed

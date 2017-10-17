@@ -1,0 +1,71 @@
+.carousel-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -moz-tap-highlight-color: rgba(255, 255, 255, 0);
+  -ms-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+.carousel-slides {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: width 100ms, left 500ms;
+}
+.carousel-slides > * {
+  position: absolute;
+  top: 0;
+}
+.carousel-left,
+.carousel-right {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 20;
+  border: 10px solid rgba(255, 0, 0, 0);
+  border-top: 0;
+  border-bottom: 0;
+  transition: border 400ms;
+}
+.carousel-left {
+  left: 0;
+}
+.carousel-left:hover{
+  border-left:10px solid #F00;
+}
+.carousel-right {
+  right: 0;
+}
+.carousel-right:hover{
+  border-right:10px solid #F00;
+}
+.carousel-button {
+  display: inline-block;
+  height: 10px;
+  margin: 8px 0.5%;
+  cursor: pointer;
+  background: #ddd;
+  transition: background 300ms;
+}
+.carousel-button:hover,
+.carousel-button.selected {
+  background: #F00;
+}
+.carousel-buttons {
+  display: block;
+  width: 100%;
+}
+.carousel-button:first-child {
+  margin-left: 0;
+}
+.carousel-button:last-child {
+  margin-right: 0;
+}

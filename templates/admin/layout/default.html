@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>admin: wrmota</title>
+    {% assets 'css_site' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+  </head>
+  <body>
+    {% include 'admin/snippet/message.html' %}
+    <article class="container">
+      {% block body %}
+      {% endblock body %}
+    </article>
+  </body>
+</html>
