@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(label='Pass', validators=[InputRequired()], id='loginPass')
 
     def validate(self):
-        if not super().validate():
+        if not super(LoginForm,self).validate():
             return False
 
         users = current_app.config['USERS']
