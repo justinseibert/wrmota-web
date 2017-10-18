@@ -8,11 +8,13 @@ from wrmota.views import _admin
 
 @_admin.before_request
 def restrict_to_admins():
+    print('')
     if 'logged_in' not in session:
         session['logged_in'] = False
+        session['user'] = ''
 
     if not session['logged_in'] and request.path != '/login':
-        abort(403)
+        return redirect(url_for('_admin.login'))
 
 @_admin.route('/')
 def index():
@@ -23,11 +25,15 @@ def login():
     form = Forms.LoginForm()
     if form.validate_on_submit():
         session['logged_in'] = True
-        flash('logged in')
+        session['user'] = form['username'].data
+
+        flash('logged in as <b>{}</b>'.format(session['user']))
         return redirect(url_for('_admin.index'))
     elif request.method == 'POST':
         flash('incorrect credentials')
 
+    if session['logged_in']:
+        flash('already logged in as <b>{}</b>. <a href="/logout">log out?</a>'.format(session['user']))
     return render_template('admin/login.html', form=form)
 
 @_admin.route('/logout')

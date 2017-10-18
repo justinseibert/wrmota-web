@@ -1,7 +1,7 @@
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
-    <p class="row yellow align-center frame-light">{{ message }}</p>
+    <p class="row yellow align-center frame-light">{{ message|safe }}</p>
     {% endfor %}
   {% endif %}
 {% endwith %}
