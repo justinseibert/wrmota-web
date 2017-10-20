@@ -5,12 +5,17 @@
     {% assets 'css_site' %}
       <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
     {% endassets %}
+    {% assets 'js_lib' %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
   </head>
   <body>
     {% include 'admin/snippet/message.html' %}
-    <article class="container">
+    <div class="container">
       {% block body %}
       {% endblock body %}
-    </article>
+    </div>
+    {% block script %}
+    {% endblock script %}
   </body>
 </html>

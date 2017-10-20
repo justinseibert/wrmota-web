@@ -1,7 +1,5 @@
-.page
-  max-width: 400px
-  margin-left: auto
-  margin-right: auto
+.page,
+  width: 100%
 
 @page
   size: Letter
@@ -43,12 +41,13 @@
     page-break-after: always
 
   .subpage,
-  img.subpage
+  canvas.subpage
     display: block
-    margin: 0
+    margin: 0.24in
     padding: 0
-    width: 8.5in
-    height: 11in
+    border: 0.01in solid $light-grey
+    width: 8in
+    height: 2in
 
   .no-print
     display: none

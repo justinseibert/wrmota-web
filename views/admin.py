@@ -13,7 +13,7 @@ def restrict_to_admins():
         session['logged_in'] = False
         session['user'] = ''
 
-    if not session['logged_in'] and request.path != '/login':
+    if not session['logged_in'] and request.path != url_for('_admin.login'):
         return redirect(url_for('_admin.login'))
 
 @_admin.route('/')
@@ -33,7 +33,7 @@ def login():
         flash('incorrect credentials')
 
     if session['logged_in']:
-        flash('already logged in as <b>{}</b>. <a href="/logout">log out?</a>'.format(session['user']))
+        flash('already logged in as <b>{}</b>. <a href="{}">log out?</a>'.format(session['user'],url_for('_admin.logout')))
     return render_template('admin/login.html', form=form)
 
 @_admin.route('/logout')
