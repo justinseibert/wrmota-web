@@ -1,19 +1,15 @@
 {% extends 'admin/layout/default.html' %}
 {% block body %}
+  <section class="no-print row">
+    <label>segments:</label>
+    <input id="divisions" onchange="resegment(this.value);" name="divisions" type="number" value="10" min="1" class="grey">
+  </section>
   <div id="pageBrick" class="page">
-    <canvas id="canvasBrick" class="subpage" width="768" height="192" data-paper-resize="true">
+    <canvas id="canvasBrick" class="subpage" width="768" height="192" resize>
       <p class="yellow row align-center no-print">you browser doesn't support <b>canvas</b> elements which are necessary to run this page</p>
     </canvas>
   </div>
   <button type="button" class="blue button float-right" onclick="brick.print();">print</button>
-  <div class="row">
-    <ul>
-      <li>click the line segment to add a point</li>
-      <li>hold shift and click a point to remove it</li>
-      <li>drag a point to reshape the line</li>
-      <li>end points are disabled</li>
-    </ul>
-  </div>
 {% endblock body %}
 
 {% block script %}
@@ -21,7 +17,13 @@
   <script type="text/javascript">
     var brick;
     window.onload = function() {
-      brick = new Brick();
+      brick = new Brick({
+        segment: 10
+      });
+    }
+    function resegment(n){
+      brick.args.segment = n;
+      brick.draw.inch();
     }
   </script>
 {% endblock script %}
