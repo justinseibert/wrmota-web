@@ -3,8 +3,10 @@
 <h1>login</h1>
 <form method="post" action="/login" class="row">
   {{ form.csrf_token }}
-  {{ form.username(class="grey five grid",placeholder="user") }}
-  {{ form.password(class="grey five grid",placeholder="pass") }}
-  <input class="two grid" type="submit" value="submit">
+  <div class="five grid break-light float-center align-center">
+    {{ form.username(class="grey row",placeholder="user") }}
+    {{ form.password(class="grey row",placeholder="pass") }}
+    <input type="submit" value="submit">
+  </div>
 </form>
 {% endblock body %}

@@ -1,9 +1,9 @@
-<aside class="row no-print">
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
+{% if messages %}
+<aside class="row no-print flash-message-animation">
     {% for message in messages %}
     <p class="row yellow align-center frame-light">{{ message|safe }}</p>
     {% endfor %}
-  {% endif %}
-{% endwith %}
 </aside>
+{% endif %}
+{% endwith %}
