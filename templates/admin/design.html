@@ -6,8 +6,13 @@
     </canvas>
   </div>
   <section class="row no-print">
-    <button type="button" class="blue button float-left" onclick="brick.draw.map();">map</button>
-    <button type="button" class="blue button float-right" onclick="brick.print();">print</button>
+    <div class="nine grid">
+      <button id="chooseTwo" type="button" class="blue button" onclick="brick.draw.points();">select</button>
+      <button type="button" class="blue button" onclick="brick.draw.map();">map</button>
+    </div>
+    <div class="three grid align-right">
+      <button type="button" class="blue button" onclick="brick.print();">print</button>
+    </div>
     <div class="row">
       <ul>
         <li>click the line segment to add a point</li>
