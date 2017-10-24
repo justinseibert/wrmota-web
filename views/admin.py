@@ -13,7 +13,6 @@ def restrict_to_admins():
         session['logged_in'] = False
         session['user'] = ''
     if not session['logged_in'] and request.path != url_for('_admin.login'):
-        session['request'] = request.path
         return redirect(url_for('_admin.login'))
 
 @_admin.route('/login', methods=['GET', 'POST'])
@@ -24,7 +23,7 @@ def login():
         session['user'] = form['username'].data
 
         flash('logged in as <b>{}</b>'.format(session['user']))
-        return redirect(session['request'])
+        return redirect(url_for('_admin.index'))
     elif request.method == 'POST':
         flash('incorrect credentials')
 

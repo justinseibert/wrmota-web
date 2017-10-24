@@ -1,5 +1,9 @@
 {% extends 'admin/layout/default.html' %}
 {% block body %}
+  <div class="row no-print">
+    <label>stroke width (inches):</label>
+    <input id="strokeWidth" onchange="brick.draw.stroke(this.value);" name="strokeWidth" type="number" value="0.25" min="0.00" step="0.05" class="grey">
+  </div>
   <div id="pageBrick" class="page">
     <canvas id="canvasBrick" class="subpage" width="768" height="192" data-paper-resize="true">
       <p class="yellow row align-center no-print">you browser doesn't support <b>canvas</b> elements which are necessary to run this page</p>
@@ -8,17 +12,26 @@
   <section class="row no-print">
     <div class="nine grid">
       <button id="chooseTwo" type="button" class="blue button" onclick="brick.draw.points();">select</button>
+      <button id="smoothButton" type="button" class="blue button" onclick="brick.draw.smooth();">smooth</button>
       <button type="button" class="blue button" onclick="brick.draw.map();">map</button>
     </div>
     <div class="three grid align-right">
       <button type="button" class="blue button" onclick="brick.print();">print</button>
     </div>
     <div class="row">
+      <h2 class="align-left break-light">editing:</h2>
       <ul>
         <li>click the line segment to add a point</li>
-        <li>drag a point to reshape the line</li>
+        <li>drag a point (or its handle) to reshape the line</li>
         <li>hold shift and click a point to remove it</li>
         <li>end points are disabled</li>
+      </ul>
+      <h2 class="align-left break-light">controls:</h2>
+      <ul>
+        <li>select: specify the endpoints to use</li>
+        <li>smooth/flat: changes the curvature of the line</li>
+        <li>map: adds the current brick to the wall (below)</li>
+        <li>print: prints the current brick black/white at 8"x2" scale</li>
       </ul>
     </div>
     <div id="pageMap" class="page">

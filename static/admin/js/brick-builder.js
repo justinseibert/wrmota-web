@@ -4,7 +4,19 @@ var Brick = function(args){
   var canvas = document.getElementById('canvasBrick');
   var map = document.getElementById('canvasMap');
   var selectButton = document.getElementById('chooseTwo');
+  var smoothButton = document.getElementById('smoothButton');
   var action = new paper.Tool();
+
+  args = args || {};
+  user.args = {
+    segment: args.segment || 8,
+    points: {
+      id: {},
+      selected: []
+    },
+    smoothing: args.smoothing || false,
+    strokeWidth: args.strokeWidth || 0.25,
+  }
 
   var config = {
     dpi: 96,
@@ -40,12 +52,13 @@ var Brick = function(args){
     used: {},
     map_layers: 0,
     edit_layer: false,
-    stroke: 0.25,
+    strokeWidth: user.args.strokeWidth,
     hits: {
     	segments: true,
     	stroke: true,
+      handles: true,
       fill: true,
-    	tolerance: 5
+    	tolerance: 0
     },
     ball: null,
     paper: {
@@ -58,15 +71,6 @@ var Brick = function(args){
     path: null,
     segment: null,
     dragging: false,
-  }
-
-  args = args || {};
-  user.args = {
-    segment: args.segment || 8,
-    points: {
-      id: {},
-      selected: []
-    },
   }
 
   var util = {
@@ -102,16 +106,22 @@ var Brick = function(args){
       }, time);
     },
     print: function(){
-      var cache_title = document.title;
       if (canvas.width == config.print_width){
+        var cache_title = document.title;
         document.title = 'wrmota_'+(+new Date).toString(36);
-        window.print();
+
+        util.wait(100,util.afterPrint);
+
         canvas.width = canvas.clientWidth;
         util.scale();
         document.title = cache_title;
       } else {
         user.print();
       }
+    },
+    afterPrint: function(){
+      window.print();
+      paper.projects[0].activeLayer.children.pop();
     },
     randInt: function(max,min){
       min = min || 0;
@@ -151,7 +161,20 @@ var Brick = function(args){
     activate: function(canvas){
       var c = config.paper[canvas];
       paper.projects[c].activate();
-    }
+    },
+    smooth: function(item){
+      if (user.args.smoothing && item.className == 'Path') {
+        item.smooth({
+          type:'catmull-rom',
+          from: 1,
+          to: item.lastSegment.index-1
+        });
+      } else if (user.args.smoothing && item.className == 'Segment'){
+        item.smooth();
+      } else {
+        item.clearHandles();
+      }
+    },
   }
 
   var valid = {
@@ -223,7 +246,6 @@ var Brick = function(args){
       }
     },
     any: function(scope){
-
       util.activate('brick');
       paper.projects[0].clear();
 
@@ -260,7 +282,7 @@ var Brick = function(args){
 
       var path = new paper.Path();
       path.strokeColor = 'white';
-      path.strokeWidth = config.stroke;
+      path.strokeWidth = config.strokeWidth;
       path.strokeJoin = 'round';
       path.strokeCap = 'round';
 
@@ -271,8 +293,12 @@ var Brick = function(args){
       path.lineTo(margin.b);
       path.lineTo(start.b);
 
+      util.smooth(path);
+      path.name = 'transit-line';
+      console.log(path);
+
       var grouped = new paper.Group(mask,rect,path);
-      // grouped.clipped = true;
+      grouped.clipped = true;
     },
     map: function(){
       util.activate('brick');
@@ -327,13 +353,31 @@ var Brick = function(args){
         paper.project.layers['temp'].remove();
         user.draw.any();
       }
+    },
+    smooth: function(){
+      if (user.args.smoothing){
+        user.args.smoothing = false;
+        smoothButton.innerHTML = 'smooth';
+      } else {
+        user.args.smoothing = true;
+        smoothButton.innerHTML = 'flat';
+      }
+      var path = paper.projects[0].activeLayer.children[0].children['transit-line'];
+      console.log(path);
+      util.smooth(path);
+    },
+    stroke: function(width){
+      var stroke = util.inch(parseFloat(width));
+      var path = paper.projects[0].activeLayer.children[0].children['transit-line'];
+      path.strokeWidth = stroke;
+      config.strokeWidth = stroke;
     }
   }
 
   action.onMouseMove = function(event) {
     paper.project.activeLayer.selected = false;
   	if (event.item){
-      event.item.selected = true;
+      event.item.fullySelected = true;
     }
   }
 
@@ -350,8 +394,12 @@ var Brick = function(args){
         if (event.modifiers.shift && hit.segment){
           hit.segment.remove();
         }
+      } else if (result.type.indexOf('handle') > -1){
+        var type = (result.type == 'handle-in') ? 'handleIn' : 'handleOut';
+        hit.segment = result.segment[type];
       } else if (result.type == 'stroke') {
         hit.segment = valid.add() ? hit.path.item.insert(result.location.index + 1, event.point) : null;
+        util.smooth(hit.segment);
       } else if (result.type == 'fill' && result.item.name.indexOf('circle_selector') > 0){
         var p = user.args.points;
         console.log(p.selected);
@@ -370,13 +418,24 @@ var Brick = function(args){
   action.onMouseDrag = function(event) {
     var mouse = event.point;
     var bounds = valid.bounds(mouse.x,mouse.y);
-    if(hit.segment){
+    if(hit.segment.className == 'Segment'){
   		hit.segment.point.x = bounds.x;
   		hit.segment.point.y = bounds.y;
+    } else {
+      hit.segment.x += event.delta.x;
+      hit.segment.y += event.delta.y;
     }
   }
 
   user.print = function(){
+    var active_layer = paper.projects[0].activeLayer.children[0];
+    var layer_cache = active_layer.clone({
+      insert: true,
+      deep: true
+    });
+    layer_cache.children[1].fillColor = 'white';
+    layer_cache.children[2].strokeColor = 'black';
+
     canvas.width = config.print_width;
     util.scale();
     if (config.attempt < 5){
@@ -402,7 +461,7 @@ var Brick = function(args){
     config.points.margin = config.points.margin.map(util.inch);
     config.points.bounds.x = config.points.bounds.x.map(util.inch);
     config.points.bounds.y = config.points.bounds.y.map(util.inch);
-    config.stroke = util.inch(config.stroke);
+    config.strokeWidth = util.inch(config.strokeWidth);
 
     // config.ball = new paper.Shape.Circle(new paper.Point(-100,-100), util.inch(0.1));
     // config.ball.fillColor = 'red';
