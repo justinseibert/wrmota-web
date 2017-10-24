@@ -234,7 +234,6 @@ var Brick = function(args){
         var x = util.inch(w*i)+util.inch(w/2)
         var r = Math.round((255/segment)*i);
         var g = 255-r;
-        console.log(r,g);
 
         var path = new paper.Path();
         path.strokeColor = 'rgb('+r+','+g+','+r+')';
@@ -295,7 +294,6 @@ var Brick = function(args){
 
       util.smooth(path);
       path.name = 'transit-line';
-      console.log(path);
 
       var grouped = new paper.Group(mask,rect,path);
       grouped.clipped = true;
@@ -313,7 +311,6 @@ var Brick = function(args){
 
       var margin = util.inch(0.0625);
       var row = Math.ceil((config.map_layers+1)/4) -1;
-      console.log(row%2, config.map_layers);
       child.position.x = margin*(config.map_layers%4) + (child.bounds.width*(config.map_layers%4)) + child.bounds.width*(1-row%2/2);
       child.position.y = child.bounds.height*row + margin*row + child.bounds.height/2;
 
@@ -325,7 +322,6 @@ var Brick = function(args){
         config.edit_layer = true;
         config.hits.stroke = false;
         selectButton.innerHTML = 'done';
-        console.log(selectButton.innerHtml);
 
         new paper.Layer();
         paper.project.activeLayer.name = 'temp';
@@ -363,7 +359,6 @@ var Brick = function(args){
         smoothButton.innerHTML = 'flat';
       }
       var path = paper.projects[0].activeLayer.children[0].children['transit-line'];
-      console.log(path);
       util.smooth(path);
     },
     stroke: function(width){
@@ -402,14 +397,12 @@ var Brick = function(args){
         util.smooth(hit.segment);
       } else if (result.type == 'fill' && result.item.name.indexOf('circle_selector') > 0){
         var p = user.args.points;
-        console.log(p.selected);
         if (result.item.fillColor.equals('black')){
           result.item.fillColor = 'white';
           var black = p.selected[1]+'_circle_selector';
           paper.project.layers['temp'].children[black].fillColor = 'black';
           p.selected[1] = p.selected[0];
           p.selected[0] = p.id[result.item.id];
-          console.log(p.selected);
         }
       }
     }
