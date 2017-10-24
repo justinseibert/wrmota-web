@@ -1,7 +1,7 @@
 {% extends 'admin/layout/default.html' %}
 {% block body %}
   <div class="row no-print">
-    <label>stroke width (inches):</label>
+    <label>stroke:</label>
     <input id="strokeWidth" onchange="brick.draw.stroke(this.value);" name="strokeWidth" type="number" value="0.25" min="0.00" step="0.05" class="grey">
   </div>
   <div id="pageBrick" class="page">
@@ -28,10 +28,11 @@
       </ul>
       <h2 class="align-left break-light">controls:</h2>
       <ul>
-        <li>select: specify the endpoints to use</li>
-        <li>smooth/flat: changes the curvature of the line</li>
-        <li>map: adds the current brick to the wall (below)</li>
-        <li>print: prints the current brick black/white at 8"x2" scale</li>
+        <li><b>stroke</b>: changes the width of the stroke in inches, default is 0.25"</li>
+        <li><b>select</b>: specify the endpoints to use</li>
+        <li><b>smooth/flat</b>: changes the curvature of the line</li>
+        <li><b>map</b>: adds the current brick to the wall (below)</li>
+        <li><b>print</b>: prints the current brick black/white at 8"x2" scale</li>
       </ul>
     </div>
     <div id="pageMap" class="page">
