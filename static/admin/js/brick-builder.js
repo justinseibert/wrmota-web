@@ -2,6 +2,7 @@ var Brick = function(args){
   var user = this || {};
   var page = document.getElementById('pageBrick');
   var canvas = document.getElementById('canvasBrick');
+  var map = document.getElementById('canvasMap');
   var action = new paper.Tool();
 
   var config = {
@@ -18,17 +19,28 @@ var Brick = function(args){
         [0,0],[4,0],[8,0],
         [0,2],[4,2],[8,2]
       ],
-      margin:[
+      margin: [
         [0.25,0.25],[4,0.25],[7.75,0.25],
         [0.25,1.75],[4,1.75],[7.75,1.75],
-      ]
+      ],
+      bounds: {
+        x: [0.25,7.75],
+        y: [0.25,1.75],
+      }
     },
+    used: {},
+    map_layers: 0,
     stroke: 0.25,
     hits: {
     	segments: true,
     	stroke: true,
-    	tolerance: 2
+    	tolerance: 5
     },
+    ball: null,
+    paper: {
+      brick: null,
+      map: null,
+    }
   }
 
   var hit = {
@@ -62,7 +74,11 @@ var Brick = function(args){
       config.scale = scale;
 
       canvas.height = (current/config.width)*config.height;
-      paper.project.activeLayer.scale(scale, [0,0]);
+
+      paper.view.scale(scale,[0,0]);
+      // console.log(paper.view.bounds);
+      // paper.project.activeLayer.bounds.size.width = canvas.width;
+      // paper.project.activeLayer.bounds.size.height = canvas.height;
     },
     wait: function(time,callback){
       window.clearTimeout(config.timer);
@@ -117,9 +133,13 @@ var Brick = function(args){
         b: p2,
       };
     },
+    activate: function(canvas){
+      var c = config.paper[canvas];
+      paper.projects[c].activate();
+    }
   }
 
-  var allow = {
+  var valid = {
     drag: function(){
       var point = hit.path.segment.index;
       var first = hit.path.item.firstSegment.index + 1;
@@ -139,6 +159,28 @@ var Brick = function(args){
       }
       console.log('point can not be added');
       return false;
+    },
+    bounds: function(x,y){
+      var bounds = config.points.bounds;
+      var coord = {
+        bottom: bounds.y[0],
+        top: bounds.y[1],
+        left: bounds.x[0],
+        right: bounds.x[1],
+      }
+      if (x < coord.left)
+        x = coord.left;
+      if (x > coord.right)
+        x = coord.right;
+      if (y < coord.bottom)
+        y = coord.bottom;
+      if (y > coord.top)
+        y = coord.top;
+
+      return {
+        x: x,
+        y: y
+      };
     }
   }
 
@@ -165,7 +207,9 @@ var Brick = function(args){
         path.lineTo(start.add([ 0, util.inch(1.5) ]));
       }
     },
-    all: function(){
+    any: function(scope){
+      util.activate('brick');
+      paper.projects[0].clear();
       var p = util.chooseTwo();
       var start = {
         a: config.points.start[p.a],
@@ -180,27 +224,51 @@ var Brick = function(args){
         b: util.randPt(),
       }
 
+      var from = new paper.Point(0, 0);
+      var size = new paper.Size(canvas.width,canvas.height);
+      var mask = new paper.Path.Rectangle(from, size);
+      var rect = new paper.Path.Rectangle(from, size);
+      rect.fillColor = 'hsl('+util.randInt(255)+',100%,50%)';
+
       var path = new paper.Path();
-      path.strokeColor = 'black';
+      path.strokeColor = 'white';
       path.strokeWidth = config.stroke;
       path.strokeJoin = 'round';
       path.strokeCap = 'round';
 
-      console.log(p.a,p.b);
-      // var start = ();
-      path.moveTo(new paper.Point(start.a));
-      path.lineTo(new paper.Point(margin.a));
-      path.lineTo(new paper.Point(random.a));
-      // path.lineTo(new paper.Point(random.b));
-      path.lineTo(new paper.Point(margin.b));
-      path.lineTo(new paper.Point(start.b));
+      path.moveTo(start.a);
+      path.lineTo(margin.a);
+      path.lineTo(random.a);
+      path.lineTo(margin.b);
+      path.lineTo(start.b);
+
+      var grouped = new paper.Group(mask,rect,path);
+      grouped.clipped = true;
+    },
+    map: function(){
+      util.activate('brick');
+      var map = paper.projects[config.paper.map];
+      // var layer = map.addLayer(new paper.Layer());
+      paper.project.activeLayer.children[0].copyTo(map);
+
+      // console.log(map.layers);
+      var child = map.activeLayer.children[config.map_layers];
+      child.applyMatrix = false;
+      child.scale(0.25);
+
+      child.position.x = 10*config.map_layers + (child.bounds.width/2) + (child.bounds.width*config.map_layers);
+      child.position.y = child.bounds.height/2;
+      console.log(child);
+
+      config.map_layers++;
+      user.draw.any();
     }
   }
 
   action.onMouseMove = function(event) {
     paper.project.activeLayer.selected = false;
   	if (event.item){
-  		event.item.selected = true;
+      event.item.selected = true;
     }
   }
 
@@ -212,22 +280,23 @@ var Brick = function(args){
   		return;
     } else {
       hit.path = result;
-
       if (result.type == 'segment') {
-        hit.segment = allow.drag() ? result.segment : null
+        hit.segment = valid.drag() ? result.segment : null
         if (event.modifiers.shift && hit.segment){
           hit.segment.remove();
         }
       } else if (result.type == 'stroke') {
-        hit.segment = allow.add() ? hit.path.item.insert(result.location.index + 1, event.point) : null;
+        hit.segment = valid.add() ? hit.path.item.insert(result.location.index + 1, event.point) : null;
       }
     }
   }
 
   action.onMouseDrag = function(event) {
-  	if (hit.segment) {
-  		hit.segment.point.x += event.delta.x;
-  		hit.segment.point.y += event.delta.y;
+    var mouse = event.point;
+    var bounds = valid.bounds(mouse.x,mouse.y);
+    if(hit.segment){
+  		hit.segment.point.x = bounds.x;
+  		hit.segment.point.y = bounds.y;
     }
   }
 
@@ -244,21 +313,30 @@ var Brick = function(args){
   }
 
   var init = function(){
-    paper.project.activeLayer.transformContent = false;
+    paper.setup(canvas);
+    config.paper.brick = paper.project.index;
+    paper.setup(map);
+    config.paper.map = paper.project.index;
+
+    paper.project.activeLayer.applyMatrix = false;
     config.last_width = canvas.width;
     util.scale();
 
     config.points.start = config.points.start.map(util.inch);
     config.points.margin = config.points.margin.map(util.inch);
+    config.points.bounds.x = config.points.bounds.x.map(util.inch);
+    config.points.bounds.y = config.points.bounds.y.map(util.inch);
     config.stroke = util.inch(config.stroke);
 
-    // user.draw.inch();
-    user.draw.all();
-  }
+    // config.ball = new paper.Shape.Circle(new paper.Point(-100,-100), util.inch(0.1));
+    // config.ball.fillColor = 'red';
 
-  paper.setup(canvas);
-  paper.view.onResize = function(event){
-    util.scale();
+    user.draw.any(canvas);
   }
   init();
+
+
+  paper.view.onResize = function(event){
+    util.wait(100,util.scale);
+  }
 }

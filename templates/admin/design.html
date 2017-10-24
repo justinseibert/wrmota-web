@@ -5,15 +5,21 @@
       <p class="yellow row align-center no-print">you browser doesn't support <b>canvas</b> elements which are necessary to run this page</p>
     </canvas>
   </div>
-  <button type="button" class="blue button float-right" onclick="brick.print();">print</button>
-  <div class="row">
-    <ul>
-      <li>click the line segment to add a point</li>
-      <li>hold shift and click a point to remove it</li>
-      <li>drag a point to reshape the line</li>
-      <li>end points are disabled</li>
-    </ul>
-  </div>
+  <section class="row no-print">
+    <button type="button" class="blue button float-left" onclick="brick.draw.map();">map</button>
+    <button type="button" class="blue button float-right" onclick="brick.print();">print</button>
+    <div class="row">
+      <ul>
+        <li>click the line segment to add a point</li>
+        <li>drag a point to reshape the line</li>
+        <li>hold shift and click a point to remove it</li>
+        <li>end points are disabled</li>
+      </ul>
+    </div>
+    <div id="pageMap" class="page">
+      <canvas id="canvasMap" class="subpage" width="768" height="768" data-paper-resize="true"></canvas>
+    </div>
+  </section>
 {% endblock body %}
 
 {% block script %}
