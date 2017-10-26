@@ -44,3 +44,7 @@ def index():
 @_admin.route('/measure')
 def measure():
     return render_template('admin/measure.html')
+
+@_admin.route('/multiple')
+def multiple():
+    return render_template('admin/multiple.html')

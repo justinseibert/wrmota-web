@@ -1,0 +1,68 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+  <div class="row">
+    <div class="six grid">
+      <canvas id="canvasA" width="300" height="300"></canvas>
+    </div>
+    <div class="six grid">
+      <canvas id="canvasB" width="300" height="300"></canvas>
+    </div>
+  </div>
+{% endblock body %}
+
+{% block script %}
+  <script type="text/javascript">
+    // paper.install(window)
+    window.onload = function(){
+      var canvas = {
+        a: document.getElementById('canvasA'),
+        b: document.getElementById('canvasB'),
+      }
+      paper.setup(canvas.a);
+      var p1 = paper.projects[0];
+      var v1 = p1.view;
+      paper.setup(canvas.b);
+      var p2 = paper.projects[1];
+      var v2 = p2.view;
+      // paper.applyMatrix = false;
+
+      function p(index){
+        // console.log(paper.project.index, index);
+        if (paper.project.index != index){
+          paper.projects[index].activate();
+        }
+        return paper;
+      }
+
+      var tracker;
+      var color;
+
+      var rect = new p(0).Path.Rectangle([0,0],55);
+      // rect.fillColor = 'red';
+      var ball = new p(1).Path.Circle([0,0],30);
+      // rect.fillColor = 'blue';
+
+      v1.onMouseEnter = function(event){
+        p(0);
+        color = 'red';
+        ball.visible = false;
+        tracker = rect;
+      }
+      v2.onMouseEnter = function(event){
+        p(1);
+        color = 'blue';
+        rect.visible = false;
+        tracker = ball;
+      }
+
+      var action = new paper.Tool();
+      action.onMouseMove = function(event){
+        // console.log(event);
+        tracker.visible = true;
+        tracker.fillColor = color;
+        tracker.position.x = event.point.x;
+        tracker.position.y = event.point.y;
+      }
+    }
+  </script>
+{% endblock script %}
