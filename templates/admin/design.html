@@ -11,7 +11,7 @@
   </div>
   <section class="row no-print">
     <div class="nine grid">
-      <button id="chooseTwo" type="button" class="blue button" onclick="brick.draw.points();">select</button>
+      <button id="chooseTwo" type="button" class="blue button" onclick="brick.draw.points();">ends</button>
       <button id="smoothButton" type="button" class="blue button" onclick="brick.draw.smooth();">smooth</button>
       <button type="button" class="blue button" onclick="brick.draw.map();">map</button>
     </div>
@@ -29,20 +29,20 @@
       <h2 class="align-left break-light">controls:</h2>
       <ul>
         <li><b>stroke</b>: changes the width of the stroke in inches, default is 0.25"</li>
-        <li><b>select</b>: specify the endpoints to use</li>
+        <li><b>ends</b>: specify the endpoints to use</li>
         <li><b>smooth/flat</b>: changes the curvature of the line</li>
         <li><b>map</b>: adds the current brick to the wall (below)</li>
         <li><b>print</b>: prints the current brick black/white at 8"x2" scale</li>
       </ul>
     </div>
     <div id="pageMap" class="page">
-      <canvas id="canvasMap" class="subpage" width="768" height="768" data-paper-resize="true"></canvas>
+      <canvas id="canvasMap" class="subpage" width="768" height="768" data-paper-resize="true" style="background:#efefef;"></canvas>
     </div>
   </section>
 {% endblock body %}
 
 {% block script %}
-  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/brick-builder.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/brick-palette.js') }}"></script>
   <script type="text/javascript">
     var brick;
     window.onload = function() {
