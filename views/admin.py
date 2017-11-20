@@ -39,7 +39,7 @@ def logout():
 
 @_admin.route('/')
 def index():
-    return render_template('admin/design.html')
+    return render_template('admin/design-mobile.html')
 
 @_admin.route('/measure')
 def measure():

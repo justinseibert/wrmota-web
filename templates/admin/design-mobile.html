@@ -1,0 +1,57 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+  <div class="fix-canvas">
+    <div class="container">
+      <div id="pageBrick" class="page">
+        <canvas id="canvasBrick" class="subpage" width="768" height="192" data-paper-resize="true">
+          <p class="yellow row align-center no-print">you browser doesn't support <b>canvas</b> elements which are necessary to run this page</p>
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div id="canvasDummy" class="dummy-space"></div>
+  <section class="row no-print">
+    <div class="row">
+      <button id="chooseTwo" type="button" class="blue button" onclick="brick.draw.points();">ends</button>
+      <button id="smoothButton" type="button" class="blue button" onclick="brick.draw.smooth();">smooth</button>
+      <button type="button" class="blue button" onclick="brick.draw.map();">map</button>
+      <button id="subtractor" type="button" class="blue button" onclick="brick.draw.subtractor();">+</button>
+      <button type="button" class="float-right blue button" onclick="brick.print();">print</button>
+    </div>
+    <div class="row no-print">
+      <label>stroke:</label>
+      <input id="strokeWidth" onchange="brick.draw.stroke(this.value);" name="strokeWidth" type="number" value="0.25" min="0.00" step="0.05" class="grey">
+    </div>
+    <div class="row">
+      <h2 class="align-left break-light">editing:</h2>
+      <ul>
+        <li>click the line segment to add a point</li>
+        <li>drag a point (or its handle) to reshape the line</li>
+        <li>hold shift (or use +/- button) and click a point to remove it</li>
+        <li>ends points can not be dragged</li>
+      </ul>
+      <h2 class="align-left break-light">controls:</h2>
+      <ul>
+        <li><b>stroke</b>: changes the width of the stroke in inches, default is 0.25"</li>
+        <li><b>ends</b>: specify the endpoints to use</li>
+        <li><b>smooth/flat</b>: changes the curvature of the line</li>
+        <li><b>map</b>: adds the current brick to the wall (below)</li>
+        <li><b>+/-</b>: set + to add points, - to subtract points</li>
+        <li><b>print</b>: prints the current brick black/white at 8"x2" scale</li>
+      </ul>
+    </div>
+    <div id="pageMap" class="page">
+      <canvas id="canvasMap" class="subpage" width="768" height="768" data-paper-resize="true" style="background:#efefef;"></canvas>
+    </div>
+  </section>
+{% endblock body %}
+
+{% block script %}
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/brick-palette-mobile.js') }}"></script>
+  <script type="text/javascript">
+    var brick;
+    window.onload = function() {
+      brick = new Brick();
+    }
+  </script>
+{% endblock script %}

@@ -4,3 +4,14 @@
   .nightmode .blue {
     background: #008;
     color: #aaa; }
+
+.fix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; }
+
+.dummy-space {
+  position: relative;
+  display: block;
+  width: 100%; }
