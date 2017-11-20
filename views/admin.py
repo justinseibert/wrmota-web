@@ -48,3 +48,7 @@ def measure():
 @_admin.route('/multiple')
 def multiple():
     return render_template('admin/multiple.html')
+
+@_admin.route('/map')
+def map():
+    return render_template('admin/map.html')

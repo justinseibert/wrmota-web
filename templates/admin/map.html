@@ -1,0 +1,82 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+  <div class="row">
+    <canvas id="canvasA" width="300" height="300" style="background:#ddd"></canvas>
+  </div>
+{% endblock body %}
+
+{% block script %}
+  <script type="text/javascript">
+    window.onload = function(){
+      var canvas = {
+        a: document.getElementById('canvasA'),
+      }
+      paper.setup(canvas.a);
+      var p1 = paper.projects[0];
+      var v1 = p1.view;
+
+      function p(index){
+        // console.log(paper.project.index, index);
+        if (paper.project.index != index){
+          paper.projects[index].activate();
+        }
+        return paper;
+      }
+
+
+      var colors = [
+        'red',
+        'blue',
+        'green',
+        'orange',
+        'pink',
+      ];
+      var points = [];
+
+      var randInt = function(max,min){
+        min = min || 0;
+        return Math.round(Math.random()*(max-min) + min);
+      };
+      var init = function(){
+        var width = window.innerWidth-100;
+        var height = window.innerHeight-100;
+        canvas.a.width = width;
+        canvas.a.height = height;
+
+        var center = new paper.Shape.Circle(new paper.Point((width/2)-10,(height/2)-10), 20);
+        center.strokeWidth = 2;
+        center.strokeColor = 'black';
+        center.fillcolor = 'rgba(0,0,0,0)';
+
+
+        for (let i = 0; i < 10; i++){
+          var ball = new paper.Shape.Circle(new paper.Point(randInt(width),randInt(height)), 10);
+          ball.fillColor = colors[randInt(colors.length-1)];
+          points.push(paper.project.activeLayer.lastChild);
+        }
+      }
+      init();
+
+      var action = new paper.Tool();
+      action.onKeyDown = function(event){
+        var x = 0;
+        var y = 0;
+        if (event.key == 'down'){
+          y = 10;
+        } else if (event.key == 'up'){
+          y = -10;
+        } else if (event.key == 'left'){
+          x = -10;
+        } else if (event.key == 'right'){
+          x = 10;
+        }
+
+        for (let i = 0; i < points.length; i++){
+          console.log(x,y);
+          points[i].position.x += x;
+          points[i].position.y += y;
+        }
+      }
+    }
+  </script>
+{% endblock script %}
