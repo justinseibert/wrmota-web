@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>wrmota</title>
+    {% assets 'css_site' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('_site.static', filename='css/leaflet.css') }}"></link>
+
+    {% assets 'js_lib' %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    <script type="text/javascript" src="{{ url_for('_site.static', filename='js/leaflet.js') }}"></script>
+  </head>
+  <body class="">
+    {% block banner %}
+    {% endblock banner %}
+
+    <div class="container">
+      {% block body %}
+      {% endblock body %}
+    </div>
+
+    {% block script %}
+    {% endblock script %}
+  </body>
+</html>

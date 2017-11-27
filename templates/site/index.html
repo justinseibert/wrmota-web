@@ -1,0 +1,22 @@
+{% extends 'site/layout/default.html' %}
+{% block banner %}
+<div id="row">
+  <div id="map" style="height:500px"></div>
+</div>
+{% endblock banner %}
+
+
+{% block script %}
+  <script type="text/javascript">
+
+  var map = new L.Map("map", {
+      center: new L.LatLng(40.33477, -75.94926),
+      zoom: 15
+  });
+
+  L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+  }).addTo(map);
+;
+  </script>
+{% endblock script %}

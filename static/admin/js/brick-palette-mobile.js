@@ -54,6 +54,7 @@ var Brick = function(args){
     },
     used: {},
     map_layers: 0,
+    map_row: 0,
     edit_layer: false,
     strokeWidth: user.args.strokeWidth,
     hits: {
@@ -311,11 +312,29 @@ var Brick = function(args){
       var child = map.activeLayer.children[config.map_layers];
       child.applyMatrix = false;
       child.scale(0.25);
-
       var margin = util.inch(0.0625);
-      var row = Math.ceil((config.map_layers+1)/4);
-      child.position.x = margin*(config.map_layers%4) + (child.bounds.width*(config.map_layers%4)) + child.bounds.width*(1-row%2/2);
-      child.position.y = child.bounds.height*row + margin*row + child.bounds.height/2;
+
+      var map_layer = config.map_layers + 1;
+      var map_row = config.map_row + 1;
+
+      var multiple = map_layer%4;
+      var row = map_row;
+
+      if (map_row%2 == 1){
+        multiple = map_layer%4;
+        row = map_row;
+        if (map_layer%4 == 0){
+          config.map_row++;
+          config.map_layer = 0;
+        }
+      } else {
+        if (map_layer%3 == 0){
+          config.map_row++;
+        }
+      }
+      console.log(map_layer,row);
+      child.position.x = margin*multiple + child.bounds.width*multiple;
+      child.position.y = margin*row + child.bounds.height*row;
 
       config.map_layers++;
       user.draw.any();
