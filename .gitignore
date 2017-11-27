@@ -18,6 +18,7 @@
 /config.py
 /config_private.py
 
+/etc/*
 /static/.webassets-cache/*
 /venv*/*
 */__pycache__/*
