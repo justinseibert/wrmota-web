@@ -1,22 +1,71 @@
 {% extends 'site/layout/default.html' %}
-{% block banner %}
-<div id="row">
-  <div id="map" style="height:500px"></div>
+{% block body %}
+<header id="banner" class="row banner">
+  <div class="row u-lock z-9">
+    <div id="map"></div>
+  </div>
+  <div class="container z-99">
+    <h1 id="title" class="highlight">West Reading Museum of Temporary Art</h1>
+  </div>
+</header>
+<div class="container z-99">
+  <p>During the summer of 2018, the streets of West Reading, PA will become the temporary site for a series of community-inspired micro-murals.</p>
+  <p>These tiny works of art will be the size of a single brick and installed throughout the borough in spaces provided by participating residents and businesses. Artists local to West Reading and beyond will be invited to contribute artwork for this exhibition in collaboration with members of the community.</p>
 </div>
-{% endblock banner %}
+{% endblock body %}
 
 
 {% block script %}
   <script type="text/javascript">
+    var elem = {
+      banner: document.getElementById('banner'),
+      title: document.getElementById('title'),
+      attribution: document.getElementsByClassName('leaflet-control-attribution'),
+      map: document.getElementById('map')
+    };
+    var obj = {};
+    var util = {};
 
-  var map = new L.Map("map", {
-      center: new L.LatLng(40.33477, -75.94926),
-      zoom: 15
-  });
+    util.initialize = function(){
+      var minHeight = elem.title.offsetHeight;
+      var height = 180;
+      console.log(minHeight);
+      while (height < minHeight){
+        height += 50;
+      }
+      height += 'px';
+      elem.map.style.height = elem.banner.style.height = height;
+      util.build_map();
+    }
 
-  L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
-      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-  }).addTo(map);
-;
+    util.build_map = function(){
+      var watercolor = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+      });
+
+      obj.map = new L.Map("map", {
+        center: new L.LatLng(40.33674, -75.94761),
+        zoom: 15,
+        zoomControl: false,
+        layers: [watercolor]
+      });
+
+      elem.attribution[0].className += ' u-hide';
+      obj.map.dragging.disable();
+    }
+
+    util.resize = function(){}
+
+
+    var listen = new Listener({
+      // resizeFunctions: [util.resize],
+      loadState: 'complete',
+      loadFunctions: [util.initialize]
+    })
+
+    // var t = new TouchClick('#explore',function(el){
+    //   var update = elem.attribution[0].className.replace(' u-hide', '');
+    //   elem.attribution[0].className = update;
+    // })
   </script>
 {% endblock script %}
