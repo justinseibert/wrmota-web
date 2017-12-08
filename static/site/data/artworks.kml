@@ -1,0 +1,2878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Artworks</name>
+    <Style id="icon-1739-0F9D58-normal">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1739-0F9D58-highlight">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1739-0F9D58">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1739-0F9D58-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1739-0F9D58-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1739-E65100-normal">
+      <IconStyle>
+        <color>ff0051e6</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1739-E65100-highlight">
+      <IconStyle>
+        <color>ff0051e6</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1739-E65100">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1739-E65100-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1739-E65100-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1739-FF5252-normal">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1739-FF5252-highlight">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1739-FF5252">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1739-FF5252-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1739-FF5252-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1739-FFEA00-normal">
+      <IconStyle>
+        <color>ff00eaff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1739-FFEA00-highlight">
+      <IconStyle>
+        <color>ff00eaff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1739-FFEA00">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1739-FFEA00-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1739-FFEA00-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>230 Reading Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Ron Bectle<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Ron Bectle</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9423655,40.3354676,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>229 Reading Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: true<br>installed: false<br>interviewed: false<br>group site: false<br>description: Mike Miller, just setting this up as a data model. you can input 0 for False and 1 for True in confirmed, installed, interviewed, group site columns.<br>student: Justin Seibert<br>artist: Kayla Mattes]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value>1</value>
+        </Data>
+        <Data name="installed">
+          <value>0</value>
+        </Data>
+        <Data name="interviewed">
+          <value>0</value>
+        </Data>
+        <Data name="group site">
+          <value>0</value>
+        </Data>
+        <Data name="description">
+          <value>Mike Miller, just setting this up as a data model. you can input 0 for False and 1 for True in confirmed, installed, interviewed, group site columns.</value>
+        </Data>
+        <Data name="student">
+          <value>Justin Seibert</value>
+        </Data>
+        <Data name="artist">
+          <value>Kayla Mattes</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9422753,40.3359593,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>101 N. 7th Ave. </name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Gage Personnel<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Gage Personnel</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9513617,40.3371073,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Woomer</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9456378,40.3320326,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>36 N. 6th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: El Morro Cafe<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>El Morro Cafe</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9499079,40.3368088,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>426 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Farmhouse Kitchen<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Farmhouse Kitchen</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9467751,40.3355146,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>550 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Cafe Bold<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Cafe Bold</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9495592,40.3356537,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Gardecki</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: contact Cash Rosario<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>contact Cash Rosario</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9455654,40.3320204,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>127 S 2nd Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.942489,40.3331036,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>435 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Dominic Wise  Contact Maddie Peace<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Dominic Wise  Contact Maddie Peace</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9471492,40.3346712,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>637 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: MIXX Popoter<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>MIXX Popoter</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9511444,40.3359828,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>116 S. 6th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Michael Pham<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Michael Pham</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.94992,40.334292,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>512 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Made Jewelry<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Made Jewelry</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9481591,40.3355678,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>438 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Justin Bortz Jeweler<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Justin Bortz Jeweler</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9471828,40.3355371,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>635 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9510881,40.3359828,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>604 W Penn Ave. A</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Art Plus<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Art Plus</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9499776,40.3356905,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Brayley</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.947282,40.3336224,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>22 S. 6th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9498248,40.33521,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>102 S. 6th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9498945,40.3345547,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>104 S. 6th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9498958,40.3345235,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Blair and Judy</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9430361,40.3367925,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>537 Franklin St.</name>
+      <description><![CDATA[sample: true<br>confirmed: true<br>installed: true<br>interviewed: true<br>group site: false<br>description: Dean<br>student: <br>artist: Michael Miller]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>1</value>
+        </Data>
+        <Data name="confirmed">
+          <value>1</value>
+        </Data>
+        <Data name="installed">
+          <value>1</value>
+        </Data>
+        <Data name="interviewed">
+          <value>1</value>
+        </Data>
+        <Data name="group site">
+          <value>0</value>
+        </Data>
+        <Data name="description">
+          <value>Dean</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value>Michael Miller</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9492601,40.3347724,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>612 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9503049,40.335717,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>616 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Let's Taco Bout it<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Let's Taco Bout it]]></value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9504685,40.3357262,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>626 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Kids Cuts<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Kids Cuts</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9506965,40.3357354,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>623 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Baldwin Brass<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Baldwin Brass</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9507072,40.335946,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>101 5th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9476039,40.3345128,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>600 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9497818,40.3356823,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>601 W. Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Diller Jewelers<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Diller Jewelers</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9497523,40.335901,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>421 Chestnut St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: WREC<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>WREC</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9460107,40.3335334,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>400 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Benchwarmers<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Benchwarmers</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9457532,40.3354369,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>2 S. 4th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9457827,40.3353347,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>404 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9459034,40.3354635,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>398 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9455305,40.3353838,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>11 S. 4th St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9456378,40.3350607,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>401 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Aladdin<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Aladdin</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9458578,40.3359133,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>421 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: GNA<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>GNA</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9466839,40.3358193,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>200 S. 4th Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9459785,40.3333024,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>423 Chestnut St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9466812,40.333605,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>400 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9464586,40.3343656,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>407 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.946354,40.3346211,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>243 Chestnut St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9441036,40.333149,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>341 Chestnut St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9454487,40.3334373,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>738 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9533304,40.3347019,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>538 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: WR Drug Store<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>WR Drug Store</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9490684,40.3356455,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>542 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Sweet Ride<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Sweet Ride</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9491649,40.3356496,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>506 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Vans Cafe<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Vans Cafe</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9480196,40.3355616,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>508 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Picturesque<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Picturesque</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9480813,40.3355637,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>440 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9472311,40.335531,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>522 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9485614,40.3356107,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>701 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Nonna Alby's<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Nonna Alby's]]></value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.951823,40.3360258,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>613 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Lilibea's<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Lilibea's]]></value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.950325,40.335943,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>548 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9496544,40.3345751,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>323 Summit Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Carly<br>student: Carly<br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Carly</value>
+        </Data>
+        <Data name="student">
+          <value>Carly</value>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9448197,40.3369376,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>VF Garage</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Dr. Kimball<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Dr. Kimball</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9510773,40.3375448,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>559 Reading Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Kallay<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Kallay</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9514314,40.3368661,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>742 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Dan Roth Owner Rachel Condron<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Dan Roth Owner Rachel Condron</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9535342,40.3346927,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>217 Kent Way</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Owner: Sidney Barrer  Lauren Bonino Contact <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Owner: Sidney Barrer  Lauren Bonino Contact </value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9509432,40.3328546,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>410 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Chicken Supreme Alex Keim Contact<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Chicken Supreme Alex Keim Contact</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9461609,40.3354717,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>801 Hill Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: VF Outlets Jade Kowalski Contact<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>VF Outlets Jade Kowalski Contact</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9525526,40.3376389,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>739 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Kuhn Funeral Home Jose Alba Contact<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Kuhn Funeral Home Jose Alba Contact</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9534699,40.3361137,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>607 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Paisley Moon<br>student: Matt Jones<br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Paisley Moon</value>
+        </Data>
+        <Data name="student">
+          <value>Matt Jones</value>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9501493,40.3359215,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>319 Kline St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Amato. Contact Sera Hartman<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Amato. Contact Sera Hartman</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9451993,40.3327963,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>WR Pool House</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: <br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-E65100</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value/>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9487572,40.3268656,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>449 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Vertigo records<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Vertigo records</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9475207,40.3357988,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>545 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Superior Oxygen<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Superior Oxygen</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9491542,40.3360074,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>525 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Yorgey's Cleaners<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Yorgey's Cleaners]]></value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9480733,40.3363059,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>521 Reading Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: I Form Fitness Studio<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>I Form Fitness Studio</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9489182,40.3370644,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>148 Tulpehocken Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Mom Chaffe's<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Mom Chaffe's]]></value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9481564,40.3375489,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>425 Buttonwood St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Manor Care<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Manor Care</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9476388,40.3371441,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>430 Franklin St.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Miller Mechanical (WR Fire Co.)<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Miller Mechanical (WR Fire Co.)</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9469736,40.3344944,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>628 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Yarn Gallery<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Yarn Gallery</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9507877,40.3357416,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>544 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Sweet Surprises<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-0F9D58</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Sweet Surprises</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9492213,40.3356557,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>227 Reading Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Tucks<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FFEA00</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Tucks</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9423977,40.3359787,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>320 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Frazier  Business<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Frazier  Business</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9447098,40.3353245,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>301 Penn Ave.</name>
+      <description><![CDATA[sample: false<br>confirmed: <br>installed: <br>interviewed: <br>group site: <br>description: Chesen Laser Eye<br>student: <br>artist: ]]></description>
+      <styleUrl>#icon-1739-FF5252</styleUrl>
+      <ExtendedData>
+        <Data name="sample">
+          <value>0</value>
+        </Data>
+        <Data name="confirmed">
+          <value/>
+        </Data>
+        <Data name="installed">
+          <value/>
+        </Data>
+        <Data name="interviewed">
+          <value/>
+        </Data>
+        <Data name="group site">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value>Chesen Laser Eye</value>
+        </Data>
+        <Data name="student">
+          <value/>
+        </Data>
+        <Data name="artist">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -75.9440982,40.3354144,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
