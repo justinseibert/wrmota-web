@@ -1,4 +1,4 @@
-.u-hide,
+.u-hide
   display: none
   opacity: 0
   visibility: hidden
@@ -27,6 +27,20 @@
   z-index: 99
 .z-999
   z-index: 999
+
+@media (max-width: $tablet-max)
+  .u-desktop
+    display: none
+    opacity: 0
+    visibility: hidden
+    z-index: $z-hide
+
+@media (min-width: $desktop-min)
+  .u-mobile
+    display: none
+    opacity: 0
+    visibility: hidden
+    z-index: $z-hide
 
 @media (min-width: $tablet-min)
   .u-reverse

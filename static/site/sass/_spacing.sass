@@ -28,6 +28,13 @@
 .frame-heavy
   padding: $heavy
 
+.block-light
+  margin: $light
+.block-medium
+  margin: $medium
+.block-heavy
+  margin: $heavy
+
 .unframe-left
   padding-left: 0
 .unframe-right
@@ -42,6 +49,21 @@
 .unframe-x
   @extend .unframe-left
   @extend .unframe-right
+
+.unblock-left
+  margin-left: 0
+.unblock-right
+  margin-right: 0
+.unblock-top
+  margin-top: 0
+.unblock-bottom
+  margin-bottom: 0
+.unblock-y
+  @extend .unblock-top
+  @extend .unblock-bottom
+.unblock-x
+  @extend .unblock-left
+  @extend .unblock-right
 
 .break-light
   margin-bottom: $light

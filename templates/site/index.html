@@ -2,7 +2,7 @@
 {% block body %}
 <header id="banner" class="row banner">
   <div class="row u-lock z-9">
-    <div id="map"></div>
+    <div id="backgroundMap"></div>
   </div>
   <div class="container z-99">
     <h1 id="title" class="highlight">West Reading Museum of Temporary Art</h1>
@@ -11,7 +11,28 @@
 <div class="container z-99">
   <p>During the summer of 2018, the streets of West Reading, PA will become the temporary site for a series of community-inspired micro-murals.</p>
   <p>These tiny works of art will be the size of a single brick and installed throughout the borough in spaces provided by participating residents and businesses. Artists local to West Reading and beyond will be invited to contribute artwork for this exhibition in collaboration with members of the community.</p>
+  <div id="sampleContainer" class="row u-fix spaced">
+    <div class="five grid background-image" style="background-image:url('{{ url_for('_site.static', filename='img/deans-house.jpg') }}')"></div>
+    <div class="seven grid frame-light unframe-right unframe-y">
+      <div id="sampleMap" class="row"></div>
+    </div>
+  </div>
+  <img class="row frame-light unframe-x" src="{{ url_for('_site.static', filename='img/gum-parker-brick.jpg') }}">
+
+  <!-- <div class="row u-fix u-mobile">
+  <img class="row" src="{{ url_for('_site.static', filename='img/west-reading-homes.jpg') }}">
+    <img class="five grid frame-light unframe-x" src="{{ url_for('_site.static', filename='img/deans-house.jpg') }}">
+    <img class="seven grid frame-light unframe-right" src="{{ url_for('_site.static', filename='img/gum-parker.jpg') }}">
+  </div>
+  <div class="row u-fix u-desktop">
+    <img class="eight grid frame-light unframe-y unframe-left" src="{{ url_for('_site.static', filename='img/west-reading-homes.jpg') }}">
+    <img class="four grid" src="{{ url_for('_site.static', filename='img/deans-house.jpg') }}">
+    <img class="row frame-light unframe-x" src="{{ url_for('_site.static', filename='img/gum-parker-brick.jpg') }}">
+  </div> -->
 </div>
+<footer class="container">
+  <small>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.</small>
+</footer>
 {% endblock body %}
 
 
@@ -21,47 +42,117 @@
       banner: document.getElementById('banner'),
       title: document.getElementById('title'),
       attribution: document.getElementsByClassName('leaflet-control-attribution'),
-      map: document.getElementById('map')
+      backgroundMap: document.getElementById('backgroundMap'),
+      sampleMap: document.getElementById('sampleMap'),
+      sampleContainer: document.getElementById('sampleContainer')
     };
     var obj = {};
     var util = {};
 
     util.initialize = function(){
-      var minHeight = elem.title.offsetHeight;
-      var height = 180;
-      console.log(minHeight);
-      while (height < minHeight){
-        height += 50;
-      }
-      height += 'px';
-      elem.map.style.height = elem.banner.style.height = height;
+      util.resize();
       util.build_map();
     }
 
     util.build_map = function(){
-      var watercolor = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-      });
 
-      obj.map = new L.Map("map", {
+
+      var watercolor = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg');
+      var watercolor2 = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg');
+
+      obj.banner = new L.Map("backgroundMap", {
         center: new L.LatLng(40.33674, -75.94761),
         zoom: 15,
         zoomControl: false,
+        attributionControl: false,
         layers: [watercolor]
       });
 
-      elem.attribution[0].className += ' u-hide';
-      obj.map.dragging.disable();
+      obj.map = new L.Map("sampleMap", {
+        center: new L.LatLng(40.33674, -75.94761),
+        zoom: 16,
+        zoomControl: false,
+        attributionControl: false,
+        layers: [watercolor2]
+      });
+
+      obj.icon = L.divIcon({className: 'map-simple-icon'});
+
+      obj.banner.dragging.disable();
+      obj.banner.touchZoom.disable();
+      obj.banner.doubleClickZoom.disable();
+      obj.banner.scrollWheelZoom.disable();
+      obj.banner.boxZoom.disable();
+      obj.banner.keyboard.disable();
+
+      // var district_boundary = new L.geoJson();
+      // district_boundary.addTo(obj.map);
+
+      $.ajax({
+        dataType: "json",
+        url: "data/artworks.geojson",
+        success: function(data) {
+          var geojsonMarkerOptions = {
+              radius: 5,
+              fillColor: "#000",
+              color: "#fff",
+              weight: 4,
+              opacity: 1,
+              fillOpacity: 1
+          };
+
+          var init_popup;
+          var init_latlng;
+          obj.geojson = L.geoJSON(data, {
+              pointToLayer: function (feature, latlng) {
+                var html = '<dl><dt>'+feature.properties.name+'</dt><dd>Artist: '+feature.properties.artist+'</dd></dl>';
+                var marker = L.circleMarker(latlng, geojsonMarkerOptions).bindPopup(html);
+                if(feature.properties.name.indexOf('537 Franklin') > -1){
+                  init_latlng = latlng;
+                  init_popup = L.popup()
+                    .setLatLng(latlng)
+                    .setContent(html)
+                    .openOn(obj.map);
+                }
+                return marker;
+              },
+              // onEachFeature: function(feature, layer) {
+              //   layer.bindPopup(html);
+              // },
+              filter: function(feature, layer){
+                return (feature.properties.sample == 1) ? true : false;
+              }
+          }).addTo(obj.map);
+
+          obj.map.panTo(init_latlng);
+          obj.map.openPopup(init_popup);
+        }
+      });
     }
 
-    util.resize = function(){}
+    util.resize = function(){
+      var minHeight = elem.title.offsetHeight;
+      var height = 180;
+      while (height < minHeight){
+        height += 50;
+      }
+      height += 'px';
+      elem.backgroundMap.style.height = elem.banner.style.height = height;
+      if (window.innerWidth < 600){
+        elem.sampleContainer.style.height = elem.sampleMap.style.height = height;
+      } else {
+        elem.sampleContainer.style.height = elem.sampleMap.style.height = '500px';
+      }
+    }
 
 
     var listen = new Listener({
-      // resizeFunctions: [util.resize],
+      resizeFunctions: [util.resize],
       loadState: 'complete',
       loadFunctions: [util.initialize]
     })
+
+
 
     // var t = new TouchClick('#explore',function(el){
     //   var update = elem.attribution[0].className.replace(' u-hide', '');
