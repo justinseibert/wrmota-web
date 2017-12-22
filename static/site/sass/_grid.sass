@@ -1,12 +1,29 @@
 .container,
+.container-medium,
+.container-small,
+.full,
 .row,
 .grid
   position: relative
 
-.container
-  max-width: 1200px
+.container,
+.container-medium,
+.container-small
+  max-width: 44rem
   margin: 0 auto
-  padding: $light
+  padding: 0
+
+.container-medium
+  max-width: 34rem
+
+.container-small
+  max-width: 24rem
+
+.full
+  width: 100%
+  height: 100%
+  margin: 0 auto
+  overflow: hidden
 
 .row
   width: 100%

@@ -1,162 +1,149 @@
 {% extends 'site/layout/default.html' %}
 {% block body %}
-<header id="banner" class="row banner">
-  <div class="row u-lock z-9">
-    <div id="backgroundMap"></div>
-  </div>
-  <div class="container z-99">
-    <h1 id="title" class="highlight">West Reading Museum of Temporary Art</h1>
-  </div>
-</header>
-<div class="container z-99">
-  <p>During the summer of 2018, the streets of West Reading, PA will become the temporary site for a series of community-inspired micro-murals.</p>
-  <p>These tiny works of art will be the size of a single brick and installed throughout the borough in spaces provided by participating residents and businesses. Artists local to West Reading and beyond will be invited to contribute artwork for this exhibition in collaboration with members of the community.</p>
-  <div id="sampleContainer" class="row u-fix spaced">
-    <div class="five grid background-image" style="background-image:url('{{ url_for('_site.static', filename='img/deans-house.jpg') }}')"></div>
-    <div class="seven grid frame-light unframe-right unframe-y">
-      <div id="sampleMap" class="row"></div>
+<header id="introHeader" class="header-section u-card">
+  <div class="header-background z-9"></div>
+  <div class="container-small">
+    <div class="logo z-99">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 400 400">
+        <defs>
+          <clipPath id="_clipPath_Lxkrck9VcHqky7ro7yHQG8lYiUD1242i">
+            <rect width="400" height="400"/>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#_clipPath_Lxkrck9VcHqky7ro7yHQG8lYiUD1242i)">
+          <g id="text">
+            <path d=" M 319.454 103.971 L 319.454 103.971 Q 331.888 125.484 343.831 139.626 L 343.831 139.626 L 343.831 139.626 Q 355.774 153.768 365.708 158.624 L 365.708 158.624 L 365.708 158.624 Q 361.406 164.621 351.977 170.139 L 351.977 170.139 L 351.977 170.139 Q 342.548 175.657 334.355 177.005 L 334.355 177.005 L 334.355 177.005 Q 317.971 179.701 307.085 172.717 L 307.085 172.717 L 307.085 172.717 Q 296.2 165.733 285.206 145.666 L 285.206 145.666 L 273.551 124.505 L 272.614 124.659 L 272.614 124.659 Q 259.741 126.777 249.605 125.079 L 249.605 125.079 L 249.605 125.079 Q 249.649 141.419 251.074 150.079 L 251.074 150.079 L 251.074 150.079 Q 252.845 160.846 255.445 167.15 L 255.445 167.15 L 255.445 167.15 Q 258.045 173.453 262.909 178.182 L 262.909 178.182 L 262.909 178.182 Q 251.301 190.91 235.619 193.49 L 235.619 193.49 L 235.619 193.49 Q 220.638 195.955 212.618 189.581 L 212.618 189.581 L 212.618 189.581 Q 204.598 183.208 201.864 166.59 L 201.864 166.59 L 201.864 166.59 Q 200.169 156.291 199.706 135.212 L 199.706 135.212 L 199.706 135.212 Q 199.243 114.133 199.781 61.877 L 199.781 61.877 L 183.255 38.873 L 183.255 38.873 Q 206.893 17.435 228.661 13.854 L 228.661 13.854 L 228.661 13.854 Q 239.662 12.044 245.223 19.543 L 245.223 19.543 L 245.223 19.543 Q 259.4 9.277 279.764 5.927 L 279.764 5.927 L 279.764 5.927 Q 295.915 3.27 308.871 8.23 L 308.871 8.23 L 308.871 8.23 Q 321.827 13.19 329.878 23.405 L 329.878 23.405 L 329.878 23.405 Q 337.93 33.619 340.009 46.259 L 340.009 46.259 L 340.009 46.259 Q 342.589 61.941 337.527 77.198 L 337.527 77.198 L 337.527 77.198 Q 332.464 92.455 319.454 103.971 L 319.454 103.971 Z  M 249.935 97.859 L 249.935 97.859 Q 253.757 97.712 255.395 97.442 L 255.395 97.442 L 255.395 97.442 Q 272.014 94.708 281.396 83.789 L 281.396 83.789 L 281.396 83.789 Q 290.778 72.869 288.352 58.123 L 288.352 58.123 L 288.352 58.123 Q 286.927 49.463 279.608 43.695 L 279.608 43.695 L 279.608 43.695 Q 272.288 37.928 261.053 39.776 L 261.053 39.776 L 261.053 39.776 Q 256.371 40.547 251.062 43.344 L 251.062 43.344 L 251.062 43.344 Q 251.201 51.494 250.231 86.512 L 250.231 86.512 L 249.935 97.859 Z " fill-rule="evenodd" fill="rgb(255,255,255)"/><path d=" M 122.686 320.648 L 127.394 388.38 L 127.394 388.38 Q 122.252 388.146 114.826 388.732 L 114.826 388.732 L 99.371 390.38 L 99.371 390.38 Q 98.857 386.577 95.772 354.263 L 95.772 354.263 L 95.772 354.263 Q 92.687 321.949 89.883 308.08 L 89.883 308.08 L 89.883 308.08 Q 88.583 310.531 86.461 318.812 L 86.461 318.812 L 86.461 318.812 Q 80.448 339.995 78.963 340.112 L 78.963 340.112 L 78.963 340.112 Q 77.478 340.229 75.013 336.048 L 75.013 336.048 L 75.013 336.048 Q 72.547 331.866 71.129 328.775 L 71.129 328.775 L 71.129 328.775 Q 69.711 325.685 68.301 322.7 L 68.301 322.7 L 68.301 322.7 Q 66.891 319.716 65.833 317.131 L 65.833 317.131 L 65.833 317.131 Q 64.775 314.546 63.479 311.659 L 63.479 311.659 L 63.479 311.659 Q 63.474 325.11 65.015 344.63 L 65.015 344.63 L 65.015 344.63 Q 66.557 364.149 70.466 392.021 L 70.466 392.021 L 70.466 392.021 Q 64.609 393.551 56.122 394.221 L 56.122 394.221 L 40.812 395.003 L 40.812 395.003 Q 40.388 395.037 39.846 393.585 L 39.846 393.585 L 39.846 393.585 Q 39.305 392.133 36.197 352.776 L 36.197 352.776 L 36.197 352.776 Q 33.089 313.418 28.471 249.522 L 28.471 249.522 L 28.471 249.522 Q 29.219 248.182 38.13 247.478 L 38.13 247.478 L 53.635 246.467 L 53.635 246.467 Q 56.393 246.25 57.242 246.183 L 57.242 246.183 L 57.454 246.166 L 57.454 246.166 Q 60.676 249.114 66.26 261.696 L 66.26 261.696 L 66.26 261.696 Q 71.843 274.278 73.987 277.098 L 73.987 277.098 L 73.987 277.098 Q 74.674 277.684 75.213 277.748 L 75.213 277.748 L 75.213 277.748 Q 75.751 277.813 76.488 274.979 L 76.488 274.979 L 76.488 274.979 Q 77.226 272.145 78.163 267.801 L 78.163 267.801 L 78.163 267.801 Q 79.101 263.458 80.218 258.673 L 80.218 258.673 L 80.218 258.673 Q 83.116 246.702 85.215 243.547 L 85.215 243.547 L 85.215 243.547 Q 86.929 243.625 88.839 243.474 L 88.839 243.474 L 116.549 240.219 L 116.549 240.219 Q 116.789 245.964 117.459 254.451 L 117.459 254.451 L 121.435 299.397 L 121.435 299.397 Q 122.491 312.764 122.686 320.648 L 122.686 320.648 Z  M 193.742 385.063 L 193.742 385.063 L 171.201 386.202 L 171.201 386.202 Q 160.23 385.147 152.218 378.307 L 152.218 378.307 L 152.218 378.307 Q 146.545 374.058 143.371 366.303 L 143.371 366.303 L 143.371 366.303 Q 140.196 358.548 139.454 350.494 L 139.454 350.494 L 139.454 350.494 Q 138.711 342.44 138.007 333.529 L 138.007 333.529 L 138.007 333.529 Q 137.304 324.617 136.595 316.988 L 136.595 316.988 L 136.595 316.988 Q 135.885 309.358 136.097 305.285 L 136.097 305.285 L 136.097 305.285 Q 136.31 301.212 136.762 298.828 L 136.762 298.828 L 136.762 298.828 Q 137.214 296.444 137.959 293.716 L 137.959 293.716 L 137.959 293.716 Q 138.705 290.989 138.833 289.911 L 138.833 289.911 L 138.833 289.911 Q 141.106 283.54 149.88 279.752 L 149.88 279.752 L 149.88 279.752 Q 158.654 275.963 165.133 275.558 L 165.133 275.558 L 165.133 275.558 Q 171.613 275.154 174.583 274.919 L 174.583 274.919 L 181.144 274.187 L 181.144 274.187 Q 200.239 272.68 210.524 281.261 L 210.524 281.261 L 210.524 281.261 Q 218.335 285.555 222.026 318.782 L 222.026 318.782 L 222.026 318.782 Q 222.44 321.311 222.54 322.584 L 222.54 322.584 L 222.54 322.584 Q 224.037 360.467 221.525 369.205 L 221.525 369.205 L 221.525 369.205 Q 220.665 371.835 219.688 372.98 L 219.688 372.98 L 219.688 372.98 Q 216.678 378.128 210.179 380.989 L 210.179 380.989 L 210.179 380.989 Q 203.68 383.851 200.302 384.331 L 200.302 384.331 L 200.302 384.331 Q 196.924 384.812 193.742 385.063 Z  M 181.603 355.705 L 181.603 355.705 L 181.603 355.705 Q 194.545 354.683 196.142 345.164 L 196.142 345.164 L 196.142 345.164 Q 196.527 333.818 196.041 327.665 L 196.041 327.665 L 196.041 327.665 Q 195.555 321.512 194.668 318.38 L 194.668 318.38 L 194.668 318.38 Q 193.004 310.826 187.644 307.833 L 187.644 307.833 L 187.644 307.833 Q 184.31 306.175 180.703 306.46 L 180.703 306.46 L 180.703 306.46 Q 177.096 306.745 173.459 307.992 L 173.459 307.992 L 173.459 307.992 Q 169.821 309.24 167.331 312.853 L 167.331 312.853 L 167.331 312.853 Q 166.142 314.014 165.832 318.202 L 165.832 318.202 L 165.832 318.202 Q 165.522 322.389 166.047 331.742 L 166.047 331.742 L 166.695 345.354 L 166.695 345.354 Q 167.148 351.083 171.723 353.603 L 171.723 353.603 L 171.723 353.603 Q 176.299 356.124 181.603 355.705 Z " fill-rule="evenodd" fill="rgb(255,255,255)"/><path d=" M 137.812 192.054 C 139.766 189.222 141.622 186.291 143.282 183.166 C 147.287 175.547 150.804 167.732 153.734 159.625 C 156.664 151.713 158.716 143.508 159.79 135.108 C 160.864 127.684 160.962 120.065 160.083 112.642 C 159.79 109.614 159.106 106.586 158.129 103.655 C 157.25 101.018 156.078 98.478 154.613 96.134 C 152.855 93.301 151.39 90.371 150.022 87.343 C 149.241 85.487 148.752 83.631 148.557 81.678 C 148.362 79.724 148.459 77.673 148.948 75.817 C 149.338 73.961 150.12 72.301 151.194 70.835 C 152.269 69.272 153.636 68.003 155.297 67.124 C 156.957 66.147 158.813 65.561 160.669 65.365 C 163.599 64.975 166.53 65.658 169.069 67.221 C 171.902 68.882 174.246 71.324 175.907 74.156 C 177.568 76.891 178.837 79.822 179.716 82.947 C 180.889 87.148 181.768 91.543 182.256 95.939 C 182.744 100.334 182.94 104.632 182.94 109.028 C 183.038 113.619 182.842 118.307 182.451 122.898 C 182.061 127.391 181.475 131.982 180.791 136.475 C 180.303 140.187 179.619 143.801 178.74 147.415 C 177.958 151.029 176.981 154.644 175.809 158.16 C 174.539 162.067 173.172 165.974 171.609 169.686 C 170.046 173.496 168.386 177.207 166.725 180.821 C 165.748 183.263 164.576 185.608 163.404 187.952 C 162.232 190.199 160.962 192.543 159.595 194.789 C 158.032 197.524 156.371 200.162 154.711 202.799 C 152.953 205.436 151.292 208.074 149.534 210.613 C 149.045 211.492 148.459 212.274 147.776 213.055 C 147.287 213.739 146.799 214.521 146.213 215.204 C 145.431 216.279 144.65 217.353 143.868 218.428 C 142.794 219.893 141.426 221.163 139.864 222.139 C 138.398 223.116 136.738 223.702 135.077 223.8 C 132.342 224.093 129.607 223.507 127.361 221.944 C 124.626 220.088 122.281 217.646 120.621 214.814 C 119.546 213.153 118.667 211.395 117.788 209.637 C 114.858 203.776 111.928 197.817 108.997 191.859 C 106.458 196.45 103.82 201.041 100.988 205.534 C 97.373 211.297 93.369 216.865 89.168 222.139 L 86.531 225.363 C 85.554 226.633 84.284 227.707 82.819 228.489 C 81.452 229.368 79.987 229.856 78.424 229.954 C 75.396 230.344 72.465 229.563 70.023 227.902 C 67.288 226.047 65.139 223.507 63.772 220.577 L 41.794 175.937 C 39.45 171.151 37.106 166.365 34.761 161.481 C 32.515 156.695 30.171 151.909 27.826 147.122 C 25.775 143.215 23.821 139.21 21.673 135.206 C 19.621 131.298 17.57 127.294 15.421 123.386 C 14.542 121.628 13.565 119.968 12.686 118.209 C 10.439 114.009 8.486 109.614 6.825 105.218 C 5.946 103.069 5.36 100.823 5.165 98.478 C 4.872 96.134 4.969 93.887 5.458 91.543 C 5.751 89.687 6.532 87.929 7.607 86.366 C 8.681 84.901 10.146 83.631 11.709 82.654 C 13.272 81.678 15.03 81.092 16.886 80.896 C 20.305 80.603 23.724 81.385 26.459 83.338 C 29.584 85.487 32.124 88.417 33.589 91.934 C 34.078 93.008 34.566 94.181 35.054 95.353 C 35.836 97.306 36.52 99.26 37.203 101.213 C 40.134 109.028 43.259 116.744 46.581 124.363 C 51.953 136.671 57.521 148.881 63.284 160.993 L 80.67 197.524 C 80.768 197.915 80.963 198.208 81.159 198.501 C 82.917 195.864 84.675 193.227 86.336 190.492 C 90.536 183.459 94.443 176.328 98.155 169.1 C 93.564 160.407 89.461 151.518 85.847 142.434 C 83.991 137.843 82.819 133.057 82.233 128.075 C 81.745 123.289 81.94 118.405 82.819 113.619 C 83.601 109.809 85.066 106.195 87.313 103.069 C 89.461 99.944 92.196 97.306 95.42 95.353 C 98.643 93.497 102.16 92.227 105.774 91.836 C 109.388 91.446 113.1 91.836 116.616 92.813 C 119.839 93.79 122.868 95.45 125.407 97.697 C 127.947 99.944 129.998 102.679 131.463 105.707 C 133.026 109.223 134.101 112.837 134.491 116.647 C 135.077 122.117 134.687 127.684 133.221 133.057 C 130.584 142.824 127.165 152.397 123.063 161.579 C 127.947 171.737 132.928 181.896 137.812 192.054 Z  M 111.341 138.136 C 112.025 136.475 112.611 134.717 113.1 132.861 C 113.783 130.322 114.272 127.782 114.565 125.145 C 114.76 123.582 114.76 121.921 114.565 120.358 C 114.369 118.893 114.076 117.428 113.49 116.061 C 113.197 115.181 112.709 114.302 112.025 113.619 C 111.537 113.032 110.951 112.544 110.267 112.251 C 109.876 112.056 109.388 112.056 108.899 112.056 C 108.313 112.153 107.727 112.349 107.239 112.642 C 106.555 113.032 105.969 113.521 105.481 114.205 C 105.09 114.791 104.797 115.474 104.602 116.158 C 104.309 117.233 104.309 118.209 104.406 119.284 C 104.504 120.554 104.797 121.824 105.188 123.093 C 106.164 126.219 107.337 129.247 108.606 132.177 C 109.486 134.229 110.462 136.182 111.341 138.136 Z " fill-rule="evenodd" fill="rgb(255,255,255)"/><path d=" M 341.496 237.248 L 341.496 237.248 L 341.496 237.248 Q 344.346 236.909 345.356 237.135 L 345.356 237.135 L 345.356 237.135 Q 346.366 237.362 350.627 237.461 L 350.627 237.461 L 350.627 237.461 Q 354.888 237.561 366.478 236.816 L 366.478 236.816 L 381.44 309.039 L 395 380.416 L 394.995 380.619 L 394.995 380.619 Q 389.899 381.515 383.202 381.359 L 383.202 381.359 L 383.202 381.359 Q 376.506 381.202 367.823 379.172 L 367.823 379.172 L 367.62 379.167 L 367.62 379.167 Q 366.29 375.279 363.537 362.728 L 363.537 362.728 L 363.537 362.728 Q 360.785 350.177 358.855 345.869 L 358.855 345.869 L 358.855 345.869 Q 358.058 345.241 355.014 345.17 L 355.014 345.17 L 346.279 345.372 L 346.279 345.372 Q 344.566 349.19 341.837 361.714 L 341.837 361.714 L 341.837 361.714 Q 339.108 374.238 336.559 379.051 L 336.559 379.051 L 336.559 379.051 Q 334.723 379.414 332.897 379.372 L 332.897 379.372 L 307.542 378.373 L 307.542 378.373 Q 307.339 378.369 307.141 378.161 L 307.141 378.161 L 307.141 378.161 Q 307.358 377.557 311.735 355.326 L 311.735 355.326 L 311.735 355.326 Q 316.111 333.095 324.206 299.479 L 324.206 299.479 L 324.206 299.479 Q 332.3 265.864 341.496 237.248 Z  M 345.418 321.394 L 345.418 321.394 L 345.418 321.394 Q 352.926 321.57 360.434 321.745 L 360.434 321.745 L 360.434 321.745 Q 356.555 279.221 353.714 279.155 L 353.714 279.155 L 353.714 279.155 Q 352.902 279.136 352.019 282.161 L 352.019 282.161 L 352.019 282.161 Q 351.136 285.185 345.418 321.394 Z " fill-rule="evenodd" fill="rgb(255,255,255)"/><path d=" M 247.247 377.293 L 247.247 377.293 L 247.487 344.96 L 247.487 344.96 Q 247.487 298.975 245.571 252.032 L 245.571 252.032 L 245.331 251.793 L 245.331 251.793 Q 241.02 249.637 229.164 249.398 L 229.164 249.398 L 229.164 249.398 Q 217.309 249.158 216.59 248.919 L 216.59 248.919 L 216.59 248.919 Q 215.153 246.045 215.153 232.513 L 215.153 232.513 L 215.153 232.513 Q 215.153 218.981 215.632 211.317 L 215.632 211.317 L 215.393 210.838 L 215.393 210.838 Q 232.158 210.359 246.05 210.359 L 246.05 210.359 L 246.05 210.359 Q 259.941 210.359 277.664 210.478 L 277.664 210.478 L 277.664 210.478 Q 295.387 210.598 316.464 212.993 L 316.464 212.993 L 316.464 212.993 Q 316.943 220.897 316.943 230.477 L 316.943 230.477 L 316.943 230.477 Q 316.943 240.057 315.506 250.116 L 315.506 250.116 L 315.506 250.116 Q 312.632 249.637 305.447 249.637 L 305.447 249.637 L 305.447 249.637 Q 298.261 249.637 286.286 250.116 L 286.286 250.116 L 285.568 250.116 L 285.568 250.116 Q 285.089 251.074 285.089 272.151 L 285.089 272.151 L 285.089 272.151 Q 285.089 293.227 286.526 377.533 L 286.526 377.533 L 286.526 378.012 L 286.526 378.012 Q 281.257 378.97 269.76 378.97 L 269.76 378.97 L 263.773 378.73 L 263.773 378.73 Q 252.277 378.73 247.247 379.688 L 247.247 379.688 L 247.247 379.688 Q 247.247 379.449 247.247 377.293 Z " fill="rgb(255,255,255)"/>
+          </g>
+        </g>
+      </svg>
     </div>
   </div>
-  <img class="row frame-light unframe-x" src="{{ url_for('_site.static', filename='img/gum-parker-brick.jpg') }}">
-
-  <!-- <div class="row u-fix u-mobile">
-  <img class="row" src="{{ url_for('_site.static', filename='img/west-reading-homes.jpg') }}">
-    <img class="five grid frame-light unframe-x" src="{{ url_for('_site.static', filename='img/deans-house.jpg') }}">
-    <img class="seven grid frame-light unframe-right" src="{{ url_for('_site.static', filename='img/gum-parker.jpg') }}">
+  <div data-goto="project" class="slide-button">
+    <div class="slide-button-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 100 100">
+        <defs>
+          <clipPath id="_clipPath_KTQi7Fv8mACwaIRtnzv1O7uRAQnKqPTJ">
+            <rect width="100" height="100"/>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#_clipPath_KTQi7Fv8mACwaIRtnzv1O7uRAQnKqPTJ)">
+          <g id="Group">
+            <line x1="70.89" y1="62.981" x2="49.893" y2="91.147" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
+            <line x1="50.088" y1="8.853" x2="49.886" y2="81.743" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
+            <line x1="29.11" y1="65.075" x2="49.893" y2="91.147" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
+          </g>
+        </g>
+      </svg>
+    </div>
   </div>
-  <div class="row u-fix u-desktop">
-    <img class="eight grid frame-light unframe-y unframe-left" src="{{ url_for('_site.static', filename='img/west-reading-homes.jpg') }}">
-    <img class="four grid" src="{{ url_for('_site.static', filename='img/deans-house.jpg') }}">
-    <img class="row frame-light unframe-x" src="{{ url_for('_site.static', filename='img/gum-parker-brick.jpg') }}">
+</header>
+<section id="introProject" class="project-section">
+  <div class="u-card">
+    <div class="project-background full u-lock-top">
+      <div class="project-shape"></div>
+      <div class="project-brick">
+        <div class="project-shape"></div>
+      </div>
+    </div>
+    <div class="container-medium frame-medium full z-99">
+      <p>During the summer of 2018, West Reading Museum of Temporary Art invites neighbors and visitors alike to explore a selection of site-specific installations.</p>
+      <div class="u-lock-bottom align-right frame-medium">
+        <p>Each installation is a collaboration between local residents and an artist from around the world.</p>
+        <div data-goto="about" class="slide-button">
+          <div class="slide-button-svg">
+            <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 100 100">
+              <g
+                 transform="matrix(1.9091202,0,0,1.9091202,-227.32071,-1764.3438)"
+                 style="stroke:#000000;stroke-opacity:1">
+                <path
+                   d="m 155.26,961.042 12,-10.686 -12,-10.686"
+                   style="fill:none;stroke:#000000;stroke-width:7.87010002;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"/>
+                <path
+                   style="fill:none;stroke:#000000;stroke-width:7.87010002;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+                   d="m 161.95,950.62 -38.688,0" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="introAbout" class="about-section u-card">
+  <div class="row about-white">
+    <div class="container-medium frame-medium">
+      <p>Short interviews and tiny murals add up to the story of a place, its people and the personal histories experienced along its streets.</p>
+    </div>
+  </div>
+  <div class="about-bricks break-medium">
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+    <div class="brick"></div>
+  </div>
+  <!-- <div class="row about-brick">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 5">
+      <path class="dash-pattern" d="m 0 0 h100"/>
+    </svg>
   </div> -->
-</div>
-<footer class="container">
-  <small>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.</small>
-</footer>
+  <div class="container-medium frame-medium">
+    <p>A digital platform will serve as a guide for finding the artworks and navigating the unique character of West Reading, PA.</p>
+    <p>Stay tuned...</p>
+  </div>
+</section>
 {% endblock body %}
-
 
 {% block script %}
   <script type="text/javascript">
-    var elem = {
-      banner: document.getElementById('banner'),
-      title: document.getElementById('title'),
-      attribution: document.getElementsByClassName('leaflet-control-attribution'),
-      backgroundMap: document.getElementById('backgroundMap'),
-      sampleMap: document.getElementById('sampleMap'),
-      sampleContainer: document.getElementById('sampleContainer')
-    };
-    var obj = {};
     var util = {};
-
-    util.initialize = function(){
-      util.resize();
-      util.build_map();
+    var doc = {
+      w: 0,
+      h: 0,
+      offset: {
+        header: 0,
+        project: 0,
+        about: 0
+      },
+      buttons: 0,
+      resize: 0
     }
 
-    util.build_map = function(){
-
-
-      var watercolor = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg');
-      var watercolor2 = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg');
-
-      obj.banner = new L.Map("backgroundMap", {
-        center: new L.LatLng(40.33674, -75.94761),
-        zoom: 15,
-        zoomControl: false,
-        attributionControl: false,
-        layers: [watercolor]
-      });
-
-      obj.map = new L.Map("sampleMap", {
-        center: new L.LatLng(40.33674, -75.94761),
-        zoom: 16,
-        zoomControl: false,
-        attributionControl: false,
-        layers: [watercolor2]
-      });
-
-      obj.icon = L.divIcon({className: 'map-simple-icon'});
-
-      obj.banner.dragging.disable();
-      obj.banner.touchZoom.disable();
-      obj.banner.doubleClickZoom.disable();
-      obj.banner.scrollWheelZoom.disable();
-      obj.banner.boxZoom.disable();
-      obj.banner.keyboard.disable();
-
-      // var district_boundary = new L.geoJson();
-      // district_boundary.addTo(obj.map);
-
-      $.ajax({
-        dataType: "json",
-        url: "data/artworks.geojson",
-        success: function(data) {
-          var geojsonMarkerOptions = {
-              radius: 5,
-              fillColor: "#000",
-              color: "#fff",
-              weight: 4,
-              opacity: 1,
-              fillOpacity: 1
-          };
-
-          var init_popup;
-          var init_latlng;
-          obj.geojson = L.geoJSON(data, {
-              pointToLayer: function (feature, latlng) {
-                var html = '<dl><dt>'+feature.properties.name+'</dt><dd>Artist: '+feature.properties.artist+'</dd></dl>';
-                var marker = L.circleMarker(latlng, geojsonMarkerOptions).bindPopup(html);
-                if(feature.properties.name.indexOf('537 Franklin') > -1){
-                  init_latlng = latlng;
-                  init_popup = L.popup()
-                    .setLatLng(latlng)
-                    .setContent(html)
-                    .openOn(obj.map);
-                }
-                return marker;
-              },
-              // onEachFeature: function(feature, layer) {
-              //   layer.bindPopup(html);
-              // },
-              filter: function(feature, layer){
-                return (feature.properties.sample == 1) ? true : false;
-              }
-          }).addTo(obj.map);
-
-          obj.map.panTo(init_latlng);
-          obj.map.openPopup(init_popup);
-        }
-      });
-    }
-
-    util.resize = function(){
-      var minHeight = elem.title.offsetHeight;
-      var height = 180;
-      while (height < minHeight){
-        height += 50;
-      }
-      height += 'px';
-      elem.backgroundMap.style.height = elem.banner.style.height = height;
-      if (window.innerWidth < 600){
-        elem.sampleContainer.style.height = elem.sampleMap.style.height = height;
-      } else {
-        elem.sampleContainer.style.height = elem.sampleMap.style.height = '500px';
-      }
-    }
-
-
-    var listen = new Listener({
-      resizeFunctions: [util.resize],
-      loadState: 'complete',
-      loadFunctions: [util.initialize]
+    $(document).ready(function(){
+      util.getOffsets();
+      doc.buttons = new TouchClick('.slide-button', util.scrollTo);
+      doc.resize = new Listener({ resizeFunctions: [util.getOffsets]});
     })
 
+    util.getOffsets = function(){
+      doc.offset.header = $('#introHeader').offset().top;
+      doc.offset.project = $('#introProject').offset().top;
+      doc.offset.about = $('#introAbout').offset().top;
+    }
 
+    util.scrollTo = function(target){
+      var elem = target.dataset.goto;
+      $('html,body').animate({
+        scrollTop: doc.offset[elem]
+      }, 750, 'swing');
+    }
 
-    // var t = new TouchClick('#explore',function(el){
-    //   var update = elem.attribution[0].className.replace(' u-hide', '');
-    //   elem.attribution[0].className = update;
-    // })
   </script>
 {% endblock script %}

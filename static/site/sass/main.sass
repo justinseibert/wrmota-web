@@ -11,17 +11,20 @@ body
   padding: 0
   width: 100%
   height: 100%
-  font-size: 110%
+  font-size: 100%
   font-weight: 400
-  font-family: 'Cabin', sans-serif
+  font-family: 'Londrina Solid', sans-serif
   color: $text
   background: $white
   +no-highlight
 
+@media (min-width: $mobile-min)
+  html,body
+    font-size: 110%
+
 @media (min-width: $tablet-min)
-  html,
-  body
-    font-size: 150%
+  html,body
+    font-size: 140%
 
 img
   display: block
@@ -42,14 +45,125 @@ canvas
 @import print
 @import animation
 
-.banner
-  position: relative
-  padding-bottom: $medium
+.header-section
+  .logo
+    position: relative
+    margin-top: -6%
+    top: 0
+    left: -4%
+    width: 106%
+  .slide-button
+    position: absolute
+    bottom: $heavy
+    right: 50%
+    width: 6rem
+    height: 6rem
+    margin-right: $heavy
+    border-radius: 50%
+    background: $blue
+    &:active
+      width: 5rem
+      height: 5rem
+  .slide-button-svg
+    position: relative
+    top: 15%
+    left: 21%
+    transform: rotate3d(0,0,1,-21deg)
 
-.background-image
-  background-position: center
-  background-size: cover
-  background-repeat: no-repeat
+@media (min-height: 640px)
+  .header-section
+    .logo
+      margin-top: 0
+      left: -12%
+      width: 117%
+    .slide-button
+      bottom: 3.5rem
+
+.header-background
+  background: $blue
+  position: absolute
+  top: -33%
+  left: -50%
+  width: 200%
   height: 100%
+  transform: rotate3d(0,0,1,13deg)
 
-@import leaflet
+.project-section
+  position: relative
+  width: 100%
+  height: 100%
+  .u-lock-bottom
+    bottom: 3rem
+  .slide-button
+    position: absolute
+    right: 2em
+    width: 3rem
+    height: 3rem
+    margin-right: 25%
+    border-radius: 50%
+    background: $red
+    &:active
+      width: 2rem
+      height: 2rem
+  .slide-button-svg
+    width: 100%
+    position: relative
+    top: -29%
+    left: 16%
+    transform: rotate3d(0,0,1,108deg)
+
+.slide-button
+  transition: width 100ms, height 100ms
+
+.project-shape
+  position: absolute
+  left: -50%
+  top: -100%
+  width: 100%
+  height: 300%
+  transform-origin: right center
+  transform: rotate3d(0,0,1,50deg)
+  background: $red
+
+.project-brick
+  position: absolute
+  top: 50%
+  left: 50%
+  margin: 0
+  margin-left: -8rem
+  margin-top: -3rem
+  width: 16rem
+  height: 6rem
+  display: block
+  padding: 0
+  background: $white
+  overflow: hidden
+  .project-shape
+    transform: rotate(230deg)
+
+.about-background
+  position: absolute
+  width: 100%
+  top: 40%
+  bottom: 0
+  background: $orange
+
+.about-section
+  background: $orange
+.about-white,
+  background: white
+
+.about-bricks
+  background: white
+  overflow: hidden
+  width: 150%
+  height: 2.1rem
+  margin-top: -2px
+  margin-bottom: 1rem
+  & .brick
+    position: relative
+    float: left
+    margin: 0.3em 1.8rem 0.8rem -1.4rem
+    width: 3.6rem
+    height: 1rem
+    background: orange
