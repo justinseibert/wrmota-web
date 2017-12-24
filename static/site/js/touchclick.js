@@ -1,3 +1,7 @@
+/*
+ * Callback returns original touched element and the event (el,e)
+*/
+
 var TouchClick = function(element,callback){
   var symbol = element[0];
   var name = element.substr(1);
@@ -33,7 +37,7 @@ var TouchClick = function(element,callback){
 
   function addClick(elem){
     elem.addEventListener('click', function(evt){
-      callback(elem);
+      callback(elem, evt);
     })
   }
 }

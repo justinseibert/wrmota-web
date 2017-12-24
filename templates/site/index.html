@@ -1,7 +1,10 @@
 {% extends 'site/layout/default.html' %}
 {% block body %}
 <header id="introHeader" class="header-section u-card">
-  <div class="header-background z-9"></div>
+  <div class="header-background z-9">
+    <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z15.png');opacity:0.4"></div>
+  </div>
+  <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z17.png');opacity:0.3"></div>
   <div class="container-small">
     <div class="logo z-99">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 400 400">
@@ -20,18 +23,16 @@
   </div>
   <div data-goto="project" class="slide-button">
     <div class="slide-button-svg">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 100 100">
-        <defs>
-          <clipPath id="_clipPath_KTQi7Fv8mACwaIRtnzv1O7uRAQnKqPTJ">
-            <rect width="100" height="100"/>
-          </clipPath>
-        </defs>
-        <g clip-path="url(#_clipPath_KTQi7Fv8mACwaIRtnzv1O7uRAQnKqPTJ)">
-          <g id="Group">
-            <line x1="70.89" y1="62.981" x2="49.893" y2="91.147" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
-            <line x1="50.088" y1="8.853" x2="49.886" y2="81.743" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
-            <line x1="29.11" y1="65.075" x2="49.893" y2="91.147" vector-effect="non-scaling-stroke" stroke-width="15.751" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="3"/>
-          </g>
+      <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 100 100">
+        <g
+           transform="matrix(1.9091202,0,0,1.9091202,-227.32071,-1764.3438)"
+           style="stroke:#000000;stroke-opacity:1">
+          <path
+             d="m 155.26,961.042 12,-10.686 -12,-10.686"
+             style="fill:none;stroke:#000000;stroke-width:7.87010002;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"/>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:7.87010002;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 161.95,950.62 -38.688,0" />
         </g>
       </svg>
     </div>
@@ -40,9 +41,29 @@
 <section id="introProject" class="project-section">
   <div class="u-card">
     <div class="project-background full u-lock-top">
-      <div class="project-shape"></div>
-      <div class="project-brick">
-        <div class="project-shape"></div>
+      <div class="project-shape">
+        <div class="u-background-cover" style="background-image:url('img/texture/brick.jpeg');opacity:0.4"></div>
+      </div>
+      <div id="BrickContainer" class="project-brick u-lock-center">
+        <img id="GumParkerIMG" src="img/gum-parker-brick.jpg">
+        <canvas id="BrickCanvas" class="about-canvas z-9"></canvas>
+        <div class="audio-playback-bar">
+          <div id="AudioProgress" class="audio-progress"></div>
+        </div>
+      </div>
+      <div id="PlayButton" class="play-button u-lock-center z-999 u-hide">
+        <svg id="PLAY" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 100 100">
+         <g transform="translate(0 -952.36)">
+          <path transform="matrix(1.2494 .85011 .84067 -1.2435 807.69 -281.52)" d="m85.536-970.61-63.259-8.12 38.662-50.724z"/>
+         </g>
+        </svg>
+        <svg id="PAUSE" class="u-hide" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 100 100">
+         <g transform="translate(0 -952.36)">
+          <path d="m18.594 954.54 25.932.39849-1.4525 94.526-25.932-.3985z"/>
+          <path d="m57.998 955.97 25.932.39849-1.4525 94.526-25.932-.3985z"/>
+         </g>
+        </svg>
+
       </div>
     </div>
     <div class="container-medium frame-medium full z-99">
@@ -70,6 +91,7 @@
   </div>
 </section>
 <section id="introAbout" class="about-section u-card">
+  <div class="u-background-cover" style="background-image:url('img/west-reading-homes.jpg');opacity:0.2"></div>
   <div class="row about-white">
     <div class="container-medium frame-medium">
       <p>Short interviews and tiny murals add up to the story of a place, its people and the personal histories experienced along its streets.</p>
@@ -99,11 +121,6 @@
     <div class="brick"></div>
     <div class="brick"></div>
   </div>
-  <!-- <div class="row about-brick">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 5">
-      <path class="dash-pattern" d="m 0 0 h100"/>
-    </svg>
-  </div> -->
   <div class="container-medium frame-medium">
     <p>A digital platform will serve as a guide for finding the artworks and navigating the unique character of West Reading, PA.</p>
     <p>Stay tuned...</p>
@@ -114,6 +131,8 @@
 {% block script %}
   <script type="text/javascript">
     var util = {};
+    var geometry = {};
+    var audio = {};
     var doc = {
       w: 0,
       h: 0,
@@ -122,14 +141,36 @@
         project: 0,
         about: 0
       },
-      buttons: 0,
-      resize: 0
+      resize: 0,
+      canvas: {
+        elem: 0,
+        container: 0,
+        ctx: 0,
+        w: 0,
+        h: 0,
+        play: 0,
+        wave: 0
+      },
+      audio: 0,
+      duration: 0
     }
 
     $(document).ready(function(){
       util.getOffsets();
-      doc.buttons = new TouchClick('.slide-button', util.scrollTo);
-      doc.resize = new Listener({ resizeFunctions: [util.getOffsets]});
+      util.canvasSetup();
+      var slidebutton = new TouchClick('.slide-button', util.scrollTo);
+      var playbutton = new TouchClick('#PlayButton', util.canvasState);
+      doc.audio = new Howl({
+        src: ['audio/gumparker.webm', 'audio/gumparker.mp3']
+      })
+      doc.audio.on('load', function(){
+        $('#PlayButton').removeClass('u-hide');
+        doc.duration = doc.audio.duration();
+      })
+      doc.audio.on('end', function(){
+        util.canvasState();
+      })
+      doc.resize = new Listener({ resizeFunctions: [util.getOffsets,util.canvasSize]});
     })
 
     util.getOffsets = function(){
@@ -138,12 +179,89 @@
       doc.offset.about = $('#introAbout').offset().top;
     }
 
-    util.scrollTo = function(target){
-      var elem = target.dataset.goto;
+
+    util.scrollTo = function(el,e){
+      var elem = el.dataset.goto;
+      console.log(el,elem,e);
       $('html,body').animate({
         scrollTop: doc.offset[elem]
       }, 750, 'swing');
     }
 
+    util.canvasSetup = function(){
+      doc.canvas.elem = document.getElementById('BrickCanvas');
+      doc.canvas.ctx = doc.canvas.elem.getContext('2d');
+      doc.canvas.container = document.getElementById('BrickContainer');
+
+      doc.canvas.wave = document.createElement('img');
+      doc.canvas.wave.onload = function(){
+        util.canvasSize();
+      }
+      doc.canvas.wave.src = 'img/waveform.png'
+      doc.canvas.play = false;
+    }
+
+    util.canvasSize = function(){
+      var w = doc.canvas.container.clientWidth;
+      var h = doc.canvas.container.clientHeight;
+
+      if (w != doc.canvas.w || h != doc.canvas.h){
+        doc.canvas.w = doc.canvas.elem.width = w;
+        doc.canvas.h = doc.canvas.elem.height = h;
+
+        var ctx = doc.canvas.ctx;
+        var extension = (h/2)*Math.tan(geometry.radian(50));
+        doc.canvas.x = [
+          w*0.5+extension,
+          w*0.5-extension
+        ]
+        ctx.fillStyle = '#FFF';
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(doc.canvas.x[0],0);
+        ctx.lineTo(doc.canvas.x[1],h);
+        ctx.lineTo(0,h);
+        ctx.clip();
+
+        ctx.fillRect(0,0,w,h);
+        ctx.drawImage(doc.canvas.wave,0,0,w,h);
+      }
+    }
+
+    util.canvasState = function(){
+      var translate = 0
+      if (!doc.canvas.play){
+        translate = doc.canvas.w/-2;
+        doc.canvas.play = true;
+        doc.audio.play();
+        audio.step();
+        $('#PLAY').addClass('u-hide');
+        $('#PAUSE').removeClass('u-hide');
+      } else {
+        doc.canvas.play = false;
+        doc.audio.pause();
+        $('#PAUSE').addClass('u-hide');
+        $('#PLAY').removeClass('u-hide');
+      }
+      $('#PlayButton, #BrickCanvas').css({
+        transform: 'translate3d('+translate+'px,0,0)'
+      })
+    }
+
+    audio.step = function(){
+      var seek = doc.audio.seek() || 0;
+      var progress = Math.round(seek / doc.duration * 100) + '%';
+      $('#AudioProgress').css({
+        width: progress
+      })
+
+      if (doc.audio.playing()) {
+        requestAnimationFrame(audio.step.bind(this));
+      }
+    }
+
+    geometry.radian = function(degree){
+      return degree * (Math.PI / 180);
+    }
   </script>
 {% endblock script %}
