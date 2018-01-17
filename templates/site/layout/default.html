@@ -3,7 +3,7 @@
   <head>
     <title>wrmota</title>
     {% include 'site/snippet/meta.html' %}
-    <link href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400;Lato:400,700" rel="stylesheet">
     {% assets 'css_site' %}
       <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
     {% endassets %}
@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.7/howler.core.min.js"></script>
   </head>
   <body id="Body">
+    {% include 'site/snippet/ajax-alert.html' %}
+
     {% block body %}
     {% endblock body %}
 

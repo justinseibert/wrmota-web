@@ -1,5 +1,5 @@
 import sqlite3
-from flask import render_template, session, abort, redirect, url_for, request, flash
+from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
 
 from wrmota.api import forms as Forms
 from wrmota import database as Database
@@ -39,7 +39,8 @@ def logout():
 
 @_admin.route('/')
 def index():
-    return render_template('admin/design-mobile.html')
+    maps_api = current_app.config['GOOGLE_MAPS_API']
+    return render_template('admin/edit-data.html', maps_api=maps_api)
 
 @_admin.route('/measure')
 def measure():

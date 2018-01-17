@@ -1,0 +1,13 @@
+<script type="text/javascript" src="{{ url_for('_site.static', filename='/js/email.js') }}"></script>
+<form id="EmailSubmitForm">
+  {{ email.csrf_token }}
+  <label>Stay tuned for updates:</label>
+  <div class="row spaced">
+    {{ email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com") }}
+    <button id="EmailSubmit" type="submit" class="three grid">submit</button>
+  </div>
+  {{ email.recaptcha }}
+</form>
+<script type="text/javascript">
+  var handle_email_subscribe = new TouchClick('#EmailSubmit', ValidateEmail);
+</script>

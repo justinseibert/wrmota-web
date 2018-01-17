@@ -18,4 +18,4 @@ _admin = Blueprint(
     url_prefix='',
 )
 
-from wrmota.views import site, admin
+from wrmota.views import site, admin, api

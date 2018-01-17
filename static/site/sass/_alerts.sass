@@ -1,0 +1,23 @@
+.alert-bar
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  text-align: center
+  font-size: 1em
+  margin: 0
+  padding: $medium $light
+  overflow: hidden
+  z-index: $z-load
+  font-family: 'Lato', sans-serif
+  font-weight: 700
+  box-shadow: 0 3px 16px -6px $text
+  &.success
+    color: $text
+    background: $golden
+    & i,
+    & em
+      color: $white
+  &.failure
+    color: $white
+    background: $red
