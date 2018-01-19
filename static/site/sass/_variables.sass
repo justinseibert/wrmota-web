@@ -11,14 +11,14 @@ $text: #222
 $blue: #209EEC
 $red: #FF0066
 $dark-red: #E20059
-$green: #19c523
+$green: #BFA
 $yellow: #FF0
 $pink: #F0F
 
 $minimal: 0.1rem
 $light: 0.5rem
 $medium: 1rem
-$heavy: 1.5rem
+$heavy: 2rem
 
 $mobile-min: 321px
 $mobile-max: 460px
@@ -30,6 +30,17 @@ $z-hide: -9999
 $z-normal: 1
 $z-menu: 999
 $z-load: 9999
+
+=rotate($amount)
+  transform: rotate($amount)
+
+.rotate1
+  +rotate(1deg)
+.rotate-1
+  +rotate(-1deg)
+
+$main-font: 'Londrina Solid', sans-serif
+$secondary-font: 'Bitter', serif
 
 =hidden-fixed
   position: fixed
@@ -56,11 +67,6 @@ $z-load: 9999
     transform: scale3d(0.95,0.95,0.95)
 
 =no-highlight
-  -webkit-touch-callout: none
-  -webkit-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
-  user-select: none
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
   -moz-tap-highlight-color: rgba(255, 255, 255, 0)
   -ms-tap-highlight-color: rgba(255, 255, 255, 0)

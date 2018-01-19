@@ -3,7 +3,7 @@
   <head>
     <title>wrmota</title>
     {% include 'site/snippet/meta.html' %}
-    <link href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400;Lato:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400|Lato:400,700|Alegreya|Bitter" rel="stylesheet">
     {% assets 'css_site' %}
       <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
     {% endassets %}
@@ -18,6 +18,12 @@
 
     {% block body %}
     {% endblock body %}
+
+    <footer id="introFooter" class="row golden-container">
+      <div class="attribution-section container-medium frame-heavy align-center">
+        <small>A project by <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="_blank">Berks Community Murals</a> in collaboration with <a href="https://besttest.studio" target="_blank" title="Kayla Mattes and Justin Seibert">BESTTEST</a><br>Presented by <a href="http://www.wrcrf.org/" target="_blank">West Reading Community Revitalization Foundation</a></small>
+      </div>
+    </footer>
 
     {% block script %}
     {% endblock script %}

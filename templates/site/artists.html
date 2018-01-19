@@ -1,0 +1,17 @@
+{% extends 'site/layout/default.html' %}
+
+{% block body %}
+<header class="row green-container align-center frame-heavy break-heavy">
+  <h1>Artists</h1>
+</header>
+<section class="container break-heavy">
+  <ul class="row unframe-x">
+  {% for artist in artists %}
+    <li class="four grid {{ options.tilt|random }}"><a href="{{ artist['website'] }}" target="_blank">{{ artist['artist'] }}</a><br><small>{{ artist['location'] }}</small></li>
+  {% endfor %}
+  </ul>
+</section>
+{% endblock body %}
+
+{% block script %}
+{% endblock script %}
