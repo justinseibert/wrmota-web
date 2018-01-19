@@ -12,7 +12,13 @@
 <section class="container break-heavy">
   <ul class="row unframe-x">
   {% for artist in template.artists %}
-    <li class="four grid {{ template.options.tilt|random }}"><a href="{{ artist.website }}" target="_blank">{{ artist.artist }}</a><br><small>{{ artist.location }}</small></li>
+    <li class="four grid {{ template.options.tilt|random }}">
+      {% if artist.website != '' %}
+        <a href="{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+      {% else %}
+        <span>{{ artist.artist }}</span>
+      {% endif %}
+        <br><small>{{ artist.location }}</small></li>
   {% endfor %}
   </ul>
 </section>
