@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>admin: wrmota</title>
+    {% assets 'css_site' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% assets 'css_admin' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% assets 'js_lib' %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+  </head>
+  <body>
+    {% include 'admin/snippet/message.html' %}
+    <div class="row">
+      {% block body %}
+      {% endblock body %}
+    </div>
+    {% block script %}
+    {% endblock script %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ maps_api }}&callback=initMap&libraries=places"></script>
+  </body>
+</html>
