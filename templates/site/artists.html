@@ -6,8 +6,8 @@
 </header>
 <section class="container break-heavy">
   <ul class="row unframe-x">
-  {% for artist in artists %}
-    <li class="four grid {{ options.tilt|random }}"><a href="{{ artist['website'] }}" target="_blank">{{ artist['artist'] }}</a><br><small>{{ artist['location'] }}</small></li>
+  {% for artist in template.artists %}
+    <li class="four grid {{ template.options.tilt|random }}"><a href="{{ artist.website }}" target="_blank">{{ artist.artist }}</a><br><small>{{ artist.location }}</small></li>
   {% endfor %}
   </ul>
 </section>
