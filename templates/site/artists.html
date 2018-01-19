@@ -1,8 +1,13 @@
 {% extends 'site/layout/default.html' %}
 
 {% block body %}
-<header class="row green-container align-center frame-heavy break-heavy">
-  <h1>Artists</h1>
+<header class="row green-container frame-heavy break-heavy align-center">
+  <h1 class="u-inline-flex">
+    <span class="inline-logo">
+      {% include 'site/svg/logo-dark.svg' %}
+    </span>
+    <span>Artists</span>
+  </h1>
 </header>
 <section class="container break-heavy">
   <ul class="row unframe-x">

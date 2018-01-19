@@ -1,18 +1,18 @@
 {% extends 'site/layout/default.html' %}
 {% block body %}
 <header id="introHeader" class="header-section u-card">
-  <div class="header-background z-9">
+  <div class="header-background z9">
     <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z15.png');opacity:0.4"></div>
   </div>
   <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z17.png');opacity:0.3"></div>
   <div class="container-small">
-    <div class="logo z-99">
-      {% include 'site/svg/logo.html' %}
+    <div class="logo z99">
+      {% include 'site/svg/logo.svg' %}
     </div>
   </div>
   <div data-goto="project" class="slide-button">
     <div class="slide-button-svg">
-      {% include 'site/svg/arrow.html' %}
+      {% include 'site/svg/arrow.svg' %}
     </div>
   </div>
 </header>
@@ -24,27 +24,27 @@
       </div>
       <div id="BrickContainer" class="project-brick u-lock-center">
         <img id="GumParkerIMG" src="img/gum-parker-brick.jpg">
-        <canvas id="BrickCanvas" class="about-canvas z-9"></canvas>
+        <canvas id="BrickCanvas" class="about-canvas z9"></canvas>
         <div class="audio-playback-bar">
           <div id="AudioProgress" class="audio-progress"></div>
         </div>
       </div>
-      <div id="PlayButton" class="play-button u-lock-center z-999 u-hide">
+      <div id="PlayButton" class="play-button u-lock-center z99 u-hide">
         <div id="PLAY">
-          {% include 'site/svg/play.html' %}
+          {% include 'site/svg/play.svg' %}
         </div>
         <div id="PAUSE" class="u-hide">
-          {% include 'site/svg/pause.html' %}
+          {% include 'site/svg/pause.svg' %}
         </div>
       </div>
     </div>
-    <div class="container-medium frame-medium full z-99">
+    <div class="container-medium frame-medium full z99">
       <p>During the summer of 2018, West Reading Museum of Temporary Art invites neighbors and visitors alike to explore a selection of site-specific installations.</p>
       <div class="u-lock-bottom align-right frame-medium">
         <p>Each installation is a collaboration between local residents and an artist from around the world.</p>
         <div data-goto="about" class="slide-button">
           <div class="slide-button-svg">
-            {% include 'site/svg/arrow.html' %}
+            {% include 'site/svg/arrow.svg' %}
           </div>
         </div>
       </div>
