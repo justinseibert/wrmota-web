@@ -14,7 +14,6 @@ def check_environment():
     else:
         TEMPLATE['analytics'] = False
 
-
 @_site.route('/')
 def index():
     TEMPLATE['email'] = Forms.EmailForm()

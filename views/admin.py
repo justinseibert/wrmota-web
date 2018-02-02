@@ -12,6 +12,7 @@ def restrict_to_admins():
         session['logged_in'] = False
         session['user'] = ''
     if not session['logged_in'] and request.path != url_for('_admin.login'):
+        print(request.path)
         return redirect(url_for('_admin.login'))
 
 @_admin.route('/login', methods=['GET', 'POST'])
