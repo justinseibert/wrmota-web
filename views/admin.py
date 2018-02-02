@@ -8,7 +8,6 @@ from wrmota.views import _admin
 
 @_admin.before_request
 def restrict_to_admins():
-    print('')
     if 'logged_in' not in session:
         session['logged_in'] = False
         session['user'] = ''

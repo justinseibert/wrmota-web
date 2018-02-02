@@ -1,5 +1,5 @@
 import sqlite3
-from flask import render_template, abort
+from flask import render_template, abort, redirect, url_for
 
 from wrmota.api import forms as Forms
 from wrmota.api import data as Data
@@ -9,6 +9,10 @@ from wrmota.views import _site
 def index():
     email = Forms.EmailForm()
     return render_template('site/index.html', email=email)
+
+@_site.route('/login')
+def login():
+    return redirect(url_for('_admin.login'))
 
 @_site.route('/artists')
 def artists():

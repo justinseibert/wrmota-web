@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>admin: wrmota</title>
+    <title>wrmota: login</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
-    {% include 'admin/snippet/head.html' %}
+    {% assets 'css_site' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
   </head>
   <body>
     {% include 'admin/snippet/message.html' %}
@@ -11,7 +13,5 @@
       {% block body %}
       {% endblock body %}
     </div>
-    {% block script %}
-    {% endblock script %}
   </body>
 </html>
