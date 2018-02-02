@@ -1,0 +1,67 @@
+{% extends 'admin/layout/data.html' %}
+{% block body %}
+
+  <div class="row golden-container frame-medium unframe-bottom">
+    <div class="row align-right">
+      <h1 id="tableName" class="float-left"><b></b> table</h1>
+    {% for table in template.tables %}
+      <button type="button" class="button" onclick="show_table('{{ table }}')">{{table}}</button>
+    {% endfor %}
+    </div>
+
+  </div>
+  {% for table in template.tables %}
+  <table id="{{ table }}Table" class="row">
+    <thead>
+      <tr>
+        {% for item in template.tables[table].head %}
+        <th>{{ item }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in template.tables[table].data %}
+      <tr>
+        {% for item in template.tables[table].head %}
+          <td>{{ row[item] }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endfor %}
+
+{% endblock body %}
+
+{% block script %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script>
+  var tables = [
+    {% for table in template.tables %}'{{ table }}',{% endfor %}
+  ];
+
+  $(document).ready(function(){
+    for (var i = 0; i < tables.length; i++){
+      var id = '#'+tables[i]+'Table';
+      $(id).DataTable({
+        paging: false,
+        scrolling: false,
+      });
+      if (i > 0){
+        $(id+'_wrapper').addClass('u-hide');
+      } else {
+        $('#tableName b').html(tables[i]);
+      }
+    }
+  });
+
+  function show_table(name){
+    id = '#'+name+'Table_wrapper';
+    $('.dataTables_wrapper').removeClass('u-hide').addClass('u-hide');
+    $(id+', #tableName').removeClass('u-hide')
+    $('#tableName b').html(name);
+
+  }
+</script>
+
+{% endblock script %}

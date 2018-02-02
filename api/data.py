@@ -9,7 +9,6 @@ class CSVdata:
 
 
     def as_dict(self,prop):
-        print(self.file)
         read = csv.DictReader(open(self.file, 'r'))
         as_dict = []
 

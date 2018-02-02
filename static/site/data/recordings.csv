@@ -1,0 +1,112 @@
+group,artist,address,original_file_location,original_file,directory,filename,uid,formatted_file_location,formatted_filename
+0,,101 N. 7th Ave.,Reading Ave. / 101 N. 7th Ave.,Bill Gage.m4a,100/n7th/,02w_BillGage.m4a,0,reading/101n7th,BillGage.m4a
+0,Clay Hickson,101 S. 5th Ave.,Franklin Street / 101 5th Ave. Corner Store,101 5th Ave. Bechtle.m4a,100/s5th/,047_1015thAveBechtle.m4a,1,franklin/1015thcornerstore,1015thAveBechtle.m4a
+1,Elizabeth Allen-Cannon,101 S. 5th Ave.,Franklin Street / 101 5th Ave. Corner Store,101 5th ave.m4a,100/s5th/,05I_1015thave.m4a,2,franklin/1015thcornerstore,1015thave.m4a
+0,Akiko Masker,102 S. 6th Ave.,6th Ave. / 102 S. 6th Ave. Rocco,Conch shell.m4a,100/s6th/,07j_Conchshell.m4a,3,6th/102s6throcco,Conchshell.m4a
+0,Mary Burke,104 S. 6th Ave.,6th Ave. / 104 S. 6th Ave. Guest,104S6thAve.m4a,100/s6th/,08U_104S6thAve.m4a,4,6th/104s6thguest,104S6thAve.m4a
+0,Annie Swiderski,109 N. 3rd Ave.,Reading Ave. / 109 N. 3rd Blair and Judy,109 N. 3rd Blair.m4a,100/n3rd/,0av_109N3rdBlair.m4a,5,reading/109n3rdblairandjudy,109N3rdBlair.m4a
+1,Karen Palcho,109 N. 3rd Ave.,Reading Ave. / 109 N. 3rd Blair and Judy,109 N. 3rd Judy.m4a,100/n3rd/,0c6_109N3rdJudy.m4a,6,reading/109n3rdblairandjudy,109N3rdJudy.m4a
+0,Adrian Mangel,166 Franklin St.,Penn Ave.,Browns.m4a,100/franklin/,0dH_Browns.m4a,7,penn,Browns.m4a
+1,Visakh Menon,166 Franklin St.,,Dynamite on the Tracks.m4a,100/franklin/,0fi_DynamiteontheTracks.m4a,8,,DynamiteontheTracks.m4a
+0,Mike Miller,17 N. 3rd Ave.,Reading Ave. / 17 North 3rd Ave.,17 N. 3rd Ave.m4a,000/n3rd/,0gT_17N3rdAve.m4a,9,reading/17north3rd,17N3rdAve.m4a
+0,Howard Fonda,2 S. 4th Ave.,Penn Ave. / 400 Block / 2 S. 4th Ave. Milla,Milla.m4a,000/s4th/,0iu_Milla.m4a,10,penn/400/2s4thmilla,Milla.m4a
+0,Alex Kline,200 S. 4th Ave.,Chestnut Street / 400 Chestnut Street Barber Shop,ferrandino-robbery.m4a,200/s4th/,0k5_ferrandinorobbery.m4a,11,chestnut/400chestnutbarbershop,ferrandinorobbery.m4a
+1,Laura Rokas,200 S. 4th Ave.,Chestnut Street / 400 Chestnut Street Barber Shop,Kate's Barber Shop.m4a,200/s4th/,0lG_KatesBarberShop.m4a,12,chestnut/400chestnutbarbershop,KatesBarberShop.m4a
+2,Nancey Seghetti,200 S. 4th Ave.,Chestnut Street / 400 Chestnut Street Barber Shop,ferrandino-immigration.m4a,200/s4th/,0nh_ferrandinoimmigration.m4a,13,chestnut/400chestnutbarbershop,ferrandinoimmigration.m4a
+0,Jessica Simorte,200 Spruce St.,Other / 200 Spruce,Shiela Ooie.wav,200/spruce/,0oS_ShielaOoie.wav,14,other/200spruce,ShielaOoie.wav
+1,Stephen Proski,200 Spruce St.,Other / 200 Spruce,Shiela Circus Train.m4a,200/spruce/,0qt_ShielaCircusTrain.m4a,15,other/200spruce,ShielaCircusTrain.m4a
+0,Amy Boone-Mcreesh,201 S. 3rd Ave.,Chestnut Street / 246 Chestnut Deke's ,Shiela Corner Store.m4a,200/s3rd/,0s4_ShielaCornerStore.m4a,16,chestnut/246chestnutdekes,ShielaCornerStore.m4a
+0,Rafael Nunez,209 S. 2nd Ave.,Other / 209 S. 2nd,Ro Alcin.m4a,200/s2nd/,0tF_RoAlcin.m4a,17,other/209s2nd,RoAlcin.m4a
+0,Emilia Olsen,211 Kline St.,Other / 211 Kline Street (Chelsie O'Niel),Danny1Lifestyle.m4a,200/kline/,0vg_Danny1Lifestyle.m4a,18,other/211klinechelsieoniel,Danny1Lifestyle.m4a
+1,Nayeli Nava,211 Kline St.,Other / 211 Kline Street (Chelsie O'Niel),Chelsie.m4a,200/kline/,0wR_Chelsie.m4a,19,other/211klinechelsieoniel,Chelsie.m4a
+0,,217 Kent Way,Other / 217 Kent Way,Basketball.wav,200/kent/,0ys_Basketball.wav,20,other/217kent,Basketball.wav
+0,Claudia Kreiss,218 S. 3rd Ave.,Other / 218 S. 3rd Northam,218 South 3rd Northam.m4a,200/s3rd/,0A3_218South3rdNortham.m4a,21,other/218s3rdnortham,218South3rdNortham.m4a
+0,Phyllis Moser,22 S. 6th Ave.,6th Ave. / 22 S. 6th Ave. Rear,Rear.m4a,000/s6th/,0BE_Rear.m4a,22,6th/22s6threar,Rear.m4a
+0,Albert Ceirvo,220 S. 4th Ave.,Other / 220 S. 4th Ave. Spruce Manor,Spruce Manor Dancing.m4a,200/s4th/,0Df_SpruceManorDancing.m4a,23,other/220s4thsprucemanor,SpruceManorDancing.m4a
+1,Tom Alexander,220 S. 4th Ave.,Other / 220 S. 4th Ave. Spruce Manor,Spruce Manor Eugene.m4a,200/s4th/,0EQ_SpruceManorEugene.m4a,24,other/220s4thsprucemanor,SpruceManorEugene.m4a
+2,Mary Ann Conway,220 S. 4th Ave.,Other / 220 S. 4th Ave. Spruce Manor,Spruce Manor Elmer Thunderstorm.m4a,200/s4th/,0Gr_SpruceManorElmerThunderstorm.m4a,25,other/220s4thsprucemanor,SpruceManorElmerThunderstorm.m4a
+3,Deb Koch,220 S. 4th Ave.,Other / 220 S. 4th Ave. Spruce Manor / Coloring books,Spruce Manor Coloring.m4a,200/s4th/,0I2_SpruceManorColoring.m4a,26,other/220s4thsprucemanor/coloringbooks,SpruceManorColoring.m4a
+0,Helen Gonzales,227 Reading Ave.,Reading Ave. / 227 Reading Ave.,227 Reading Ave Tuck.m4a,200/reading/,0JD_227ReadingAveTuck.m4a,27,reading/227reading,227ReadingAveTuck.m4a
+0,Bryan Ray,229 Reading Ave.,Reading Ave. / 229 Reading Ave.,Leon.m4a,200/reading/,0Le_Leon.m4a,28,reading/229reading,Leon.m4a
+1,Pietro Librizzi,229 Reading Ave.,,ferrandino-trees.m4a,200/reading/,0MP_ferrandinotrees.m4a,29,,ferrandinotrees.m4a
+2,Angela Duen,229 Reading Ave.,Reading Ave. / 229 Reading Ave.,Reading Ave.m4a,200/reading/,0Oq_ReadingAve.m4a,30,reading/229reading,ReadingAve.m4a
+0,Alex Dukes,230 Reading Ave.,Reading Ave. / 230 Reading Ave.,Mrs. Seyler's Ghost Bectel.m4a,200/reading/,0Q1_MrsSeylersGhostBectel.m4a,31,reading/230reading,MrsSeylersGhostBectel.m4a
+0,Suzanne Fellows,243 Chestnut St.,Chestnut Street / 243 Chestnut St. IA Club,Danny2Club.m4a,200/chestnut/,0RC_Danny2Club.m4a,32,chestnut/243chestnutiaclub,Danny2Club.m4a
+0,Katie Trainer,323 Summit Ave.,Reading Ave. / 323 Summit Ave.,Tomczak.m4a,300/summit/,0Td_Tomczak.m4a,33,reading/323summit,Tomczak.m4a
+0,Judy Ballinger,341 Chestnut St.,Chestnut Street / 341 Chestnut St. Nanouh,George Nanouh.m4a,300/chestnut/,0UO_GeorgeNanouh.m4a,34,chestnut/341chestnutnanouh,GeorgeNanouh.m4a
+0,Maja Ruznic,353 Chestnut St.,Chestnut Street / Coleman,Tina.m4a,300/chestnut/,0Wp_Tina.m4a,35,chestnut/coleman,Tina.m4a
+1,Jordy van den Niewendijk,353 Chestnut St.,Chestnut Street / Coleman,Coleman's Duncan Yo-yo.m4a,300/chestnut/,0Y0_ColemansDuncanYoyo.m4a,36,chestnut/coleman,ColemansDuncanYoyo.m4a
+0,,398 Penn Ave.,Penn Ave. / 300 Block / Dragonfly,Dragon Fly.m4a,300/penn/,0ZB_DragonFly.m4a,37,penn/300/dragonfly,DragonFly.m4a
+0,Bijan Berahimi,400 Franklin St.,Franklin Street / 400 Franklin WR High,400 Franklin School Seal.m4a,400/franklin/,11c_400FranklinSchoolSeal.m4a,38,franklin/400franklinwrhigh,400FranklinSchoolSeal.m4a
+1,Elliot Fox,400 Franklin St.,Franklin Street / 400 Franklin WR High,400 Franklin WRHS Jumping Out The Window.m4a,400/franklin/,12N_400FranklinWRHSJumpingOutTheWindow.m4a,39,franklin/400franklinwrhigh,400FranklinWRHSJumpingOutTheWindow.m4a
+2,Robert Otto Epstein,400 Franklin St.,Franklin Street / 400 Franklin WR High,kissinger-tests.m4a,400/franklin/,14o_kissingertests.m4a,40,franklin/400franklinwrhigh,kissingertests.m4a
+3,Alexander Kline,400 Franklin St.,Franklin Street / 400 Franklin WR High,400 Franklin Early 1980's-We're Burning....m4a,400/franklin/,15Z_400FranklinEarly1980sWereBurning.m4a,41,franklin/400franklinwrhigh,400FranklinEarly1980sWereBurning.m4a
+4,Laura Zamperini,400 Franklin St.,Franklin Street / 400 Franklin WR High,Mammy Gresh.m4a,400/franklin/,17A_MammyGresh.m4a,42,franklin/400franklinwrhigh,MammyGresh.m4a
+0,Lisa Fedich,401 Penn Ave.,Penn Ave. / 400 Block / 401 Penn Ave. Aladdin,Aladdin.m4a,400/penn/,19b_Aladdin.m4a,43,penn/400/401pennaladdin,Aladdin.m4a
+0,Rachel Grobstein,407 Franklin St.,Franklin Street / 407 Franklin St. Bucolo,Cherry Street Vendors.m4a,400/franklin/,1aM_CherryStreetVendors.m4a,44,franklin/407franklinbucolo,CherryStreetVendors.m4a
+0,Maja Ruznic,407 Franklin St.,Franklin Street / 407 Franklin St. Bucolo,Franklin Street Love.m4a,400/franklin/,1cn_FranklinStreetLove.m4a,45,franklin/407franklinbucolo,FranklinStreetLove.m4a
+0,Madeline Gallucci,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,jujubees.wav,400/chestnut/,1dY_jujubees.wav,46,chestnut/421chestnutwrec,jujubees.wav
+1,Matthew Craven,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,421 Chestnut WRHS Basketball Shoe.m4a,400/chestnut/,1fz_421ChestnutWRHSBasketballShoe.m4a,47,chestnut/421chestnutwrec,421ChestnutWRHSBasketballShoe.m4a
+2,Ben Caldwell,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,Babb.Student cheering at BBall.m4a,400/chestnut/,1ha_BabbStudentcheeringatBBall.m4a,48,chestnut/421chestnutwrec,BabbStudentcheeringatBBall.m4a
+3,Katie Batten ,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,421 Chestnut Ha WREC.m4a,400/chestnut/,1iL_421ChestnutHaWREC.m4a,49,chestnut/421chestnutwrec,421ChestnutHaWREC.m4a
+4,Jessica Maffia,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,421 Chestnut Jose WREC.m4a,400/chestnut/,1km_421ChestnutJoseWREC.m4a,50,chestnut/421chestnutwrec,421ChestnutJoseWREC.m4a
+5,Walter Sutin,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,9-17-87 Train To Philly 200th Anniv. US Constitution.m4a,400/chestnut/,1lX_91787TrainToPhilly200thAnnivUSConstitution.m4a,51,chestnut/421chestnutwrec,91787TrainToPhilly200thAnnivUSConstitution.m4a
+6,Wynde Dyer ,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,Tierney.m4a,400/chestnut/,1ny_Tierney.m4a,52,chestnut/421chestnutwrec,Tierney.m4a
+7,Jessica Alexander,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,421 Chestnut 1 Jeremith WREC.m4a,400/chestnut/,1p9_421Chestnut1JeremithWREC.m4a,53,chestnut/421chestnutwrec,421Chestnut1JeremithWREC.m4a
+8,Jennifer Watt,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,Kupiszewski WREC.m4a,400/chestnut/,1qK_KupiszewskiWREC.m4a,54,chestnut/421chestnutwrec,KupiszewskiWREC.m4a
+9,Nicole Pagliei,421 Chestnut St.,Chestnut Street / 421 Chestnut WREC,Mrs. Kozuch.m4a,400/chestnut/,1sl_MrsKozuch.m4a,55,chestnut/421chestnutwrec,MrsKozuch.m4a
+0,Ben Koch,423 Chestnut St.,Chestnut Street / 423 Chestnut St. Kupiszewski,423 Chestnut Street.m4a,400/chestnut/,1tW_423ChestnutStreet.m4a,56,chestnut/423chestnutkupiszewski,423ChestnutStreet.m4a
+0,Anna Valdez,426 Penn Ave.,Penn Ave. / 400 Block / 426 Penn Ave. Farmhouse Kitchen,Farmhouse.m4a,400/penn/,1vx_Farmhouse.m4a,57,penn/400/426pennfarmhousekitchen,Farmhouse.m4a
+0,Laura Steiger,430 Franklin St.,Franklin Street / 430 Franklin St. WR Fire,WRFD Brotherhood 2.m4a,400/franklin/,1x8_WRFDBrotherhood2.m4a,58,franklin/430franklinwrfire,WRFDBrotherhood2.m4a
+1,Benjamin Cook,430 Franklin St.,Franklin Street / 430 Franklin St. WR Fire,WRFD Bowling.m4a,400/franklin/,1yJ_WRFDBowling.m4a,59,franklin/430franklinwrfire,WRFDBowling.m4a
+2,Kayla Mattes,430 Franklin St.,Franklin Street / 430 Franklin St. WR Fire,WRFD Carnival 1.m4a,400/franklin/,1Ak_WRFDCarnival1.m4a,60,franklin/430franklinwrfire,WRFDCarnival1.m4a
+3,Yumiko Glover,430 Franklin St.,Franklin Street / 430 Franklin St. WR Fire,WRFD Fire Boscov's.m4a,400/franklin/,1BV_WRFDFireBoscovs.m4a,61,franklin/430franklinwrfire,WRFDFireBoscovs.m4a
+0,Alison Shannon,435 Franklin St.,Franklin Street / 435 Franklin St. Wise,wise.m4a,400/franklin/,1Dw_wise.m4a,62,franklin/435franklinwise,wise.m4a
+1,Martha Ressler,435 Franklin St.,Franklin Street / 435 Franklin St. Wise,Franklin Street Games.m4a,400/franklin/,1F7_FranklinStreetGames.m4a,63,franklin/435franklinwise,FranklinStreetGames.m4a
+0,Daniella Yacono,438 Penn Ave.,Penn Ave. / 400 Block / 438 Penn Ave. Bortz Jeweler,The Black Swan.m4a,400/penn/,1GI_TheBlackSwan.m4a,64,penn/400/438pennbortzjeweler,TheBlackSwan.m4a
+0,Kozy Kitchens,441 Chestnut St.,Chestnut Street / Brayley,ChestnutSt.wav,400/chestnut/,1Ij_ChestnutSt.wav,65,chestnut/brayley,ChestnutSt.wav
+0,Aaron Elvis Jupin,449 Penn Ave.,Penn Ave. / 400 Block / 449 Penn Ave. Vertigo Records,Stacy.m4a,400/penn/,1JU_Stacy.m4a,66,penn/400/449pennvertigorecords,Stacy.m4a
+0,Nayeli Nava ,460 Chestnut St.,Chestnut Street / 460 Chestnut Heckler,460 Chestnut Playground Chestnut.m4a,400/chestnut/,1Lv_460ChestnutPlaygroundChestnut.m4a,67,chestnut/460chestnutheckler,460ChestnutPlaygroundChestnut.m4a
+1,Rose Briccetti,460 Chestnut St.,Chestnut Street / 460 Chestnut Heckler,460 Chestnut Heckler Pets.m4a,400/chestnut/,1N6_460ChestnutHecklerPets.m4a,68,chestnut/460chestnutheckler,460ChestnutHecklerPets.m4a
+2,Pedro Trujillo,460 Chestnut St.,Chestnut Street / 460 Chestnut Heckler,460 Chestnut Spoona.m4a,400/chestnut/,1OH_460ChestnutSpoona.m4a,69,chestnut/460chestnutheckler,460ChestnutSpoona.m4a
+0,Lily Wong,506 Penn Ave.,Penn Ave. / 500 Block / 506 Penn Ave. Vans,Pho Interview.wav,500/penn/,1Qi_PhoInterview.wav,70,penn/500/506pennvans,PhoInterview.wav
+0,Anna Beaver,508 Penn Ave.,Penn Ave. / 500 Block / 508 Penn Ave. Picturesque,Picturesque.m4a,500/penn/,1RT_Picturesque.m4a,71,penn/500/508pennpicturesque,Picturesque.m4a
+0,Chris Allen,512 Penn Ave.,Penn Ave. / 500 Block / 512 Penn Ave. Made Jewelry,Made Cook.m4a,500/penn/,1Tu_MadeCook.m4a,72,penn/500/512pennmadejewelry,MadeCook.m4a
+0,,521 Reading Ave.,Reading Ave. / 521 Reading Ave. I Form,I Form Fitness.m4a,500/reading/,1V5_IFormFitness.m4a,73,reading/521readingiform,IFormFitness.m4a
+0,Kristen Albright,522 Penn Ave.,Penn Ave. / 500 Block / 522 Penn Ave. Alison Clothing Co.,Alison.m4a,500/penn/,1WG_Alison.m4a,74,penn/500/522pennalisonclothingco,Alison.m4a
+0,Mike Miller,537 Franklin St.,Franklin Street / 537 Franklin St. Rohrbach,Dean's Gum Parker.m4a,500/franklin/,1Yh_DeansGumParker.m4a,75,franklin/537franklinrohrbach,DeansGumParker.m4a
+1,Karen Weber,542 Penn Ave.,Penn Ave. / 500 Block / 542 Penn Ave. Sweet Ride,sweetride.m4a,500/penn/,1ZS_sweetride.m4a,76,penn/500/542pennsweetride,sweetride.m4a
+0,Rachel Grobstein ,542 Penn Ave.,Penn Ave. / 500 Block / 542 Penn Ave. Sweet Ride,Ron Bectel Neizel's Store.m4a,500/penn/,21t_RonBectelNeizelsStore.m4a,77,penn/500/542pennsweetride,RonBectelNeizelsStore.m4a
+0,Amanda Condict,548 Franklin St.,Franklin Street / 548 Franklin St.,hafer.m4a,500/franklin/,234_hafer.m4a,78,franklin/548franklin,hafer.m4a
+0,Amy Jarding,550 Penn Ave.,Penn Ave. / 500 Block / 550 Penn Ave. Cafe Bold,550PennAve.wav,500/penn/,24F_550PennAve.wav,79,penn/500/550penncafebold,550PennAve.wav
+0,Erin Zona,550 Penn Ave.,Penn Ave.,Trolley Wire.m4a,500/penn/,26g_TrolleyWire.m4a,80,penn,TrolleyWire.m4a
+0,Pam Roule,551 Chestnut St.,Chestnut Street / 551 Chestnut Reber,Reber.m4a,500/chestnut/,27R_Reber.m4a,81,chestnut/551chestnutreber,Reber.m4a
+1,Michele Byrne,551 Chestnut St.,Chestnut Street / 551 Chestnut Reber,Sledding On Wayne Ave..m4a,500/chestnut/,29s_SleddingOnWayneAve.m4a,82,chestnut/551chestnutreber,SleddingOnWayneAve.m4a
+0,Sarah Mikenis,600 Penn Ave.,Penn Ave. / 600 Block / 600 Penn Ave. Salons,"walker,weist-socks.m4a",600/penn/,2b3_walkerweistsocks.m4a,83,penn/600/600pennsalons,walkerweistsocks.m4a
+1,,600 Penn Ave.,Penn Ave. / 600 Block / 600 Penn Ave. Salons,Shiela Salon.m4a,600/penn/,2cE_ShielaSalon.m4a,84,penn/600/600pennsalons,ShielaSalon.m4a
+0,Srijon Chowdury,601 Penn Ave.,Penn Ave. / 500 Block,Eisenbrown Memorial.m4a,600/penn/,2ef_EisenbrownMemorial.m4a,85,penn/500,EisenbrownMemorial.m4a
+1,Gary Noland,601 Penn Ave.,Penn Ave. / 600 Block / 601 Penn Ave. Dillers(Christmans),Reifsnyder's piano.m4a,600/penn/,2fQ_Reifsnyderspiano.m4a,86,penn/600/601penndillerschristmans,Reifsnyderspiano.m4a
+2,Irene Dobson,601 Penn Ave.,Penn Ave. / 600 Block / 601 Penn Ave. Dillers(Christmans),Penn Theater.m4a,600/penn/,2hr_PennTheater.m4a,87,penn/600/601penndillerschristmans,PennTheater.m4a
+3,Christina Van Der Merwe,601 Penn Ave.,Penn Ave. / 600 Block / 601 Penn Ave. Dillers(Christmans),Diller Jewelers.m4a,600/penn/,2j2_DillerJewelers.m4a,88,penn/600/601penndillerschristmans,DillerJewelers.m4a
+0,Joshua Hagler,604 Penn Ave.,Penn Ave. / 600 Block / 604 Penn Ave. Art Plus,Kissinger Travel.m4a,600/penn/,2kD_KissingerTravel.m4a,89,penn/600/604pennartplus,KissingerTravel.m4a
+1,Pipo Rioboo,604 Penn Ave.,Penn Ave. / 600 Block / 604 Penn Ave. Art Plus,Pam's Golden Cat.m4a,600/penn/,2me_PamsGoldenCat.m4a,90,penn/600/604pennartplus,PamsGoldenCat.m4a
+2,Andrew Pochan,604 Penn Ave.,Penn Ave. / 600 Block / WR Tavern,"walker,weist-stealing.m4a",600/penn/,2nP_walkerweiststealing.m4a,91,penn/600/wrtavern,walkerweiststealing.m4a
+3,Ari Bird,604 Penn Ave.,Penn Ave. / 600 Block / WR Tavern,West Reading Tavern.m4a,600/penn/,2pq_WestReadingTavern.m4a,92,penn/600/wrtavern,WestReadingTavern.m4a
+0,,610 Penn Ave.,Penn Ave. / 600 Block / 610 Penn Ave. (Chatty Monks),610 Penn Ave Chatty Monks 1.m4a,600/penn/,2r1_610PennAveChattyMonks1.m4a,93,penn/600/610pennchattymonks,610PennAveChattyMonks1.m4a
+1,Jay Ressler,610 Penn Ave.,Penn Ave. / 600 Block / 610 Penn Ave. (Chatty Monks),Van's Bakery.m4a,600/penn/,2sC_VansBakery.m4a,94,penn/600/610pennchattymonks,VansBakery.m4a
+0,Sara Miller,612 Penn Ave.,Penn Ave. / 600 Block / 612 Penn Ave. Frock,Frock- Brick Interview.m4a,600/penn/,2ud_FrockBrickInterview.m4a,95,penn/600/612pennfrock,FrockBrickInterview.m4a
+0,Kristen Woodward,616 Penn Ave.,Penn Ave. / 600 Block / 616 Penn Ave. Let's Taco 'Bout It,Lets Taco Bout It.m4a,600/penn/,2vO_LetsTacoBoutIt.m4a,96,penn/600/616pennletstacoboutit,LetsTacoBoutIt.m4a
+1,Chad Kouri,616 Penn Ave.,Penn Ave. / 600 Block / 616 Penn Ave. Let's Taco 'Bout It,Hi-oz Cafe Let's Taco 'Bout It.m4a,600/penn/,2xp_HiozCafeLetsTacoBoutIt.m4a,97,penn/600/616pennletstacoboutit,HiozCafeLetsTacoBoutIt.m4a
+0,Elizabeth Allen-Cannon,623 Penn Ave.,Penn Ave. / 600 Block / 623 Penn Ave. Baldwin,Baldwin.m4a,600/penn/,2z0_Baldwin.m4a,98,penn/600/623pennbaldwin,Baldwin.m4a
+0,April Camlin,628 Penn Ave.,Penn Ave. / 600 Block / 628 Penn Ave.,Yarn Gallery Interview.wav,600/penn/,2AB_YarnGalleryInterview.wav,99,penn/600/628penn,YarnGalleryInterview.wav
+0,Anna Valdez,742 Franklin St.,Franklin Street / 742 Franklin Street Dan Roth,742franklinst.wav,700/franklin/,2Cc_742franklinst.wav,100,franklin/742franklindanroth,742franklinst.wav
+0,Kayla Mattes,801 Hill Ave.,Other,Kathleen MOTA Interview.mp3,800/hill/,2DN_KathleenMOTAInterview.mp3,101,other,KathleenMOTAInterview.mp3
+0,,801 Hill Ave.,Other,ferrandino-textiles.m4a,800/hill/,2Fo_ferrandinotextiles.m4a,102,other,ferrandinotextiles.m4a
+0,Amir H. Fallah,WR Pool House,Other / WR Pool House,Pool Patch.m4a,XXX/pool/,2GZ_PoolPatch.m4a,103,other/wrpoolhouse,PoolPatch.m4a
+1,Emilia Olsen,WR Pool House,Other / WR Pool House,Big Tree.m4a,XXX/pool/,2IA_BigTree.m4a,104,other/wrpoolhouse,BigTree.m4a
+2,Helena Kauppila,WR Pool House,Other / WR Pool House,Crowded Pool.m4a,XXX/pool/,2Kb_CrowdedPool.m4a,105,other/wrpoolhouse,CrowdedPool.m4a
+3,Holly Leonardson,WR Pool House,Other / WR Pool House,Heckler Water Pageant.m4a,XXX/pool/,2LM_HecklerWaterPageant.m4a,106,other/wrpoolhouse,HecklerWaterPageant.m4a
+4,Maria Calandra ,WR Pool House,Other / WR Pool House,Skinny Dipping.m4a,XXX/pool/,2Nn_SkinnyDipping.m4a,107,other/wrpoolhouse,SkinnyDipping.m4a
+5,Ralph Pugay,WR Pool House,Other / WR Pool House,WR Water Pageant.m4a,XXX/pool/,2OY_WRWaterPageant.m4a,108,other/wrpoolhouse,WRWaterPageant.m4a
+6,Vincent Strijkan,WR Pool House,Other / WR Pool House,BabbDIY fire diver.m4a,XXX/pool/,2Qz_BabbDIYfirediver.m4a,109,other/wrpoolhouse,BabbDIYfirediver.m4a
+7,Sofie Ramos,WR Pool House,Other / WR Pool House,Carnival Shiela WR Playground.m4a,XXX/pool/,2Sa_CarnivalShielaWRPlayground.m4a,110,other/wrpoolhouse,CarnivalShielaWRPlayground.m4a

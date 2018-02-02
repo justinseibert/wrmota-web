@@ -1,0 +1,72 @@
+$orange: #FF9D00
+$golden: #ffc200
+$white: #FFF
+$dust: #EEE
+$light-grey: #EEE
+$light-grey-select: #E5E5E5
+$medium-grey: #CCC
+$dark-grey: #AAA
+$text-emphasis: #555
+$text: #222
+$blue: #209EEC
+$red: #FF0066
+$dark-red: #E20059
+$green: #BFA
+$yellow: #FF0
+$pink: #F0F
+
+$minimal: 0.1rem
+$light: 0.5rem
+$medium: 1rem
+$heavy: 2rem
+
+$mobile-min: 321px
+$mobile-max: 460px
+$tablet-min: 461px
+$tablet-max: 768px
+$desktop-min: 769px
+
+$z-hide: -9999
+$z-normal: 1
+$z-menu: 999
+$z-load: 9999
+
+=rotate($amount)
+  transform: rotate($amount)
+
+.rotate1
+  +rotate(1deg)
+.rotate-1
+  +rotate(-1deg)
+
+$main-font: 'Londrina Solid', sans-serif
+$secondary-font: 'Bitter', serif
+
+=hidden-fixed
+  position: fixed
+  top: 0
+  left: -9999px
+  opacity: 0
+
+=no-outline
+  outline: none
+  border: none
+  margin: 0
+  padding: 0
+  border-radius: 0
+
+=reach-ends
+  &:first-child
+    margin-left: 0
+  &:last-child
+    margin-right: 0
+
+=activate
+  transition: transform 50ms
+  &:active
+    transform: scale3d(0.95,0.95,0.95)
+
+=no-highlight
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+  -moz-tap-highlight-color: rgba(255, 255, 255, 0)
+  -ms-tap-highlight-color: rgba(255, 255, 255, 0)

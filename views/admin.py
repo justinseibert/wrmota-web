@@ -39,6 +39,10 @@ def logout():
 
 @_admin.route('/')
 def index():
+    return render_template('admin/index.html')
+
+@_admin.route('/map')
+def google_map():
     maps_api = current_app.config['GOOGLE_MAPS_API']
     return render_template('admin/edit-data.html', maps_api=maps_api)
 
@@ -50,6 +54,26 @@ def measure():
 def multiple():
     return render_template('admin/multiple.html')
 
-@_admin.route('/map')
+@_admin.route('/map2')
 def map():
     return render_template('admin/map.html')
+
+@_admin.route('/data')
+def data():
+    db = Database.get_db()
+    tables = [
+        'address',
+        'media',
+        'artist'
+    ]
+    template = {
+        'tables': {}
+    }
+    for table in tables:
+        statement = "SELECT * FROM {}".format(table)
+        data = db.execute(statement).fetchall()
+        template['tables'][table] = {
+            'head' : data[0].keys(),
+            'data' : data,
+        }
+    return render_template('admin/data.html',template=template)
