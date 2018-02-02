@@ -1,0 +1,16 @@
+<nav class="nav-menu no-print z99">
+  <input type="checkbox" id="menu" class="nav-toggle">
+  <label for="menu" class="nav-button" onclick="this.blur()">
+    <div id="MENU">
+      {% include "site/svg/menu.svg" %}
+    </div>
+    <div id="MENU_RETURN">
+      {% include "site/svg/cross.svg" %}
+    </div>
+    <h1 id="MENU_TITLE">Menu</h1>
+  </label>
+  <ul id="navigation">
+    <li><a href="/">home</a></li>
+    <li><a href="/artists">artists</a></li>
+  </ul>
+</nav>

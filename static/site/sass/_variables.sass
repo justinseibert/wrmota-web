@@ -26,13 +26,24 @@ $tablet-min: 461px
 $tablet-max: 768px
 $desktop-min: 769px
 
-$z-hide: -9999
-$z-normal: 1
-$z-menu: 999
-$z-load: 9999
+.z-999,
+.z-hide
+  z-index: -999
+.z1
+  z-index: 1
+.z9
+  z-index: 9
+.z99
+  z-index: 99
+.z999
+  z-index: 999
+.z9999,
+.z-load
+  z-index: 9999
 
 =rotate($amount)
-  transform: rotate($amount)
+  transform: rotate3d(0,0,1,$amount)
+  // transform: rotate($amount)
 
 .rotate1
   +rotate(1deg)

@@ -1,13 +1,24 @@
 {% extends 'site/layout/default.html' %}
 
 {% block body %}
-<header class="row green-container align-center frame-heavy break-heavy">
-  <h1>Artists</h1>
+<header class="row green-container frame-heavy break-heavy align-center">
+  <h1 class="u-inline-flex">
+    <span class="inline-logo">
+      {% include 'site/svg/logo-dark.svg' %}
+    </span>
+    <span>Artists</span>
+  </h1>
 </header>
 <section class="container break-heavy">
   <ul class="row unframe-x">
-  {% for artist in artists %}
-    <li class="four grid {{ options.tilt|random }}"><a href="{{ artist['website'] }}" target="_blank">{{ artist['artist'] }}</a><br><small>{{ artist['location'] }}</small></li>
+  {% for artist in template.artists %}
+    <li class="four grid {{ template.options.tilt|random }}">
+      {% if artist.website != '' %}
+        <a href="{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+      {% else %}
+        <span>{{ artist.artist }}</span>
+      {% endif %}
+        <br><small>{{ artist.location }}</small></li>
   {% endfor %}
   </ul>
 </section>
