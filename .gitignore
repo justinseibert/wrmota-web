@@ -7,7 +7,6 @@
 .Trashes
 
 *.pyc
-*.db
 *.log
 *.sql
 *.sqlite
