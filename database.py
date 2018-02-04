@@ -39,6 +39,45 @@ def get_map_points():
 
     return address
 
+def get_artists_involved():
+    db = get_db()
+
+    visitor = db.execute('''
+        SELECT DISTINCT
+            artist.artist,
+            artist.website,
+            artist.location,
+            artist_meta.curator
+        FROM
+            address
+        INNER JOIN artist ON address.artist = artist.id
+        INNER JOIN artist_meta ON artist.meta = artist_meta.id
+        WHERE
+            artist_meta.curator = 'kayla'
+        OR
+            artist_meta.curator = 'pam'
+        ORDER BY artist.artist ASC
+    ''').fetchall()
+
+    local = db.execute('''
+        SELECT DISTINCT
+            artist.artist,
+            artist.website,
+            artist.location,
+            artist_meta.curator
+        FROM
+            address
+        INNER JOIN artist ON address.artist = artist.id
+        INNER JOIN artist_meta ON artist.meta = artist_meta.id
+        WHERE artist_meta.curator = 'mike'
+        ORDER BY artist.artist ASC
+    ''').fetchall()
+
+    return {
+        'visitor': visitor,
+        'local': local
+    }
+
 def get_dict_of(input_data, name='default', json=False):
     data = []
     head = input_data[0].keys()

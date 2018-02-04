@@ -10,15 +10,38 @@
   </h1>
 </header>
 <section class="container break-heavy">
+  <header class="row align-center frame-medium break-medium">
+    <h2>Visiting Selection</h2>
+  </header>
   <ul class="row unframe-x">
-  {% for artist in template.artists %}
+  {% for artist in template.artists.visitor.data %}
     <li class="four grid {{ template.options.tilt|random }}">
       {% if artist.website != '' %}
-        <a href="{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+        <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
       {% else %}
         <span>{{ artist.artist }}</span>
       {% endif %}
-        <br><small>{{ artist.location }}</small></li>
+        <br><small>
+          {% if artist.location == '' %}
+            Earth
+          {% else %}
+            {{ artist.location }}
+          {% endif %}
+        </small></li>
+  {% endfor %}
+  </ul>
+  <header class="row align-center frame-medium break-medium">
+    <h2>Local Selection</h2>
+  </header>
+  <ul class="row unframe-x">
+  {% for artist in template.artists.local.data %}
+    <li class="four grid {{ template.options.tilt|random }}">
+      {% if artist.website != '' %}
+        <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+      {% else %}
+        <span>{{ artist.artist }}</span>
+      {% endif %}
+      </li>
   {% endfor %}
   </ul>
 </section>
