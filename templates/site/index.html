@@ -103,7 +103,11 @@
       var slidebutton = new TouchClick('.slide-button', util.scrollTo);
       var playbutton = new TouchClick('#PlayButton', util.canvasState);
       doc.audio = new Howl({
-        src: ['audio/500/franklin/1Yh_DeansGumParker.webm','audio/500/franklin/1Yh_DeansGumParker.mp3','audio/500/franklin/1Yh_DeansGumParker.ogg']
+        src: [
+          '/audio/500/franklin/1Yh_DeansGumParker.webm',
+          '/audio/500/franklin/1Yh_DeansGumParker.mp3',
+          '/audio/500/franklin/1Yh_DeansGumParker.ogg'
+        ]
       })
       doc.audio.on('load', function(){
         $('#PlayButton').removeClass('u-hide');

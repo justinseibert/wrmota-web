@@ -1,0 +1,23 @@
+<header id="tableHeader" class="golden-container">
+  <input id="table-search" type="text" placeholder="search table">
+</header>
+{% for table in template.tables %}
+<table id="{{ table }}Table" class="row">
+  <thead>
+    <tr>
+      {% for item in template.tables[table].head %}
+        <th class="access-col_{{item}}">{{ item }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in template.tables[table].data %}
+    <tr class="table-row" data-id="{{row.id}}">
+      {% for item in template.tables[table].head %}
+        <td class="access-col_{{item}}">{{ row[item] }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor %}

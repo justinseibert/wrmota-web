@@ -13,9 +13,8 @@ _admin = Blueprint(
     __name__,
     template_folder='../templates',
     static_folder='../static/admin',
-    static_url_path='/static/admin',
-    subdomain='admin',
-    url_prefix='',
+    static_url_path='',
+    url_prefix='/admin',
 )
 
 from wrmota.views import site, admin, api

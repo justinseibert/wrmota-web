@@ -1,0 +1,32 @@
+{% extends 'admin/layout/map.html' %}
+{% block body %}
+<div id="Fullscreen" class="row">
+  <div class="six grid">
+    <input id="map-search" type="text" placeholder="search map">
+    <div id="map"></div>
+  </div>
+  <div class="six grid">
+    {% include 'admin/snippet/table.html' %}
+  </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/google.js') }}"></script>
+  <script>
+    var sites = {{ template.tables.address.data|tojson }};
+    var table;
+    var tr_click;
+    $(document).ready(function(){
+      table = new TableData({
+        name: '{{ template.tables.address.name }}',
+        data: sites,
+        crop: true,
+        rmCols: ['id','lat','lng','brick','website']
+      });
+      tr_click= new TouchClick('.table-row',show_site_from_table);
+    });
+
+  </script>
+{% endblock script %}

@@ -1,7 +1,7 @@
 {% extends 'admin/layout/login.html' %}
 {% block body %}
 <h1>login</h1>
-<form method="post" action="/login" class="row">
+<form method="post" action="/admin/login" class="row">
   {{ form.csrf_token }}
   <div class="five grid break-light float-center align-center">
     {{ form.username(class="grey row",placeholder="user") }}

@@ -34,34 +34,11 @@
 {% endblock body %}
 
 {% block script %}
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
   var tables = [
     {% for table in template.tables %}'{{ table }}',{% endfor %}
   ];
-
-  $(document).ready(function(){
-    for (var i = 0; i < tables.length; i++){
-      var id = '#'+tables[i]+'Table';
-      $(id).DataTable({
-        paging: false,
-        scrolling: false,
-      });
-      if (i > 0){
-        $(id+'_wrapper').addClass('u-hide');
-      } else {
-        $('#tableName b').html(tables[i]);
-      }
-    }
-  });
-
-  function show_table(name){
-    id = '#'+name+'Table_wrapper';
-    $('.dataTables_wrapper').removeClass('u-hide').addClass('u-hide');
-    $(id+', #tableName').removeClass('u-hide')
-    $('#tableName b').html(name);
-
-  }
 </script>
+<script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>
 
 {% endblock script %}

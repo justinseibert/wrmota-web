@@ -1,3 +1,4 @@
+from pprint import pprint
 import sqlite3
 from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
 
@@ -5,6 +6,8 @@ from wrmota.api import forms as Forms
 from wrmota import database as Database
 
 from wrmota.views import _admin
+
+TEMPLATE = {}
 
 @_admin.before_request
 def restrict_to_admins():
@@ -43,8 +46,14 @@ def index():
 
 @_admin.route('/map')
 def google_map():
-    maps_api = current_app.config['GOOGLE_MAPS_API']
-    return render_template('admin/edit-data.html', maps_api=maps_api)
+    TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
+
+    map_points = Database.get_map_points()
+    TEMPLATE['tables'] = {
+        'address': Database.get_dict_of(map_points,name='address',json=False)
+    }
+
+    return render_template('admin/googlemaps.html', template=TEMPLATE)
 
 @_admin.route('/measure')
 def measure():
@@ -59,12 +68,15 @@ def map():
     return render_template('admin/map.html')
 
 @_admin.route('/data')
-def data():
+def all_tables():
     db = Database.get_db()
     tables = [
         'address',
+        'artist',
         'media',
-        'artist'
+        'address_meta',
+        'artist_meta',
+        'media_meta',
     ]
     template = {
         'tables': {}
