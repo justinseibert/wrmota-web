@@ -72,7 +72,7 @@
     </StyleMap>
     <Placemark>
       <name>551 Chestnut Street A</name>
-      <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: True<br>group site: true<br>description: Reber, <br>student: <br>artist: Pam Roule]]></description>
+      <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: True<br>group site: true<br>description: Reber<br>student: <br>artist: Pam Roule]]></description>
       <styleUrl>#icon-1739-0F9D58</styleUrl>
       <ExtendedData>
         <Data name="sample">
@@ -94,7 +94,7 @@
           <value>1</value>
         </Data>
         <Data name="description">
-          <value>Reber, </value>
+          <value>Reber</value>
         </Data>
         <Data name="student">
           <value/>
@@ -306,7 +306,7 @@
     </Placemark>
     <Placemark>
       <name>460 Chestnut St. A</name>
-      <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Heckler<br>student: <br>artist: Nayeli Nava ]]></description>
+      <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Heckler<br>student: <br>artist: Nayeli Nava]]></description>
       <styleUrl>#icon-1739-0F9D58</styleUrl>
       <ExtendedData>
         <Data name="sample">
@@ -334,7 +334,7 @@
           <value/>
         </Data>
         <Data name="artist">
-          <value>Nayeli Nava </value>
+          <value>Nayeli Nava</value>
         </Data>
       </ExtendedData>
       <Point>
@@ -1320,7 +1320,7 @@
     </Placemark>
     <Placemark>
       <name>200 S. 4th Ave. A</name>
-      <description><![CDATA[sample: false<br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Barbershop (robbery)<br>student: <br>artist: Alex Kline]]></description>
+      <description><![CDATA[sample: false<br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Barbershop (robbery)<br>student: <br>artist: Alexander Kline]]></description>
       <styleUrl>#icon-1739-FFEA00</styleUrl>
       <ExtendedData>
         <Data name="sample">
@@ -1348,7 +1348,7 @@
           <value/>
         </Data>
         <Data name="artist">
-          <value>Alex Kline</value>
+          <value>Alexander Kline</value>
         </Data>
       </ExtendedData>
       <Point>
@@ -1436,8 +1436,8 @@
       </Point>
     </Placemark>
     <Placemark>
-      <name>407 Franklin St. A</name>
-      <description><![CDATA[sample: false<br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Kim Bucolo Franklin Street Love<br>student: <br>artist: Lisa Fedich]]></description>
+      <name>407 Franklin St. B</name>
+      <description><![CDATA[sample: false<br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: <br>group site: true<br>description: Kim Bucolo Franklin Street Love<br>student: <br>artist: Maja Ruznic]]></description>
       <styleUrl>#icon-1739-0F9D58</styleUrl>
       <ExtendedData>
         <Data name="sample">
@@ -1465,7 +1465,7 @@
           <value/>
         </Data>
         <Data name="artist">
-          <value>Lisa Fedich</value>
+          <value>Maja Ruznic</value>
         </Data>
       </ExtendedData>
       <Point>
@@ -2918,7 +2918,7 @@
       </Point>
     </Placemark>
     <Placemark>
-      <name>407 Franklin Street</name>
+      <name>407 Franklin Street A</name>
       <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: True<br>group site: true<br>description: Bucolo (Cherry Street Vendors story)<br>student: <br>artist: Rachel Grobstein]]></description>
       <styleUrl>#icon-1739-0F9D58</styleUrl>
       <ExtendedData>
@@ -4166,7 +4166,7 @@
       </Point>
     </Placemark>
     <Placemark>
-      <name>604 Penn Ave</name>
+      <name>604 Penn Ave D</name>
       <description><![CDATA[sample: <br>confirmed: true<br>installed: <br>interviewed: true<br>site photos: True<br>group site: true<br>description: Sally Star<br>student: <br>artist: Ari Bird]]></description>
       <styleUrl>#icon-1739-0F9D58</styleUrl>
       <ExtendedData>

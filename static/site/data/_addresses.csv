@@ -1,11 +1,11 @@
 address,lat,lng,sample,confirmed,installed,interviewed,site photos,group site,description,student,artist
-551 Chestnut Street A,40.3337501,-75.949299,,x,,x,x,x,"Reber, ",,Pam Roule
+551 Chestnut Street A,40.3337501,-75.949299,,x,,x,x,x,Reber,,Pam Roule
 220 S. 4th Ave. A,40.3328955,-75.9461904,,x,,x,,x,Spruce Manor (dancer),,Albert Ceirvo
 209 S. 2nd Ave.,40.3324497,-75.9427089,,x,,x,,,Ro Alcin,,Rafael Nunez
 211 Kline Street B,40.3324048,-75.9431192,,x,,x,,x,Chelsie ONeil,,Nayeli Nava
 201 S. 3rd,40.3330141,-75.9442028,,x,,x,,,Deke's Shiela Nestro corner store,,Amy Boone-Mcreesh
 200 Spruce Street A,40.3317587,-75.9431273,,x,,x,,x,Shiela Nestro (Ooie),,Jessica Simorte
-460 Chestnut St. A,40.3334322,-75.9475127,,x,,x,,x,Heckler,,Nayeli Nava 
+460 Chestnut St. A,40.3334322,-75.9475127,,x,,x,,x,Heckler,,Nayeli Nava
 230 Reading Ave.,40.3356915,-75.9422609,,x,,x,x,,Ron Bectle,,Alex Dukes
 229 Reading Ave. A,40.3359593,-75.9422753,,x,,x,x,x,Leon,,Bryan Ray
 101 N. 7th Ave. ,40.3371073,-75.9513617,,x,,x,,,Gage Personnel,,
@@ -31,10 +31,10 @@ address,lat,lng,sample,confirmed,installed,interviewed,site photos,group site,de
 2 S. 4th Ave.,40.3353347,-75.9457827,,x,,x,,,Milla's,,
 398 Penn Ave.,40.3353838,-75.9455305,,x,,x,,,Dragonfly,,
 401 Penn Ave.,40.3359133,-75.9458578,,x,,x,x,,Aladdin,,Lisa Fedich
-200 S. 4th Ave. A,40.3333024,-75.9459785,,x,,x,,x,Barbershop (robbery),,Alex Kline
+200 S. 4th Ave. A,40.3333024,-75.9459785,,x,,x,,x,Barbershop (robbery),,Alexander Kline
 423 Chestnut St.,40.333605,-75.9466812,,x,,x,x,,Kupiszewski,,Ben Koch
 400 Franklin St. A,40.3343656,-75.9464586,,x,,x,,x,West Reading HS,,Bijan Berahimi
-407 Franklin St. A,40.3346211,-75.946354,,x,,x,,x,Kim Bucolo Franklin Street Love,,Lisa Fedich
+407 Franklin St. B,40.3346211,-75.946354,,x,,x,,x,Kim Bucolo Franklin Street Love,,Maja Ruznic
 243 Chestnut St.,40.333149,-75.9441036,,x,,x,,x,IA Club,,
 341 Chestnut St.,40.3334373,-75.9454487,,x,,x,x,,George Nanouh,,Judy Ballinger
 542 Penn Ave. A,40.3356496,-75.9491649,,x,,x,x,x,Sweet Ride (Neizel Store story),,Rachel Grobstein
@@ -72,7 +72,7 @@ WR Pool House A,40.327248,-75.9490174,,x,,x,x,x,Pool Patch,,Amir H. Fallah
 400 Franklin Street C,40.3342408,-75.9461796,,x,,x,x,x,Taking tests,,Robert Otto Epstein
 400 Franklin Street D,40.3340609,-75.9465766,,x,,x,x,,"""We're burning here"" story",,
 400 Franklin Street E,40.3343778,-75.9466839,,x,,x,x,x,Mammy Gresh,,Laura Zamperini
-407 Franklin Street,40.3346171,-75.9463191,,x,,x,x,x,Bucolo (Cherry Street Vendors story),,Rachel Grobstein
+407 Franklin Street A,40.3346171,-75.9463191,,x,,x,x,x,Bucolo (Cherry Street Vendors story),,Rachel Grobstein
 421 Chestnut St. B,40.3339914,-75.9463728,,x,,x,x,x,WREC Basketball show,,Matthew Craven
 421 Chestnut Street D,40.3335579,-75.946421,,x,,x,x,x,WREC (Ha Interview),,Katie Batten 
 421 Chestnut Street C,40.3339873,-75.9464854,,x,,x,x,x,WREC Basketball cheering section,,
@@ -104,7 +104,7 @@ WR Pool House F,40.3271559,-75.9491462,,x,,x,x,x,Fire diver,,Ralph Pugay
 WR Pool House G,40.3272009,-75.9490952,,x,,x,x,x,Byron DIY Fire Diver,,Vincent Strijkan
 421 Chestnut Street I,40.3335988,-75.9465122,,x,,x,x,x,Teacher interviiew,,
 421 Chestnut Street J,40.3337052,-75.9460026,,x,,x,x,x,Sabrina Interview,,
-604 Penn Ave,40.3357089,-75.9500447,,x,,x,x,x,Sally Star,,Ari Bird
+604 Penn Ave D,40.3357089,-75.9500447,,x,,x,x,x,Sally Star,,Ari Bird
 353 Chestnut Street B,40.3335314,-75.9457773,,x,,x,x,x,Duncan Yoyo,,Jordy van den Niewendijk
 550 Penn Ave. B,40.3355698,-75.9495699,,x,,x,x,x,Trolley Wire,,Erin Zona
 WR Pool House H,40.3272408,-75.9490335,,x,,x,x,x,Sheila Carnival,,Sofie Ramos
