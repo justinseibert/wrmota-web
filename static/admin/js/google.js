@@ -2,6 +2,7 @@ var map;
 var google_site = {};
 var audio = {};
 var latest_track = null;
+var latest_track_duration = 0;
 var elem = {
   'map': document.getElementById('map')
 };
@@ -148,14 +149,18 @@ function create_sites(){
       icon:icon,
       map: map
     });
-    var content = '<div class="row spaced flex-center" style="width:200px">'+
-      '<div class="three grid">'+
-        '<div id="PLAY_'+sites[i].id+'" data-id="'+sites[i].id+'" class="map-audio-button map-load-button"></div>'+
+    var artist_url = (sites[i].website != '') ? '<a href="http://'+sites[i].website+'" target="_blank">'+sites[i].artist+'</a>' : sites[i].artist;
+    var content = '<div class="row spaced flex-center break-light" style="width:200px">'+
+        '<div class="three grid">'+
+          '<div id="PLAY_'+sites[i].id+'" data-id="'+sites[i].id+'" class="map-audio-button map-load-button"></div>'+
+        '</div>'+
+        '<div class="nine grid">'+
+          '<b>'+sites[i].address+'</b>'+
+          '<br>'+artist_url+
+        '</div>'+
       '</div>'+
-      '<div class="nine grid">'+
-        '<b>'+sites[i].address+'</b>'+
-        '<br>'+sites[i].artist+
-      '</div>'+
+      '<div class="audio-playback-bar">'+
+        '<div id="AudioProgress" class="audio-progress"></div>'+
       '</div>';
     var id = sites[i].id;
     google_site[id] = {
@@ -166,6 +171,7 @@ function create_sites(){
     google.maps.event.addListener(marker, 'click', (function(marker, content, id) {
       return function() {
           if (latest_track){
+            latest_track_duration = 0;
             latest_track.stop();
           }
           infowindow.setContent(content);
@@ -206,6 +212,13 @@ function load_audio(id){
 function allow_play(id){
   var play_id = '#PLAY_'+id;
   var play_pause = new TouchClick(play_id, play_pause_audio);
+  var seek_audio = new TouchClick('.audio-playback-bar', function(elem,evt){
+    if(latest_track && latest_track_duration > 0){
+      var position = 1 - ((elem.clientWidth - evt.offsetX)/elem.clientWidth);
+      latest_track.seek(position*latest_track_duration);
+      audio_progress_step();
+    }
+  })
   $('#PLAY_'+id)
     .removeClass('map-load-button')
     .addClass('map-play-button')
@@ -226,7 +239,21 @@ function play_pause_audio(elem,evt){
       .removeClass('map-play-button')
       .addClass('map-pause-button')
     ;
+    latest_track = track;
+    latest_track_duration = track.duration();
     track.play();
+    audio_progress_step();
   }
-  latest_track = track;
+}
+
+function audio_progress_step(){
+  var seek = latest_track.seek() || 0;
+  var progress = Math.round(seek / latest_track_duration * 100) + '%';
+  $('#AudioProgress').css({
+    width: progress
+  })
+
+  if (latest_track.playing()) {
+    requestAnimationFrame(audio_progress_step.bind(this));
+  }
 }
