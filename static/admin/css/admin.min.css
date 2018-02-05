@@ -195,6 +195,9 @@ li.gre:before {
 .dataTables_info {
   margin: 0.5rem 1rem; }
 
+.table-header {
+  font-size: 0.5em; }
+
 table {
   font-family: monospace;
   text-align: left;

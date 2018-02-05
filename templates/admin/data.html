@@ -1,44 +1,33 @@
 {% extends 'admin/layout/data.html' %}
 {% block body %}
 
-  <div class="row golden-container frame-medium unframe-bottom">
-    <div class="row align-right">
-      <h1 id="tableName" class="float-left"><b></b> table</h1>
-    {% for table in template.tables %}
-      <button type="button" class="button" onclick="show_table('{{ table }}')">{{table}}</button>
-    {% endfor %}
-    </div>
-
-  </div>
-  {% for table in template.tables %}
-  <table id="{{ table }}Table" class="row">
-    <thead>
-      <tr>
-        {% for item in template.tables[table].head %}
-        <th>{{ item }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in template.tables[table].data %}
-      <tr>
-        {% for item in template.tables[table].head %}
-          <td>{{ row[item] }}</td>
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endfor %}
+  {% include 'admin/snippet/table.html' %}
 
 {% endblock body %}
 
 {% block script %}
+<script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>
 <script>
   var tables = [
     {% for table in template.tables %}'{{ table }}',{% endfor %}
   ];
+  var table = {};
+  $(document).ready(function(){
+    for (var i = 0, t = tables.length; i < t; i++){
+      var name = tables[i];
+      var hide_state = (i > 0) ? true : false;
+      table[name] = new TableData({
+        name: tables[i],
+        hide: true,
+        crop: true,
+      })
+    }
+    table['address'].show();
+    var select_table = new TouchClick('.select-table-button', function(elem,evt){
+      var name = elem.dataset.table;
+      table[name].show();
+    })
+  })
 </script>
-<script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>
 
 {% endblock script %}

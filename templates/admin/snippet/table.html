@@ -1,6 +1,22 @@
+{% if template.tables|length > 1 %}
+<header id="tableHeader" class="golden-container">
+  <div class="table-header frame-light row align-right">
+    <h1 id="tableName" class="float-left"><b></b> table</h1>
+    {% for table in template.tables %}
+    <button type="button" class="select-table-button button" data-table="{{table}}">{{table}}</button>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <input id="table-search" type="text" placeholder="search table">
+  </div>
+</header>
+{% else %}
 <header id="tableHeader" class="golden-container">
   <input id="table-search" type="text" placeholder="search table">
 </header>
+{% endif %}
+
+
 {% for table in template.tables %}
 <table id="{{ table }}Table" class="row">
   <thead>

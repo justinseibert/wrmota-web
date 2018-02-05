@@ -15,21 +15,21 @@ TableData.prototype.create = function(){
   this.table = $(id).DataTable({
     paging: false,
     scrolling: false,
-    dom: 'ltir',
+    dom: 'ltr',
   });
   if (this.hide){
     $(id+'_wrapper').addClass('u-hide');
   }
   if (this.crop){
     var head = $('#tableHeader').outerHeight(true);
-    var foot = $(id+'_info').outerHeight(true);
-    console.log(head,foot);
+    // var foot = $(id+'_info').outerHeight(true);
+    // console.log(window.innerHeight,head,foot);
     $(id+'_wrapper')
       .css('height', window.innerHeight - head)
       ;
     $(id)
       .addClass('overflow-container')
-      .css('height', window.innerHeight - head - foot)
+      .css('height', window.innerHeight - head)
       ;
   }
   var rmCol = this.rmCols.length;
@@ -45,9 +45,9 @@ TableData.prototype.create = function(){
   })
 },
 
-TableData.prototype.show = function(name){
-  id = '#'+name+'Table_wrapper';
+TableData.prototype.show = function(){
+  id = '#'+this.name+'Table_wrapper';
   $('.dataTables_wrapper').removeClass('u-hide').addClass('u-hide');
   $(id+', #tableName').removeClass('u-hide')
-  $('#tableName b').html(name);
+  $('#tableName b').html(this.name);
 }

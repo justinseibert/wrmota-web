@@ -62,23 +62,11 @@ def google_map():
 
 @_admin.route('/data')
 def all_tables():
-    db = Database.get_db()
-    tables = [
-        'address',
-        'artist',
-        'media',
-        'address_meta',
-        'artist_meta',
-        'media_meta',
-    ]
-    template = {
-        'tables': {}
-    }
-    for table in tables:
-        statement = "SELECT * FROM {}".format(table)
-        data = db.execute(statement).fetchall()
-        template['tables'][table] = {
-            'head' : data[0].keys(),
-            'data' : data,
-        }
+    TEMPLATE['tables'] = {}
+    data = Database.get_all_data()
+
+    for table in data:
+        t = data[table]
+        TEMPLATE['tables'][t['name']] = Database.get_dict_of(t['data'],name=t['name'],json=False)
+
     return render_template('admin/data.html',template=TEMPLATE)

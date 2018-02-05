@@ -78,6 +78,26 @@ def get_artists_involved():
         'local': local
     }
 
+def get_all_data():
+    db = get_db()
+    tables = [
+        'address',
+        'artist',
+        'media',
+        'address_meta',
+        'artist_meta',
+        'media_meta',
+    ]
+    data = {}
+    for table in tables:
+        statement = "SELECT * FROM {}".format(table)
+        selection = db.execute(statement).fetchall()
+        data[table] = {
+            'name' : table,
+            'data' : selection
+        }
+    return data
+
 def get_dict_of(input_data, name='default', json=False):
     data = []
     head = input_data[0].keys()
