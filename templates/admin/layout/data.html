@@ -2,24 +2,15 @@
 <html>
   <head>
     <title>admin: wrmota</title>
-    {% assets 'css_site' %}
-      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
-    {% endassets %}
-    {% assets 'css_admin' %}
-      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
-    {% endassets %}
-    {% assets 'js_lib' %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    {% include 'admin/snippet/head.html' %}
   </head>
-  <body class="data-table">
+  <body>
     {% include 'admin/snippet/message.html' %}
-
     {% block body %}
     {% endblock body %}
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    
     {% block script %}
     {% endblock script %}
   </body>

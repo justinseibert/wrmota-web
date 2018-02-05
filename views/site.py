@@ -3,7 +3,6 @@ from pprint import pprint
 from flask import render_template, abort, current_app, redirect, url_for
 
 from wrmota.api import forms as Forms
-from wrmota.api import data as Data
 from wrmota import database as Database
 from wrmota.views import _site
 

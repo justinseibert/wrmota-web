@@ -11,6 +11,11 @@ TEMPLATE = {}
 
 @_admin.before_request
 def restrict_to_admins():
+    if current_app.config['ENVIRONMENT'] == 'PRODUCTION':
+        TEMPLATE['analytics'] = True
+    else:
+        TEMPLATE['analytics'] = False
+
     if 'logged_in' not in session:
         session['logged_in'] = False
         session['user'] = ''
@@ -32,7 +37,7 @@ def login():
 
     if session['logged_in']:
         flash('already logged in as <b>{}</b>. <a href="{}">log out?</a>'.format(session['user'],url_for('_admin.logout')))
-    return render_template('admin/login.html', form=form)
+    return render_template('admin/login.html', form=form, template=TEMPLATE)
 
 @_admin.route('/logout')
 def logout():
@@ -42,7 +47,7 @@ def logout():
 
 @_admin.route('/')
 def index():
-    return render_template('admin/index.html')
+    return render_template('admin/index.html', template=TEMPLATE)
 
 @_admin.route('/map')
 def google_map():
@@ -54,18 +59,6 @@ def google_map():
     }
 
     return render_template('admin/googlemaps.html', template=TEMPLATE)
-
-@_admin.route('/measure')
-def measure():
-    return render_template('admin/measure.html')
-
-@_admin.route('/multiple')
-def multiple():
-    return render_template('admin/multiple.html')
-
-@_admin.route('/map2')
-def map():
-    return render_template('admin/map.html')
 
 @_admin.route('/data')
 def all_tables():
@@ -88,4 +81,4 @@ def all_tables():
             'head' : data[0].keys(),
             'data' : data,
         }
-    return render_template('admin/data.html',template=template)
+    return render_template('admin/data.html',template=TEMPLATE)

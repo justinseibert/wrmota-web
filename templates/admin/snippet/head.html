@@ -1,3 +1,5 @@
+<link rel="icon" type="image/png" href="img/favicon.png">
+
 {% assets 'css_site' %}
   <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
 {% endassets %}
@@ -9,4 +11,9 @@
 {% assets 'js_lib' %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+{% if template.analytics %}
+  {% include 'site/snippet/analytics.html' %}
+{% endif %}
