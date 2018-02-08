@@ -13,17 +13,24 @@ label
 
 input
   font-family: 'Lato', sans-serif
-  font-weight: 700
-  box-shadow: 0 3px 0 0 $red
+  font-weight: 400
+  box-shadow: 0 3px 0 0 $dark-grey
   color: $red
   &::placeholder
     color: $medium-grey
   &:focus
     box-shadow: 0 3px 0 0 $dark-red
 
+input[required]
+  font-weight: 700
+  box-shadow: 0 3px 0 0 $red
+  &::placeholder
+    font-style: italic
 
 button
   background: $red
+  margin-bottom: 3px
+  margin-right: 3px
   box-shadow: 3px 3px 0 0 $text
   &:hover
     background: $dark-red
