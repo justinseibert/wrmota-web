@@ -32,7 +32,8 @@
       ['email',$('#createEmail')],
       ['password', $('#createPassword')]
     ],
-    submit_url: '/api/create_user'
+    submit_url: '/api/create_user',
+    recaptcha: true
   });
   var handle_email_subscribe = new TouchClick('#CreateSubmit', function(el,e){
     e.preventDefault();

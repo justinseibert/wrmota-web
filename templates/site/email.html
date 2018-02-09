@@ -13,7 +13,8 @@
     validate_items: [
       ['email', $('#UserEmail')]
     ],
-    submit_url: 'api/subscribe'
+    submit_url: 'api/subscribe',
+    recaptcha: true
   });
   var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
     e.preventDefault();

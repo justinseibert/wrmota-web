@@ -3,6 +3,7 @@ var wrmotaForm = function(args){
   this.validate_items = args.validate_items || [];
   this.alert_box = args.alert_box || $('#AJAXAlert');
   this.submit_url = args.submit_url || null;
+  this.recaptcha = args.recaptcha;
 }
 
 wrmotaForm.prototype.validate = function(){
@@ -26,8 +27,12 @@ wrmotaForm.prototype.validate = function(){
     }
     this.showMessage(data);
   } else {
-    recaptcha_pass = this;
-    grecaptcha.execute();
+    if (this.recaptcha){
+      recaptcha_pass = this;
+      grecaptcha.execute();
+    } else {
+      this.submit();
+    }
   }
 }
 
