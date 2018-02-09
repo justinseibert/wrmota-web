@@ -2,22 +2,54 @@ from datetime import datetime
 from uuid import uuid4
 from flask import jsonify, abort, request, current_app, session, render_template
 import requests
+from pprint import pprint
 
-from wrmota.api import forms as Forms
 from wrmota.api import _api
+from wrmota.api import forms as Forms
+from wrmota import database as Database
 
 @_api.route('/create_user', methods=['POST'])
 def create_user():
-    data = {}
+    data = {
+        'error': False,
+        'message': 'default message'
+    }
     form = Forms.CreateUserForm()
     if form.validate_on_submit():
+        user = request.form
+        Database.add_curator(user)
+        # if added:
         data['errors'] = False
         data['message'] = 'User "{}" successfully created.'.format(request.form['username'])
+        # else:
+        #     data['errors'] = True
+        #     data['message'] = 'An error occurred. Unable to create new user.'
     else:
         data['errors'] = form.errors
         data['message'] = 'There was an error with your form.'
 
     return jsonify(data)
+
+# @_api.route('/check_user', methods=['POST'])
+# def check_user():
+#     data = {
+#         'errors': True,
+#         'message': 'Nope, that didn\'t work.'
+#     }
+#     form = Forms.LoginUserForm()
+#     if form.validate_on_submit():
+#         user = request.form['username']
+#         password = request.form['password']
+#
+#         isUser = Database.login(user,password)
+#
+#         if isUser['valid']:
+#             session['user'] = user
+#             session['token'] = isUser['token']
+#             data['errors'] = False
+#             data['message'] = 'Successfully logged in!'
+#
+#     return redirect(url_for())
 
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():

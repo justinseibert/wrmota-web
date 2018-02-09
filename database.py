@@ -1,5 +1,8 @@
 import sqlite3
 from flask import g, current_app, jsonify
+from pprint import pprint
+
+from wrmota.api import hashes as Hash
 
 def connect_db():
     rv = sqlite3.connect(current_app.config['DATABASE'])
@@ -112,3 +115,89 @@ def get_dict_of(input_data, name='default', json=False):
         'head': head,
         'data': data,
     }
+
+def add_curator(data):
+    db = get_db()
+    secure = Hash.store_password(data['password'])
+    pprint(secure)
+    db.execute('''
+        INSERT INTO curator (
+            first_name,
+            last_name,
+            email,
+            username,
+            password,
+            salt,
+            uuid
+        )
+        VALUES (?,?,?,?,?,?,?)
+    ''',
+        [
+            data['first_name'],
+            data['last_name'],
+            data['email'],
+            data['username'],
+            secure['password'],
+            secure['salt'],
+            secure['uuid']
+        ]
+    )
+    db.commit()
+
+def login(user,password):
+    data = {
+        'valid': False,
+        'token': None
+    }
+    db = get_db()
+    stored = db.execute('''
+        SELECT
+            username,
+            password,
+            salt,
+            permission
+        FROM curator
+        WHERE username = (?)
+    ''', [user]).fetchone()
+
+    data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
+
+    if data['valid']:
+        uuid = Hash.generate_token()
+        token = Hash.generate_token()
+        db.execute('''
+            UPDATE curator
+            SET uuid = (?)
+            WHERE username = (?)
+        ''', [
+            uuid,
+            stored['username']
+        ])
+        db.execute('''
+            INSERT OR REPLACE INTO session (
+                uuid,
+                token
+            )
+            VALUES (?,?)
+        ''', [
+            uuid,
+            token
+        ])
+        data['token'] = token
+
+    db.commit();
+
+    return data
+
+def get_session_permission(token):
+    db = get_db()
+    session = db.execute('''
+        SELECT
+            curator.permission
+        FROM
+            session
+        INNER JOIN curator ON session.uuid = curator.uuid
+        WHERE token = (?)
+    ''', [token]).fetchone()
+
+    return session['permission']

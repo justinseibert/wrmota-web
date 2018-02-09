@@ -30,6 +30,10 @@ class CreateUserForm(FlaskForm):
     email = TextField('email', validators=[Email(),DataRequired()], id="createEmail")
     recaptcha = RecaptchaField('recaptcha')
 
+class LoginUserForm(FlaskForm):
+    username = TextField(label='User Name', validators=[InputRequired()], id='loginUser')
+    password = PasswordField(label='Password', validators=[InputRequired()], id='loginPassword')
+
 
 class EmailForm(FlaskForm):
     email = TextField('email', validators=[Email(),DataRequired()])

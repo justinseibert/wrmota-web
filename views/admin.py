@@ -3,6 +3,7 @@ import sqlite3
 from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
 
 from wrmota.api import forms as Forms
+from wrmota.api import login as Login
 from wrmota import database as Database
 
 from wrmota.views import _admin
@@ -16,46 +17,57 @@ def restrict_to_admins():
     else:
         TEMPLATE['analytics'] = False
 
-    if 'logged_in' not in session:
-        session['logged_in'] = False
-        session['user'] = ''
-    if not session['logged_in'] and request.path != url_for('_admin.login'):
-        print(request.path)
-        return redirect(url_for('_admin.login'))
-
 @_admin.route('/login', methods=['GET', 'POST'])
 def login():
-    form = Forms.LoginForm()
+    form = Forms.LoginUserForm()
+    TEMPLATE['form'] = form
+    print(request.method)
     if form.validate_on_submit():
-        session['logged_in'] = True
-        session['user'] = form['username'].data
+        user = request.form['username']
+        password = request.form['password']
 
-        flash('logged in as <b>{}</b>'.format(session['user']))
-        return redirect(url_for('_admin.index'))
+        isUser = Database.login(user,password)
+        if isUser['valid']:
+            session['user'] = user
+            session['token'] = isUser['token']
+
+            flash('logged in as <b>{}</b>'.format(user))
+            return redirect(url_for('_admin.index'))
     elif request.method == 'POST':
         flash('incorrect credentials')
 
-    if session['logged_in']:
+    if 'token' in session and 'user' in session:
         flash('already logged in as <b>{}</b>. <a href="{}">log out?</a>'.format(session['user'],url_for('_admin.logout')))
-    return render_template('admin/login.html', form=form, template=TEMPLATE)
+    return render_template('admin/users/login.html', template=TEMPLATE)
 
 @_admin.route('/logout')
 def logout():
-    session['logged_in'] = False
+    del session['user']
+    del session['token']
     flash('logged out')
     return redirect(url_for('_admin.login'))
 
-@_admin.route('/create/user', methods=['GET'])
+
+@Login.requires_permission_0
 def create_user():
     form = Forms.CreateUserForm()
     TEMPLATE['form'] = form
     return render_template('admin/users/create.html', template=TEMPLATE)
 
+@_admin.route('/user/<func>', methods=['GET'])
+def user_functions(func):
+    if func == 'create':
+        return create_user()
+    else:
+        return abort(404)
+
 @_admin.route('/')
+@Login.requires_permission_10
 def index():
     return render_template('admin/index.html', template=TEMPLATE)
 
 @_admin.route('/map')
+@Login.requires_permission_10
 def google_map():
     TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
 
@@ -67,6 +79,7 @@ def google_map():
     return render_template('admin/googlemaps.html', template=TEMPLATE)
 
 @_admin.route('/data')
+@Login.requires_permission_10
 def all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()

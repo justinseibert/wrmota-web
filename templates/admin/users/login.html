@@ -1,0 +1,17 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+<header class="row break-medium">
+  <h1>Login</h1>
+</header>
+<form id="LoginUserForm" action="{{ url_for('_admin.login') }}" method="post" class="row">
+  {{ template.form.csrf_token }}
+  <div class="eight grid break-light float-center align-center">
+    {{ template.form.username(class="grey row break-light",placeholder="username",required="required") }}
+    {{ template.form.password(class="grey row break-light",placeholder="password",required="required") }}
+    <button id="LoginSubmit" type="submit">submit</button>
+  </div>
+</form>
+{% endblock body %}
+
+{% block script %}
+{% endblock script %}
