@@ -149,10 +149,10 @@ def login(user,password):
     db = get_db()
     stored = db.execute('''
         SELECT
-            username,
             password,
             salt,
-            permission
+            permission,
+            uuid
         FROM curator
         WHERE username = (?)
     ''', [user]).fetchone()
@@ -160,16 +160,7 @@ def login(user,password):
     data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
 
     if data['valid']:
-        uuid = Hash.generate_token()
         token = Hash.generate_token()
-        db.execute('''
-            UPDATE curator
-            SET uuid = (?)
-            WHERE username = (?)
-        ''', [
-            uuid,
-            stored['username']
-        ])
         db.execute('''
             INSERT OR REPLACE INTO session (
                 uuid,
@@ -177,7 +168,7 @@ def login(user,password):
             )
             VALUES (?,?)
         ''', [
-            uuid,
+            stored['uuid'],
             token
         ])
         data['token'] = token

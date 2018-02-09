@@ -7,10 +7,13 @@ def check_login_status(level):
     if 'token' not in session:
         return False
     elif 'token' in session:
-        permission = Database.get_session_permission(session['token'])
-        if permission <= level:
-            return True
-        else:
+        try:
+            permission = Database.get_session_permission(session['token'])
+            if permission <= level:
+                return True
+            else:
+                return False
+        except TypeError:
             return False
 
 def requires_permission_10(f):
