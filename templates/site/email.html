@@ -9,5 +9,9 @@
   {{ template.email.recaptcha }}
 </form>
 <script type="text/javascript">
-  var handle_email_subscribe = new TouchClick('#EmailSubmit', ValidateEmail);
+  var email = new EmailForm({});
+  var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
+    e.preventDefault();
+    email.validate()
+  });
 </script>
