@@ -1,17 +1,22 @@
-<script type="text/javascript" src="{{ url_for('_site.static', filename='/js/email.js') }}"></script>
 <form id="EmailSubmitForm">
   {{ template.email.csrf_token }}
   <label>Stay tuned for updates:</label>
   <div class="row spaced">
-    {{ template.email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com") }}
+    {{ template.email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com",required="required") }}
     <button id="EmailSubmit" type="submit" class="three grid">submit</button>
   </div>
   {{ template.email.recaptcha }}
 </form>
 <script type="text/javascript">
-  var email = new EmailForm({});
+  var email = new wrmotaForm({
+    form: $('#EmailSubmitForm'),
+    validate_items: [
+      ['email', $('#UserEmail')]
+    ],
+    submit_url: 'api/subscribe'
+  });
   var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
     e.preventDefault();
-    email.validate()
+    email.validate();
   });
 </script>

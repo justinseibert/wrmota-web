@@ -45,6 +45,12 @@ def logout():
     flash('logged out')
     return redirect(url_for('_admin.login'))
 
+@_admin.route('/create/user', methods=['GET'])
+def create_user():
+    form = Forms.CreateUserForm()
+    TEMPLATE['form'] = form
+    return render_template('admin/users/create.html', template=TEMPLATE)
+
 @_admin.route('/')
 def index():
     return render_template('admin/index.html', template=TEMPLATE)

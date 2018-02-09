@@ -1,0 +1,42 @@
+{% extends 'admin/layout/default.html' %}
+{% block body %}
+<header class="row break-medium">
+  <h1>create new user</h1>
+</header>
+<form id="NewUserForm" class="row">
+  {{ template.form.csrf_token }}
+  <div class="row break-light float-center align-center">
+    <div class="row spaced">
+      {{ template.form.first_name(class="six grid grey break-light",placeholder="first name") }}
+      {{ template.form.last_name(class="six grid grey break-light",placeholder="last name") }}
+    </div>
+    {{ template.form.username(class="grey row break-light",placeholder="username",required="required") }}
+    {{ template.form.email(class="grey row break-light",placeholder="email",required="required") }}
+    <div class="row spaced">
+      {{ template.form.password(class="grey six grid break-light",placeholder="password",required="required") }}
+      {{ template.form.confirm(class="grey six grid break-light",placeholder="confirm password",required="required") }}
+    </div>
+    <small class="row">Password must be at least 16 characters long, contain a number, uppercase and lowercase letters.</small>
+    <button id="CreateSubmit" type="submit">submit</button>
+    {{ template.form.recaptcha }}
+  </div>
+</form>
+{% endblock body %}
+
+{% block script %}
+<script type="text/javascript">
+  var user = new wrmotaForm({
+    form: $('#NewUserForm'),
+    validate_items: [
+      ['text',$('#createUser')],
+      ['email',$('#createEmail')],
+      ['password', $('#createPassword')]
+    ],
+    submit_url: '/api/create_user'
+  });
+  var handle_email_subscribe = new TouchClick('#CreateSubmit', function(el,e){
+    e.preventDefault();
+    user.validate();
+  });
+</script>
+{% endblock script %}

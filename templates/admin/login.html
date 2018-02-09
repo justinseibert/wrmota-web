@@ -1,14 +1,16 @@
 {% extends 'admin/layout/default.html' %}
 {% block body %}
-<h1>login</h1>
-<form method="post" action="/admin/login" class="row">
-  {{ form.csrf_token }}
-  <div class="five grid break-light float-center align-center">
-    {{ form.username(class="grey row",placeholder="user") }}
-    {{ form.password(class="grey row",placeholder="pass") }}
-    <input type="submit" value="submit">
-  </div>
-</form>
+<div class="row frame-light">
+  <h1>login</h1>
+  <form method="post" action="/admin/login" class="row">
+    {{ form.csrf_token }}
+    <div class="five grid break-light float-center align-center">
+      {{ form.username(class="grey row break-light",placeholder="user") }}
+      {{ form.password(class="grey row break-light",placeholder="pass") }}
+      <button type="submit">submit</button>
+    </div>
+  </form>
+</div>
 {% endblock body %}
 
 {% block script %}

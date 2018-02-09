@@ -6,8 +6,22 @@ import requests
 from wrmota.api import forms as Forms
 from wrmota.api import _api
 
+@_api.route('/create_user', methods=['POST'])
+def create_user():
+    data = {}
+    form = Forms.CreateUserForm()
+    if form.validate_on_submit():
+        data['errors'] = False
+        data['message'] = 'User "{}" successfully created.'.format(request.form['username'])
+    else:
+        data['errors'] = form.errors
+        data['message'] = 'There was an error with your form.'
+
+    return jsonify(data)
+
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():
+    data = {}
     validform = Forms.EmailForm()
     if validform.validate_on_submit():
         info = {
@@ -18,15 +32,13 @@ def email_subscribe():
 
         add_list_member(info)
 
-        data = {
-            'errors': False,
-            'from': current_app.config['MAILGUN_SUBSCRIBE_ADDRESS']
-        }
+        data['errors'] = False
+        data['message'] = 'Success! Be on the look out for emails from <i>{}</i>'.format(current_app.config['MAILGUN_SUBSCRIBE_ADDRESS'])
     else:
-        data = {
-            'errors': True,
-            'data' : validform.errors
-        }
+        print(validform.errors)
+        data['errors'] = validform.errors
+        data['message'] = 'There was an error with your form.'
+
     return jsonify(data)
 
 # def send_complex_message(info):
