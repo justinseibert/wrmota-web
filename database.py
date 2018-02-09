@@ -55,10 +55,7 @@ def get_artists_involved():
             address
         INNER JOIN artist ON address.artist = artist.id
         INNER JOIN artist_meta ON artist.meta = artist_meta.id
-        WHERE
-            artist_meta.curator = 'kayla'
-        OR
-            artist_meta.curator = 'pam'
+        WHERE artist_meta.visitor = 1
         ORDER BY artist.artist ASC
     ''').fetchall()
 
@@ -72,7 +69,7 @@ def get_artists_involved():
             address
         INNER JOIN artist ON address.artist = artist.id
         INNER JOIN artist_meta ON artist.meta = artist_meta.id
-        WHERE artist_meta.curator = 'mike'
+        WHERE artist_meta.visitor != 1
         ORDER BY artist.artist ASC
     ''').fetchall()
 
