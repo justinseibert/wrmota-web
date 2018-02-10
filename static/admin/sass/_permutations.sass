@@ -1,0 +1,25 @@
+$blue: #347cff
+$green: #50e04a
+$red: #ff384c
+$orange: #ffbb00
+
+$permutation_map: (A: $blue,B: $green,C: $red,D: $orange)
+@each $item,$color in $permutation_map
+  .permutation-#{$item}
+    background: $color
+
+.permutation-stripe
+  display: inline-block
+  float: left
+  margin: 10px
+
+.permutation-block
+  display: block
+  width: 48px
+  height: 48px
+  overflow: hidden
+  & svg
+    position: relative
+    width: 121%
+    top: -6px
+    left: -5px

@@ -1,0 +1,14 @@
+{% extends 'admin/layout/uncontained.html' %}
+{% block body %}
+
+{% for item in template.permutation %}
+  <div class="permutation-stripe">
+    {% for perm in range(item|length) %}
+    <div class="permutation-block permutation-{{ item[perm] }}">
+      {% if perm == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+
+{% endblock body %}

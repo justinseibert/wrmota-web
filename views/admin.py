@@ -1,5 +1,7 @@
 from pprint import pprint
 import sqlite3
+from itertools import product
+from random import shuffle
 from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
 
 from wrmota.api import forms as Forms
@@ -89,3 +91,19 @@ def all_tables():
         TEMPLATE['tables'][t['name']] = Database.get_dict_of(t['data'],name=t['name'],json=False)
 
     return render_template('admin/data.html',template=TEMPLATE)
+
+@_admin.route('/permutation')
+# @Login.requires_permission_10
+def permutation():
+    TEMPLATE['permutation'] = []
+
+    i = 0
+    iter2 = product('ABCD',repeat=4)
+    for j2 in iter2:
+        if i%2 == 0 and i < 219:
+            TEMPLATE['permutation'].append(j2)
+        i += 1
+
+    shuffle(TEMPLATE['permutation'])
+
+    return render_template('admin/permutation.html', template=TEMPLATE)
