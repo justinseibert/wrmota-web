@@ -48,7 +48,7 @@ def logout():
     return redirect(url_for('_admin.login'))
 
 
-# @Login.requires_permission_0
+@Login.requires_permission_0
 def create_user():
     form = Forms.CreateUserForm()
     TEMPLATE['form'] = form
