@@ -116,7 +116,6 @@ def get_dict_of(input_data, name='default', json=False):
 def add_curator(data):
     db = get_db()
     secure = Hash.store_password(data['password'])
-    pprint(secure)
     db.execute('''
         INSERT INTO curator (
             first_name,
@@ -157,21 +156,24 @@ def login(user,password):
         WHERE username = (?)
     ''', [user]).fetchone()
 
-    data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
+    try:
+        data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
 
-    if data['valid']:
-        token = Hash.generate_token()
-        db.execute('''
-            INSERT OR REPLACE INTO session (
-                uuid,
+        if data['valid']:
+            token = Hash.generate_token()
+            db.execute('''
+                INSERT OR REPLACE INTO session (
+                    uuid,
+                    token
+                )
+                VALUES (?,?)
+            ''', [
+                stored['uuid'],
                 token
-            )
-            VALUES (?,?)
-        ''', [
-            stored['uuid'],
-            token
-        ])
-        data['token'] = token
+            ])
+            data['token'] = token
+    except TypeError:
+        print('uuid does not exist')
 
     db.commit();
 

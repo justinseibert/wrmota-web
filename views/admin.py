@@ -21,7 +21,7 @@ def restrict_to_admins():
 def login():
     form = Forms.LoginUserForm()
     TEMPLATE['form'] = form
-    print(request.method)
+
     if form.validate_on_submit():
         user = request.form['username']
         password = request.form['password']
@@ -48,7 +48,7 @@ def logout():
     return redirect(url_for('_admin.login'))
 
 
-@Login.requires_permission_0
+# @Login.requires_permission_0
 def create_user():
     form = Forms.CreateUserForm()
     TEMPLATE['form'] = form
