@@ -24,5 +24,6 @@
 */__pycache__/*
 
 **/all.min.css
+**/admin.min.css
 **/all.min.js
 **/lib.min.js
