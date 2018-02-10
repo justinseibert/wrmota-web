@@ -23,7 +23,7 @@ def store_password(password):
 
 def check_password(stored_password,stored_salt,password):
     hash = hash_password(password,stored_salt)
-    return stored_password == hash
+    return str(stored_password) == str(hash)
 
 def generate_token():
     return hexlify(urandom(16))
