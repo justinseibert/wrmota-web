@@ -1,11 +1,6 @@
 from os import urandom
 from binascii import hexlify
 import hashlib
-from flask import current_app
-
-def protect(string, salt):
-    protect = str(string + salt).encode('utf-8')
-    return hashlib.sha1(protect).hexdigest()
 
 def hash_password(password,salt):
     password = password.encode('utf-8')
