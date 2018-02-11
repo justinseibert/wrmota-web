@@ -1,14 +1,21 @@
 {% extends 'admin/layout/default.html' %}
 {% block body %}
-<header class="row">
+<div class="frame-light">
   <h1>admin</h1>
-</header>
 
-<nav class="row align-left">
-  <ul class="float-left">
-    <li><a href="/admin/map">map view</a></li>
-    <li><a href="/admin/data">data tables</a></li>
-    <li><a href="/admin/logout">logout</a></li>
-  </ul>
-</nav>
+  <nav class="row admin-nav">
+    <h2>View</h2>
+    <ul class="row break-heavy">
+      <li><a href="/admin/map">map</a></li>
+      <li><a href="/admin/data">data tables</a></li>
+    </ul>
+    <h2>Edit</h2>
+    <ul class="row break-heavy">
+      <li><a href="/admin/edit/artists">artists</a></li>
+    </ul>
+    <ul class="row break-heavy">
+      <li><a href="/admin/logout">logout</a></li>
+    </ul>
+  </nav>
+</div>
 {% endblock body %}

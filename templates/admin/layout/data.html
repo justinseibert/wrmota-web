@@ -6,11 +6,12 @@
   </head>
   <body>
     {% include 'admin/snippet/message.html' %}
+    {% include 'site/snippet/ajax-alert.html' %}
     {% block body %}
     {% endblock body %}
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    
+
     {% block script %}
     {% endblock script %}
   </body>

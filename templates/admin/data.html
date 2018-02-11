@@ -6,7 +6,6 @@
 {% endblock body %}
 
 {% block script %}
-<script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>
 <script>
   var tables = [
     {% for table in template.tables %}'{{ table }}',{% endfor %}
