@@ -1,17 +1,16 @@
 label,
 input,
-button
+button,
+select
   display: inline-block
-  margin: 0 0 $minimal 0
+  margin: 0 0 $light 0
   padding: $light
   border: 2px solid transparent
   border-radius: 0
   outline: none
 
-label
-  padding-left: 0
-
-input
+input,
+select
   font-family: 'Lato', sans-serif
   font-weight: 400
   box-shadow: 0 3px 0 0 $dark-grey
@@ -27,6 +26,34 @@ input[required]
   &::placeholder
     font-style: italic
 
+label
+  padding-left: 0
+  &.boolean-label
+    font-size: 0.75em
+    cursor: pointer
+    & span
+      position: relative
+      float: left
+      display: flex
+      align-items: center
+    & span::before
+      font-family: 'Lato', sans-serif
+      content: ''
+      display: block
+      float: left
+      margin-right: 0.5rem
+      background: $dust
+      text-align: center
+      width: 1.4em
+      flex: 0 0 1.4em
+      height: 1.4em
+    & input[type='checkbox']
+      display: none
+      &:checked + span::before
+        content: '\00D7'
+        background: $red
+        color: $white
+
 button
   background: $red
   margin-bottom: 3px
@@ -37,7 +64,10 @@ button
   &:active
     transform: scale3d(0.97,0.97,1)
     box-shadow: 0 0 0 0 $text
-  // border: 2px solid $text
+button.green
+  background: $grass
+  &:hover
+    background: $sunny-grass
 
 .grecaptcha-badge
   display: none

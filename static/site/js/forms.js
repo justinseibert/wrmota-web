@@ -61,13 +61,15 @@ wrmotaForm.prototype.showMessage = function(data){
   a.addClass('u-hide');
   var t = window.setTimeout(function(){
     if (data.errors){
+      a.removeClass('success');
       a.addClass('failure');
     } else {
+      a.removeClass('failure');
       a.addClass('success');
     }
     a.html(data.message);
     a.removeClass('u-hide');
-  }, 1);
+  }, 50);
 }
 
 wrmotaForm.prototype.submit = function(){
@@ -81,6 +83,12 @@ wrmotaForm.prototype.submit = function(){
       success: function(data) {
         f.showMessage(data);
         f.form.removeClass('u-hide');
+        if(data.errors){
+          console.log(data.errors);
+        }
+        if(data.log){
+          console.log(data.log);
+        }
       },
       error: function(data){
         f.alert_box.html('oops, that didn\'t work for some reason');
