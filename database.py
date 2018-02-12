@@ -78,6 +78,52 @@ def get_artists_involved():
         'local': local
     }
 
+def get_curators_list():
+    db = get_db()
+    curators = db.execute('''
+        SELECT DISTINCT
+            curator
+        FROM
+            artist_meta
+    ''').fetchall()
+
+    return get_list_of(curators)
+
+def get_data_artist():
+    db = get_db()
+
+    artist = db.execute('''
+        SELECT DISTINCT
+            address.id,
+            address.address,
+            address.brick,
+            artist.id AS artist_id,
+            artist.artist,
+            artist.location,
+            artist.website,
+            artist.bio,
+            artist_meta.id AS artist_meta_id,
+            artist_meta.curator,
+            artist_meta.email,
+            artist_meta.visitor,
+            artist_meta.confirmed,
+            artist_meta.assigned,
+            artist_meta.info_sent,
+            artist_meta.touched_base,
+            artist_meta.art_received,
+            artist_meta.notes,
+            media.id AS media_id,
+            media.directory,
+            media.audio
+        FROM
+            address
+        LEFT JOIN artist ON address.artist = artist.id
+        LEFT JOIN media ON address.media = media.id
+        LEFT JOIN artist_meta ON artist.meta = artist_meta.id
+    ''').fetchall()
+
+    return artist
+
 def get_all_data():
     db = get_db()
     tables = [
@@ -113,6 +159,38 @@ def get_dict_of(input_data, name='default', json=False):
         'data': data,
     }
 
+def get_list_of(input_data):
+    output_data = []
+    for row in input_data:
+        output_data.append(row[0])
+
+    return output_data
+
+def keep_cols_in_dict(input_dict,cols):
+    output_dict = {
+        'name': input_dict['name'],
+        'head': cols,
+        'data': []
+    }
+    for original_row in input_dict['data']:
+        revised_row = {}
+        for col in cols:
+            revised_row[col] = original_row[col]
+
+        output_dict['data'].append(revised_row)
+
+    return output_dict
+
+def remove_cols_from_dict(input_dict,cols):
+    for row in input_dict['data']:
+        for col in rm_cols:
+            del row[col]
+
+    for col in rm_cols:
+        input_dict['head'].remove(col)
+
+    return input_dict
+
 def add_curator(data):
     db = get_db()
     secure = Hash.store_password(data['password'])
@@ -139,6 +217,15 @@ def add_curator(data):
         ]
     )
     db.commit()
+
+# def update_artist_data(data):
+#     db = get_db()
+#     try:
+#         db.execute('''
+#             UPDATE artist
+#             SET
+#
+#         ''')
 
 def login(user,password):
     data = {
@@ -181,13 +268,14 @@ def login(user,password):
 
 def get_session_permission(token):
     db = get_db()
-    session = db.execute('''
+    user = db.execute('''
         SELECT
-            curator.permission
+            curator.permission,
+            curator.username
         FROM
             session
         INNER JOIN curator ON session.uuid = curator.uuid
         WHERE token = (?)
     ''', [token]).fetchone()
 
-    return session['permission']
+    return user['permission']

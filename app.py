@@ -64,14 +64,14 @@ def configure_error_handlers(app):
     @app.errorhandler(500)
     def server_error_page(error):
         message = 'server thing'
-        return render_template('site/error.html', message=message, type=500)
+        return render_template('site/error.html', message=message), 500
 
     @app.errorhandler(404)
     def notfound_error_page(error):
         message = 'nothing here'
-        return render_template('site/error.html', message=message, type=404)
+        return render_template('site/error.html', message=message), 404
 
     @app.errorhandler(403)
     def forbidden_error_page(error):
         message = 'not allowed'
-        return render_template('site/error.html', message=message, type=403)
+        return render_template('site/error.html', message=message), 403
