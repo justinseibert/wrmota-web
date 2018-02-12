@@ -5,12 +5,12 @@ from wrmota import database as Database
 
 def check_login_status(level):
     if not hasattr(g, 'permission'):
-        print('g.permission does yet exist')
         try:
             g.permission = Database.get_session_permission(session['token'])
         except:
             return False
     if g.permission <= level:
+        print('USER: '+g.user)
         return True
 
 def requires_permission_10(f):

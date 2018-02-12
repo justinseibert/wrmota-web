@@ -6,6 +6,7 @@ from pprint import pprint
 
 from wrmota.api import _api
 from wrmota.api import forms as Forms
+from wrmota.api import login as Login
 from wrmota import database as Database
 
 @_api.route('/create_user', methods=['POST'])
@@ -18,38 +19,42 @@ def create_user():
     if form.validate_on_submit():
         user = request.form
         Database.add_curator(user)
-        # if added:
         data['errors'] = False
         data['message'] = 'User "{}" successfully created.'.format(request.form['username'])
-        # else:
-        #     data['errors'] = True
-        #     data['message'] = 'An error occurred. Unable to create new user.'
     else:
         data['errors'] = form.errors
         data['message'] = 'There was an error with your form.'
 
     return jsonify(data)
 
-# @_api.route('/check_user', methods=['POST'])
-# def check_user():
-#     data = {
-#         'errors': True,
-#         'message': 'Nope, that didn\'t work.'
-#     }
-#     form = Forms.LoginUserForm()
-#     if form.validate_on_submit():
-#         user = request.form['username']
-#         password = request.form['password']
-#
-#         isUser = Database.login(user,password)
-#
-#         if isUser['valid']:
-#             session['user'] = user
-#             session['token'] = isUser['token']
-#             data['errors'] = False
-#             data['message'] = 'Successfully logged in!'
-#
-#     return redirect(url_for())
+def update_artist_data():
+    response = {}
+    form = Forms.EditArtistForm()
+    form.curator.choices = Forms.get_curators()
+    if form.validate_on_submit():
+        update = Database.update_artist_data(form)
+        if update:
+            response['errors'] = False
+            response['message'] = 'Artist "{}" successfully updated.'.format(request.form['artist'])
+        else:
+            response = Forms.handle_error(form)
+    else:
+        response = Forms.handle_error(form)
+
+    return response
+
+@_api.route('/edit/<data>', methods=['POST'])
+@Login.requires_permission_5
+def api_edit_data(data):
+    if data == 'artist':
+        response = update_artist_data()
+    else:
+        response = {
+            'error': False,
+            'message': 'default message'
+        }
+    return jsonify(response)
+
 
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():

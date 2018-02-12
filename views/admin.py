@@ -93,7 +93,7 @@ def all_tables():
     return render_template('admin/data.html',template=TEMPLATE)
 
 @_admin.route('/permutation')
-# @Login.requires_permission_10
+@Login.requires_permission_10
 def permutation():
     TEMPLATE['permutation'] = []
 
@@ -107,3 +107,22 @@ def permutation():
     shuffle(TEMPLATE['permutation'])
 
     return render_template('admin/permutation.html', template=TEMPLATE)
+
+@Login.requires_permission_5
+def edit_artist_data():
+    data = Database.get_dict_of(Database.get_data_artist(), name='artist')
+    TEMPLATE['artist'] = data
+    cols = ['id','artist','curator','art_received']
+    TEMPLATE['tables'] = {
+        'artist' : Database.keep_cols_in_dict(data,cols)
+    }
+
+    form = Forms.EditArtistForm()
+    form.curator.choices = Forms.get_curators()
+    TEMPLATE['form'] = form
+    return render_template('admin/edit/artist.html', template=TEMPLATE)
+
+@_admin.route('/edit/<data>')
+def edit_data(data):
+    if data == 'artists':
+        return edit_artist_data()

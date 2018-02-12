@@ -93,11 +93,8 @@ def get_data_artist():
     db = get_db()
 
     artist = db.execute('''
-        SELECT DISTINCT
-            address.id,
-            address.address,
-            address.brick,
-            artist.id AS artist_id,
+        SELECT
+            artist.id,
             artist.artist,
             artist.location,
             artist.website,
@@ -111,14 +108,9 @@ def get_data_artist():
             artist_meta.info_sent,
             artist_meta.touched_base,
             artist_meta.art_received,
-            artist_meta.notes,
-            media.id AS media_id,
-            media.directory,
-            media.audio
+            artist_meta.notes
         FROM
-            address
-        LEFT JOIN artist ON address.artist = artist.id
-        LEFT JOIN media ON address.media = media.id
+            artist
         LEFT JOIN artist_meta ON artist.meta = artist_meta.id
     ''').fetchall()
 
@@ -218,14 +210,62 @@ def add_curator(data):
     )
     db.commit()
 
-# def update_artist_data(data):
-#     db = get_db()
-#     try:
-#         db.execute('''
-#             UPDATE artist
-#             SET
-#
-#         ''')
+def update_artist_data(form):
+    d = {}
+    for field in form:
+        if field.data == True:
+            v = 1
+        elif field.data == False:
+            v = 0
+        else:
+            v = field.data
+        d[field.name] = v
+
+    db = get_db()
+    print('Update ARTIST:')
+    pprint(d)
+    try:
+        db.execute('''
+            UPDATE artist
+            SET
+                artist = ?,
+                location = ?,
+                website = ?
+            WHERE id = ?
+        ''', (
+            d['artist'],
+            d['location'],
+            d['website'],
+            d['artist_id']
+        ))
+        db.execute('''
+            UPDATE artist_meta
+            SET
+                curator = ?,
+                email = ?,
+                visitor = ?,
+                confirmed = ?,
+                assigned = ?,
+                info_sent = ?,
+                touched_base = ?,
+                art_received = ?
+            WHERE id = ?
+        ''', (
+            d['curator'],
+            d['email'],
+            d['visitor'],
+            d['confirmed'],
+            d['assigned'],
+            d['info_sent'],
+            d['touched_base'],
+            d['art_received'],
+            d['artist_meta_id']
+        ))
+        db.commit()
+        return True
+    except:
+        print('ERROR: artist update failed')
+        return False
 
 def login(user,password):
     data = {
@@ -278,4 +318,5 @@ def get_session_permission(token):
         WHERE token = (?)
     ''', [token]).fetchone()
 
+    g.user = user['username']
     return user['permission']
