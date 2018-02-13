@@ -5,6 +5,7 @@ from wrmota import database as Database
 
 def check_login_status(level):
     if not hasattr(g, 'permission'):
+        print('Getting user...')
         try:
             g.permission = Database.get_session_permission(session['token'])
         except:
