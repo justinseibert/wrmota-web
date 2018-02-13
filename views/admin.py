@@ -1,7 +1,7 @@
 from pprint import pprint
 import sqlite3
 from itertools import product
-from random import shuffle
+from random import shuffle, choice
 from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
 
 from wrmota.api import forms as Forms
@@ -57,6 +57,7 @@ def create_user():
     return render_template('admin/users/create.html', template=TEMPLATE)
 
 @_admin.route('/user/<func>', methods=['GET'])
+@Login.requires_permission_5
 def user_functions(func):
     if func == 'create':
         return create_user()
@@ -81,7 +82,7 @@ def google_map():
     return render_template('admin/googlemaps.html', template=TEMPLATE)
 
 @_admin.route('/data')
-@Login.requires_permission_10
+@Login.requires_permission_5
 def all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()
@@ -92,20 +93,31 @@ def all_tables():
 
     return render_template('admin/data.html',template=TEMPLATE)
 
-@_admin.route('/permutation')
+@_admin.route('/permutation/<combo>')
 @Login.requires_permission_10
-def permutation():
+def permutation(combo):
     TEMPLATE['permutation'] = []
 
+    if combo == '4x4':
+        iter = product('ABCD',repeat=4)
+        skip = 2
+        add = False
+    elif combo == '5x3':
+        iter = product('ABCDE',repeat=3)
+        skip = 1
+        add = True
+    else:
+        abort(404)
+
     i = 0
-    iter2 = product('ABCD',repeat=4)
-    for j2 in iter2:
-        if i%2 == 0 and i < 219:
-            TEMPLATE['permutation'].append(j2)
-        i += 1
-
-    shuffle(TEMPLATE['permutation'])
-
+    for j in iter:
+        if (i/skip) <= 110:
+            if add:
+                k = list(j)
+                k.append(choice('ABCDE'))
+                j = k[::-1]
+            TEMPLATE['permutation'].append(j)
+        i += skip
     return render_template('admin/permutation.html', template=TEMPLATE)
 
 @Login.requires_permission_5
@@ -123,6 +135,7 @@ def edit_artist_data():
     return render_template('admin/edit/artist.html', template=TEMPLATE)
 
 @_admin.route('/edit/<data>')
+@Login.requires_permission_10
 def edit_data(data):
     if data == 'artists':
         return edit_artist_data()
