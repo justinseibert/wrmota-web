@@ -37,6 +37,11 @@ wrmotaForm.prototype.validate = function(){
 }
 
 wrmotaForm.prototype.validation = {
+  safe: function(val){
+    var hasInput = val.length > 0;
+    var notWeird = val.search(/[:;]/) == -1
+    return (hasInput && notWeird) ? true : false;
+  },
   text: function(val){
     var hasInput = val.length > 0;
     var notWeird = val.search(/[:;.,<>?\/\\`~@#$%^&*\(\)!\{\}\[\]+=-]/) == -1

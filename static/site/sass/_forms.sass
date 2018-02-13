@@ -16,6 +16,7 @@ select
   box-shadow: 0 3px 0 0 $dark-grey
   color: $red
   background: $white
+  text-overflow: ellipsis
   &::placeholder
     color: $medium-grey
   &:focus
@@ -58,20 +59,35 @@ label
         background: $red
         color: $white
 
-button
+button,
   background: $red
   margin-bottom: 3px
   margin-right: 3px
   box-shadow: 3px 3px 0 0 $text
+  -webkit-appearance: none
   &:hover
     background: $dark-red
   &:active
     transform: scale3d(0.97,0.97,1)
     box-shadow: 0 0 0 0 $text
-button.green
+  &::after
+    display: none
+  & svg
+    max-height: 2.5em
+button.green,
   background: $grass
   &:hover
     background: $sunny-grass
+
+a.button
+  @extend button
+  &::after,
+  &::before
+    display: none
+
+a.svg-button
+  width: 2em
+  height: 2em
 
 .grecaptcha-badge
   display: none

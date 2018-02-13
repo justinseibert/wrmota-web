@@ -25,7 +25,8 @@
           </div>
           <div class="row">
             {{ template.form.email.label(class="three grid") }}
-            {{ template.form.email(class="nine grid",placeholder="email") }}
+            {{ template.form.email(class="seven grid",placeholder="email") }}
+            <a id="MailTo" href="#" class="green button svg-button float-right" target="_blank">{% include 'site/svg/email.svg' %}</a>
           </div>
           <div class="row">
             {{ template.form.website.label(class="three grid") }}
@@ -93,6 +94,7 @@
     artist_meta_id: document.getElementById('EditArtistMetaId'),
     artist: document.getElementById('EditArtist'),
     email: document.getElementById('EditEmail'),
+    mailto: document.getElementById('MailTo'),
     website: document.getElementById('EditWebsite'),
     curator: document.getElementById('EditCurator'),
     visitor: document.getElementById('EditVisitor'),
@@ -134,6 +136,7 @@
     elem.artist_meta_id.value = d.artist_meta_id;
     elem.artist.value = d.artist;
     elem.email.value = d.email;
+    elem.mailto.href = 'mailto:'+d.email;
     elem.website.value = d.website;
     elem.curator.value = d.curator;
     elem.visitor.checked = d.visitor == 1 ? true : false;
