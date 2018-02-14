@@ -10,6 +10,7 @@ from wrmota.api import login as Login
 from wrmota import database as Database
 
 @_api.route('/create_user', methods=['POST'])
+@Login.requires_permission_0
 def create_user():
     data = {
         'error': False,

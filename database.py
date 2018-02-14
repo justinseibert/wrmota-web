@@ -3,6 +3,7 @@ from flask import g, current_app, jsonify
 from pprint import pprint
 
 from wrmota.api import hashes as Hash
+from wrmota.api import sanitize as Sanitize
 
 def connect_db():
     rv = sqlite3.connect(current_app.config['DATABASE'])
@@ -220,7 +221,10 @@ def update_artist_data(form):
         elif field.data == False:
             v = 0
         else:
-            v = field.data
+            if field.name == 'website':
+                v = Sanitize.website(field.data)
+            else:
+                v = Sanitize.spaces(field.data)
         d[field.name] = v
 
     db = get_db()
