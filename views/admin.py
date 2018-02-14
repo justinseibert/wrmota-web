@@ -132,10 +132,42 @@ def edit_artist_data():
     form = Forms.EditArtistForm()
     form.curator.choices = Forms.get_curators()
     TEMPLATE['form'] = form
-    return render_template('admin/edit/artist.html', template=TEMPLATE)
+    return render_template('admin/task/edit_artist.html', template=TEMPLATE)
 
-@_admin.route('/edit/<data>')
+@Login.requires_permission_5
+def send_artist_emails():
+    curators = Database.get_curators_list()
+    curator_options = {
+        'none': 'no',
+        'all': 'all'
+    }
+    for curator in curators:
+        curator_options[curator] = "{}'s".format(curator)
+    TEMPLATE['curators'] = curator_options
+
+    filter_options = {
+        'none': 'no filter',
+        'confirmed': 'confirmed',
+        'visitor': 'visitor',
+        'touched_base': 'touched base',
+        'art_received': 'art received',
+    }
+    TEMPLATE['options'] = filter_options
+
+    data = Database.get_dict_of(Database.get_data_artist(), name='artist')
+    TEMPLATE['artist'] = data
+
+    cols = ['id','artist','curator','art_received','visitor','confirmed','touched_base','email']
+    TEMPLATE['tables'] = {
+        'artist' : Database.keep_cols_in_dict(data,cols)
+    }
+
+    return render_template('admin/task/send_email.html', template=TEMPLATE)
+
+@_admin.route('/task/<data>')
 @Login.requires_permission_10
 def edit_data(data):
     if data == 'artists':
         return edit_artist_data()
+    elif data == 'email':
+        return send_artist_emails()

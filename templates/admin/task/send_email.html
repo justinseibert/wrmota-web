@@ -1,0 +1,150 @@
+{% extends 'admin/layout/data.html' %}
+
+{% block body %}
+<div class="row">
+  <div class="four grid">
+    {% include 'admin/snippet/table.html' %}
+  </div>
+  <div class="eight grid frame-light">
+    <aside class="row">
+      <p>Use the dropdown options to narrow a selection of artists. Hitting the <em>draft email</em> button will open up a new email draft in your preferred editor with the selected artists BCC'd and ready to go.</p>
+    </aside>
+    <header class="row break-medium">
+      <div class="row">
+        <label>Send emails to</label>
+        <select id="List" name="list" class="select-feature">
+          {% for item in template.curators %}
+            <option value="{{item}}" {% if item == 'none' %}selected="selected"{% endif %}>{{ template.curators[item] }}</option>
+          {% endfor %}
+        </select>
+        <label> artists</label>
+      </div>
+      <div class="row">
+        <label>Filter artists by</label>
+        <select id="Filter" name="filter" class="select-feature">
+          {% for item in template.options %}
+            <option value="{{ item }}" {% if item == 'none' %}selected="selected"{% endif %}>{{ template.options[item] }}</option>
+          {% endfor %}
+        </select>
+        <label> if</label>
+        <select id="Boolean" name="boolean" class="select-feature">
+          <option value="0">no</option>
+          <option value="1">yes</option>
+        </select>
+      </div>
+      <button id="DraftIt" class="green button">draft email</button>
+    </header>
+    <section id="CherryPicker" class="row"></section>
+  </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+<script>
+  var all_data = {{ template.artist.data|tojson }};
+  var table_data = {{ template.tables.artist.data|tojson }};
+  var table;
+  var elem = {
+    list: document.getElementById('List'),
+    filter: document.getElementById('Filter'),
+    boolean: document.getElementById('Boolean'),
+    selection: document.getElementById('CherryPicker'),
+    form: document.getElementById('ArtistForm'),
+  }
+  $(document).ready(function(){
+    table = new TableData({
+      name: '{{ template.tables.artist.name }}',
+      data: table_data,
+      crop: true,
+      rmCols: ['id']
+    });
+    var draft_it = new TouchClick('#DraftIt',draft_email)
+  });
+
+  $('.select-feature').on('change', function(){
+    var curator = elem.list.value;
+    var filt = elem.filter.value;
+    var bool = elem.boolean.value;
+    var artists = get_artists(curator,filt,bool);
+    create_check_list(artists)
+  });
+
+  function draft_email(el,e){
+    var form = document.getElementById('ArtistForm');
+    if (form){
+      var emails = 'mailto:?bcc=';
+      var input = form.elements;
+      for (var i = 0,len = input.length; i < len; i++){
+        if (input[i].checked){
+          console.log(input[i].value);
+          emails += input[i].value + ','
+        }
+      }
+      window.open(emails, '_blank');
+    } else {
+      alert('you need to select some artists');
+    }
+  }
+
+  function create_check_list(a){
+    elem.selection.innerHTML = '<p>Use the check boxes to refine your selection.</p>';
+    var form = document.createElement('form');
+    form.id = 'ArtistForm';
+    form.className = 'row';
+    for (var i = 0, len = a.length; i < len; i++){
+      var label = document.createElement('label');
+      var input = document.createElement('input');
+      var span = document.createElement('span');
+
+      var id = 'artist_'+a[i].id;
+      label.className = 'boolean-label four grid';
+      label.for = id;
+      input.name = id;
+      input.type = 'checkbox';
+      input.value = a[i].email;
+      input.checked = 'checked';
+      span.innerHTML = a[i].artist;
+
+      label.appendChild(input);
+      label.appendChild(span);
+      form.appendChild(label);
+    }
+    elem.selection.appendChild(form);
+  }
+
+  function get_artists(curator,filt,bool){
+    if (curator == 'all' && filt == 'none'){
+      return all_data;
+    } else if (curator == 'all' && filt != 'none'){
+      return filter_by(all_data,filt,bool);
+    } else if (curator != 'all' && curator != 'none' && filt == 'none'){
+      return get_list_by(curator);
+    } else if (curator != 'all'  && curator != 'none' && filt != 'none'){
+      var list = get_list_by(curator);
+      return filter_by(list,filt,bool);
+    }
+  }
+
+  function filter_by(list,filter,boolean){
+    var data = [];
+    for (var i = 0; i < list.length; i++){
+      var item = list[i];
+      if (item[filter] == boolean){
+        data.push(item);
+      }
+    }
+    return data;
+  }
+
+  function get_list_by(curator){
+    var data = [];
+    for (var i = 0; i < all_data.length; i++){
+      var item = all_data[i];
+      if (item.curator == curator){
+        data.push(item);
+      }
+    }
+    return data;
+  }
+</script>
+{% endblock script %}
