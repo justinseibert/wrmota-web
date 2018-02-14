@@ -125,6 +125,8 @@ def get_all_data():
         'address_meta',
         'artist_meta',
         'media_meta',
+        'curator',
+        'session'
     ]
     data = {}
     for table in tables:
@@ -284,6 +286,10 @@ def login(user,password):
     ''', [user]).fetchone()
 
     try:
+        if stored['permission'] > 10:
+            print('LOGIN: invalid permission')
+            return data
+
         data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
 
         if data['valid']:
@@ -300,7 +306,7 @@ def login(user,password):
             ])
             data['token'] = token
     except TypeError:
-        print('uuid does not exist')
+        print('LOGIN: invalid credentials')
 
     db.commit();
 

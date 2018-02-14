@@ -35,6 +35,8 @@ def login():
 
             flash('logged in as <b>{}</b>'.format(user))
             return redirect(url_for('_admin.index'))
+        else:
+            flash('Unable to log in')
     elif request.method == 'POST':
         flash('incorrect credentials')
 
@@ -82,7 +84,7 @@ def google_map():
     return render_template('admin/googlemaps.html', template=TEMPLATE)
 
 @_admin.route('/data')
-@Login.requires_permission_5
+@Login.requires_permission_0
 def all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()
