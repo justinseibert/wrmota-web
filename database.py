@@ -45,34 +45,22 @@ def get_map_points():
 
 def get_artists_involved():
     db = get_db()
-
-    visitor = db.execute('''
-        SELECT DISTINCT
+    sql = '''
+        SELECT
             artist.artist,
             artist.website,
             artist.location,
             artist_meta.curator
         FROM
-            address
-        INNER JOIN artist ON address.artist = artist.id
+            artist
         INNER JOIN artist_meta ON artist.meta = artist_meta.id
-        WHERE artist_meta.visitor = 1
+        WHERE artist_meta.visitor = (?)
+        AND artist_meta.confirmed = 1
         ORDER BY artist.artist ASC
-    ''').fetchall()
+    '''
 
-    local = db.execute('''
-        SELECT DISTINCT
-            artist.artist,
-            artist.website,
-            artist.location,
-            artist_meta.curator
-        FROM
-            address
-        INNER JOIN artist ON address.artist = artist.id
-        INNER JOIN artist_meta ON artist.meta = artist_meta.id
-        WHERE artist_meta.visitor != 1
-        ORDER BY artist.artist ASC
-    ''').fetchall()
+    visitor = db.execute(sql,[1]).fetchall()
+    local = db.execute(sql,[0]).fetchall()
 
     return {
         'visitor': visitor,
