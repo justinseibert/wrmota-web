@@ -1,0 +1,78 @@
+{% extends 'admin/layout/data.html' %}
+{% block body %}
+  <div class="row">
+    <div class="four grid">
+      {% include 'admin/snippet/table.html' %}
+    </div>
+    <div class="eight grid frame-light full-scroll">
+      <h2>Color Codes</h2>
+      <p>Select an address from the table to display its color code:</p>
+      <div class="row">
+        <div id="_stripe" class="three grid" style="min-width:136px">
+          <div class="permutation-stripe">
+            {% for i in range(0,4) %}
+            <div id="_block{{i}}">
+              {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          <div class="permutation-stripe">
+            {% for i in range(0,4) %}
+            <div id="_letter{{i}}" class="permutation-block"></div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="nine grid frame-medium">
+          <p id="_address"></p>
+          <p id="_artist"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+  var alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+  var elem = {
+    'stripe': document.getElementById('_stripe'),
+    'address': document.getElementById('_address'),
+    'artist': document.getElementById('_artist'),
+    'block': [
+      {% for i in range(0,4) %}
+      document.getElementById('_block{{i}}'),
+      {% endfor %}
+    ],
+    'letter': [
+      {% for i in range(0,4) %}
+      document.getElementById('_letter{{i}}'),
+      {% endfor %}
+    ]
+  }
+  var table_data = {{ template.tables.codes.data|tojson }};
+  var table;
+  var tr_click;
+  $(document).ready(function(){
+    table = new TableData({
+      name: '{{ template.tables.codes.name }}',
+      data: table_data,
+      crop: true,
+      // rmCols: ['id']
+    });
+    tr_click= new TouchClick('.table-row',pull_up_data);
+  });
+
+  function pull_up_data(el,e){
+    var d = table.get_entry(el);
+    var address = (d.brick == 0) ? d.address : d.address + ' ' + alphabet.charAt(d.brick);
+    elem.address.innerHTML = address;
+    elem.artist.innerHTML = (d.artist == null) ? 'no artist' : d.artist;
+
+    for (var i = 0; i < d.code.length; i++){
+      elem.block[i].className = 'permutation-block permutation-' + d.code.charAt(i);
+      elem.letter[i].innerHTML = d.code.charAt(i);
+    }
+  }
+</script>
+{% endblock script %}

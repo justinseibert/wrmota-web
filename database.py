@@ -330,3 +330,27 @@ def get_session_permission(token):
 
     g.user = user['username']
     return user['permission']
+
+def get_address_codes():
+    db = get_db()
+    codes = db.execute('''
+        SELECT
+            address.id,
+            color_code.code,
+            address.address,
+            address.brick,
+            artist.artist,
+            artist_meta.art_received,
+            address_meta.installed,
+            media.directory,
+            media.audio
+        FROM
+            address
+        LEFT JOIN artist on address.artist = artist.id
+        LEFT JOIN media on address.media = media.id
+        LEFT JOIN color_code on address.id = color_code.address
+        LEFT JOIN artist_meta on artist.meta = artist_meta.id
+        LEFT JOIN address_meta on address.meta = address_meta.id
+    ''').fetchall()
+
+    return codes

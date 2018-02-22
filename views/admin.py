@@ -71,21 +71,8 @@ def user_functions(func):
 def index():
     return render_template('admin/index.html', template=TEMPLATE)
 
-@_admin.route('/map')
-@Login.requires_permission_10
-def google_map():
-    TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
-
-    map_points = Database.get_map_points()
-    TEMPLATE['tables'] = {
-        'address': Database.get_dict_of(map_points,name='address',json=False)
-    }
-
-    return render_template('admin/googlemaps.html', template=TEMPLATE)
-
-@_admin.route('/data')
 @Login.requires_permission_0
-def all_tables():
+def view_all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()
 
@@ -93,34 +80,38 @@ def all_tables():
         t = data[table]
         TEMPLATE['tables'][t['name']] = Database.get_dict_of(t['data'],name=t['name'],json=False)
 
-    return render_template('admin/data.html',template=TEMPLATE)
+    return render_template('admin/view/data.html',template=TEMPLATE)
 
-@_admin.route('/permutation/<combo>')
 @Login.requires_permission_10
-def permutation(combo):
-    TEMPLATE['permutation'] = []
+def view_address_codes():
+    TEMPLATE['tables'] = {}
+    codes = Database.get_address_codes()
 
-    if combo == '4x4':
-        iter = product('ABCD',repeat=4)
-        skip = 2
-        add = False
-    elif combo == '5x3':
-        iter = product('ABCDE',repeat=3)
-        skip = 1
-        add = True
+    TEMPLATE['tables']['codes'] = Database.get_dict_of(codes, name='codes', json=False)
+    return render_template('admin/view/address-codes.html',template=TEMPLATE)
+
+@Login.requires_permission_10
+def view_google_map():
+    TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
+
+    map_points = Database.get_map_points()
+    TEMPLATE['tables'] = {
+    'address': Database.get_dict_of(map_points,name='address',json=False)
+    }
+
+    return render_template('admin/view/googlemaps.html', template=TEMPLATE)
+
+@_admin.route('/view/<data>')
+@Login.requires_permission_10
+def view_data(data):
+    if data == 'data':
+        return view_all_tables()
+    elif data == 'codes':
+        return view_address_codes()
+    elif data == 'map':
+        return view_google_map()
     else:
-        abort(404)
-
-    i = 0
-    for j in iter:
-        if (i/skip) <= 110:
-            if add:
-                k = list(j)
-                k.append(choice('ABCDE'))
-                j = k[::-1]
-            TEMPLATE['permutation'].append(j)
-        i += skip
-    return render_template('admin/permutation.html', template=TEMPLATE)
+        return abort(404)
 
 @Login.requires_permission_5
 def edit_artist_data():
@@ -173,3 +164,5 @@ def edit_data(data):
         return edit_artist_data()
     elif data == 'email':
         return send_artist_emails()
+    else:
+        return abort(404)

@@ -51,3 +51,12 @@ TableData.prototype.show = function(){
   $(id+', #tableName').removeClass('u-hide')
   $('#tableName b').html(this.name);
 }
+
+TableData.prototype.get_entry = function(el){
+  var id = el.dataset.id;
+  for (var each in this.data){
+    if (this.data[each].id == id){
+      return this.data[each];
+    }
+  }
+}
