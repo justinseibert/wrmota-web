@@ -31,7 +31,6 @@ def artists():
         'visitor' : Database.get_dict_of(artists['visitor'], name='visitor'),
         'local' : Database.get_dict_of(artists['local'], name='local'),
     }
-    pprint(TEMPLATE['artists'])
     TEMPLATE['options'] = {
         'tilt' : ['rotate1','rotate-1', '', '', '', '']
     }
