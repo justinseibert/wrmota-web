@@ -29,16 +29,16 @@ def get_map_points():
             artist.website,
             artist_meta.art_received,
             media.directory,
-            media.audio,
+            media.file,
             media_meta.original_directory,
             media_meta.original_filename,
             media_meta.notes
         FROM
             address
         LEFT JOIN artist ON address.artist = artist.id
-        INNER JOIN media ON address.media = media.id
+        INNER JOIN media ON address.audio = media.id
         INNER JOIN artist_meta ON address.artist = artist_meta.id
-        INNER JOIN media_meta ON address.media = media_meta.id
+        INNER JOIN media_meta ON media.id = media_meta.id
     ''').fetchall()
 
     return address
@@ -331,11 +331,11 @@ def get_address_codes():
             artist_meta.art_received,
             address_meta.installed,
             media.directory,
-            media.audio
+            media.file
         FROM
             address
         LEFT JOIN artist on address.artist = artist.id
-        LEFT JOIN media on address.media = media.id
+        LEFT JOIN media on address.audio = media.id
         LEFT JOIN color_code on address.id = color_code.address
         LEFT JOIN artist_meta on artist.meta = artist_meta.id
         LEFT JOIN address_meta on address.meta = address_meta.id

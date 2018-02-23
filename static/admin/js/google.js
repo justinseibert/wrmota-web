@@ -165,7 +165,7 @@ function create_sites(){
     var id = sites[i].id;
     google_site[id] = {
       marker: marker,
-      audio: '/audio/'+sites[i].directory+sites[i].audio
+      audio: '/audio/'+sites[i].directory + sites[i].file
     }
     // audio[id] = new Howl({ src: [audio_file] })
     google.maps.event.addListener(marker, 'click', (function(marker, content, id) {
