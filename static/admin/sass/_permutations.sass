@@ -25,3 +25,20 @@ $permutation_map: (A: $blue,B: $green,C: $red,D: $orange,E: $yellow,F: $pink,G: 
     width: 121%
     top: -6px
     left: -5px
+
+
+@page
+  width: 8.5in
+  height: 11in
+  margin: 0.5in 0.25in
+
+@media print
+  .pageA4
+    display: block
+    margin: 0
+    padding: 0
+  .permutation-stripe
+    margin: 0
+  .permutation-block
+    width: 0.5in
+    height: 0.5in

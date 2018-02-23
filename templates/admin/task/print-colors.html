@@ -1,0 +1,97 @@
+{% extends 'admin/layout/print.html' %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('_admin.static', filename='css/spectrum.css') }}">
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/spectrum.js') }}"></script>
+{% endblock head %}
+
+{% block body %}
+<div class="row frame-medium no-print">
+  <div class="nine grid">
+    <label>A</label><input id="A"/>
+    <label>B</label><input id="B"/>
+    <label>C</label><input id="C"/>
+    <label>D</label><input id="D"/>
+  </div>
+  <div class="three grid align-right">
+    <button class="green button" onclick="window.print();">print</button>
+  </div>
+</div>
+
+<div class="pageA4 row">
+{% for item in template.codes.data %}
+  <div class="permutation-stripe" title="{{item.address}} {{item.brick}}">
+    {% for i in range(0,4) %}
+    <div class="permutation-block permutation-{{ item.code[i] }}">
+      {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+</div>
+
+<div class="row print-only" style="margin-top:0.5in;">
+  <div class="row">
+    <div class="permutation-block permutation-A"></div><span id="meta-A"></span>
+  </div>
+  <div class="row">
+    <div class="permutation-block permutation-B"></div><span id="meta-B"></span>
+  </div>
+  <div class="row">
+    <div class="permutation-block permutation-C"></div><span id="meta-C"></span>
+  </div>
+  <div class="row">
+    <div class="permutation-block permutation-D"></div><span id="meta-D"></span>
+  </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+<script>
+  var init_colors = []
+  var inputs = '#A, #B, #C, #D';
+  var each_input = inputs.split(', ');
+
+  for (var i in each_input){
+    var id = each_input[i];
+    var block = '.permutation-' + id[1];
+    var meta = '#meta-' + id[1];
+
+    var color = rgb2hex($(block).css('background'));
+    console.log(color);
+    $(id).attr('value',color);
+    $(meta).html(color);
+    init_colors.push(color);
+  }
+
+  $(inputs).spectrum({
+    showInput: true,
+    allowEmpty: true,
+    showButtons: false,
+    showPalette: true,
+    preferredFormat: 'hex',
+    palette: init_colors
+  });
+
+  $(inputs).on('move.spectrum', change_color);
+
+  function change_color(e,color){
+    var block = '.permutation-' + e.target.id;
+    var meta = '#meta-' + e.target.id;
+    var hex = color.toHex();
+    $(block).css('background', color);
+    $(meta).html(color.toString());
+  }
+
+  function rgb2hex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    rgb = rgb.slice(1,4);
+    var hex = '#';
+    for (var i in rgb){
+      var color = parseInt(rgb[i]).toString(16).padStart(2,'0');
+      hex += color.toUpperCase();
+    }
+    return hex;
+  }
+</script>
+{% endblock script %}

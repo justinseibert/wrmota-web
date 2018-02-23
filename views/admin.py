@@ -157,6 +157,12 @@ def send_artist_emails():
 
     return render_template('admin/task/send_email.html', template=TEMPLATE)
 
+@Login.requires_permission_10
+def print_color_codes():
+    codes = Database.get_address_codes()
+    TEMPLATE['codes'] = Database.get_dict_of(codes)
+    return render_template('admin/task/print-colors.html', template=TEMPLATE)
+
 @_admin.route('/task/<data>')
 @Login.requires_permission_10
 def edit_data(data):
@@ -164,5 +170,7 @@ def edit_data(data):
         return edit_artist_data()
     elif data == 'email':
         return send_artist_emails()
+    elif data == 'print-codes':
+        return print_color_codes()
     else:
         return abort(404)

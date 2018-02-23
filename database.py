@@ -342,3 +342,20 @@ def get_address_codes():
     ''').fetchall()
 
     return codes
+
+def get_color_code_positions():
+    db = get_db()
+    codes = db.execute('''
+        SELECT
+            id,
+            p0,
+            p1,
+            p2,
+            p3
+        FROM
+            color_code
+        WHERE
+            address is not Null
+    ''').fetchall()
+
+    return codes
