@@ -63,15 +63,24 @@ def configure_logging(app):
 def configure_error_handlers(app):
     @app.errorhandler(500)
     def server_error_page(error):
-        message = 'server thing'
-        return render_template('site/error.html', message=message), 500
+        type = 500
+        message = 'uh oh, server thing happened'
+        return render_template('site/error.html', message=message, type=type), 500
+
+    @app.errorhandler(503)
+    def server_error_page(error):
+        type = 503
+        message = 'maintaining stuff, come back later'
+        return render_template('site/error.html', message=message, type=type), 503
 
     @app.errorhandler(404)
     def notfound_error_page(error):
-        message = 'nothing here'
-        return render_template('site/error.html', message=message), 404
+        type = 404
+        message = 'nope, nothing here'
+        return render_template('site/error.html', message=message, type=type), 404
 
     @app.errorhandler(403)
     def forbidden_error_page(error):
-        message = 'not allowed'
-        return render_template('site/error.html', message=message), 403
+        type = 403
+        message = 'sorry, not allowed'
+        return render_template('site/error.html', message=message, type=type), 403

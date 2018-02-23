@@ -14,6 +14,7 @@ TEMPLATE = {}
 
 @_admin.before_request
 def restrict_to_admins():
+    # return abort(503)
     if current_app.config['ENVIRONMENT'] == 'PRODUCTION':
         TEMPLATE['analytics'] = True
     else:
