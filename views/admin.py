@@ -52,15 +52,14 @@ def logout():
     flash('logged out')
     return redirect(url_for('_admin.login'))
 
-
-@Login.requires_permission_0
+@Login.requires_permission(0)
 def create_user():
     form = Forms.CreateUserForm()
     TEMPLATE['form'] = form
     return render_template('admin/users/create.html', template=TEMPLATE)
 
 @_admin.route('/user/<func>', methods=['GET'])
-@Login.requires_permission_5
+@Login.requires_permission(5)
 def user_functions(func):
     if func == 'create':
         return create_user()
@@ -68,11 +67,11 @@ def user_functions(func):
         return abort(404)
 
 @_admin.route('/')
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def index():
     return render_template('admin/index.html', template=TEMPLATE)
 
-@Login.requires_permission_0
+@Login.requires_permission(0)
 def view_all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()
@@ -83,7 +82,7 @@ def view_all_tables():
 
     return render_template('admin/view/data.html',template=TEMPLATE)
 
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def view_address_codes():
     TEMPLATE['tables'] = {}
     codes = Database.get_address_codes()
@@ -91,7 +90,7 @@ def view_address_codes():
     TEMPLATE['tables']['codes'] = Database.get_dict_of(codes, name='codes', json=False)
     return render_template('admin/view/address-codes.html',template=TEMPLATE)
 
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def view_google_map():
     TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
 
@@ -103,7 +102,7 @@ def view_google_map():
     return render_template('admin/view/googlemaps.html', template=TEMPLATE)
 
 @_admin.route('/view/<data>')
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def view_data(data):
     if data == 'data':
         return view_all_tables()
@@ -114,7 +113,7 @@ def view_data(data):
     else:
         return abort(404)
 
-@Login.requires_permission_5
+@Login.requires_permission(5)
 def edit_artist_data():
     data = Database.get_dict_of(Database.get_data_artist(), name='artist')
     TEMPLATE['artist'] = data
@@ -128,7 +127,7 @@ def edit_artist_data():
     TEMPLATE['form'] = form
     return render_template('admin/task/edit_artist.html', template=TEMPLATE)
 
-@Login.requires_permission_5
+@Login.requires_permission(5)
 def send_artist_emails():
     curators = Database.get_curators_list()
     curator_options = {
@@ -158,14 +157,14 @@ def send_artist_emails():
 
     return render_template('admin/task/send_email.html', template=TEMPLATE)
 
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def print_color_codes():
     codes = Database.get_address_codes()
     TEMPLATE['codes'] = Database.get_dict_of(codes)
     return render_template('admin/task/print-colors.html', template=TEMPLATE)
 
 @_admin.route('/task/<data>')
-@Login.requires_permission_10
+@Login.requires_permission(10)
 def edit_data(data):
     if data == 'artists':
         return edit_artist_data()

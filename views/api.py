@@ -10,7 +10,7 @@ from wrmota.api import login as Login
 from wrmota import database as Database
 
 @_api.route('/create_user', methods=['POST'])
-@Login.requires_permission_0
+@Login.requires_permission(0)
 def create_user():
     data = {
         'error': False,
@@ -45,7 +45,7 @@ def update_artist_data():
     return response
 
 @_api.route('/edit/<data>', methods=['POST'])
-@Login.requires_permission_5
+@Login.requires_permission(5)
 def api_edit_data(data):
     if data == 'artist':
         response = update_artist_data()

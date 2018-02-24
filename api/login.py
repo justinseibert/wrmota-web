@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import abort, session, g, url_for, redirect
+from flask import abort, session, g, url_for, redirect, request
 
 from wrmota import database as Database
 
@@ -9,34 +9,26 @@ def check_login_status(level):
         try:
             g.permission = Database.get_session_permission(session['token'])
         except:
-            return False
+            print('ERROR: no user')
+            return None
+
+    print('USER: '+g.user)
     if g.permission <= level:
-        print('USER: '+g.user)
         return True
+    else:
+        print('ERROR: invalid permission for ' + request.path)
+        return False
 
-def requires_permission_10(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        permission = check_login_status(10)
-        if not permission:
-            return abort(403)
-        return f(*args, **kwargs)
-    return decorated_function
-
-def requires_permission_5(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        permission = check_login_status(5)
-        if not permission:
-            return abort(403)
-        return f(*args, **kwargs)
-    return decorated_function
-
-def requires_permission_0(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        permission = check_login_status(0)
-        if not permission:
-            return abort(403)
-        return f(*args, **kwargs)
-    return decorated_function
+def requires_permission(level):
+    def permission_decorator(func):
+        @wraps(func)
+        def func_wrapper(*args, **kwargs):
+            permission = check_login_status(level)
+            if permission == True:
+                return func(*args, **kwargs)
+            elif permission == None:
+                return redirect(url_for('_admin.login'))
+            elif permission == False:
+                return abort(403)
+        return func_wrapper
+    return permission_decorator

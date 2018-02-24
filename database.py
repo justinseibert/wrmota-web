@@ -279,7 +279,7 @@ def login(user,password):
 
     try:
         if stored['permission'] > 10:
-            print('LOGIN: invalid permission')
+            print('LOGIN: not allowed')
             return data
 
         data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
