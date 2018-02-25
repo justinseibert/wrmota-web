@@ -6,6 +6,7 @@ from pprint import pprint
 
 from wrmota.api import _api
 from wrmota.api import forms as Forms
+from wrmota.api import hashes as Hash
 from wrmota.api import login as Login
 from wrmota import database as Database
 
@@ -56,20 +57,26 @@ def api_edit_data(data):
         }
     return jsonify(response)
 
-def render_email_recordings(form):
-    pprint(form)
-    return 'accepted email!'
+def render_email_recording(form):
+    verify = Hash.verify_mail_origin(
+        api_key=current_app.config['MAILGUN_API_KEY'],
+        token=form.token,
+        timestamp=form.timestamp,
+        signature=form.signature
+    )
+    if verify:
+        pprint(form.sender,form.subject,form.body-plain,form.attachment-count)
+        return 'EMAIL ROUTE: valid email', 200
+    else:
+        return 'EMAIL ROUTE: invalid email', 406
 
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
-    if data == 'recordings':
-        response = accept_email_recordings(request.form)
+    if data == 'recording':
+        response = render_email_recording(request.form)
     else:
-        response = {
-            'error': False,
-            'message': 'default message'
-        }
-    return jsonify(response)
+        response = 'EMAIL ROUTE: invalid url', 406
+    return response
 
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():
