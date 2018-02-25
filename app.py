@@ -1,7 +1,6 @@
 import os
 from flask import Flask, g, render_template, flash
 from flask_assets import Environment, Bundle
-from flask_wtf.csrf import CSRFProtect
 
 from wrmota import config_public as ConfigPublic
 from wrmota import config_private as ConfigPrivate
@@ -15,7 +14,6 @@ def create_app(config='PRODUCTION', app_name=None):
 
     app = Flask(app_name)
     assets = Environment(app)
-    csrf = CSRFProtect(app)
 
     configure_app(app, public, private)
     configure_blueprints(app, blueprints)
