@@ -24,8 +24,12 @@ def generate_token():
     return hexlify(urandom(16))
 
 def verify_mail_origin(api_key, token, timestamp, signature):
+    print(api_key,token,timestamp,signature)
     hmac_digest = hmac.new(
         key=api_key,
         msg='{}{}'.format(timestamp, token),
         digestmod=hashlib.sha256).hexdigest()
-    return hmac.compare_digest(unicode(signature), unicode(hmac_digest))
+    str_comparison = str(signature) == str(hmac_digest)
+    hmac_comparison = hmac.compare_digest(unicode(signature), unicode(hmac_digest))
+    print(hmac_comparison, str_comparison)
+    return hmac_comparison
