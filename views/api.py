@@ -56,6 +56,20 @@ def api_edit_data(data):
         }
     return jsonify(response)
 
+def render_email_recordings(form):
+    pprint(form)
+    return 'accepted email!'
+
+@_api.route('/accept-email/<data>', methods=['POST'])
+def accept_email_data(data):
+    if data == 'recordings':
+        response = accept_email_recordings(request.form)
+    else:
+        response = {
+            'error': False,
+            'message': 'default message'
+        }
+    return jsonify(response)
 
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():
