@@ -29,7 +29,5 @@ def verify_mail_origin(api_key, token, timestamp, signature):
         key=api_key,
         msg='{}{}'.format(timestamp, token),
         digestmod=hashlib.sha256).hexdigest()
-    str_comparison = str(signature) == str(hmac_digest)
     hmac_comparison = hmac.compare_digest(unicode(signature), unicode(hmac_digest))
-    print(hmac_comparison, str_comparison)
     return hmac_comparison

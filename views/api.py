@@ -57,23 +57,32 @@ def api_edit_data(data):
         }
     return jsonify(response)
 
-def render_email_recording(form):
-    
+def render_email_recording(email):
+    message = 'EMAIL: routing failed to authenticate from {}'.format(email['from'])
+    status = 406
+    verify = False
+
     try:
-	verify = Hash.verify_mail_origin(
+        verify = Hash.verify_mail_origin(
             api_key=current_app.config['MAILGUN_API_KEY'],
-            token=form['token'],
-            timestamp=form['timestamp'],
-            signature=form['signature']
+            token=email['token'],
+            timestamp=email['timestamp'],
+            signature=email['signature']
         )
-	print('verify: {}'.format(verify))
-        if verify:
-	    print('origin verified')
-            return 'EMAIL ROUTE: valid email', 200
-        else:
-            return 'EMAIL ROUTE: failed to authenticate', 406 
     except:
-        return 'EMAIL ROUTE: invalid email', 406
+        return message, 406
+
+    if verify:
+        message = 'EMAIL: routing verified from {}'.format(email['from'])
+        status = 200
+        if email['attachment-count'] > 0:
+            for i in range(1,email['attachment-count']):
+                f = 'attachment-{}'.format(i)
+                print('mailgun file: {}'.format(email[f]))
+                print('request file: {}'.format(request.files[f]))
+
+    print(message)
+    return message, status
 
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
