@@ -75,11 +75,22 @@ def render_email_recording(email):
     if verify:
         message = 'EMAIL: routing verified from {}'.format(email['from'])
         status = 200
-        if email['attachment-count'] > 0:
-            for i in range(1,email['attachment-count']):
+        count = int(email['attachment-count'])
+	print(count)
+	pprint(request.files)
+        if count > 0:
+            for i in range(1,count+1):
                 f = 'attachment-{}'.format(i)
-                print('mailgun file: {}'.format(email[f]))
-                print('request file: {}'.format(request.files[f]))
+		f = request.files[f]
+                print('request file: {}'.format(f))
+	
+		import os
+		from werkzeug.utils import secure_filename
+		filename = secure_filename(f.filename)
+	        location = os.path.join(current_app.config['TEMP_UPLOAD_FOLDER'], filename)
+		print(location)
+		f.save(location)
+
 
     print(message)
     return message, status
