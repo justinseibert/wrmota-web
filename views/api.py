@@ -1,6 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
-from flask import jsonify, abort, request, current_app, session, render_template
+from flask import jsonify, abort, request, current_app, session, render_template, redirect, url_for
 import requests
 from pprint import pprint
 
@@ -88,7 +88,14 @@ def extract_audio_from_email(email,attachments):
     print(message)
     return message, status
 
-@_api.route('/test-upload')
+@Login.requires_permission(0)
+@_api.route('/test-upload', methods=['POST'])
+def test_upload():
+    file_saved = Forms.handle_upload(request.files,'AUDIO')
+    if file_saved:
+        return 'success', 200
+    else:
+        return 'fail', 500
 
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):

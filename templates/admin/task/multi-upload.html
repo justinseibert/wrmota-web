@@ -1,10 +1,10 @@
 {% extends 'admin/layout/data.html' %}
 {% block body %}
 
-  <form class="row" action="/api/test-upload" enctype="multipart/form-data">
-    <input class="row" type="file">
-    <input class="row" type="file">
-    <input class="row" type="file">
+  <form class="row" method="post" action="/api/test-upload" enctype="multipart/form-data">
+    <input class="row" type="file" name="attachment-1">
+    <input class="row" type="file" name="attachment-2">
+    <input class="row" type="file" name="attachment-3">
     <button type="submit">submit</button>
   </form>
 {% endblock body %}

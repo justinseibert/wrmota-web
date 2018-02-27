@@ -55,9 +55,11 @@ class EditArtistForm(FlaskForm):
     art_received = BooleanField(id="EditArtReceived")
     visitor = BooleanField(id="EditVisitor")
 
-# def handle_upload(file,extension):
-#     try:
-#
+def handle_upload(attachments,fieldname,extension):
+    for file in attachments:
+        # id = fieldname+str(i)
+        print(attachments[file].filename)
+    return True
 
 def allowed_file(filename, extensions):
     allowed = current_app.config['ALLOWED_FILES'][extensions]
