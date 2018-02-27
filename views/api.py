@@ -1,6 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
-from flask import jsonify, abort, request, current_app, session, render_template
+from flask import jsonify, abort, request, current_app, session, render_template, redirect, url_for
 import requests
 from pprint import pprint
 
@@ -67,8 +67,11 @@ def extract_audio_from_email(email,attachments):
         message = 'EMAIL: routing verified from {}'.format(email['from'])
         status = 200
 
-        code = Sanitize.code(email['subject'])
+        code = Sanitize.is_code(email['subject'])
         count = int(email['attachment-count'])
+
+        # if code:
+            # set file to match code
 
         # if code and count > 0:
         #     file_saved = Forms.handle_upload(attachments, field='attachment-', extension='audio')
