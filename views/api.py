@@ -88,8 +88,6 @@ def extract_audio_from_email(email,attachments):
     print(message)
     return message, status
 
-@_api.route('/test-upload')
-
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
     verified = Hash.verify_email(current_app.config['MAILGUN_API_KEY'], request.form)
