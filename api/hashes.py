@@ -23,10 +23,19 @@ def check_password(stored_password,stored_salt,password):
 def generate_token():
     return hexlify(urandom(16))
 
-def verify_mail_origin(api_key, token, timestamp, signature):
-    hmac_digest = hmac.new(
-        key=api_key,
-        msg='{}{}'.format(timestamp, token),
-        digestmod=hashlib.sha256).hexdigest()
-    hmac_comparison = hmac.compare_digest(unicode(signature), unicode(hmac_digest))
+def verify_mail_origin(api_key, email):
+    try:
+        hmac_digest = hmac.new(
+            key=api_key,
+            msg='{}{}'.format(email['timestamp'], email['token']),
+            digestmod=hashlib.sha256
+        ).hexdigest()
+
+        hmac_comparison = hmac.compare_digest(
+            unicode(email['signature']),
+            unicode(hmac_digest)
+        )
+    except:
+        return False
+
     return hmac_comparison

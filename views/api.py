@@ -8,6 +8,7 @@ from wrmota.api import _api
 from wrmota.api import forms as Forms
 from wrmota.api import hashes as Hash
 from wrmota.api import login as Login
+from wrmota.api import sanitize as Sanitize
 from wrmota import database as Database
 
 @_api.route('/create_user', methods=['POST'])
@@ -57,48 +58,44 @@ def api_edit_data(data):
         }
     return jsonify(response)
 
-def render_email_recording(email):
-    message = 'EMAIL: routing failed to authenticate from {}'.format(email['from'])
+def extract_audio_from_email(email,attachments):
+    message = 'EMAIL: unable to extract audio from {}'.format(email['from'])
     status = 406
     verify = False
 
     try:
-        verify = Hash.verify_mail_origin(
-            api_key=current_app.config['MAILGUN_API_KEY'],
-            token=email['token'],
-            timestamp=email['timestamp'],
-            signature=email['signature']
-        )
-    except:
-        return message, 406
-
-    if verify:
         message = 'EMAIL: routing verified from {}'.format(email['from'])
         status = 200
-        count = int(email['attachment-count'])
-	print(count)
-	pprint(request.files)
-        if count > 0:
-            for i in range(1,count+1):
-                f = 'attachment-{}'.format(i)
-		f = request.files[f]
-                print('request file: {}'.format(f))
-	
-		import os
-		from werkzeug.utils import secure_filename
-		filename = secure_filename(f.filename)
-	        location = os.path.join(current_app.config['TEMP_UPLOAD_FOLDER'], filename)
-		print(location)
-		f.save(location)
 
+        code = Sanitize.code(email['subject'])
+        count = int(email['attachment-count'])
+
+        # if code and count > 0:
+        #     file_saved = Forms.handle_upload(attachments, field='attachment-', extension='audio')
+        #     for i in range(1,count+1):
+        #         id = 'attachment-{}'.format(i)
+        #         file = request.files[id]
+
+        # import os
+        # from werkzeug.utils import secure_filename
+        # filename = secure_filename(f.filename)
+        #     location = os.path.join(current_app.config['TEMP_UPLOAD_FOLDER'], filename)
+        # print(location)
+        # f.save(location)
+    except:
+        return message, 406
 
     print(message)
     return message, status
 
+@_api.route('/test-upload')
+
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
-    if data == 'recording':
-        response = render_email_recording(request.form)
+    verified = Hash.verify_email(current_app.config['MAILGUN_API_KEY'], request.form)
+
+    if verified and data == 'recording':
+        response = extract_audio_from_email(request.form,request.files)
     else:
         response = 'EMAIL ROUTE: invalid url', 406
     return response

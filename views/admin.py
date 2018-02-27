@@ -163,6 +163,10 @@ def print_color_codes():
     TEMPLATE['codes'] = Database.get_dict_of(codes)
     return render_template('admin/task/print-colors.html', template=TEMPLATE)
 
+@Login.requires_permission(0)
+def test_upload_files():
+    return render_template('admin/task/multi-upload.html', template=TEMPLATE)
+
 @_admin.route('/task/<data>')
 @Login.requires_permission(10)
 def edit_data(data):
@@ -172,5 +176,7 @@ def edit_data(data):
         return send_artist_emails()
     elif data == 'print-codes':
         return print_color_codes()
+    elif data == 'upload-files':
+        return test_upload_files()
     else:
         return abort(404)
