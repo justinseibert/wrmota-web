@@ -285,7 +285,7 @@ def login(user,password):
         data['valid'] = Hash.check_password(stored['password'],stored['salt'],password)
 
         if data['valid']:
-            token = Hash.generate_token()
+            token = Hash.generate_token(16)
             db.execute('''
                 INSERT OR REPLACE INTO session (
                     uuid,
@@ -359,3 +359,17 @@ def get_color_code_positions():
     ''').fetchall()
 
     return codes
+
+def upload_files(uploads):
+    try:
+        db = get_db()
+        db.executemany('''
+            INSERT INTO media
+                (directory, file, type)
+            VALUES
+                (?,?,?)
+        ''', uploads)
+        db.commit()
+        return True
+    except:
+        return False

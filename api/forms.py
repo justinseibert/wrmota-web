@@ -1,9 +1,11 @@
-from flask import current_app
+from flask import current_app, request
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import TextField, PasswordField, HiddenField, BooleanField, SelectField
 from wtforms.validators import InputRequired, ValidationError, Email, DataRequired, EqualTo
+from werkzeug.utils import secure_filename
 
 from wrmota.api import hashes as Hash
+from wrmota.api import sanitize as Sanitize
 from wrmota import database as Database
 
 class LoginForm(FlaskForm):
@@ -55,11 +57,28 @@ class EditArtistForm(FlaskForm):
     art_received = BooleanField(id="EditArtReceived")
     visitor = BooleanField(id="EditVisitor")
 
-def handle_upload(attachments,fieldname,extension):
-    for file in attachments:
-        # id = fieldname+str(i)
-        print(attachments[file].filename)
-    return True
+def handle_upload(files,extensions):
+    uploads = []
+    failed = []
+    for file in files:
+        name = secure_filename(files[file].filename)
+        if allowed_file(name, extensions):
+            media = Sanitize.media_file(name)
+            if extensions == 'audio':
+                media_type = extensions
+            else:
+                media_type = media['extension']
+            uploads.append((media['directory'], media['name'], media_type))
+            files[file].save(media['path'])
+            print('UPLOAD: succesfully saved {} to {}'.format(name,media['path']))
+        else:
+            failed.append(name)
+            print('UPLOAD: failed to save {}'.format(name))
+
+    return {
+        'failed': failed,
+        'in_database': Database.upload_files(uploads)
+    }
 
 def allowed_file(filename, extensions):
     allowed = current_app.config['ALLOWED_FILES'][extensions]

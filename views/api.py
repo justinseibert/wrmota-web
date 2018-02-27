@@ -67,8 +67,11 @@ def extract_audio_from_email(email,attachments):
         message = 'EMAIL: routing verified from {}'.format(email['from'])
         status = 200
 
-        code = Sanitize.code(email['subject'])
+        code = Sanitize.is_code(email['subject'])
         count = int(email['attachment-count'])
+
+        # if code:
+            # set file to match code
 
         # if code and count > 0:
         #     file_saved = Forms.handle_upload(attachments, field='attachment-', extension='audio')
@@ -91,9 +94,11 @@ def extract_audio_from_email(email,attachments):
 @Login.requires_permission(0)
 @_api.route('/test-upload', methods=['POST'])
 def test_upload():
-    file_saved = Forms.handle_upload(request.files,'AUDIO')
-    if file_saved:
+    file_saved = Forms.handle_upload(request.files,'image')
+    if file_saved['in_database'] and len(file_saved['failed']) < 1:
         return 'success', 200
+    elif len(file_saved['failed']) > 0:
+        return 'fail', 415
     else:
         return 'fail', 500
 
