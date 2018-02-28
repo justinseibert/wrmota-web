@@ -58,45 +58,71 @@ def api_edit_data(data):
         }
     return jsonify(response)
 
-def extract_audio_from_email(email,attachments):
-    message = 'EMAIL: unable to extract audio from {}'.format(email['from'])
-    status = 406
-    verify = False
+def extract_audio_from_email():
+    email = request.form
+    audio = request.files
 
-    try:
-        message = 'EMAIL: routing verified from {}'.format(email['from'])
-        status = 200
+    has_code = Sanitize.is_code(email['subject'])
+    sender = email['from']
+    notes = '{}: {}'.format(email['subject'],email['stripped-text'])
+    count = int(email['attachment-count'])
 
-        code = Sanitize.is_code(email['subject'])
-        count = int(email['attachment-count'])
+    message = []
 
-        # if code:
-            # set file to match code
+    if count > 0:
+        file_saved = Forms.handle_upload(audio, 'audio')
+        uploaded = file_saved['uploads']
+        failed = file_saved['failed']
 
-        # if code and count > 0:
-        #     file_saved = Forms.handle_upload(attachments, field='attachment-', extension='audio')
-        #     for i in range(1,count+1):
-        #         id = 'attachment-{}'.format(i)
-        #         file = request.files[id]
+        if len(uploaded) > 0:
+            new_media = []
+            added_files = len(uploaded) > 1 ? 'files: ' : 'file: '
+            for i in uploaded:
+                new_media.append((
+                    uploaded[i]['directory'],
+                    uploaded[i]['name'],
+                    uploaded[i]['filetype'],
+                    uploaded[i]['extension'],
+                    None,
+                    uploaded[i]['original_filename'],
+                    notes,
+                    sender
+                ))
+                added_files += str(uploaded[i]['original_filename']) + ', ',
+            added_files += added_files[0:-2]
 
-        # import os
-        # from werkzeug.utils import secure_filename
-        # filename = secure_filename(f.filename)
-        #     location = os.path.join(current_app.config['TEMP_UPLOAD_FOLDER'], filename)
-        # print(location)
-        # f.save(location)
-    except:
-        return message, 406
+            if Database.add_media(new_media):
+                message.append("SUCCESS: uploaded {}".format(added_files))
+            else:
+                message.append("ERROR: unable to add {} to database".format(added_files))
 
-    print(message)
-    return message, status
+        if len(failed) > 0:
+            failed_files = len(failed) > 1 ? 'files: ' : 'file: '
+            the_fails = ', '.join(f for f in failed)
+            message.append("ERROR: unable to upload {}".format(the_fails))
+    else:
+        message.append("ERROR: no attachments were found")
+
+    message_allowed_files = ', '.join(i for i in current_app.config['ALLOWED_FILES']['audio'])
+    # - If you wish to automatically link the new recording to its correct address on the website, you must specify the 4-letter code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup \n
+    message.append('''
+        \n------------\n
+        Please Note:\n
+        - Messages should be emailed directly to recordings@wrmota.org\n
+        - The email upload system only supports these filetypes: {}.\n
+        - You can add notes about the file in the Body of your email\n
+        - If you are having other issues, please contact Justin: justin@wrmota.org
+    '''.format(message_allowed_files))
+    Email.send_application_response(sender, 'Your Audio Uploads', message)
+
+    return 'Message accepted', 200
 
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
     verified = Hash.verify_email(current_app.config['MAILGUN_API_KEY'], request.form)
 
     if verified and data == 'recording':
-        response = extract_audio_from_email(request.form,request.files)
+        response = extract_audio_from_email()
     else:
         response = 'EMAIL ROUTE: invalid url', 406
     return response

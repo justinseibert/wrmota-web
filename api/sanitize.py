@@ -47,5 +47,6 @@ def media_file(name):
         'directory': directory,
         'name': unique_name,
         'extension': extension,
-        'path': os.path.join(current_app.config['UPLOAD_DIRECTORY'], relative_path)
+        'original_filename': name,
+        'full_path': os.path.join(current_app.config['UPLOAD_DIRECTORY'], relative_path)
     }

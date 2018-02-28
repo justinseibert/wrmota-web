@@ -57,27 +57,29 @@ class EditArtistForm(FlaskForm):
     art_received = BooleanField(id="EditArtReceived")
     visitor = BooleanField(id="EditVisitor")
 
-def handle_upload(files,extensions):
+def handle_upload(files,filetypes):
     uploads = []
     failed = []
     for file in files:
         name = secure_filename(files[file].filename)
-        if allowed_file(name, extensions):
+        if allowed_file(name, filetypes):
             media = Sanitize.media_file(name)
-            if extensions == 'audio':
-                media_type = extensions
-            else:
-                media_type = media['extension']
-            uploads.append((media['directory'], media['name'], media_type))
-            files[file].save(media['path'])
-            print('UPLOAD: succesfully saved {} to {}'.format(name,media['path']))
+            media['filetype'] = filetypes
+
+            try:
+                files[file].save(media['full_path'])
+                uploads.append(media)
+                print('UPLOAD: succesfully saved {} to {}'.format(name,media['path']))
+            except:
+                failed.append(name)
+                print('UPLOAD: failed to save {}'.format(name))
         else:
             failed.append(name)
-            print('UPLOAD: failed to save {}'.format(name))
+            print('UPLOAD: incorrect filetype, failed to save {}'.format(name))
 
     return {
-        'failed': failed,
-        'in_database': Database.upload_files(uploads)
+        'uploads': uploads,
+        'failed': failed
     }
 
 def allowed_file(filename, extensions):
