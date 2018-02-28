@@ -34,6 +34,20 @@ def is_code(item):
     else:
         return False
 
+def extension(item, withdot=False, split=False):
+    parts = item.rsplit('.', 1)
+    name = parts[0]
+    extension = parts[1].lower()
+    extension = '.{}'.format(extension) if withdot else extension
+
+    if split:
+        return {
+            'name': name,
+            'extension': extension
+        }
+    else:
+        return extension
+
 def date_directory(style):
     folders = ''.join('%{}/'.format(i) for i in style)
     return datetime.now().strftime(folders)
@@ -41,7 +55,7 @@ def date_directory(style):
 def media_file(name):
     directory = date_directory('md')
     unique_name = Hash.generate_token(8).decode('utf-8')
-    extension = name.rsplit('.', 1)[1].lower()
+    extension = extension(name)
     relative_path = '{}{}.{}'.format(directory,unique_name,extension)
 
     try:

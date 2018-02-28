@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 from wrmota.api import hashes as Hash
 from wrmota.api import sanitize as Sanitize
-# from wrmota.api import convert as Convert
+from wrmota.api import convert as Convert
 from wrmota import database as Database
 
 class LoginForm(FlaskForm):
@@ -69,8 +69,10 @@ def handle_upload(files,filetypes):
 
             try:
                 files[f].save(media['full_path'])
-                uploads.append(media)
                 print('UPLOAD: succesfully saved {} to {}'.format(name,media['full_path']))
+
+                conversion = Convert.audio_files(media['full_path'])
+                uploads.append(media)
             except:
                 failed.append(name)
                 print('UPLOAD: failed to save {}'.format(name))
