@@ -111,7 +111,8 @@ def get_all_data():
         'artist',
         'media',
         'address_meta',
-        'artist_meta'
+        'artist_meta',
+        'color_code'
     ]
     if g and g.permission == 0:
         tables.append('curator')
