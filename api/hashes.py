@@ -25,7 +25,7 @@ def generate_token(bits):
 
 def verify_mail_origin(api_key, email):
     for i in email:
-        print(email[i])
+        print(i, email[i])
     print('')
 
     try:

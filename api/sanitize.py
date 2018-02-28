@@ -1,10 +1,20 @@
 import os
-from re import sub, match, IGNORECASE
+import string
+from re import sub, match, search, IGNORECASE
 from datetime import datetime
 
 from flask import current_app
 
 from wrmota.api import hashes as Hash
+
+def make_ascii(text):
+    return text.decode('unicode_escape').encode('ascii','ignore')
+
+def make_unicode(text):
+    printable = set(string.printable)
+    text = filter(lambda a:a in printable, text)
+    text = sub(r'(.*)\s+$', r'\1', text)
+    return unicode(text).decode('unicode_escape').encode('utf-8','ignore')
 
 def website(item):
     item = sub(r'\s*',r'',item)
@@ -36,7 +46,7 @@ def media_file(name):
 
     try:
         path = os.path.join(current_app.config['UPLOAD_DIRECTORY'],directory)
-        os.makedirs(path,exist_ok=False)
+        os.makedirs(path)
         os.chmod(path,0o755)
         print('UPLOAD: created new directory {}'.format(directory))
     except OSError:

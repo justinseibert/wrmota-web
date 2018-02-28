@@ -60,16 +60,16 @@ class EditArtistForm(FlaskForm):
 def handle_upload(files,filetypes):
     uploads = []
     failed = []
-    for file in files:
-        name = secure_filename(files[file].filename)
+    for f in files:
+        name = secure_filename(files[f].filename)
         if allowed_file(name, filetypes):
             media = Sanitize.media_file(name)
             media['filetype'] = filetypes
 
             try:
-                files[file].save(media['full_path'])
+                files[f].save(media['full_path'])
                 uploads.append(media)
-                print('UPLOAD: succesfully saved {} to {}'.format(name,media['path']))
+                print('UPLOAD: succesfully saved {} to {}'.format(name,media['full_path']))
             except:
                 failed.append(name)
                 print('UPLOAD: failed to save {}'.format(name))
