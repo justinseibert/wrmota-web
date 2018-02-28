@@ -71,7 +71,7 @@ def user_functions(func):
 def index():
     return render_template('admin/index.html', template=TEMPLATE)
 
-@Login.requires_permission(0)
+@Login.requires_permission(5)
 def view_all_tables():
     TEMPLATE['tables'] = {}
     data = Database.get_all_data()

@@ -111,10 +111,12 @@ def get_all_data():
         'artist',
         'media',
         'address_meta',
-        'artist_meta',
-        'curator',
-        'session'
+        'artist_meta'
     ]
+    if g and g.permission == 0:
+        tables.append('curator')
+        tables.append('session')
+
     data = {}
     for table in tables:
         statement = "SELECT * FROM {}".format(table)
@@ -359,21 +361,21 @@ def get_color_code_positions():
     return codes
 
 def add_media(uploads):
-#    try:
-     db = get_db()
-     db.executemany('''
-         INSERT INTO media(
-             directory,
-             name,
-             filetype,
-             extension,
-             original_directory,
-             original_filename,
-             notes,
-             uploaded_by
-         ) VALUES (?,?,?,?,?,?,?,?)
-     ''', uploads)
-     db.commit()
-     return True
-#    except:
-#        return False
+    try:
+        db = get_db()
+        db.executemany('''
+            INSERT INTO media(
+                directory,
+                name,
+                filetype,
+                extension,
+                original_directory,
+                original_filename,
+                notes,
+                uploaded_by
+            ) VALUES (?,?,?,?,?,?,?,?)
+        ''', uploads)
+        db.commit()
+        return True
+    except:
+        return False

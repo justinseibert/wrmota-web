@@ -62,21 +62,20 @@ def api_edit_data(data):
 def extract_audio_from_email():
     email = request.form
     audio = request.files
-    
+
     has_code = Sanitize.is_code(email['subject'])
     sender = email['from']
     subject = Sanitize.make_unicode(email['subject'])
     body = Sanitize.make_unicode(email['stripped-text'])
     notes = '{}: {}'.format(subject,body)
-    
+
     message = []
-    
-    print('MADE IT TO THE COUNTING PART')
+
     if 'attachment-count' in email and email['attachment-count'] > 0:
         file_saved = Forms.handle_upload(audio, 'audio')
         uploaded = file_saved['uploads']
         failed = file_saved['failed']
-    
+
         if len(uploaded) > 0:
             new_media = []
             for upload in uploaded:
@@ -90,19 +89,19 @@ def extract_audio_from_email():
                     notes,
                     sender
                 ))
-         
+
             added_files = ', '.join(u['original_filename'] for u in uploaded)
             if Database.add_media(new_media):
                 message.append("SUCCESS: uploaded {}".format(added_files))
             else:
                 message.append("ERROR: unable to add {} to database".format(added_files))
-    
+
         if len(failed) > 0:
             failed_files = ', '.join(f for f in failed)
             message.append("ERROR: unable to upload {}".format(failed_files))
     else:
         message.append("ERROR: no attachments were found")
-    
+
     message_allowed_files = ', '.join(i for i in current_app.config['ALLOWED_FILES']['audio'])
     # - If you wish to automatically link the new recording to its correct address on the website, you must specify the 4-letter code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup \n
     message.append('''
@@ -120,7 +119,7 @@ def extract_audio_from_email():
 @_api.route('/accept-email/<data>', methods=['POST'])
 def accept_email_data(data):
     verified = Hash.verify_mail_origin(current_app.config['MAILGUN_API_KEY'], request.form)
-    
+
     if verified and data == 'recording':
         response = extract_audio_from_email()
     else:

@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 
 from wrmota.api import hashes as Hash
 from wrmota.api import sanitize as Sanitize
+# from wrmota.api import convert as Convert
 from wrmota import database as Database
 
 class LoginForm(FlaskForm):
