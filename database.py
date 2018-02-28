@@ -29,16 +29,15 @@ def get_map_points():
             artist.website,
             artist_meta.art_received,
             media.directory,
-            media.file,
-            media_meta.original_directory,
-            media_meta.original_filename,
-            media_meta.notes
+            media.name,
+            media.original_directory,
+            media.original_filename,
+            media.notes
         FROM
             address
         LEFT JOIN artist ON address.artist = artist.id
         INNER JOIN media ON address.audio = media.id
         INNER JOIN artist_meta ON address.artist = artist_meta.id
-        INNER JOIN media_meta ON media.id = media_meta.id
     ''').fetchall()
 
     return address
@@ -113,7 +112,6 @@ def get_all_data():
         'media',
         'address_meta',
         'artist_meta',
-        'media_meta',
         'curator',
         'session'
     ]
@@ -331,7 +329,7 @@ def get_address_codes():
             artist_meta.art_received,
             address_meta.installed,
             media.directory,
-            media.file
+            media.name
         FROM
             address
         LEFT JOIN artist on address.artist = artist.id
@@ -360,14 +358,20 @@ def get_color_code_positions():
 
     return codes
 
-def upload_files(uploads):
+def add_media(uploads):
     try:
         db = get_db()
         db.executemany('''
-            INSERT INTO media
-                (directory, file, type)
-            VALUES
-                (?,?,?)
+            INSERT INTO media(
+                directory,
+                name,
+                filetype,
+                extension,
+                original_directory,
+                original_filename,
+                notes,
+                uploaded_by,
+            ) VALUES (?,?,?,?,?,?,?,?)
         ''', uploads)
         db.commit()
         return True
