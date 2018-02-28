@@ -34,7 +34,7 @@ def is_code(item):
     else:
         return False
 
-def extension(item, withdot=False, split=False):
+def get_extension(item, withdot=False, split=False):
     parts = item.rsplit('.', 1)
     name = parts[0]
     extension = parts[1].lower()
@@ -55,7 +55,7 @@ def date_directory(style):
 def media_file(name):
     directory = date_directory('md')
     unique_name = Hash.generate_token(8).decode('utf-8')
-    extension = extension(name)
+    extension = get_extension(name)
     relative_path = '{}{}.{}'.format(directory,unique_name,extension)
 
     try:

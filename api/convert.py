@@ -2,7 +2,7 @@ import ffmpy
 from wrmota.api import sanitize as Sanitize
 
 def audio_files(original):
-    new_file = Sanitize.extension(original, split=True)['name']
+    new_file = Sanitize.get_extension(original, split=True)['name']
     webm = '{}.webm'.format(new_file)
     mp3 = '{}.mp3'.format(new_file)
     ogg = '{}.ogg'.format(new_file)
