@@ -76,7 +76,7 @@ def extract_audio_from_email():
 
         if len(uploaded) > 0:
             new_media = []
-            added_files = len(uploaded) > 1 ? 'files: ' : 'file: '
+            added_files = 'files: ' if len(uploaded) > 1 else 'file: '
             for i in uploaded:
                 new_media.append((
                     uploaded[i]['directory'],
@@ -89,7 +89,7 @@ def extract_audio_from_email():
                     sender
                 ))
                 added_files += str(uploaded[i]['original_filename']) + ', ',
-            added_files += added_files[0:-2]
+                added_files += added_files[0:-2]
 
             if Database.add_media(new_media):
                 message.append("SUCCESS: uploaded {}".format(added_files))
@@ -97,7 +97,7 @@ def extract_audio_from_email():
                 message.append("ERROR: unable to add {} to database".format(added_files))
 
         if len(failed) > 0:
-            failed_files = len(failed) > 1 ? 'files: ' : 'file: '
+            failed_files = 'files: ' if len(failed) > 1 else 'file: '
             the_fails = ', '.join(f for f in failed)
             message.append("ERROR: unable to upload {}".format(the_fails))
     else:
@@ -106,12 +106,12 @@ def extract_audio_from_email():
     message_allowed_files = ', '.join(i for i in current_app.config['ALLOWED_FILES']['audio'])
     # - If you wish to automatically link the new recording to its correct address on the website, you must specify the 4-letter code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup \n
     message.append('''
-        \n------------\n
-        Please Note:\n
-        - Messages should be emailed directly to recordings@wrmota.org\n
-        - The email upload system only supports these filetypes: {}.\n
-        - You can add notes about the file in the Body of your email\n
-        - If you are having other issues, please contact Justin: justin@wrmota.org
+    \n------------\n
+    Please Note:\n
+    - Messages should be emailed directly to recordings@wrmota.org\n
+    - The email upload system only supports these filetypes: {}.\n
+    - You can add notes about the file in the Body of your email\n
+    - If you are having other issues, please contact Justin: justin@wrmota.org
     '''.format(message_allowed_files))
     Email.send_application_response(sender, 'Your Audio Uploads', message)
 
