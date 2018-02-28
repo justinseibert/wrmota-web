@@ -4,7 +4,6 @@ from datetime import datetime
 
 from flask import current_app
 
-from wrmota.api import sanitize as Sanitize
 from wrmota.api import hashes as Hash
 
 def website(item):
