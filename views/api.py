@@ -93,6 +93,9 @@ def extract_audio_from_email():
             added_files = ', '.join(u['original_filename'] for u in uploaded)
             if Database.add_media(new_media):
                 message.append("SUCCESS: uploaded {}".format(added_files))
+                if has_code:
+                    link_message = Database.set_audio_per_code(uploaded[0]['name'],has_code,body)
+                    message.append(link_message)
             else:
                 message.append("ERROR: unable to add {} to database".format(added_files))
 

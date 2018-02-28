@@ -380,3 +380,42 @@ def add_media(uploads):
         return True
     except:
         return False
+
+def set_audio_per_code(name,code,text=''):
+    try:
+        db = get_db()
+        db.execute('''
+            UPDATE address
+            SET 'text' = ?,
+                audio =
+                CASE WHEN EXISTS (
+                    SELECT media.id
+                    FROM media
+                    WHERE media.name = ?
+                )
+                THEN (
+                    SELECT media.id
+                    FROM media
+                    WHERE media.name = ?
+                )
+                ELSE
+                    address.audio
+                END
+            WHERE address.id =
+                CASE WHEN EXISTS (
+                    SELECT color_code.address
+                    FROM color_code
+                    WHERE color_code.code = ?
+                )
+                THEN (
+                    SELECT color_code.address
+                    FROM color_code
+                    WHERE color_code.code = ?
+                )
+                ELSE
+                    NULL
+                END
+        ''', (text, name,name, code,code))
+        return "SUCCESS: address updated with new information"
+    except:
+        return "ERROR: not able to update address with supplied code"
