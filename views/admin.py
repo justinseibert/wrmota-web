@@ -6,6 +6,7 @@ from flask import render_template, session, abort, redirect, url_for, request, f
 
 from wrmota.api import forms as Forms
 from wrmota.api import login as Login
+from wrmota.api import sanitize as Sanitize
 from wrmota import database as Database
 
 from wrmota.views import _admin
@@ -175,8 +176,19 @@ def edit_data(data):
     else:
         return abort(404)
 
+@_admin.route('/lookup')
+def code_lookup_for_emails():
+    TEMPLATE['tables'] = {}
+    codes = Database.get_address_codes()
+
+    codes = Database.get_dict_of(codes, name='codes', json=False)
+    for c in codes['data']:
+        c['brick'] = Sanitize.brick_as_letter(c['brick'])
+    TEMPLATE['tables']['codes'] = codes
+    return render_template('admin/task/find-codes.html',template=TEMPLATE)
+
 @_admin.route('/test')
 @Login.requires_permission(0)
 def test_update():
-    abort(404)
+    return abort(404)
     # return Database.set_audio_per_code('2b3_Reber','ABAB')

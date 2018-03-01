@@ -21,8 +21,12 @@ def index():
     return render_template('site/index.html', template=TEMPLATE)
 
 @_site.route('/login')
-def login():
+def admin_login():
     return redirect(url_for('_admin.login'))
+
+@_site.route('/lookup')
+def admin_lookup():
+    return redirect(url_for('_admin.code_lookup_for_emails'))
 
 @_site.route('/artists')
 def artists():

@@ -1,0 +1,112 @@
+{% extends 'admin/layout/data.html' %}
+{% block body %}
+  <div class="row frame-medium">
+    <h2>Color Codes</h2>
+    <p>Select an address from the table to copy and display its code:</p>
+    <div class="row">
+      <div id="_stripe" class="two grid" style="min-width:136px">
+        <div class="permutation-stripe">
+          {% for i in range(0,4) %}
+          <div id="_block{{i}}">
+            {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="permutation-stripe">
+        </div>
+      </div>
+      <div class="nine grid frame-medium">
+        <p id="_code"></p>
+        <p id="_address"></p>
+        <p id="_artist"></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {% include 'admin/snippet/table.html' %}
+  </div>
+
+{% endblock body %}
+
+{% block script %}
+<script src="{{ url_for('_admin.static', filename='js/clipboard.min.js') }}"></script>
+<script>
+  var elem = {
+    'stripe': document.getElementById('_stripe'),
+    'address': document.getElementById('_address'),
+    'artist': document.getElementById('_artist'),
+    'code': document.getElementById('_code'),
+    'block': [
+      {% for i in range(0,4) %}
+      document.getElementById('_block{{i}}'),
+      {% endfor %}
+    ],
+  }
+  var table_data = {{ template.tables.codes.data|tojson }};
+  var table;
+  var tr_click, clipboard, copy_button;
+  $(document).ready(function(){
+    table = new TableData({
+      name: '{{ template.tables.codes.name }}',
+      data: table_data,
+      crop: false,
+      rmCols: ['id','art_received','installed','directory', 'name']
+    });
+    clipboard = new ClipboardJS('.table-row', {
+      text: function(el){
+        var d = table.get_entry(el);
+        return d.code;
+      }
+    });
+    clipboard.on('success', successful_copy);
+    tr_click= new TouchClick('.table-row',pull_up_data);
+  });
+
+  function successful_copy(e){
+    var alert_copy = new wrmotaForm({
+      form: false,
+    });
+    var data = {
+      message: 'copied "'+e.text+'" to clipboard',
+      errors: false
+    }
+    alert_copy.showMessage(data)
+    e.clearSelection();
+  }
+
+  function pull_up_data(el,e){
+    var d = table.get_entry(el);
+    var address = (d.brick == 'A') ? d.address : d.address + ' ' + d.brick;
+    elem.address.innerHTML = address;
+    elem.artist.innerHTML = (d.artist == null) ? 'no artist' : d.artist;
+    elem.code.innerHTML = '';
+
+    var code = document.createElement('span');
+    code.style = 'padding-left:30px';
+    elem.code.innerHTML = d.code;
+
+    var button = document.createElement('button');
+    button.id = '_copy';
+    button.className = 'green';
+    button.innerHTML = 'copy';
+    button.style = 'margin-right:30px';
+    button.setAttribute('data-clipboard-text', d.code);
+
+    var email = document.createElement('a');
+    email.className = 'button green';
+    email.target = 'blank';
+    email.href = 'mailto:recordings@wrmota.org?subject='+d.code;
+    email.innerHTML = 'draft email';
+
+    elem.code.appendChild(code);
+    elem.code.appendChild(button);
+    elem.code.appendChild(email);
+
+    for (var i = 0; i < d.code.length; i++){
+      elem.block[i].className = 'permutation-block permutation-' + d.code.charAt(i);
+    }
+    copy_button = new ClipboardJS('#_copy');
+    copy_button.on('success', successful_copy);
+  }
+</script>
+{% endblock script %}
