@@ -398,21 +398,26 @@ def set_audio_per_code(name=None,code=None):
     else:
         media_id = media_id['id']
 
-    address_id = db.execute('''
-        SELECT color_code.address
+    address_data = db.execute('''
+        SELECT
+            color_code.address as id,
+            address.address as address,
+            address.brick
         FROM color_code
+        INNER JOIN address ON color_code.address = address.id
         WHERE color_code.code = ?
     ''', [code]).fetchone()
 
-    if address_id is None or address_id['address'] is None:
+    if address_data is None or address_data['id'] is None:
         return "ERROR: not able to update address with supplied code"
     else:
-        address_id = address_id['address']
+        address_name = '{} {}'.format(address_data['address'],Sanitize.brick_as_letter(address_data['brick']))
+        address_id = address_data['id']
 
     db.execute('''
         UPDATE address
         SET audio = ?
         WHERE id = ?
-    ''', [text, media_id, address_id])
+    ''', [media_id, address_id])
     db.commit()
-    return "SUCCESS: address updated with new information"
+    return "SUCCESS: {} updated with new information".format(address_name)
