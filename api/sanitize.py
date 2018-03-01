@@ -27,6 +27,9 @@ def spaces(item):
     item = sub(r'^\s*|\s*$', r'', item)
     return item
 
+def brick_as_letter(item):
+    return str(string.ascii_uppercase[item])
+
 def is_code(item):
     has_code = search(r'[a-dA-D]{4}',item)
     if has_code:
