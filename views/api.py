@@ -114,7 +114,7 @@ def extract_audio_from_email():
     - Messages should be sent to recordings@wrmota.org from your students.wyoarea.org email address
     - The email upload system only supports these filetypes: {}.
     - To link you new file with the correct address you must specify the 4-letter address code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup
-    - You can add any notes or descriptions of the file in the Body of your email.
+    - You can add any notes or descriptions for the file in the Body of your email.
     - If you are having other issues, please contact Justin: justin@wrmota.org
     '''.format(message_allowed_files))
     Email.send_application_response(sender, 'Your Audio Uploads', message)

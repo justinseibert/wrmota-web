@@ -3,10 +3,7 @@ import requests
 
 def send_application_response(recipient,subject,message_array):
     details = '\n'.join(m for m in message_array)
-    message = '''
-    This is an automated response message with the following information:
-    {}
-    '''.format(details)
+    message = 'This is an automated response message with the following information:\n{}'.format(details)
 
     return requests.post(
         current_app.config['MAILGUN_API_URL'],
