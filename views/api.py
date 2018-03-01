@@ -94,8 +94,11 @@ def extract_audio_from_email():
             if Database.add_media(new_media):
                 message.append("SUCCESS: uploaded {}".format(added_files))
                 if has_code:
+                    print(has_code,uploaded[0]['name'])
                     link_message = Database.set_audio_per_code(uploaded[0]['name'],has_code,body)
                     message.append(link_message)
+                else:
+                    message.append("ERROR: no 4-letter code was found in the subject line")
             else:
                 message.append("ERROR: unable to add {} to database".format(added_files))
 
@@ -106,13 +109,13 @@ def extract_audio_from_email():
         message.append("ERROR: no attachments were found")
 
     message_allowed_files = ', '.join(i for i in current_app.config['ALLOWED_FILES']['audio'])
-    # - If you wish to automatically link the new recording to its correct address on the website, you must specify the 4-letter code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup \n
     message.append('''
     \n------------\n
-    Please Note:\n
-    - Messages should be emailed directly to recordings@wrmota.org\n
-    - The email upload system only supports these filetypes: {}.\n
-    - You can add notes about the file in the Body of your email\n
+    Please Note:
+    - Messages should be sent to recordings@wrmota.org from your students.wyoarea.org email address
+    - The email upload system only supports these filetypes: {}.
+    - To link you new file with the correct address you must specify the 4-letter address code in the Subject Line of your email. Codes can be found here: https://wrmota.org/admin/lookup
+    - You can add any notes or descriptions of the file in the Body of your email.
     - If you are having other issues, please contact Justin: justin@wrmota.org
     '''.format(message_allowed_files))
     Email.send_application_response(sender, 'Your Audio Uploads', message)

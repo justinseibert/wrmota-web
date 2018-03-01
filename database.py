@@ -381,41 +381,35 @@ def add_media(uploads):
     except:
         return False
 
-def set_audio_per_code(name,code,text=''):
-    try:
-        db = get_db()
-        db.execute('''
-            UPDATE address
-            SET 'text' = ?,
-                audio =
-                CASE WHEN EXISTS (
-                    SELECT media.id
-                    FROM media
-                    WHERE media.name = ?
-                )
-                THEN (
-                    SELECT media.id
-                    FROM media
-                    WHERE media.name = ?
-                )
-                ELSE
-                    address.audio
-                END
-            WHERE address.id =
-                CASE WHEN EXISTS (
-                    SELECT color_code.address
-                    FROM color_code
-                    WHERE color_code.code = ?
-                )
-                THEN (
-                    SELECT color_code.address
-                    FROM color_code
-                    WHERE color_code.code = ?
-                )
-                ELSE
-                    NULL
-                END
-        ''', (text, name,name, code,code))
-        return "SUCCESS: address updated with new information"
-    except:
+def set_audio_per_code(name=None,code=None):
+    db = get_db()
+
+    media_id = db.execute('''
+        SELECT media.id
+        FROM media
+        WHERE media.name = ?
+    ''', [name]).fetchone()
+
+    if media_id is None:
+        return "ERROR: not able to update address with new media file"
+    else:
+        media_id = media_id['id']
+
+    address_id = db.execute('''
+        SELECT color_code.address
+        FROM color_code
+        WHERE color_code.code = ?
+    ''', [code]).fetchone()
+
+    if address_id is None or address_id['address'] is None:
         return "ERROR: not able to update address with supplied code"
+    else:
+        address_id = address_id['address']
+
+    db.execute('''
+        UPDATE address
+        SET audio = ?
+        WHERE id = ?
+    ''', [text, media_id, address_id])
+    db.commit()
+    return "SUCCESS: address updated with new information"
