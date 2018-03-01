@@ -30,6 +30,18 @@ def spaces(item):
 def brick_as_letter(item):
     return str(string.ascii_uppercase[item])
 
+def email_sender(item):
+    m = match(r'(.*)\s+\<(.*[@]*)\>', item)
+    if m:
+        return {
+            'name': m.group(1),
+            'email': m.group(2)
+        }
+    else:
+        return False
+
+
+
 def is_code(item):
     has_code = search(r'[a-dA-D]{4}',item)
     if has_code:

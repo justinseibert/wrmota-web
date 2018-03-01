@@ -183,7 +183,9 @@ def code_lookup_for_emails():
 
     codes = Database.get_dict_of(codes, name='codes', json=False)
     for c in codes['data']:
+        uploaded_by = Sanitize.email_sender(c['uploaded by'])
         c['brick'] = Sanitize.brick_as_letter(c['brick'])
+        c['uploaded by'] = uploaded_by['name'] if uploaded_by else c['uploaded by']
     TEMPLATE['tables']['codes'] = codes
     return render_template('admin/task/find-codes.html',template=TEMPLATE)
 
@@ -191,4 +193,4 @@ def code_lookup_for_emails():
 @Login.requires_permission(0)
 def test_update():
     return abort(404)
-    # return Database.set_audio_per_code('2b3_Reber','ABAB')
+    # return Sanitize.email_sender('Justin Seibert <justin@wrmota.org>')['email']

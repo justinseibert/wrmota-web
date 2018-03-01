@@ -333,7 +333,8 @@ def get_address_codes():
             address_meta.installed,
             media.directory,
             media.name,
-            media.original_filename as 'current audio'
+            media.original_filename as 'current audio',
+            media.uploaded_by as 'uploaded by'
         FROM
             address
         LEFT JOIN artist on address.artist = artist.id
