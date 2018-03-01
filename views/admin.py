@@ -174,3 +174,9 @@ def edit_data(data):
         return print_color_codes()
     else:
         return abort(404)
+
+@_admin.route('/test')
+@Login.requires_permission(0)
+def test_update():
+    abort(404)
+    # return Database.set_audio_per_code('2b3_Reber','ABAB')
