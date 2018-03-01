@@ -94,8 +94,7 @@ def extract_audio_from_email():
             if Database.add_media(new_media):
                 message.append("SUCCESS: uploaded {}".format(added_files))
                 if has_code:
-                    print(has_code,uploaded[0]['name'])
-                    link_message = Database.set_audio_per_code(uploaded[0]['name'],has_code,body)
+                    link_message = Database.set_audio_per_code(uploaded[0]['name'],has_code)
                     message.append(link_message)
                 else:
                     message.append("ERROR: no 4-letter code was found in the subject line")

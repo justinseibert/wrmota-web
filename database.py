@@ -384,6 +384,9 @@ def add_media(uploads):
 def set_audio_per_code(name=None,code=None):
     db = get_db()
 
+    name = Sanitize.make_unicode(name)
+    code = Sanitize.make_unicode(code)
+
     media_id = db.execute('''
         SELECT media.id
         FROM media
