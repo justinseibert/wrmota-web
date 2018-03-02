@@ -18,6 +18,7 @@
 /config.py
 /config_private.py
 
+/ionic/*
 /etc/*
 /static/.webassets-cache/*
 /venv*/*
