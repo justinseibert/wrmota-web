@@ -9,6 +9,7 @@ from wrmota.api import forms as Forms
 from wrmota.api import hashes as Hash
 from wrmota.api import login as Login
 from wrmota.api import email as Email
+from wrmota.api import provide as Provide
 from wrmota.api import sanitize as Sanitize
 from wrmota import database as Database
 
@@ -152,6 +153,13 @@ def email_subscribe():
         data['message'] = 'There was an error with your form.'
 
     return jsonify(data)
+
+@_api.route('/get/<data>', methods=['POST'])
+def get_json_data(data):
+    if data == 'essential':
+        return Provide.essential_data()
+    else:
+        return abort(400)
 
 # def send_complex_message(info):
 #     return requests.post(
