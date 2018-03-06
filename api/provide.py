@@ -20,6 +20,7 @@ def essential_data():
         LEFT JOIN artist on address.artist = artist.id
         LEFT JOIN media on address.audio = media.id
         WHERE address.artist IS NOT NULL
+        ORDER BY address.artist ASC
     ''').fetchall()
 
     data = Database.get_dict_of(artists, json=True)

@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 from flask import jsonify, abort, request, current_app, session, render_template, redirect, url_for
+from flask_cors import CORS, cross_origin
 import requests
 from pprint import pprint
 
@@ -154,7 +155,8 @@ def email_subscribe():
 
     return jsonify(data)
 
-@_api.route('/get/<data>', methods=['POST'])
+@_api.route('/get/<data>')
+@cross_origin()
 def get_json_data(data):
     if data == 'essential':
         return Provide.essential_data()
