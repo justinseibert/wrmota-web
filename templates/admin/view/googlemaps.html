@@ -22,7 +22,7 @@
         name: '{{ template.tables.address.name }}',
         data: sites,
         crop: true,
-        rmCols: ['id','lat','lng','brick','website']
+        rmCols: ['id','lat','lng','website','audio_dir','audio','image_dir','image']
       });
       tr_click= new TouchClick('.table-row',show_site_from_table);
     });

@@ -95,9 +95,12 @@ def view_address_codes():
 def view_google_map():
     TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
 
-    map_points = Database.get_map_points()
+    map_points = Database.get_dict_of(Database.get_map_points(), name='address')
+    for p in map_points['data']:
+        p['brick'] = Sanitize.brick_as_letter(p['brick'])
+
     TEMPLATE['tables'] = {
-    'address': Database.get_dict_of(map_points,name='address',json=False)
+    'address': map_points
     }
 
     return render_template('admin/view/googlemaps.html', template=TEMPLATE)
