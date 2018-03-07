@@ -20,6 +20,7 @@
 
 /ionic/*
 /etc/*
+/static/site/media/*
 /static/.webassets-cache/*
 /venv*/*
 */__pycache__/*

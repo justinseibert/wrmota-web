@@ -28,15 +28,17 @@ def get_map_points():
             artist.artist,
             artist.website,
             artist_meta.art_received,
-            media.directory,
-            media.name,
-            media.original_directory,
-            media.original_filename,
-            media.notes
+            audio.directory as audio_dir,
+            audio.name as audio,
+            audio.original_filename as audio_orig,
+            image.directory as image_dir,
+            image.name as image,
+            image.original_filename as image_orig
         FROM
             address
         LEFT JOIN artist ON address.artist = artist.id
-        INNER JOIN media ON address.audio = media.id
+        LEFT JOIN media AS audio ON address.audio = audio.id
+        LEFT JOIN media AS image ON address.image = image.id
         INNER JOIN artist_meta ON address.artist = artist_meta.id
     ''').fetchall()
 

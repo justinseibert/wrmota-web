@@ -27,6 +27,15 @@ def spaces(item):
     item = sub(r'^\s*|\s*$', r'', item)
     return item
 
+def remove_spaces(item):
+    return sub(r'\s', r'', item)
+
+def remove_dots(item):
+    return sub(r'\.', r'', item)
+
+def weird_stuff(item):
+    return sub(r'[\s,\.\/;\'\[\]\`\-=*\/<>\?:"\{\}\|\\~!@#$%\^&\*\(\)_\+]', r'', item)
+
 def brick_as_letter(item):
     return str(string.ascii_uppercase[item])
 
