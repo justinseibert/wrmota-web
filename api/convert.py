@@ -10,7 +10,7 @@ def audio_files(original):
 
     try:
         ff = ffmpy.FFmpeg(
-            inputs={ original: '-n' },
+            inputs={ original: '-hide_banner -loglevel panic -n' },
             outputs={
                 webm: '-dash 1',
                 mp3: None,
