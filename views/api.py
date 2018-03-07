@@ -124,6 +124,7 @@ def extract_audio_from_email():
     return 'Message accepted', 200
 
 @_api.route('/accept-email/<data>', methods=['POST'])
+@cross_origin()
 def accept_email_data(data):
     verified = Hash.verify_mail_origin(current_app.config['MAILGUN_API_KEY'], request.form)
 
@@ -160,19 +161,10 @@ def email_subscribe():
 def get_json_data(data):
     if data == 'essential':
         return Provide.essential_data()
+    elif data == 'test':
+        return 'success', 200
     else:
         return abort(400)
-
-# def send_complex_message(info):
-#     return requests.post(
-#         current_app.config['MAILGUN_API_URL'],
-#         auth=("api", current_app.config['MAILGUN_API_KEY']),
-#         data={"from": current_app.config['MAILGUN_SUBSCRIBE_ADDRESS'],
-#               "to": info['address'],
-#               "subject": 'Get in touch',
-#               "text": "Hi! This is just a quick confirmation email showing that you've subscribed to recieve updates about WRMOTA (West Reading Museum of Temporary Art). If you did not expect this, please unsubscribe. Otherwise, no further action is required.\n\n--The WRMOTA Team\nwrmota.org",
-#               "html": render_template('email/subscribe.html', title='Welcome to WRMOTA')
-#             })
 
 def add_list_member(info):
     print('adding to list')
