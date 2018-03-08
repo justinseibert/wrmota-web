@@ -77,7 +77,7 @@ def get_curators_list():
             artist_meta
     ''').fetchall()
 
-    return get_list_of(curators)
+    return get_list_of('curator', curators)
 
 def get_data_artist():
     db = get_db()
@@ -145,12 +145,38 @@ def get_dict_of(input_data, name='default', json=False):
         'data': data,
     }
 
-def get_list_of(input_data):
-    output_data = []
-    for row in input_data:
-        output_data.append(row[0])
+def get_dict_by(item, input_data, json=False):
+    data = get_dict_of(input_data)
+    data['head'].remove(item)
 
-    return output_data
+    result = {}
+    for entry in data['data']:
+        # set new key by item
+        key = entry[item]
+        # add list to support multiple data per key, if not already here
+        result[key] = [] if key not in result else result[key]
+
+        # populate all the data into a new dict
+        info = {}
+        for head in data['head']:
+            info[head] = entry[head]
+
+        # add the new dict to new results list
+        result[key].append(info)
+
+    if json:
+        result = jsonify(result)
+
+    return result
+
+def get_list_of(item, input_data, distinct=True):
+    result = []
+    for row in input_data:
+        result.append(row[item])
+
+    if distinct:
+        result = set(result)
+    return sorted(list(result))
 
 def keep_cols_in_dict(input_dict,cols):
     output_dict = {
