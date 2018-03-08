@@ -124,9 +124,9 @@ def extract_audio_from_email():
     return 'Message accepted', 200
 
 @_api.route('/accept-email/<data>', methods=['POST'])
+# see app level for CSRF exemption
 @cross_origin()
 def accept_email_data(data):
-    # see app level for CSRF exemption
     verified = Hash.verify_mail_origin(current_app.config['MAILGUN_API_KEY'], request.form)
 
     if verified and data == 'recording':
@@ -157,12 +157,12 @@ def email_subscribe():
 
     return jsonify(data)
 
-@_api.route('/get/<data>')
+@_api.route('/v1/get/<data>')
+# see app level for CSRF exemption
 @cross_origin()
 def get_json_data(data):
-    # see app level for CSRF exemption
-    if data == 'essential':
-        return Provide.essential_data()
+    if data == 'all':
+        return Provide.all_data()
     elif data == 'test':
         return 'success', 200
     else:
