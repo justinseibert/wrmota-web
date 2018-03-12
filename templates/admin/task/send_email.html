@@ -33,6 +33,7 @@
         </select>
       </div>
       <button id="DraftIt" class="green button">draft email</button>
+      <button id="CopyIt" class="green button">copy emails</button>
     </header>
     <section id="CherryPicker" class="row"></section>
   </div>
@@ -40,6 +41,7 @@
 {% endblock body %}
 
 {% block script %}
+<script src="{{ url_for('_admin.static', filename='js/clipboard.min.js') }}"></script>
 <script>
   var all_data = {{ template.artist.data|tojson }};
   var table_data = {{ template.tables.artist.data|tojson }};
@@ -58,7 +60,26 @@
       crop: true,
       rmCols: ['id']
     });
-    var draft_it = new TouchClick('#DraftIt',draft_email)
+    var draft_it = new TouchClick('#DraftIt',draft_email);
+    var clipboard = new ClipboardJS('#CopyIt', {
+      text: function(el){
+        var email = get_email_string();
+        if (email.length > 0){
+          return email;
+        }
+      }
+    });
+    clipboard.on('success', function(e){
+      var alert_copy = new wrmotaForm({
+        form: false,
+      });
+      var data = {
+        message: 'copied emails to clipboard',
+        errors: false
+      }
+      alert_copy.showMessage(data)
+      e.clearSelection();
+    })
   });
 
   $('.select-feature').on('change', function(){
@@ -69,20 +90,27 @@
     create_check_list(artists)
   });
 
-  function draft_email(el,e){
+  function get_email_string(){
     var form = document.getElementById('ArtistForm');
-    if (form){
-      var emails = 'mailto:?bcc=';
+    var emails = '';
+    if (form) {
       var input = form.elements;
       for (var i = 0,len = input.length; i < len; i++){
         if (input[i].checked){
-          console.log(input[i].value);
           emails += input[i].value + ','
         }
       }
-      window.open(emails, '_blank');
     } else {
       alert('you need to select some artists');
+    }
+    return emails;
+  }
+
+  function draft_email(el,e){
+    var emails = get_email_string();
+    if (emails.length > 0){
+      var mailto = 'mailto:?bcc=' + emails;
+      window.open(mailto, 'blank');
     }
   }
 
