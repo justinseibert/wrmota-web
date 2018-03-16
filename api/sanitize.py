@@ -82,7 +82,7 @@ def date_directory(style):
     return datetime.now().strftime(folders)
 
 def media_file(name):
-    directory = date_directory('md')
+    directory = date_directory('MIS')
     unique_name = Hash.generate_token(8).decode('utf-8')
     extension = get_extension(name)
     relative_path = '{}{}.{}'.format(directory,unique_name,extension)
