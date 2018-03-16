@@ -36,6 +36,9 @@ def remove_dots(item):
 def weird_stuff(item):
     return sub(r'[\s,\.\/;\'\[\]\`\-=*\/<>\?:"\{\}\|\\~!@#$%\^&\*\(\)_\+]', r'', item)
 
+def remove_email_confidentiality_statement(item):
+    return sub(r'\s*\*{4}\s*THE INFORMATION CONTAINED IN THIS EMAIL(.*)\*{4}\s*', r'', item)
+
 def brick_as_letter(item):
     return str(string.ascii_uppercase[item])
 

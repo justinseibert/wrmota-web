@@ -67,9 +67,9 @@ def extract_audio_from_email():
 
     has_code = Sanitize.is_code(email['subject'])
     sender = email['from']
-    subject = Sanitize.make_unicode(email['subject'])
+    notes = Sanitize.make_unicode(email['subject'])
     body = Sanitize.make_unicode(email['stripped-text'])
-    notes = '{}: {}'.format(subject,body)
+    story = Sanitize.remove_email_confidentiality_statement(body)
 
     message = []
 
@@ -89,6 +89,7 @@ def extract_audio_from_email():
                     None,
                     upload['original_filename'],
                     notes,
+                    story,
                     sender
                 ))
 

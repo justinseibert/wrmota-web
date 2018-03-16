@@ -403,28 +403,29 @@ def add_media(uploads):
                 original_directory,
                 original_filename,
                 notes,
+                story,
                 uploaded_by
-            ) VALUES (?,?,?,?,?,?,?,?)
+            ) VALUES (?,?,?,?,?,?,?,?,?)
         ''', uploads)
         db.commit()
         return True
     except:
         return False
 
-def set_audio_per_code(name=None,code=None):
+def set_audio_per_code(media_file=None,code=None):
     db = get_db()
 
-    name = Sanitize.make_unicode(name)
+    media_file = Sanitize.make_unicode(media_file)
     code = Sanitize.make_unicode(code)
 
     media_id = db.execute('''
         SELECT media.id
         FROM media
         WHERE media.name = ?
-    ''', [name]).fetchone()
+    ''', [media_file]).fetchone()
 
     if media_id is None:
-        return "ERROR: not able to update address with new media file"
+        return "ERROR: not able to find media file to update address"
     else:
         media_id = media_id['id']
 
@@ -446,8 +447,10 @@ def set_audio_per_code(name=None,code=None):
 
     db.execute('''
         UPDATE address
-        SET audio = ?
+        SET
+            audio = ?,
+            story = ?
         WHERE id = ?
-    ''', [media_id, address_id])
+    ''', [media_id, media_id, address_id])
     db.commit()
     return "SUCCESS: {} updated with new information".format(address_name)
