@@ -195,8 +195,9 @@ function load_audio(id){
   if (!audio[id]){
     audio[id] = new Howl({
       src: [
-        file+'.webm',
         file+'.mp3',
+        file+'.ogg',
+        file+'.webm',
         file+'.m4a',
       ],
     });
