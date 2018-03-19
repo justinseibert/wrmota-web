@@ -18,12 +18,14 @@ def all_data():
             address.audio as audio_id,
             audio.directory as audio_directory,
             audio.name as audio_file,
+            story.story as audio_story,
             color_code.code as code
         FROM
             address
         LEFT JOIN artist on address.artist = artist.id
         LEFT JOIN artist_meta on artist.meta = artist_meta.id
         LEFT JOIN media as audio on address.audio = audio.id
+        LEFT JOIN media as story on address.story = story.id
         LEFT JOIN color_code on color_code.address = address.id
         WHERE address.artist IS NOT NULL
         ORDER BY address.artist ASC
