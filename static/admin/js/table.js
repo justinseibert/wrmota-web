@@ -60,3 +60,11 @@ TableData.prototype.get_entry = function(el){
     }
   }
 }
+
+TableData.prototype.get_all = function(col){
+  entries = [];
+  for (var each in this.data){
+    entries.push(this.data[each][col]);
+  }
+  return entries;
+}

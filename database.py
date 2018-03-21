@@ -130,6 +130,31 @@ def get_all_data():
         }
     return data
 
+def get_print_map_data():
+    db = get_db()
+
+    data = db.execute('''
+        SELECT
+            address.id,
+            color.code,
+            address.address,
+            address.brick,
+            artist.id as artist_id,
+            artist.artist,
+            artist.location,
+            artist_meta.id AS artist_meta_id,
+            artist_meta.visitor,
+            story.story
+        FROM
+            address
+        LEFT JOIN artist ON address.artist = artist.id
+        LEFT JOIN artist_meta ON artist.meta = artist_meta.id
+        LEFT JOIN media as story ON address.story = story.id
+        LEFT JOIN color_code AS color ON color.address = address.id
+    ''').fetchall()
+
+    return data
+
 def get_dict_of(input_data, name='default', json=False):
     data = []
     head = input_data[0].keys()

@@ -1,0 +1,110 @@
+{% extends 'admin/layout/data.html' %}
+{% block body %}
+  <div class="row frame-medium">
+    <p>click a cell to copy its contents, click a header to copy everything in its column</p>
+    <div id="_stripe" class="two grid" style="min-width:136px">
+      <div class="permutation-stripe">
+        {% for i in range(0,4) %}
+        <div id="_block{{i}}">
+          {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="permutation-stripe">
+      </div>
+    </div>
+    <div class="nine grid frame-light">
+      <p id="_code"></p>
+      <p id="_address"></p>
+      <p id="_artist"></p>
+      <p id="_location"></p>
+    </div>
+  </div>
+  <div class="row print-map-table">
+    {% include 'admin/snippet/table.html' %}
+  </div>
+
+{% endblock body %}
+
+{% block script %}
+<script src="{{ url_for('_admin.static', filename='js/clipboard.min.js') }}"></script>
+<script>
+  var elem = {
+    'stripe': document.getElementById('_stripe'),
+    'address': document.getElementById('_address'),
+    'artist': document.getElementById('_artist'),
+    'location': document.getElementById('_location'),
+    'code': document.getElementById('_code'),
+    'block': [
+      {% for i in range(0,4) %}
+      document.getElementById('_block{{i}}'),
+      {% endfor %}
+    ],
+  }
+  var table_data = {{ template.tables.paper.data|tojson }};
+  var table;
+  var tr_click, clipboard, copy_button;
+  $(document).ready(function(){
+    // console.log(table_data[0]);
+    table = new TableData({
+      name: '{{ template.tables.paper.name }}',
+      data: table_data,
+      crop: false,
+      rmCols: ['id','artist_id','artist_meta_id','location','code','brick']
+    });
+    clipboard_td = new ClipboardJS('td', {
+      text: function(el){
+        return el.innerHTML;
+      }
+    });
+    clipboard_th = new ClipboardJS('th', {
+      text: function(el){
+        var d = table.get_all(el.innerHTML);
+        return d.join('\n');
+      }
+    });
+    clipboard_th.on('success', successful_copy);
+    clipboard_td.on('success', successful_copy);
+    tr_click= new TouchClick('.table-row',pull_up_data);
+  });
+
+  function successful_copy(e){
+    var alert_copy = new wrmotaForm({
+      form: false,
+    });
+    var maxLen = 30;
+    if (e.trigger.tagName == 'TH'){
+      e.text = 'all from "<em>'+e.trigger.innerHTML;
+    } else {
+      e.text = (e.text.length > maxLen) ? e.text.slice(0,maxLen)+'...' : e.text;
+      e.text = '"<em>'+e.text;
+    }
+    var data = {
+      message: 'copied '+e.text+'</em>" to clipboard',
+      errors: false
+    }
+    alert_copy.showMessage(data)
+    e.clearSelection();
+  }
+
+  function pull_up_data(el,e){
+    var d = table.get_entry(el);
+    var address = (d.brick == 'A') ? d.address : d.address + ' ' + d.brick;
+    elem.address.innerHTML = address;
+    elem.artist.innerHTML = (d.artist == null) ? 'no artist' : d.artist;
+    elem.code.innerHTML = '';
+    elem.location.innerHTML = d.location;
+
+
+    var code = document.createElement('span');
+    code.style = 'padding-left:30px';
+    elem.code.innerHTML = d.code;
+
+    elem.code.appendChild(code);
+
+    for (var i = 0; i < d.code.length; i++){
+      elem.block[i].className = 'permutation-block permutation-' + d.code.charAt(i);
+    }
+  }
+</script>
+{% endblock script %}

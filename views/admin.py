@@ -105,6 +105,20 @@ def view_google_map():
 
     return render_template('admin/view/googlemaps.html', template=TEMPLATE)
 
+@Login.requires_permission(10)
+def view_print_map_data():
+    paper = Database.get_dict_of(Database.get_print_map_data(), name='paper')
+    for p in paper['data']:
+        p['brick'] = Sanitize.brick_as_letter(p['brick'])
+        p['visitor'] = Sanitize.visitor_status(p['visitor'])
+        p['story'] = '' if p['story'] == None else p['story']
+
+    TEMPLATE['tables'] = {
+        'paper': paper
+    }
+
+    return render_template('admin/view/print-map-data.html', template=TEMPLATE)
+
 @_admin.route('/view/<data>')
 @Login.requires_permission(10)
 def view_data(data):
@@ -114,6 +128,8 @@ def view_data(data):
         return view_address_codes()
     elif data == 'map':
         return view_google_map()
+    elif data == 'paper':
+        return view_print_map_data()
     else:
         return abort(404)
 

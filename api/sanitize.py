@@ -44,6 +44,9 @@ def remove_email_confidentiality_statement(item):
 def brick_as_letter(item):
     return str(string.ascii_uppercase[item])
 
+def visitor_status(item):
+    return 'visiting' if item == 1 else 'local'
+
 def email_sender(item):
     m = match(r'(.*)\s+\<(.*[@]*)\>', item)
     if m:
@@ -53,8 +56,6 @@ def email_sender(item):
         }
     else:
         return False
-
-
 
 def is_code(item):
     has_code = search(r'[a-dA-D]{4}',item)
