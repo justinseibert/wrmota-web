@@ -6,88 +6,30 @@ var TableData = function(args){
   this.hide = args.hide || false;
   this.crop = args.crop || false;
   this.rmCols = args.rmCols || [];
-  this.columns = args.columns || [];
+  this.columns = args.columns || [{data: 'id', title: 'id'}];
   this.input = args.input || '#table-search';
+  this.callback = args.callback || false;
+  this.rowClickCallback = args.rowClickCallback || null;
+  this.ajaxPass = 0;
 
-  if (this.data != null && this.url == null){
-    this.create();
+  if (this.url == null){
+    this.htmlCreate();
   } else {
-    this.name = 'default';
-    var $this = this;
-    $.ajax({
-      type: "GET",
-      url: this.url,
-      success: function(data) {
-        $this.data = data;
-        $this.ajaxCreate();
-        console.log(data);
-      },
-      error: function(data){
-        console.log(data);
-      }
-    });
+    this.ajaxCreate();
   }
 }
 
-TableData.prototype.ajaxCreate = function(){
+TableData.prototype.htmlCreate = function(){
   var id = '#'+this.name+'Table';
-  var $this = this;
-  this.data.head.forEach(function(col){
-    if (!$this.rmCols.includes(col)){
-      $this.columns.push({
-        'data': col,
-        'title': col
-      });
-    }
-  })
-  // hello
-  this.table = $(id).DataTable({
-    data: this.data.data,
-    columns: this.columns,
-    paging: false,
-    scrolling: false,
-    dom: 'ltr',
-    crop: true,
-  });
-
-  if (this.crop){
-    var head = $('#tableHeader').outerHeight(true);
-    $(id+'_wrapper')
-      .css('height', window.innerHeight - head)
-      ;
-    $(id)
-      .addClass('overflow-container')
-      .css('height', window.innerHeight - head)
-      ;
-  }
-
-  var table = this.table;
-  $(this.input).on('keyup', table, function(){
-    table.search(this.value).draw();
-  })
-}
-
-TableData.prototype.create = function(){
-  var id = '#'+this.name+'Table';
+  console.log(id);
   this.table = $(id).DataTable({
     paging: false,
     scrolling: false,
     dom: 'ltr',
+    rowId: 'id',
   });
   if (this.hide){
     $(id+'_wrapper').addClass('u-hide');
-  }
-  if (this.crop){
-    var head = $('#tableHeader').outerHeight(true);
-    // var foot = $(id+'_info').outerHeight(true);
-    // console.log(window.innerHeight,head,foot);
-    $(id+'_wrapper')
-      .css('height', window.innerHeight - head)
-      ;
-    $(id)
-      .addClass('overflow-container')
-      .css('height', window.innerHeight - head)
-      ;
   }
   var rmCol = this.rmCols.length;
   if (rmCol > 0){
@@ -95,12 +37,90 @@ TableData.prototype.create = function(){
       $('.access-col_'+this.rmCols[i]).addClass('u-hide');
     }
   }
-
-  var table = this.table;
-  $(this.input).on('keyup', table, function(){
-    table.search(this.value).draw();
-  })
+  this.setupTable(id);
 }
+
+TableData.prototype.ajaxCreate = function(){
+  var self = this;
+  var id = '#defaultTable';
+  $(id).html('');
+  self.table = $(id).DataTable({
+    ajax: {
+      url: self.url,
+      dataSrc: 'data'
+    },
+    deferRender: true,
+    columns: self.columns,
+    paging: false,
+    scrolling: false,
+    dom: 'ltr',
+    crop: true,
+    fixedHeader: true,
+    columnDefs: [{
+      targets: '_all',
+      createdCell: function(td, cellData, rowData, row, col){
+        td.dataset.id = rowData.id;
+        td.dataset.value = cellData;
+      }
+    }],
+    createdRow: function(row, data, dataIndex){
+      row.dataset.id = data.id;
+    },
+    initComplete: function(settings, data){
+      self.renderColumns(settings,data);
+    }
+  });
+
+  if (self.ajaxPass > 0){
+    self.setupTable(id);
+  }
+}
+
+TableData.prototype.setupTable = function(id){
+  var self = this;
+  if (self.crop){
+    var head = $('#tableHeader').outerHeight(true);
+    $(id+'_wrapper')
+    .css('height', window.innerHeight - head)
+    ;
+    $(id)
+    .addClass('overflow-container')
+    .css('height', window.innerHeight - head)
+    ;
+  }
+
+  $(self.input).on('keyup', self.table, function(){
+    table.search(this.value).draw();
+  });
+
+  $(id+' tbody').on('click', 'tr', function(el){
+    self.rowClickCallback(el.target.dataset);
+  })
+
+};
+
+TableData.prototype.renderColumns = function(settings,data){
+  var self = this;
+  if (self.ajaxPass < 1){
+    self.columns = [];
+    self.ajaxPass++;
+    data.head.forEach(function(col){
+      if (!self.rmCols.includes(col)){
+        self.columns.push({
+          'data': col,
+          'title': col
+        });
+      }
+    });
+    self.data = data.data;
+    self.table.clear();
+    self.table.destroy();
+    self.ajaxCreate();
+  } else if (self.callback){
+    self.callback(self.data);
+  }
+};
+
 
 TableData.prototype.show = function(){
   id = '#'+this.name+'Table_wrapper';

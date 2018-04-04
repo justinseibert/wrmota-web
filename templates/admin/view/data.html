@@ -14,14 +14,15 @@
   $(document).ready(function(){
     for (var i = 0, t = tables.length; i < t; i++){
       var name = tables[i];
+      console.log(name);
       var hide_state = (i > 0) ? true : false;
       table[name] = new TableData({
-        name: tables[i],
-        hide: true,
+        name: name,
+        hide: hide_state,
         crop: true,
       })
     }
-    table['address'].show();
+    // table['address'].show();
     var select_table = new TouchClick('.select-table-button', function(elem,evt){
       var name = elem.dataset.table;
       table[name].show();

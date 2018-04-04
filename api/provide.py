@@ -51,7 +51,7 @@ def map_data():
     db = Database.get_db()
     data = db.execute('''
         SELECT
-            address.id as address_id,
+            address.id as id,
             address.address,
             address.brick,
             address.lat,

@@ -11,6 +11,7 @@ from wrmota.api import hashes as Hash
 from wrmota.api import login as Login
 from wrmota.api import email as Email
 from wrmota.api import provide as Provide
+from wrmota.api import update as Update
 from wrmota.api import sanitize as Sanitize
 from wrmota import database as Database
 
@@ -168,6 +169,15 @@ def get_json_data(data):
         return Provide.map_data()
     elif data == 'test':
         return 'success', 200
+    else:
+        return abort(400)
+
+@_api.route('/v1/post/<option>', methods=['POST'])
+@Login.requires_permission(5)
+def post_json_data(option):
+    if option == 'latLng':
+        data = request.get_json();
+        return Update.latLng(data)
     else:
         return abort(400)
 

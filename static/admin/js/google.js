@@ -131,6 +131,7 @@ function initMap() {
 
 
 function create_sites(){
+  var draggable = (allow_latlngDrag > 0) ? true : false;
   var icon = {
     path: 'm 22,11 a 11,11 0 0 0 -11,-11 11,11 0 0 0 -11,11 11,11 0 0 0 11,11 11,11 0 0 0 11,-11 z',
     fillColor: 'white',
@@ -142,14 +143,15 @@ function create_sites(){
   };
   var infowindow = new google.maps.InfoWindow();
   for (var i = 0,s = sites.length; i < s; i++){
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: {
         lat: sites[i].lat,
         lng: sites[i].lng,
       },
       icon:icon,
       map: map,
-      draggable: true,
+      draggable: draggable,
+      ajaxData: sites[i]
     });
     var artist_url = (sites[i].website != '') ? '<a href="http://'+sites[i].website+'" target="_blank">'+sites[i].artist+'</a>' : sites[i].artist;
     var artwork_image = (sites[i].image != null) ? '<div class="row break-light"><a  class="row" href="/media/'+sites[i].image_dir + sites[i].image+'.jpg" target="_blank"><img src="/media/'+sites[i].image_dir + sites[i].image+'-thumbnail.jpg"></a></div>' : '';
@@ -169,7 +171,7 @@ function create_sites(){
     var id = sites[i].id;
     google_site[id] = {
       marker: marker,
-      audio: '/media/'+sites[i].audio_dir + sites[i].audio
+      audio: 'https://wrmota.org/media/'+sites[i].audio_dir + sites[i].audio
     }
     // audio[id] = new Howl({ src: [audio_file] })
     google.maps.event.addListener(marker, 'click', (function(marker, content, id) {
@@ -183,11 +185,16 @@ function create_sites(){
           load_audio(id);
       }
     })(marker, content, id));
+    if (draggable){
+      google.maps.event.addListener(marker, 'dragend', function(evt){
+        updateLatLng(marker.ajaxData, evt.latLng.lat(), evt.latLng.lng());
+      });
+    }
   }
 }
 
-function show_site_from_table(elem,evt){
-  var site = google_site[elem.dataset.id].marker;
+function show_site_from_table(dataset){
+  var site = google_site[dataset.id].marker;
   google.maps.event.trigger(site,'click');
   map.panTo(site.position);
 }
@@ -261,4 +268,24 @@ function audio_progress_step(){
   if (latest_track.playing()) {
     requestAnimationFrame(audio_progress_step.bind(this));
   }
+}
+
+function updateLatLng(marker, lat, lng){
+  let data = {
+    id: marker.id,
+    lat: lat,
+    lng: lng
+  }
+  $.ajax({
+      type: "POST",
+      url: '/api/v1/post/latLng',
+      data: JSON.stringify(data, null, '\t'),
+      contentType: 'application/json',
+      success: function(data) {
+        table.table.ajax.reload();
+      },
+      error: function(data){
+        console.log(data.errors);
+      }
+  });
 }

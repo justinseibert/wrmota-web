@@ -6,25 +6,31 @@
     <div id="map"></div>
   </div>
   <div class="six grid">
-    {% include 'admin/snippet/table2.html' %}
+    {% include 'admin/snippet/ajax-table.html' %}
   </div>
 </div>
 {% endblock body %}
 
 {% block script %}
-  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/google2.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/google.js') }}"></script>
   <script>
-    var table;
-    var tr_click;
-    $(document).ready(function(){
+    var table,
+        tr_click,
+        sites;
+    var allow_latlngDrag = {{ template.allow_latlngDrag }};
+    function initData(){
       table = new TableData({
         name: 'address',
         url: '/api/v1/get/map',
         crop: true,
-        rmCols: ['id','lat','lng','website','audio_dir','audio','image_dir','image']
+        rmCols: ['id','website','audio_dir','audio','image_dir','image'],
+        callback: createMap,
+        rowClickCallback: show_site_from_table,
       });
-      tr_click= new TouchClick('.table-row',show_site_from_table);
-    });
-
+    }
+    function createMap(data){
+      sites = data;
+      initMap();
+    }
   </script>
 {% endblock script %}

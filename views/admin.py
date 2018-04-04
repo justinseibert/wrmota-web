@@ -2,7 +2,7 @@ from pprint import pprint
 import sqlite3
 from itertools import product
 from random import shuffle, choice
-from flask import render_template, session, abort, redirect, url_for, request, flash, current_app
+from flask import render_template, session, abort, redirect, url_for, request, flash, current_app, g
 
 from wrmota.api import forms as Forms
 from wrmota.api import login as Login
@@ -93,8 +93,8 @@ def view_address_codes():
 
 @Login.requires_permission(10)
 def view_google_map():
-    # TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
-    #
+    TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
+    TEMPLATE['allow_latlngDrag'] = 1 if g.permission <= 5 else 0
     # map_points = Database.get_dict_of(Database.get_map_points(), name='address')
     # for p in map_points['data']:
     #     p['brick'] = Sanitize.brick_as_letter(p['brick'])
