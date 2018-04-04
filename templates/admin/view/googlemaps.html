@@ -6,21 +6,20 @@
     <div id="map"></div>
   </div>
   <div class="six grid">
-    {% include 'admin/snippet/table.html' %}
+    {% include 'admin/snippet/table2.html' %}
   </div>
 </div>
 {% endblock body %}
 
 {% block script %}
-  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/google.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/google2.js') }}"></script>
   <script>
-    var sites = {{ template.tables.address.data|tojson }};
     var table;
     var tr_click;
     $(document).ready(function(){
       table = new TableData({
-        name: '{{ template.tables.address.name }}',
-        data: sites,
+        name: 'address',
+        url: '/api/v1/get/map',
         crop: true,
         rmCols: ['id','lat','lng','website','audio_dir','audio','image_dir','image']
       });

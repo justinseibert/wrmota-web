@@ -46,3 +46,33 @@ def all_data():
         }
 
     return jsonify(result)
+
+def map_data():
+    db = Database.get_db()
+    data = db.execute('''
+        SELECT
+            address.id as address_id,
+            address.address,
+            address.brick,
+            address.lat,
+            address.lng,
+            artist.artist,
+            artist.website,
+            artist_meta.art_received,
+            audio.directory as audio_dir,
+            audio.name as audio,
+            audio.original_filename as audio_orig,
+            image.directory as image_dir,
+            image.name as image,
+            image.original_filename as image_orig
+        FROM
+            address
+        LEFT JOIN artist ON address.artist = artist.id
+        LEFT JOIN media AS audio ON address.audio = audio.id
+        LEFT JOIN media AS image ON address.image = image.id
+        INNER JOIN artist_meta ON address.artist = artist_meta.id
+    ''').fetchall()
+
+    result = Database.get_dict_of(data)
+
+    return jsonify(result)

@@ -164,6 +164,8 @@ def email_subscribe():
 def get_json_data(data):
     if data == 'all':
         return Provide.all_data()
+    elif data == 'map':
+        return Provide.map_data()
     elif data == 'test':
         return 'success', 200
     else:

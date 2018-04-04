@@ -137,7 +137,8 @@ function create_sites(){
     fillOpacity: 1,
     scale: 0.4,
     strokeColor: '#FF0066',
-    strokeWeight: 5
+    strokeWeight: 5,
+    anchor: new google.maps.Point(11,11),
   };
   var infowindow = new google.maps.InfoWindow();
   for (var i = 0,s = sites.length; i < s; i++){
@@ -147,7 +148,8 @@ function create_sites(){
         lng: sites[i].lng,
       },
       icon:icon,
-      map: map
+      map: map,
+      draggable: true,
     });
     var artist_url = (sites[i].website != '') ? '<a href="http://'+sites[i].website+'" target="_blank">'+sites[i].artist+'</a>' : sites[i].artist;
     var artwork_image = (sites[i].image != null) ? '<div class="row break-light"><a  class="row" href="/media/'+sites[i].image_dir + sites[i].image+'.jpg" target="_blank"><img src="/media/'+sites[i].image_dir + sites[i].image+'-thumbnail.jpg"></a></div>' : '';
