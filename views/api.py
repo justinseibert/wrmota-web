@@ -121,7 +121,8 @@ def extract_audio_from_email():
     - You can add any notes or descriptions for the file in the Body of your email.
     - If you are having other issues, please contact Justin: justin@wrmota.org
     '''.format(message_allowed_files))
-    Email.send_application_response(sender, 'Your Audio Uploads', message)
+
+    # Email.send_application_response(sender, 'Your Audio Uploads', message)
 
     return 'Message accepted', 200
 
