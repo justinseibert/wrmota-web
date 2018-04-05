@@ -1,6 +1,7 @@
 from pprint import pprint
 from flask import jsonify
 from wrmota import database as Database
+from wrmota.api import sanitize as Sanitize
 
 def all_data():
     db = Database.get_db()
@@ -74,5 +75,59 @@ def map_data():
     ''').fetchall()
 
     result = Database.get_dict_of(data)
+
+    return jsonify(result)
+
+def readable_data(option):
+    db = Database.get_db()
+    data = db.execute('''
+        SELECT
+            color.code,
+            address.id as id,
+            address.address,
+            address.brick,
+            address.lat,
+            address.lng,
+            address.meta as address_meta_id,
+            address_meta.installed,
+            address.artist as artist_id,
+            artist.artist,
+            artist.website,
+            artist.location,
+            artist.meta as artist_meta_id,
+            artist_meta.visitor,
+            artist_meta.art_received,
+            address.audio as audio_id,
+            audio.directory as audio_directory,
+            audio.name as audio,
+            audio.original_filename as original_audio,
+            audio.uploaded_by,
+            address.image as image_id,
+            image.directory as image_directory,
+            image.name as image,
+            image.original_filename as original_image,
+            address.story as story_id,
+            story.story as story
+        FROM
+            address
+        LEFT JOIN artist ON address.artist = artist.id
+        LEFT JOIN media AS audio ON address.audio = audio.id
+        LEFT JOIN media AS image ON address.image = image.id
+        LEFT JOIN media AS story ON address.story = story.id
+        LEFT JOIN color_code AS color ON color.address = address.id
+        INNER JOIN artist_meta ON address.artist = artist_meta.id
+        INNER JOIN address_meta ON address.meta = address_meta.id
+    ''').fetchall()
+
+    result = Database.get_dict_of(data)
+
+    if not option or option != 'raw':
+        for each in result['data']:
+            each['brick'] = Sanitize.brick_as_letter(each['brick'])
+
+            uploaded_by = Sanitize.email_sender(each['uploaded_by'])
+            each['uploaded_by'] = uploaded_by['name'] if uploaded_by else each['uploaded_by']
+
+            each['visitor'] = Sanitize.visitor_status(each['visitor'])
 
     return jsonify(result)

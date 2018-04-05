@@ -160,14 +160,17 @@ def email_subscribe():
 
     return jsonify(data)
 
-@_api.route('/v1/get/<data>')
+@_api.route('/v1/get/<data>', methods=['GET'], defaults={'option': 'None'})
+@_api.route('/v1/get/<data>/<option>', methods=['GET'])
 # see app level for CSRF exemption
 @cross_origin()
-def get_json_data(data):
+def get_json_data(data,option):
     if data == 'all':
         return Provide.all_data()
     elif data == 'map':
         return Provide.map_data()
+    elif data == 'readable':
+        return Provide.readable_data(option)
     elif data == 'test':
         return 'success', 200
     else:
@@ -177,7 +180,7 @@ def get_json_data(data):
 @Login.requires_permission(5)
 def post_json_data(option):
     if option == 'latLng':
-        data = request.get_json();
+        data = request.get_json()
         return Update.latLng(data)
     else:
         return abort(400)
