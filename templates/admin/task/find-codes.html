@@ -1,29 +1,27 @@
 {% extends 'admin/layout/data.html' %}
 {% block body %}
-  <div class="row frame-medium">
+  <div class="four grid frame-medium">
     <h2>Color Codes</h2>
     <p>Select an address from the table to copy and display its code:</p>
-    <div class="row">
-      <div id="_stripe" class="two grid" style="min-width:136px">
-        <div class="permutation-stripe">
-          {% for i in range(0,4) %}
-          <div id="_block{{i}}">
-            {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
-          </div>
-          {% endfor %}
+    <div id="_stripe" class="row">
+      <div class="permutation-stripe">
+        {% for i in range(0,4) %}
+        <div id="_block{{i}}">
+          {% if i == 0 %}{% include 'site/svg/logo.svg' %}{% endif %}
         </div>
-        <div class="permutation-stripe">
-        </div>
+        {% endfor %}
       </div>
-      <div class="nine grid frame-medium">
-        <p id="_code"></p>
-        <p id="_address"></p>
-        <p id="_artist"></p>
+      <div class="permutation-stripe">
       </div>
     </div>
+    <div class="row">
+      <p id="_code"></p>
+      <p id="_address"></p>
+      <p id="_artist"></p>
+    </div>
   </div>
-  <div class="row">
-    {% include 'admin/snippet/table.html' %}
+  <div class="eight grid">
+    {% include 'admin/snippet/ajax-table.html' %}
   </div>
 
 {% endblock body %}
@@ -42,24 +40,48 @@
       {% endfor %}
     ],
   }
-  var table_data = {{ template.tables.codes.data|tojson }};
-  var table;
-  var tr_click, clipboard, copy_button;
+  var tr_click,
+      table,
+      table_data,
+      clipboard,
+      copy_button;
   $(document).ready(function(){
     table = new TableData({
-      name: '{{ template.tables.codes.name }}',
-      data: table_data,
-      crop: false,
-      rmCols: ['id','art_received','installed','directory', 'name']
+      url: '/api/v1/get/readable',
+      crop: true,
+      rmCols: [
+        'id',
+        'lat',
+        'lng',
+        'address_meta_id',
+        'installed',
+        'artist_id',
+        'website',
+        'location',
+        'artist_meta_id',
+        'visitor',
+        'art_received',
+        'audio',
+        'image_id',
+        'image_directory',
+        'image',
+        'original_image',
+        'story_id'
+      ],
+      callback: function(data){
+        table_data = data;
+        clipboard = new ClipboardJS('.table-row', {
+          text: function(el){
+            console.log(el);
+            var d = table.get_entry(el);
+            return d.code;
+          }
+        });
+        clipboard.on('success', successful_copy);
+      },
+      rowClickCallback: pull_up_data
     });
-    clipboard = new ClipboardJS('.table-row', {
-      text: function(el){
-        var d = table.get_entry(el);
-        return d.code;
-      }
-    });
-    clipboard.on('success', successful_copy);
-    tr_click= new TouchClick('.table-row',pull_up_data);
+    // tr_click= new TouchClick('.table-row',pull_up_data);
   });
 
   function successful_copy(e){
@@ -74,8 +96,8 @@
     e.clearSelection();
   }
 
-  function pull_up_data(el,e){
-    var d = table.get_entry(el);
+  function pull_up_data(el){
+    var d = table.get_entry_v2(el);
     var address = (d.brick == 'A') ? d.address : d.address + ' ' + d.brick;
     elem.address.innerHTML = address;
     elem.artist.innerHTML = (d.artist == null) ? 'no artist' : d.artist;
