@@ -1,7 +1,9 @@
 <header id="tableHeader" class="golden-container">
   <input id="table-search" type="text" placeholder="search table">
+  <div id="colVisRow" class="row frame-light"></div>
 </header>
 
 <table id="defaultTable" class="row" style="width:100%"></table>
 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
 <script type="text/javascript" src="{{ url_for('_admin.static', filename='js/table.js') }}"></script>

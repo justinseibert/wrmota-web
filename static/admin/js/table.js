@@ -7,6 +7,7 @@ var TableData = function(args){
   this.crop = args.crop || false;
   this.rmCols = args.rmCols || [];
   this.columns = args.columns || [{data: 'id', title: 'id'}];
+  this.buttons = args.buttons || [];
   this.input = args.input || '#table-search';
   this.callback = args.callback || false;
   this.rowClickCallback = args.rowClickCallback || null;
@@ -53,7 +54,8 @@ TableData.prototype.ajaxCreate = function(){
     columns: self.columns,
     paging: false,
     scrolling: false,
-    dom: 'ltr',
+    dom: 'Bltr',
+    buttons: ['csv','colvis'],
     crop: true,
     fixedHeader: true,
     columnDefs: [{
@@ -78,6 +80,9 @@ TableData.prototype.ajaxCreate = function(){
 
 TableData.prototype.setupTable = function(id){
   var self = this;
+
+  self.table.buttons().container().appendTo($('#colVisRow'));
+
   if (self.crop){
     var head = $('#tableHeader').outerHeight(true);
     $(id+'_wrapper')
@@ -88,6 +93,7 @@ TableData.prototype.setupTable = function(id){
     .css('height', window.innerHeight - head)
     ;
   }
+
 
   $(self.input).on('keyup', self.table, function(){
     table.search(this.value).draw();
@@ -110,6 +116,7 @@ TableData.prototype.renderColumns = function(settings,data){
           'data': col,
           'title': col
         });
+        self.buttons.push(col);
       }
     });
     self.data = data.data;
@@ -131,6 +138,15 @@ TableData.prototype.show = function(){
 
 TableData.prototype.get_entry = function(el){
   var id = el.dataset.id;
+  for (var each in this.data){
+    if (this.data[each].id == id){
+      return this.data[each];
+    }
+  }
+}
+
+TableData.prototype.get_entry_v2 = function(el){
+  var id = el.id;
   for (var each in this.data){
     if (this.data[each].id == id){
       return this.data[each];
