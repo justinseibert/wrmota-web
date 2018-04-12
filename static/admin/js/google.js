@@ -129,7 +129,6 @@ function initMap() {
   create_sites();
 }
 
-
 function create_sites(){
   var draggable = (allow_latlngDrag > 0) ? true : false;
   var icon = {
@@ -193,7 +192,7 @@ function create_sites(){
   }
 }
 
-function show_site_from_table(dataset){
+function show_site_from_table(dataset, el){
   var site = google_site[dataset.id].marker;
   google.maps.event.trigger(site,'click');
   map.panTo(site.position);

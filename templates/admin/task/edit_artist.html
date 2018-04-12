@@ -1,151 +1,169 @@
 {% extends 'admin/layout/data.html' %}
 {% block body %}
   <div class="row">
-    <div class="four grid">
-      {% include 'admin/snippet/table.html' %}
-    </div>
-    <div class="eight grid frame-light full-scroll">
-      <div class="row">
-        <form id="ArtistForm" class="eight grid float-center">
-          <header class="row break-light">
-            <div class="nine grid">
-              <h2>Update Artist</h2>
-              <p>Select an artist from the table.</p>
-            </div>
-            <div class="three grid">
-              <button id="SubmitArtistEdits" type="button" class="green float-right">update</button>
-            </div>
-          </header>
-          {{ template.form.csrf_token }}
-          {{ template.form.artist_id }}
-          {{ template.form.artist_meta_id }}
-          <div class="row">
-            {{ template.form.artist.label(class="three grid") }}
-            {{ template.form.artist(class="nine grid",placeholder="name") }}
-          </div>
-          <div class="row">
-            {{ template.form.email.label(class="three grid") }}
-            {{ template.form.email(class="seven grid",placeholder="email") }}
-            <a id="MailTo" href="#" class="green button svg-button float-right" target="_blank">{% include 'site/svg/email.svg' %}</a>
-          </div>
-          <div class="row">
-            {{ template.form.website.label(class="three grid") }}
-            {{ template.form.website(class="nine grid",placeholder="website") }}
-          </div>
-          <div class="row">
-            {{ template.form.curator.label(class="three grid") }}
-            {{ template.form.curator(class="nine grid",placeholder="curator") }}
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditVisitor">
-              {{ template.form.visitor }}
-              <span>visitor</span>
-            </label>
-          </div>
-          <div class="row">
-            {{ template.form.location.label(class="three grid") }}
-            {{ template.form.location(class="nine grid",placeholder="location") }}
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditConfirmed">
-              {{ template.form.confirmed }}
-              <span>confirmed</span>
-            </label>
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditAssigned">
-              {{ template.form.assigned }}
-              <span>assigned</span>
-            </label>
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditInfoSent">
-              {{ template.form.info_sent }}
-              <span>info sent</span>
-            </label>
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditTouchedBase">
-              {{ template.form.touched_base }}
-              <span>touched base</span>
-            </label>
-          </div>
-          <div class="row">
-            <label class="nine grid float-right boolean-label" for="EditArtReceived">
-              {{ template.form.art_received }}
-              <span>art received</span>
-            </label>
-          </div>
-        </form>
-      </div>
-    </div>
+    {% include 'admin/snippet/ajax-table.html' %}
   </div>
 
 {% endblock body %}
 
 {% block script %}
 <script>
-  var data = {{ template.artist.data|tojson }};
-  var table_data = {{ template.tables.artist.data|tojson }};
-  var table;
-  var tr_click;
-  var elem = {
-    artist_id: document.getElementById('EditArtistId'),
-    artist_meta_id: document.getElementById('EditArtistMetaId'),
-    artist: document.getElementById('EditArtist'),
-    email: document.getElementById('EditEmail'),
-    mailto: document.getElementById('MailTo'),
-    website: document.getElementById('EditWebsite'),
-    curator: document.getElementById('EditCurator'),
-    visitor: document.getElementById('EditVisitor'),
-    location: document.getElementById('EditLocation'),
-    confirmed: document.getElementById('EditConfirmed'),
-    assigned: document.getElementById('EditAssigned'),
-    info_sent: document.getElementById('EditInfoSent'),
-    touched_base: document.getElementById('EditTouchedBase'),
-    art_received: document.getElementById('EditArtReceived'),
-  }
-  var edit;
   $(document).ready(function(){
     table = new TableData({
-      name: '{{ template.tables.artist.name }}',
-      data: table_data,
+      name: 'artists',
+      url: '/api/v1/get/readable',
       crop: true,
-      rmCols: ['id']
-    });
-    tr_click= new TouchClick('.table-row',pull_up_data);
-
-    edit = new wrmotaForm({
-      form: $('#ArtistForm'),
-      validate_items: [
-        // ['text',$('#EditArtist')],
-        ['email',$('#EditEmail')],
+      rmCols: [
+        // 'code',
+        'lat',
+        'lng',
+        'id',
+        'address_meta_id',
+        'artist_id',
+        'artist_meta_id',
+        'visitor',
+        // 'art_received',
+        'audio_id',
+        'audio_directory',
+        'audio',
+        'uploaded_by',
+        'image_id',
+        'image_directory',
+        'image',
+        'story_id'
       ],
-      submit_url: '/api/edit/artist',
-      recaptcha: false
-    });
-    var handle_email_subscribe = new TouchClick('#SubmitArtistEdits', function(el,e){
-      e.preventDefault();
-      edit.validate();
+      // callback: createMap,
+      // rowClickCallback: edit_column,
+      editable: [
+        'website',
+        'location',
+        'story',
+      ],
     });
   });
+  // function edit_column(data, el){
+  //   cells.clicked = el;
+  //   cell_activation(true);
+  //
+  //   if (cells.allowed){
+  //     let original = el.target.innerHTML;
+  //     el.target.innerHTML = '';
+  //
+  //     cells.input = document.createElement('input');
+  //     cells.input.type = "text";
+  //     cells.input.value = original;
+  //     el.target.appendChild(cells.input);
+  //
+  //     cells.input.select();
+  //     cells.input.addEventListener('keydown', confirm_edit)
+  //   }
+  // }
+  //
+  // function confirm_edit(e){
+  //   console.log(cells.allowed);
+  //   if (e.key == 'Enter'){
+  //     cells.input.removeEventListener('keydown', confirm_edit);
+  //     cell_activation(false);
+  //   }
+  // }
+  //
+  // function cell_activation(activate){
+  //   if (activate){
+  //     if (cells.current && cells.clicked.target.tagName == 'TD') {
+  //       write_value();
+  //       cells.current = cells.clicked;
+  //       cells.data = cells.current.target.dataset;
+  //     } else if (!cells.current){
+  //       cells.current = cells.clicked;
+  //       cells.data = cells.current.target.dataset;
+  //     }
+  //     check_allowance();
+  //   } else {
+  //     write_value();
+  //     cells.current = false;
+  //     cells.clicked = null;
+  //     cells.uid = null;
+  //     cells.input = null;
+  //   }
+  // }
+  //
+  // function write_value(){
+  //   if (cells.allowed){
+  //     let val = cells.current.target.firstChild.value;
+  //     cells.current.target.innerHTML = val;
+  //   }
+  // }
+  //
+  // function check_allowance(){
+  //   if (allowed_edits.includes(cells.data.col)){
+  //     cells.allowed = true;
+  //   } else {
+  //     cells.allowed = false;
+  //   }
+  // }
 
-  function pull_up_data(el,e){
-    var d = data[el.dataset.id];
-    elem.artist_id.value = d.id;
-    elem.artist_meta_id.value = d.artist_meta_id;
-    elem.artist.value = d.artist;
-    elem.email.value = d.email;
-    elem.mailto.href = 'mailto:'+d.email;
-    elem.website.value = d.website;
-    elem.curator.value = d.curator;
-    elem.visitor.checked = d.visitor == 1 ? true : false;
-    elem.location.value = d.location;
-    elem.confirmed.checked = d.confirmed == 1 ? true : false;
-    elem.assigned.checked = d.assigned == 1 ? true : false;
-    elem.info_sent.checked = d.info_sent == 1 ? true : false;
-    elem.touched_base.checked = d.touched_base == 1 ? true : false;
-    elem.art_received.checked = d.art_received == 1 ? true : false;
-  }
+
+  // var data = {{ template.artist.data|tojson }};
+  // var table_data = {{ template.tables.artist.data|tojson }};
+  // var table;
+  // var tr_click;
+  // var elem = {
+  //   artist_id: document.getElementById('EditArtistId'),
+  //   artist_meta_id: document.getElementById('EditArtistMetaId'),
+  //   artist: document.getElementById('EditArtist'),
+  //   email: document.getElementById('EditEmail'),
+  //   mailto: document.getElementById('MailTo'),
+  //   website: document.getElementById('EditWebsite'),
+  //   curator: document.getElementById('EditCurator'),
+  //   visitor: document.getElementById('EditVisitor'),
+  //   location: document.getElementById('EditLocation'),
+  //   confirmed: document.getElementById('EditConfirmed'),
+  //   assigned: document.getElementById('EditAssigned'),
+  //   info_sent: document.getElementById('EditInfoSent'),
+  //   touched_base: document.getElementById('EditTouchedBase'),
+  //   art_received: document.getElementById('EditArtReceived'),
+  // }
+  // var edit;
+  // $(document).ready(function(){
+  //   table = new TableData({
+  //     name: '{{ template.tables.artist.name }}',
+  //     data: table_data,
+  //     crop: true,
+  //     rmCols: ['id']
+  //   });
+  //   tr_click= new TouchClick('.table-row',pull_up_data);
+  //
+  //   edit = new wrmotaForm({
+  //     form: $('#ArtistForm'),
+  //     validate_items: [
+  //       // ['text',$('#EditArtist')],
+  //       ['email',$('#EditEmail')],
+  //     ],
+  //     submit_url: '/api/edit/artist',
+  //     recaptcha: false
+  //   });
+  //   var handle_email_subscribe = new TouchClick('#SubmitArtistEdits', function(el,e){
+  //     e.preventDefault();
+  //     edit.validate();
+  //   });
+  // });
+  //
+  // function pull_up_data(el,e){
+  //   var d = data[el.dataset.id];
+  //   elem.artist_id.value = d.id;
+  //   elem.artist_meta_id.value = d.artist_meta_id;
+  //   elem.artist.value = d.artist;
+  //   elem.email.value = d.email;
+  //   elem.mailto.href = 'mailto:'+d.email;
+  //   elem.website.value = d.website;
+  //   elem.curator.value = d.curator;
+  //   elem.visitor.checked = d.visitor == 1 ? true : false;
+  //   elem.location.value = d.location;
+  //   elem.confirmed.checked = d.confirmed == 1 ? true : false;
+  //   elem.assigned.checked = d.assigned == 1 ? true : false;
+  //   elem.info_sent.checked = d.info_sent == 1 ? true : false;
+  //   elem.touched_base.checked = d.touched_base == 1 ? true : false;
+  //   elem.art_received.checked = d.art_received == 1 ? true : false;
+  // }
 </script>
 {% endblock script %}

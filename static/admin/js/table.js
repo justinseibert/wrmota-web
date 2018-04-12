@@ -12,6 +12,14 @@ var TableData = function(args){
   this.callback = args.callback || false;
   this.rowClickCallback = args.rowClickCallback || null;
   this.ajaxPass = 0;
+  this.editable = args.editable || [];
+  this.cells = {
+    current: null,
+    data: null,
+    clicked: null,
+    input: null,
+    allowed: false,
+  }
 
   if (this.url == null){
     this.htmlCreate();
@@ -76,8 +84,15 @@ TableData.prototype.ajaxCreate = function(){
     columnDefs: [{
       targets: '_all',
       createdCell: function(td, cellData, rowData, row, col){
-        td.dataset.id = rowData.id;
-        td.dataset.value = cellData;
+        if (self.ajaxPass > 0){
+          td.dataset.uid = row*col;
+          td.dataset.id = rowData.id;
+          td.dataset.value = cellData;
+          td.dataset.col = self.columns[col].data;
+          if (self.editable.includes(self.columns[col].data)){
+            td.dataset.editable = 1;
+          }
+        }
       }
     }],
     createdRow: function(row, data, dataIndex){
@@ -115,7 +130,12 @@ TableData.prototype.setupTable = function(id){
   });
 
   $(id+' tbody').on('click', 'tr', function(el){
-    self.rowClickCallback(el.target.dataset);
+    if (self.rowClickCallback){
+      self.rowClickCallback(el.target.dataset, el);
+    }
+    if (self.editable.length > 0){
+      self.edit(el.target.dataset, el);
+    }
   })
 
 };
@@ -142,7 +162,6 @@ TableData.prototype.renderColumns = function(settings,data){
     self.callback(self.data);
   }
 };
-
 
 TableData.prototype.show = function(){
   id = '#'+this.name+'Table_wrapper';
@@ -175,4 +194,68 @@ TableData.prototype.get_all = function(col){
     entries.push(this.data[each][col]);
   }
   return entries;
+}
+
+TableData.prototype.edit = function(data,el){
+  let cells = this.cells;
+  let allowed_edits = this.editable;
+
+  cells.clicked = el;
+  cell_activation(true);
+
+  if (cells.allowed){
+    let original = el.target.innerHTML;
+    el.target.innerHTML = '';
+
+    cells.input = document.createElement('input');
+    cells.input.type = "text";
+    cells.input.value = original;
+    el.target.appendChild(cells.input);
+
+    cells.input.select();
+    cells.input.addEventListener('keydown', confirm_edit)
+  }
+
+  function confirm_edit(e){
+    console.log(cells.allowed);
+    if (e.key == 'Enter'){
+      cells.input.removeEventListener('keydown', confirm_edit);
+      cell_activation(false);
+    }
+  }
+
+  function cell_activation(activate){
+    if (activate){
+      if (cells.current && cells.clicked.target.tagName == 'TD') {
+        write_value();
+        cells.current = cells.clicked;
+        cells.data = cells.current.target.dataset;
+      } else if (!cells.current){
+        cells.current = cells.clicked;
+        cells.data = cells.current.target.dataset;
+      }
+      check_allowance();
+    } else {
+      write_value();
+      cells.current = false;
+      cells.clicked = null;
+      cells.uid = null;
+      cells.input = null;
+    }
+  }
+
+  function write_value(){
+    if (cells.allowed){
+      let val = cells.current.target.firstChild.value;
+      cells.current.target.innerHTML = val;
+    }
+  }
+
+  function check_allowance(){
+    if (allowed_edits.includes(cells.data.col)){
+      cells.allowed = true;
+    } else {
+      cells.allowed = false;
+    }
+  }
 }
