@@ -69,12 +69,21 @@ th
     background: none
     border: none
     padding: 0 0.25em
+    span
+      text-decoration: underline
 
 .dt-button-collection
+  padding-top: 1em
+  line-height: 1
+  z-index: 99
   button
-    opacity: 0.25
-    &.active
+    span
+      opacity: 0.25
+      font-family: monospace
+      text-decoration: line-through
+    &.active span
       opacity: 1
+      text-decoration: underline
 
 .print-map-table
   td,th

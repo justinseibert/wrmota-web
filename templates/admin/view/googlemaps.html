@@ -21,9 +21,23 @@
     function initData(){
       table = new TableData({
         name: 'address',
-        url: '/api/v1/get/map',
+        url: '/api/v1/get/readable',
         crop: true,
-        rmCols: ['id','website','audio_dir','audio','image_dir','image'],
+        rmCols: [
+          'id',
+          'address_meta_id',
+          'artist_id',
+          'artist_meta_id',
+          'visitor',
+          'art_received',
+          'audio_id',
+          'audio_directory',
+          'audio',
+          'image_id',
+          'image_directory',
+          'image',
+          'story_id'
+        ],
         callback: createMap,
         rowClickCallback: show_site_from_table,
       });

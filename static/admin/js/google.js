@@ -154,7 +154,7 @@ function create_sites(){
       ajaxData: sites[i]
     });
     var artist_url = (sites[i].website != '') ? '<a href="http://'+sites[i].website+'" target="_blank">'+sites[i].artist+'</a>' : sites[i].artist;
-    var artwork_image = (sites[i].image != null) ? '<div class="row break-light"><a  class="row" href="/media/'+sites[i].image_dir + sites[i].image+'.jpg" target="_blank"><img src="/media/'+sites[i].image_dir + sites[i].image+'-thumbnail.jpg"></a></div>' : '';
+    var artwork_image = (sites[i].image != null) ? '<div class="row break-light"><a  class="row" href="/media/'+sites[i].image_directory + sites[i].image+'.jpg" target="_blank"><img src="/media/'+sites[i].image_directory + sites[i].image+'-thumbnail.jpg"></a></div>' : '';
     var content = '<div class="row spaced flex-center break-light" style="width:200px">'+
         '<div class="three grid">'+
           '<div id="PLAY_'+sites[i].id+'" data-id="'+sites[i].id+'" class="map-audio-button map-load-button"></div>'+
@@ -171,7 +171,7 @@ function create_sites(){
     var id = sites[i].id;
     google_site[id] = {
       marker: marker,
-      audio: 'https://wrmota.org/media/'+sites[i].audio_dir + sites[i].audio
+      audio: 'https://wrmota.org/media/'+sites[i].audio_directory + sites[i].audio
     }
     // audio[id] = new Howl({ src: [audio_file] })
     google.maps.event.addListener(marker, 'click', (function(marker, content, id) {

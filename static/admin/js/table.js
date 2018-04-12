@@ -55,7 +55,22 @@ TableData.prototype.ajaxCreate = function(){
     paging: false,
     scrolling: false,
     dom: 'Bltr',
-    buttons: ['csv','colvis'],
+    buttons: [
+      {
+        extend: 'csv',
+        text: 'Export CSV'
+      },
+      {
+        extend: 'collection',
+        text: 'Show/Hide Columns',
+        buttons: [{
+          extend: 'columnsToggle',
+          className: 'custom-spacing',
+        }],
+        autoClose: false,
+        fade: 0
+      }
+    ],
     crop: true,
     fixedHeader: true,
     columnDefs: [{
@@ -96,7 +111,7 @@ TableData.prototype.setupTable = function(id){
 
 
   $(self.input).on('keyup', self.table, function(){
-    table.search(this.value).draw();
+    self.table.search(this.value).draw();
   });
 
   $(id+' tbody').on('click', 'tr', function(el){
