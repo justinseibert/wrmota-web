@@ -36,7 +36,8 @@ def login():
             session['token'] = isUser['token']
 
             flash('logged in as <b>{}</b>'.format(user))
-            return redirect(url_for('_admin.index'))
+            flash('table editing is WIP, no changes will be saved')
+            return redirect(url_for('_admin.view_data', data='map'))
         else:
             flash('Unable to log in')
     elif request.method == 'POST':
@@ -91,7 +92,7 @@ def view_address_codes():
     TEMPLATE['tables']['codes'] = Database.get_dict_of(codes, name='codes', json=False)
     return render_template('admin/view/address-codes.html',template=TEMPLATE)
 
-@Login.requires_permission(10)
+@Login.requires_permission(5)
 def view_google_map():
     TEMPLATE['maps_api'] = current_app.config['GOOGLE_MAPS_API']
     TEMPLATE['allow_latlngDrag'] = 1 if g.permission <= 5 else 0
