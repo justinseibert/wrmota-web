@@ -470,12 +470,15 @@ def set_audio_per_code(media_file=None,code=None):
         address_name = '{} {}'.format(address_data['address'],Sanitize.brick_as_letter(address_data['brick']))
         address_id = address_data['id']
 
+    # add story here if updating by email (set story = media_id)
     db.execute('''
         UPDATE address
         SET
-            audio = ?,
-            story = ?
+            audio = ?
         WHERE id = ?
-    ''', [media_id, media_id, address_id])
+    ''', [
+        media_id,
+        address_id
+    ])
     db.commit()
     return "SUCCESS: {} updated with new information".format(address_name)
