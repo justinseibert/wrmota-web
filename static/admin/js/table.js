@@ -222,7 +222,6 @@ TableData.prototype.edit = function(data,el){
   }
 
   function confirm_edit(e){
-    console.log(cells.allowed);
     if (e.key == 'Enter'){
       cells.input.removeEventListener('keydown', confirm_edit);
       cell_activation(false);

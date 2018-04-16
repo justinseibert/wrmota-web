@@ -212,12 +212,10 @@ function load_audio(id){
       ],
     });
   } else if (audio[id].state() == 'loaded') {
-    console.log(id);
     allow_play(id);
   }
 
   audio[id].on('load', function(){
-    console.log(id);
     allow_play(id);
   });
 }
