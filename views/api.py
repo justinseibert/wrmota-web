@@ -179,9 +179,15 @@ def get_json_data(data,option):
 @_api.route('/v1/post/<option>', methods=['POST'])
 @Login.requires_permission(5)
 def post_json_data(option):
+    data = request.get_json()
     if option == 'latLng':
-        data = request.get_json()
         return Update.latLng(data)
+    elif option == 'story':
+        return Update.story(data)
+    elif option == 'website':
+        return Update.website(data)
+    elif option == 'location':
+        return Update.location(data)
     else:
         return abort(400)
 

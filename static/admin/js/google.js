@@ -193,9 +193,11 @@ function create_sites(){
 }
 
 function show_site_from_table(dataset, el){
-  var site = google_site[dataset.id].marker;
-  google.maps.event.trigger(site,'click');
-  map.panTo(site.position);
+  if (el.target.tagName == 'TD'){
+    var site = google_site[dataset.id].marker;
+    google.maps.event.trigger(site,'click');
+    map.panTo(site.position);
+  }
 }
 
 function load_audio(id){

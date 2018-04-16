@@ -13,8 +13,11 @@ var TableData = function(args){
   this.rowClickCallback = args.rowClickCallback || null;
   this.ajaxPass = 0;
   this.editable = args.editable || [];
+  this.permission = args.permission || 0;
+  this.editCallback = args.editCallback || null;
   this.cells = {
     current: null,
+    active_id: null,
     data: null,
     clicked: null,
     input: null,
@@ -133,7 +136,7 @@ TableData.prototype.setupTable = function(id){
     if (self.rowClickCallback){
       self.rowClickCallback(el.target.dataset, el);
     }
-    if (self.editable.length > 0){
+    if (self.editable.length > 0 && self.permission > 0){
       self.edit(el.target.dataset, el);
     }
   })
@@ -197,13 +200,15 @@ TableData.prototype.get_all = function(col){
 }
 
 TableData.prototype.edit = function(data,el){
-  let cells = this.cells;
-  let allowed_edits = this.editable;
+  let self = this;
+  let cells = self.cells;
+  let allowed_edits = self.editable;
 
   cells.clicked = el;
   cell_activation(true);
 
-  if (cells.allowed){
+  if (cells.allowed && el.target.tagName == 'TD'){
+    // create input area with existing cell data
     let original = el.target.innerHTML;
     el.target.innerHTML = '';
 
@@ -226,18 +231,23 @@ TableData.prototype.edit = function(data,el){
 
   function cell_activation(activate){
     if (activate){
+      // if a cell was clicked previously, only set editable if newly clicked is cell
       if (cells.current && cells.clicked.target.tagName == 'TD') {
         write_value();
         cells.current = cells.clicked;
         cells.data = cells.current.target.dataset;
+        cells.active_id = cells.data.uid;
       } else if (!cells.current){
+        // if none selected, set current editable to clicked cell
         cells.current = cells.clicked;
         cells.data = cells.current.target.dataset;
+        cells.active_id = cells.data.uid;
       }
       check_allowance();
     } else {
       write_value();
       cells.current = false;
+      cells.active_id = null;
       cells.clicked = null;
       cells.uid = null;
       cells.input = null;
@@ -245,9 +255,12 @@ TableData.prototype.edit = function(data,el){
   }
 
   function write_value(){
+    // if allowed to edit
     if (cells.allowed){
       let val = cells.current.target.firstChild.value;
       cells.current.target.innerHTML = val;
+      // send edited data to local callback function with (database row, column, input value)
+      self.editCallback(self.data[cells.data.id], cells.data.col, val);
     }
   }
 

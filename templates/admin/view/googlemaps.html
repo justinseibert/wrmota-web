@@ -1,11 +1,11 @@
 {% extends 'admin/layout/map.html' %}
 {% block body %}
 <div id="Fullscreen" class="row">
-  <div class="six grid">
+  <div class="five grid">
     <input id="map-search" type="text" placeholder="search map">
     <div id="map"></div>
   </div>
-  <div class="six grid">
+  <div class="seven grid">
     {% include 'admin/snippet/ajax-table.html' %}
   </div>
 </div>
@@ -44,12 +44,69 @@
           'website',
           'location',
           'story'
-        ]
+        ],
+        permission: {{ template.allow_tableEdits }},
+        editCallback: pushEdits,
       });
     }
     function createMap(data){
       sites = data;
       initMap();
+    }
+
+    function pushEdits(row,col,val){
+      let update = row[col] != val;
+      let proceed = false;
+      let url = '/api/v1/post/';
+      let data = {
+        'entry': col,
+      };
+      console.log(row);
+      console.log('data changed:',update);
+
+      console.log('column:', col);
+      if (update && col == 'story'){
+        data = {
+          'story_id': row.story_id,
+          'story': val
+        };
+        url += 'story';
+        proceed = true;
+      } else if (update && col == 'website'){
+        data = {
+          'artist_id': row.artist_id,
+          'website': val
+        };
+        url += 'website';
+        proceed = true;
+      } else if (update && col == 'location'){
+        data = {
+          'artist_id': row.artist_id,
+          'location': val
+        };
+        url += 'location';
+        proceed = true;
+      }
+
+      if (proceed){
+        let form = new wrmotaForm({});
+        $.ajax({
+          type: 'POST',
+          url: url,
+          data: JSON.stringify(data, null, '\t'),
+          contentType: 'application/json',
+          success: function(data) {
+            console.log(data.message);
+            table.table.ajax.reload();
+          },
+          error: function(data){
+            data.errors = true;
+            data.message = 'unable to update entry';
+            form.showMessage(data);
+            table.table.ajax.reload();
+          }
+        })
+      }
     }
   </script>
 {% endblock script %}
