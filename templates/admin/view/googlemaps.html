@@ -55,7 +55,6 @@
     }
 
     function pushEdits(row,col,val){
-      let update = row[col] != val;
       let proceed = false;
       let url = '/api/v1/post/';
       let data = {
@@ -65,21 +64,21 @@
       console.log('data changed:',update);
 
       console.log('column:', col);
-      if (update && col == 'story'){
+      if (col == 'story'){
         data = {
           'story_id': row.story_id,
           'story': val
         };
         url += 'story';
         proceed = true;
-      } else if (update && col == 'website'){
+      } else if (col == 'website'){
         data = {
           'artist_id': row.artist_id,
           'website': val
         };
         url += 'website';
         proceed = true;
-      } else if (update && col == 'location'){
+      } else if (col == 'location'){
         data = {
           'artist_id': row.artist_id,
           'location': val

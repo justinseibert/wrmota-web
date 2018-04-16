@@ -36,7 +36,6 @@ def login():
             session['token'] = isUser['token']
 
             flash('logged in as <b>{}</b>'.format(user))
-            flash('table editing is WIP, no changes will be saved')
             return redirect(url_for('_admin.view_data', data='map'))
         else:
             flash('Unable to log in')
