@@ -27,11 +27,12 @@ def all_data():
             address
         LEFT JOIN artist on address.artist = artist.id
         LEFT JOIN artist_meta on artist.meta = artist_meta.id
+        LEFT JOIN address_meta as status on address.meta = status.id
         LEFT JOIN media as audio on address.audio = audio.id
         LEFT JOIN media as story on address.story = story.id
         LEFT JOIN theme on address.theme = theme.id
         LEFT JOIN color_code on color_code.address = address.id
-        WHERE address.artist IS NOT NULL
+        WHERE status.installed = 1
         ORDER BY address.artist ASC
     ''').fetchall()
 
@@ -44,6 +45,7 @@ def all_data():
 
     result = {}
     for k,v in selection.items():
+        print(v)
         result[k] = {
             'list': Database.get_list_of(v,data),
             'data': Database.get_dict_by(v,data)
