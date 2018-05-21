@@ -21,56 +21,69 @@
   </p>
 </header>
 
-<div id="_info" class="page-portion info" ref="_moreInfo" v-show="showMore">
-  <div class="info-row break-medium">
-    <div class="info-block">
-      <h2>About the Project</h2>
-      <p>West Reading Museum of Temporary Art seeks to unearth personal histories of the borough that would otherwise remain unrecorded.</p>
-    </div>
+<transition name="fade-transition">
+  <div id="_info" class="page-portion info" ref="_moreInfo" v-show="showMore">
+    <section class="u-flex-evenly" ref="_blockBar">
+      <template v-for="(color,index) of blocks.group" >
+          <div class="permutation-block" :class="color" v-bind:style="{width: blocks.size+'px', height:blocks.size/3+'px'}"></div>
+      </template>
+    </section>
 
-    <section id="_audioPlayer" class="card player-controls info-block" v-show="artist">
-      <img src="/img/sofie-ramos.jpg">
-      <div class="u-flex frame-medium" v-if="artist">
-        <button class="play-button">
-          <svg-loading v-if="audio.state=='loading'"></svg-loading>
-          <svg-play v-if="audio.state=='ready'"></svg-play>
-          <svg-pause v-if="audio.state=='playing'"></svg-pause>
-        </button>
-        <div class="frame-medium unframe-y">
-          <h1>{{ artist.address }}</h1>
-          <h2>{{ artist.artist_name }}</h2>
-        </div>
+    <section class="info-row break-medium">
+      <div class="info-block">
+        <h2>About the Project</h2>
+        <p>West Reading Museum of Temporary Art seeks to unearth personal histories of the borough that would otherwise remain unrecorded.</p>
       </div>
-      <div class="frame-medium playback">
-        <svg-rewind></svg-rewind>
-        <div class="audio-playback-bar">
-          <div class="audio-progress"></div>
+
+      <section id="_audioPlayer" class="card player-controls info-block" v-show="artist">
+        <img src="/img/sofie-ramos.jpg">
+        <div class="u-flex frame-medium" v-if="artist">
+          <button class="play-button" v-on:click="toggleState()">
+            <svg-loading v-if="audio.button=='loading'"></svg-loading>
+            <svg-play v-if="audio.button=='paused'"></svg-play>
+            <svg-pause v-if="audio.button=='playing'"></svg-pause>
+          </button>
+          <div class="frame-medium unframe-y">
+            <h1>{{ artist.address }}</h1>
+            <h2>{{ artist.artist_name }}</h2>
+          </div>
         </div>
-        <svg-fastforward></svg-fastforward>
-      </div>
+        <div class="frame-medium playback">
+          <button class="icon-only" v-on:click="skipTrack('backward')">
+            <svg-rewind></svg-rewind>
+          </button>
+          <div class="audio-playback-bar">
+            <div class="audio-progress" v-bind:style="{ transform: audio.progress }"></div>
+          </div>
+          <button class="icon-only" v-on:click="skipTrack('forward')">
+            <svg-fastforward></svg-fastforward>
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="row">
+      <p class="nine grid">During the summer of 2018, WRMOTA invites neighbors and vistors alike to explore the streets of West Reading, PA in search of a selection of brick-sized murals installed on the walls of homes and businesses.</p>
+      <p class="four grid u-right">
+        <a href="/map" class="button nav-button full-button orange">
+          View Map
+          <svg-arrow-forward></svg-arrow-forward>
+        </a>
+      </p>
+    </section>
+
+    <section class="row">
+      <p>Each mural is a response to a story told by a local site-owner that reflects a memory related to the specific location.</p>
+      <p>Themes of community, nostalgia, connection and loss arise from the dozens of catalogues stories collected across generations and interpreted by artists from Spain, Germany, the Netherlands, UK and all over the United States, including a selection of local Berks County participants.</p>
+      <p class="four grid u-float-right">
+        <a href="/artists" class="button nav-button green full-button">
+          View Artists
+          <svg-arrow-forward></svg-arrow-forward>
+        </a>
+      </p>
     </section>
   </div>
-
-  <section class="row">
-    <p class="ten grid">During the summer of 2018, WRMOTA invites neighbors and vistors alike to explore the streets of West Reading, PA in search of a selection of brick-sized murals installed on the walls of homes and businesses.</p>
-    <p class="four grid u-right">
-      <a href="/map" class="button nav-button full-button orange">
-        View Map
-        <svg-arrow-forward></svg-arrow-forward>
-      </a></p>
-  </section>
-
-  <section class="row">
-    <p>Each mural is a response to a story told by a local site-owner that reflects a memory related to the specific location.</p>
-    <p>Themes of community, nostalgia, connection and loss arise from the dozens of catalogues stories collected across generations and interpreted by artists from Spain, Germany, the Netherlands, UK and all over the United States, including a selection of local Berks County participants.</p>
-    <p class="four grid u-float-right">
-      <a href="/artists" class="button nav-button green full-button">
-        View Artists
-        <svg-arrow-forward></svg-arrow-forward>
-      </a>
-    </p>
-  </section>
-</div>
+</transition>
 {% endraw %}
 {% endblock body %}
 
@@ -85,6 +98,11 @@
       artist: false,
       errors: [],
       fetch_attempt: 0,
+      blocks: {
+        group: [],
+        size: 30,
+        margin: 10,
+      },
       email: {
         submission: null,
         address: '',
@@ -92,6 +110,7 @@
       audio: {
         current: null,
         state: 'loading',
+        button: 'loading',
         progress: 0,
         files: {},
         duration: 0,
@@ -102,9 +121,17 @@
         this.showMore = true;
         this.$nextTick(function(){
           window.scroll({
-            top: this.$refs._moreInfo.offsetTop,
+            top: this.$refs._blockBar.offsetTop,
             behavior: 'smooth'
           });
+          var letters = 'ABCD';
+          var width = this.$refs._blockBar.offsetWidth;
+          var amount = width / (this.blocks.size+this.blocks.margin);
+          for (var i = 0; i < amount-1; i++){
+            var letter = Math.floor(Math.random() * letters.length);
+            console.log(letter, letters[letter]);
+            this.blocks.group.push('permutation-'+letters[letter]);
+          }
         });
       },
       getArtist: function(){
@@ -135,18 +162,69 @@
             html5: true
           });
         } else {
-          this.audio.state = 'ready';
+          this.audio.button = 'paused';
         }
         this.audio.current = this.audio.files[id];
         this.progress = 0;
 
         var $this = this;
         this.audio.current.on('load', function(){
-          $this.audio.state = 'ready'
+          $this.audio.button = 'paused'
         });
         this.audio.current.on('end', function(){
-          $this.audio.state = 'ready'
+          $this.audio.button = 'paused'
         });
+      },
+      stepProgress: function(){
+        var seek = this.audio.current.seek() || 0;
+        var progress = Math.round(seek / this.audio.current.duration() * 100);
+
+        if (this.audio.progress != progress){
+          this.audio.progress = progress;
+          this.audio.progress = 'translate3d('+progress+'%,0,0)';
+        }
+
+        if (this.audio.current.playing()){
+          requestAnimationFrame(this.stepProgress.bind(this));
+        }
+      },
+      skipTrack(direction){
+        console.log(direction);
+        var skip = 10;
+        var position = 0;
+        var current = this.audio.current.seek() || 0;
+
+        if (direction == 'forward'){
+          position = current+skip;
+          position = (position > this.audio.current.duration()) ? 0 : position;
+        } else  {
+          position = current-skip;
+          position = (position < 0) ? 0 : position;
+        }
+
+        this.audio.current.seek(position);
+        this.stepProgress();
+      },
+      playAudio: function(){
+        Howler.ctx.resume();
+        this.audio.current.play();
+        this.stepProgress();
+      },
+      pauseAudio: function(){
+        this.audio.current.pause();
+      },
+      toggleState: function() {
+        console.log(this.audio.button);
+        switch (this.audio.button){
+          case 'playing':
+            this.audio.button = 'paused';
+            this.pauseAudio();
+            break;
+          case 'paused':
+            this.audio.button = 'playing';
+            this.playAudio();
+            break;
+        }
       },
       getData: function(){
         var vm = this;

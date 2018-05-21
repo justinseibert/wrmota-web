@@ -4,7 +4,7 @@
 <div class="page-portion">
   <h1>Artists</h1>
   <hr>
-  <section class="container break-heavy">
+  <section class="break-heavy">
     <h2>Visiting Selection</h2>
     <ul class="row unframe-x">
     {% for artist in template.artists.visitor.data %}
@@ -12,7 +12,7 @@
         {% if artist.website != '' %}
           <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
         {% else %}
-          <span>{{ artist.artist }}</span>
+          <b>{{ artist.artist }}</b>
         {% endif %}
           <br><small>
             {% if artist.location == '' %}
@@ -31,7 +31,7 @@
         {% if artist.website != '' %}
           <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
         {% else %}
-          <span>{{ artist.artist }}</span>
+          <b>{{ artist.artist }}</b>
         {% endif %}
           <br><small>
             {% if artist.location == '' %}

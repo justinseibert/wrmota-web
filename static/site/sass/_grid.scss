@@ -173,20 +173,22 @@
 
 $code-block: 70px;
 $grid-padding-width: 30px;
+$max-page-width: 1300px;
 
 .page-portion {
   width: 100%;
-  max-width: 1100px;
+  max-width: $max-page-width - 100px;
   z-index: 10;
   background: color($colors, white);
   padding: 0 ($grid-padding-width / 2) 0 ($code-block - $grid-padding-width);
   margin: 0 auto;
 }
 @media (min-width: $desktop-min){
-  footer.page-portion {
-    max-width: 90%;
+  .info section {
+    margin: $heavy 0;
   }
 }
+
 .code-portion {
   position: fixed;
   top: 0;
