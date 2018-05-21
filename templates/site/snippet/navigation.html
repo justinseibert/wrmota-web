@@ -1,16 +1,64 @@
-<nav class="nav-menu no-print z99">
-  <input type="checkbox" id="menu" class="nav-toggle">
-  <label for="menu" class="nav-button" onclick="this.blur()">
-    <div id="MENU">
-      {% include "site/svg/menu.svg" %}
-    </div>
-    <div id="MENU_RETURN">
-      {% include "site/svg/cross.svg" %}
-    </div>
-    <h1 id="MENU_TITLE">Menu</h1>
-  </label>
-  <ul id="navigation">
-    <li><a href="/">home</a></li>
-    <li><a href="/artists">artists</a></li>
-  </ul>
-</nav>
+{% raw %}
+<div id="_nav">
+  <nav class="code-portion">
+    <template v-for="(item, index) of code">
+      <template v-if="index === 0">
+        <a href="/" :class="item" class="logo-block permutation-block" v-bind:style="{ left:logo.left+'px' }">
+            <img class="logo-svg" src="/img/logo-tile.svg" v-bind:style=" { opacity:logo.opacity }"/>
+          </a>
+      </template>
+      <template v-else-if="index === 1">
+        <div :class="item" class="permutation-block" ref="_belowLogo"></div>
+      </template>
+      <template v-else>
+        <div :class="item" class="permutation-block"></div>
+      </template>
+    </template>
+  </nav>
+  <div v-bind:style="{ height: spacing+'px' }"></div>
+</div>
+{% endraw %}
+
+<script>
+  var vNav = new Vue({
+    el: '#_nav',
+    data: {
+      code: 'ABCD'.split('').map(x => 'permutation-'+x),
+      logo: {
+        left: 0,
+        min: -50,
+        max: 0,
+        opacity: 1,
+      },
+      spacing: 0,
+    },
+    methods: {
+      handleScroll: function(){
+        if (window.scrollY < this.spacing){
+          requestAnimationFrame(this.shiftLogo);
+        } else if (this.logo.left > this.logo.min){
+          this.logo.left = this.logo.min;
+          this.logo.opacity = 0;
+        }
+      },
+      shiftLogo: function(){
+        let ratio = window.scrollY/this.spacing;
+        this.logo.left = ratio * this.logo.min;
+        this.logo.opacity = 1-ratio;
+      }
+    },
+    mounted: function(){
+      this.$nextTick(function() {
+        var below = this.$refs._belowLogo[0];
+        this.spacing = below.offsetTop;
+        this.logo.min = below.offsetLeft;
+      })
+    },
+    created () {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
+  });
+</script>

@@ -1,50 +1,50 @@
 {% extends 'site/layout/default.html' %}
 
 {% block body %}
-<header class="row green-container frame-heavy break-heavy align-center">
-  <h1 class="u-inline-flex">
-    <span class="inline-logo">
-      {% include 'site/svg/logo-dark.svg' %}
-    </span>
-    <span>Artists</span>
-  </h1>
-</header>
-<section class="container break-heavy">
-  <header class="row align-center frame-medium break-medium">
+<div class="page-portion">
+  <h1>Artists</h1>
+  <hr>
+  <section class="container break-heavy">
     <h2>Visiting Selection</h2>
-  </header>
-  <ul class="row unframe-x">
-  {% for artist in template.artists.visitor.data %}
-    <li class="four grid {{ template.options.tilt|random }}">
-      {% if artist.website != '' %}
-        <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
-      {% else %}
-        <span>{{ artist.artist }}</span>
-      {% endif %}
-        <br><small>
-          {% if artist.location == '' %}
-            Earth
-          {% else %}
-            {{ artist.location }}
-          {% endif %}
-        </small></li>
-  {% endfor %}
-  </ul>
-  <header class="row align-center frame-medium break-medium">
+    <ul class="row unframe-x">
+    {% for artist in template.artists.visitor.data %}
+      <li class="four grid">
+        {% if artist.website != '' %}
+          <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+        {% else %}
+          <span>{{ artist.artist }}</span>
+        {% endif %}
+          <br><small>
+            {% if artist.location == '' %}
+              Earth
+            {% else %}
+              {{ artist.location }}
+            {% endif %}
+          </small></li>
+    {% endfor %}
+    </ul>
+
     <h2>Local Selection</h2>
-  </header>
-  <ul class="row unframe-x">
-  {% for artist in template.artists.local.data %}
-    <li class="four grid {{ template.options.tilt|random }}">
-      {% if artist.website != '' %}
-        <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
-      {% else %}
-        <span>{{ artist.artist }}</span>
-      {% endif %}
-      </li>
-  {% endfor %}
-  </ul>
-</section>
+    <ul class="row unframe-x">
+    {% for artist in template.artists.local.data %}
+      <li class="four grid">
+        {% if artist.website != '' %}
+          <a href="http://{{ artist.website }}" target="_blank">{{ artist.artist }}</a>
+        {% else %}
+          <span>{{ artist.artist }}</span>
+        {% endif %}
+          <br><small>
+            {% if artist.location == '' %}
+              Earth
+            {% else %}
+              {{ artist.location }}
+            {% endif %}
+          </small></li>
+        </li>
+    {% endfor %}
+    </ul>
+  </section>
+</div>
 {% endblock body %}
 
 {% block script %}

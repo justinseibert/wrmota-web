@@ -2,18 +2,19 @@ label,
 input,
 button,
 select
+  font-size: 1.3em
+  line-height: 1
+  letter-spacing: 0.05em
   display: inline-block
-  margin: 0 0 $light 0
-  padding: $light
-  border: 2px solid transparent
+  margin: 0 0 $light * 1.5 0
+  padding: $light * 1.5
   border-radius: 0
+  border: none
   outline: none
 
 input,
 select
-  font-family: 'Lato', sans-serif
   font-weight: 400
-  box-shadow: 0 3px 0 0 $dark-grey
   color: $red
   background: $white
   text-overflow: ellipsis
@@ -59,25 +60,43 @@ label
         background: $red
         color: $white
 
-button,
-  background: $red
+button
+  font-family: $header-font
+  color: color($colors, white)
+  background: color($colors, blue)
   margin-bottom: 3px
   margin-right: 3px
-  box-shadow: 3px 3px 0 0 $text
   -webkit-appearance: none
   &:hover
     background: $dark-red
   &:active
     transform: scale3d(0.97,0.97,1)
-    box-shadow: 0 0 0 0 $text
-  &::after
-    display: none
   & svg
     max-height: 2.5em
-button.green,
-  background: $grass
+
+a.button.green,
+button.green
+  background: color($colors, green)
   &:hover
-    background: $sunny-grass
+    background: hover(green, 10)
+
+a.button.orange,
+button.orange
+  background: color($colors, orange)
+  &:hover
+    background: hover(orange, 3)
+
+a.button.red,
+button.red
+  background: color($colors, red)
+  &:hover
+    background: hover(red, 10)
+
+a.button.blue,
+button.blue
+  background: color($colors, blue)
+  &:hover
+    background: hover(blue, 10)
 
 a.button
   @extend button

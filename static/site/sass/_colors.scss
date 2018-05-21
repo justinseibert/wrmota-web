@@ -1,0 +1,76 @@
+@function color($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+@function hover($key, $amount) {
+  @if map-has-key($colors, $key) {
+    @return darken(map-get($colors, $key), $amount);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+$colors: (
+  white: #FFF,
+  dust: #e4e4e4,
+  ash: #c3c3c3,
+  wool: #5b5b5b,
+  night: #222,
+  blue: #347cff,
+  green: #50e04a,
+  red: #ff384c,
+  orange: #ffbb00,
+  clear: transparent,
+);
+
+$themes: (
+  community: #cb15e4,
+  culture: #efad00,
+  moving: #eeef07,
+  music: #2ECC71,
+  school: #10e4d2,
+  sentimental: #ff0066,
+  water: #03b1ff,
+);
+
+$permutation_map: (
+  A: color($colors, blue),
+  B: color($colors, green),
+  C: color($colors, red),
+  D: color($colors, orange)
+);
+@each $item,$color in $permutation_map {
+  .permutation-#{$item} {
+    background-color: $color;
+  }
+}
+
+$theme_color_map: (
+  community: color($themes, community),
+  culture: color($themes, culture),
+  moving: color($themes, moving),
+  music: color($themes, music),
+  school: color($themes, school),
+  sentimental: color($themes, sentimental),
+  water: color($themes, water),
+);
+@each $item,$color in $theme_color_map {
+  .theme_#{$item} {
+    border-color: $color;
+    color: $color;
+    font-weight: bold;
+    text-transform: capitalize;
+    &.play-button {
+      color: color($colors, white);
+      background-color: $color;
+      font-weight: normal;
+      text-transform: none;
+    }
+  }
+}

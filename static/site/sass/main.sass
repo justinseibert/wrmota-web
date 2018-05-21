@@ -1,4 +1,5 @@
 @import variables
+@import colors
 @import normalize
 
 *
@@ -13,10 +14,14 @@ body
   height: 100%
   font-size: 100%
   font-weight: 400
-  font-family: $main-font
+  font-family: $text-font
   color: $text
   background: $white
   +no-highlight
+
+img
+  display: block
+  max-width: 100%
 
 @media (min-width: $mobile-min)
   html,body
@@ -24,17 +29,12 @@ body
 
 @media (min-width: $tablet-min)
   html,body
-    font-size: 140%
-
-img
-  display: block
-  width: 100%
+    font-size: 130%
 
 @import grid
 @import spacing
 
 @import typography
-@import colors
 @import forms
 
 @import utilities
@@ -43,197 +43,5 @@ img
 @import alerts
 @import navigation
 
-.header-section
-  .logo
-    position: relative
-    margin-top: -6%
-    top: 0
-    left: -4%
-    width: 106%
-  .slide-button
-    position: absolute
-    bottom: 2rem
-    right: 50%
-    width: 6rem
-    height: 6rem
-    margin-right: $heavy
-    border-radius: 50%
-    border: 1rem solid white
-    box-shadow: 0 0 1rem -0.35rem black
-    background: $blue
-    &:active
-      width: 5rem
-      height: 5rem
-  .slide-button-svg
-    position: relative
-    width: 140%
-    top: 18%
-    left: 6%
-    transform: rotate3d(0,0,1,71deg)
-
-@media (min-height: 640px)
-  .header-section
-    .logo
-      margin-top: 0
-      left: -12%
-      width: 117%
-    .slide-button
-      bottom: 3.5rem
-
-.inline-logo
-  width: 1em
-  height: 1em
-  margin: 0 $heavy 0 0
-
-.header-background
-  background: $blue
-  position: absolute
-  top: -23%
-  left: -10%
-  width: 200%
-  height: 100%
-  transform: rotate3d(0,0,1,13deg)
-
-.project-section
-  position: relative
-  width: 100%
-  height: 100%
-  .u-lock-bottom
-    bottom: 3rem
-  .slide-button
-    position: absolute
-    right: 2em
-    width: 3rem
-    height: 3rem
-    margin-right: 25%
-    border-radius: 50%
-    background: $red
-    &:active
-      width: 2rem
-      height: 2rem
-  .slide-button-svg
-    width: 100%
-    position: relative
-    top: -29%
-    left: 16%
-    transform: rotate3d(0,0,1,108deg)
-
-.slide-button
-  transition: width 100ms, height 100ms
-
-.project-shape
-  position: absolute
-  left: -50%
-  top: -100%
-  width: 100%
-  height: 300%
-  transform-origin: right center
-  transform: rotate3d(0,0,1,50deg)
-  background: $red
-  overflow: hidden
-  & :first-child
-    position: absolute
-    top: 10%
-    left: 40%
-    height: 80%
-    width: 130%
-    transform-origin: center
-    transform: rotate3d(0,0,1,-50deg)
-
-.project-brick
-  margin: 0
-  margin-left: -9rem
-  margin-top: -3.25rem
-  width: 18rem
-  height: 6.5rem
-  display: block
-  padding: 0
-  background: $white
-  overflow: hidden
-  .project-shape
-    transform: rotate(230deg)
-
-.about-canvas
-  position: absolute
-  top: 0
-  left: 0
-  transition: transform 400ms
-
-.play-button
-  position: absolute
-  top: 50%
-  left: 50%
-  width: 4rem
-  height: 4rem
-  margin-left: -2rem
-  margin-top: -2rem
-  transition: transform 400ms, width 100ms, height 100ms, margin 100ms
-  border-radius: 50%
-  background: $red
-  box-shadow: 0 0 1rem -0.35rem
-  &:active
-    width: 3rem
-    height: 3rem
-    margin-left: -1.5rem
-    margin-top: -1.5rem
-  svg
-    position: absolute
-    top: 50%
-    left: 50%
-    width: 2rem
-    margin-left: -1rem
-    margin-top: -1rem
-  // &::after
-  //   display: block
-  //   content: ''
-  //   width: 0
-  //   height: 0
-  //   border-style: solid
-  //   border-width: 1rem 0 1rem 1.8rem
-  //   border-color: transparent transparent transparent black
-  //   margin-left: -0.65rem
-  //   margin-top: -0.95rem
-  //   transform: rotate3d(0,0,1,-5deg)
-
-.audio-playback-bar
-  position: absolute
-  left: 0
-  bottom: 0
-  background: $light-grey
-  width: 100%
-  height: 5px
-  cursor: pointer
-.audio-progress
-  float: left
-  height: 100%
-  background: $orange
-
-@media (min-width: $tablet-max)
-  .project-brick
-    margin-left: -12rem
-    margin-top: -4.125rem
-    width: 24rem
-    height: 8.25rem
-
-.about-section
-  background: $orange
-  .u-background-cover
-    top: 20%
-.about-white,
-  background: white
-
-.about-bricks
-  position: relative
-  background: white
-  overflow: hidden
-  width: 150%
-  height: 2.1rem
-  margin-top: -2px
-  margin-bottom: 1rem
-  & .brick
-    position: relative
-    float: left
-    margin: 0.3em 1.8rem 0.8rem -1.4rem
-    width: 3.6rem
-    height: 1rem
-    background: $orange
+@import pages/index
+@import pages/navigation

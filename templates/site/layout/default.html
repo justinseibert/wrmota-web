@@ -3,21 +3,12 @@
   <head>
     {% include 'site/snippet/head.html' %}
   </head>
-  <body id="Body">
-    {% include 'site/snippet/ajax-alert.html' %}
+  <body>
+      {% include 'site/snippet/ajax-alert.html' %}
+      {% include 'site/snippet/navigation.html' %}
 
-    {% include 'site/snippet/navigation.html' %}
+      {% block body %}{% endblock body %}
 
-    {% block body %}
-    {% endblock body %}
-
-    <footer id="introFooter" class="row golden-container">
-      <div class="attribution-section container-medium frame-heavy align-center">
-        <small>A project by <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="_blank">Berks Community Murals</a> in collaboration with <a href="https://besttest.studio" target="_blank" title="Kayla Mattes and Justin Seibert">BESTTEST</a><br>Presented by <a href="http://www.wrcrf.org/" target="_blank">West Reading Community Revitalization Foundation</a></small>
-      </div>
-    </footer>
-
-    {% block script %}
-    {% endblock script %}
+      {% block script %}{% endblock script %}
   </body>
 </html>

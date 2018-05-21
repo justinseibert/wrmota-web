@@ -1,213 +1,176 @@
 {% extends 'site/layout/default.html' %}
 {% block body %}
-<header id="introHeader" class="header-section u-card">
-  <div class="header-background z9">
-    <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z15.png');opacity:0.4"></div>
-  </div>
-  <div class="u-background-cover" style="background-image:url('img/texture/wrmap-z17.png');opacity:0.3"></div>
-  <div class="container-small">
-    <div class="logo z99">
-      {% include 'site/svg/logo.svg' %}
-    </div>
-  </div>
-  <div data-goto="project" class="slide-button">
-    <div class="slide-button-svg">
-      {% include 'site/svg/arrow.svg' %}
-    </div>
-  </div>
-</header>
-<section id="introProject" class="project-section">
-  <div class="u-card">
-    <div class="project-background full u-lock-top">
-      <div class="project-shape">
-        <div class="u-background-cover" style="background-image:url('img/texture/brick.jpeg');opacity:0.4"></div>
-      </div>
-      <div id="BrickContainer" class="project-brick u-lock-center">
-        <img id="GumParkerIMG" src="img/sofie-ramos.jpg">
-        <canvas id="BrickCanvas" class="about-canvas z9"></canvas>
-        <div class="audio-playback-bar">
-          <div id="AudioProgress" class="audio-progress"></div>
-        </div>
-      </div>
-      <div id="PlayButton" class="play-button u-lock-center z99 u-hide">
-        <div id="PLAY">
-          {% include 'site/svg/play.svg' %}
-        </div>
-        <div id="PAUSE" class="u-hide">
-          {% include 'site/svg/pause.svg' %}
-        </div>
-      </div>
-    </div>
-    <div class="container-medium frame-medium full z9">
-      <p>During the summer of 2018, West Reading Museum of Temporary Art invites neighbors and visitors alike to explore a selection of site-specific installations.</p>
-      <div class="u-lock-bottom align-right frame-medium">
-        <p>Each installation is a collaboration between local residents and an artist from around the world.</p>
-        <div data-goto="about" class="slide-button">
-          <div class="slide-button-svg">
-            {% include 'site/svg/arrow.svg' %}
+<div id="_home" class="page-portion">
+  <section>
+    <h1 class="header">West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
+    <hr>
+    <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
+    <p>Download the app to explore the artwork of WRMOTA and listen to stories from the community that inspired it.</p>
+    <p>
+      <a href="https://itunes.apple.com/us/app/wrmota/id1373824275?mt=8">
+        <img class="dl-badge" alt='Download on the App Store' src="/img/icon/badge-ios.svg"></a>
+      <a href='https://play.google.com/store/apps/details?id=org.wrmota.app'>
+        <img class="dl-badge" alt='Get it on Google Play' src='/img/icon/badge-android.png'/>
+      </a>
+    </p>
+    <p>
+      <a onclick="vHome.show()">Learn more</a>
+    </p>
+  </section>
+
+<div id="_info">
+  <transition name="fade-transition">
+    <section v-show="showInfo" ref="_moreInfo">
+      {% raw %}
+      <section id="_audioPlayer" class="card player-controls" v-show="artist">
+        <img src="/img/sofie-ramos.jpg">
+        <div class="u-flex frame-medium" v-if="artist">
+          <button class="play-button">
+            <svg-loading></svg-loading>
+          </button>
+          <div class="frame-medium unframe-y">
+            <h1>{{ artist.address }}</h1>
+            <h2>{{ artist.artist_name }}</h2>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="introAbout" class="about-section u-card">
-  <div class="u-background-cover" style="background-image:url('img/west-reading-homes.jpg');opacity:0.2"></div>
-  <div class="row about-white">
-    <div class="container-medium frame-medium">
-      <p>Short interviews and tiny murals add up to the story of a place, its people and the personal histories experienced along its streets.</p>
-    </div>
-  </div>
-  <div class="about-bricks break-medium">
-    {% for i in range(22) %}
-      <div class="brick"></div>
-    {% endfor %}
-  </div>
-  <div class="container-medium frame-medium">
-    <p>A digital platform will serve as a guide for finding the artworks and navigating the unique character of West Reading, PA.</p>
-    {% include 'site/email.html' %}
-  </div>
-</section>
+        <div class="frame-medium playback">
+          <svg-rewind></svg-rewind>
+          <div class="audio-playback-bar">
+            <div class="audio-progress"></div>
+          </div>
+          <svg-fastforward></svg-fastforward>
+        </div>
+      </section>
+      {% endraw %}
+
+      <section class="desktop-right desktop-text">
+        <p>West Reading Museum of Temporary Art seeks to unearth personal histories of the borough that would otherwise remain unrecorded.</p>
+        <p>During the summer of 2018, WRMOTA invites neighbors and vistors alike to explore the streets of West Reading, PA in search of a selection of brick-sized murals installed on the walls of homes and businesses.</p>
+        <p>
+          <a href="/map" class="button nav-button orange">
+            <span>View Map</span>
+            <svg-arrow-forward></svg-arrow-forward>
+          </a></p>
+      </section>
+
+      <section>
+        <p>Each mural is a response to a story told by a local site-owner that reflects a memory related to the specific location.</p>
+        <p>Themes of community, nostalgia, connection and loss arise from the dozens of catalogues stories collected across generations and interpreted by artists from Spain, Germany, the Netherlands, UK and all over the United States, including a selection of local Berks County participants.</p>
+        <p>
+          <a href="/artists" class="button nav-button green">
+            <span>View Artists</span>
+            <svg-arrow-forward></svg-arrow-forward>
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <p>Sign up to receive updates on WRMOTA events this summer:</p>
+        <form id="EmailSubmitForm">
+          {{ template.email.csrf_token }}
+          <div class="row spaced">
+            <input v-model="email.address" class="nine grid" type="email" placeholder="me@email.com" required />
+            <!-- {{ template.email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com",required="required") }} -->
+          </div>
+          <button v-on:click="validateEmail" class="three grid">submit</button>
+        </form>
+      </section>
+
+      <hr>
+
+      <section>
+        <small>
+          <p>WRMOTA is a collaboration between Michael Miller of <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="blank">Berks Community Murals</a>, Kayla Mattes and Justin Seibert of <a href="https://besttest.studio" target="blank">BESTTEST</a> and students in Wyomissing Area High School's Public Art Workshop and Humanities Class.</p>
+          <p>WRMOTA is generously funded by West Reading Elm Street, a program of the West Reading Community Revitalization Foundation <a href="https://wrcrf.org" target="blank">(WRCRF)</a>, along with the Wyomissing Area Education Foundation <a href="https://wyoarea-foundation.org" target="blank">(WAEF)</a> and Wyomissing Area School District.</p>
+        </small>
+      </section>
+
+    </section>
+  </transition>
+</div>
+
+</div>
+{{ template.email.recaptcha }}
 {% endblock body %}
 
 {% block script %}
-  <script type="text/javascript">
-    var util = {};
-    var geometry = {};
-    var audio = {};
-    var doc = {
-      w: 0,
-      h: 0,
-      offset: {
-        header: 0,
-        project: 0,
-        about: 0
+
+
+<script type="text/javascript">
+  var email = new wrmotaForm({
+    form: $('#EmailSubmitForm'),
+    validate_items: [
+      ['email', $('#UserEmail')]
+    ],
+    submit_url: 'api/subscribe',
+    recaptcha: true
+  });
+  // var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
+  //   console.log(el,e);
+  //   e.preventDefault();
+  //   email.validate();
+  // });
+</script>
+
+<script>
+  var vHome = new Vue({
+    el: '#_info',
+    data: {
+      showInfo: true,
+      codedData: false,
+      code: 'AABC',
+      artist: false,
+      errors: [],
+      fetch_attempt: 0,
+      email: {
+        submission: null,
+        address: '',
+      }
+    },
+    methods: {
+      show: function(){
+        this.showInfo = true;
+        this.$nextTick(function(){
+          window.scroll({
+            top: this.$refs._moreInfo.offsetTop,
+            behavior: 'smooth'
+          });
+        });
       },
-      resize: 0,
-      canvas: {
-        elem: 0,
-        container: 0,
-        ctx: 0,
-        w: 0,
-        h: 0,
-        play: 0,
-        wave: 0
+      getArtist: function(){
+        if (!this.artist) {
+          this.getData();
+        } else  {
+          return this.artist;
+        }
       },
-      audio: 0,
-      duration: 0
-    }
-
-    $(document).ready(function(){
-      util.getOffsets();
-      util.canvasSetup();
-      var slidebutton = new TouchClick('.slide-button', util.scrollTo);
-      var playbutton = new TouchClick('#PlayButton', util.canvasState);
-      doc.audio = new Howl({
-        src: [
-          'https://wrmota.org/media/03/06/31/ac0d73fc89a551b4.mp3',
-          'https://wrmota.org/media/03/06/31/ac0d73fc89a551b4.ogg',
-          'https://wrmota.org/media/03/06/31/ac0d73fc89a551b4.webm',
-        ]
-      })
-      doc.audio.on('load', function(){
-        $('#PlayButton').removeClass('u-hide');
-        doc.duration = doc.audio.duration();
-      })
-      doc.audio.on('end', function(){
-        util.canvasState();
-      })
-      doc.resize = new Listener({ resizeFunctions: [util.getOffsets,util.canvasSize]});
-    })
-
-    util.getOffsets = function(){
-      doc.offset.header = $('#introHeader').offset().top;
-      doc.offset.project = $('#introProject').offset().top;
-      doc.offset.about = $('#introAbout').offset().top;
-    }
-
-
-    util.scrollTo = function(el,e){
-      var elem = el.dataset.goto;
-      console.log(el,elem,e);
-      $('html,body').animate({
-        scrollTop: doc.offset[elem]
-      }, 750, 'swing');
-    }
-
-    util.canvasSetup = function(){
-      doc.canvas.elem = document.getElementById('BrickCanvas');
-      doc.canvas.ctx = doc.canvas.elem.getContext('2d');
-      doc.canvas.container = document.getElementById('BrickContainer');
-
-      doc.canvas.wave = document.createElement('img');
-      doc.canvas.wave.onload = function(){
-        util.canvasSize();
+      getData: function(){
+        var vm = this;
+        vm.fetch_attempt++;
+        axios.get('https://wrmota.org/api/v1/get/all')
+        .then(function(resp) {
+          // JSON responses are automatically parsed.
+          vm.codedData = resp.data.codes.data;
+          vm.artist = vm.codedData[vm.code][0];
+        })
+        .catch(function(error) {
+          vm.errors.push(error);
+          if (vm.fetch_attempt < 3){
+            vm.getArtist();
+          }
+        })
+      },
+      validateEmail: function(evt){
+        evt.preventDefault();
+        email.validate2();
       }
-      doc.canvas.wave.src = 'img/waveform.png'
-      doc.canvas.play = false;
-    }
+    },
+    created: function() {
+      this.artist = this.getArtist();
+      this.email.submission = new wrmotaForm2({
 
-    util.canvasSize = function(){
-      var w = doc.canvas.container.clientWidth;
-      var h = doc.canvas.container.clientHeight;
-
-      if (w != doc.canvas.w || h != doc.canvas.h){
-        doc.canvas.w = doc.canvas.elem.width = w;
-        doc.canvas.h = doc.canvas.elem.height = h;
-
-        var ctx = doc.canvas.ctx;
-        var extension = (h/2)*Math.tan(geometry.radian(50));
-        doc.canvas.x = [
-          w*0.5+extension,
-          w*0.5-extension
-        ]
-        ctx.fillStyle = '#FFF';
-        ctx.beginPath();
-        ctx.moveTo(0,0);
-        ctx.lineTo(doc.canvas.x[0],0);
-        ctx.lineTo(doc.canvas.x[1],h);
-        ctx.lineTo(0,h);
-        ctx.clip();
-
-        ctx.fillRect(0,0,w,h);
-        ctx.drawImage(doc.canvas.wave,0,0,w*3,h);
-      }
-    }
-
-    util.canvasState = function(){
-      var translate = 0
-      if (!doc.canvas.play){
-        translate = doc.canvas.w/-2;
-        doc.canvas.play = true;
-        doc.audio.play();
-        audio.step();
-        $('#PLAY').addClass('u-hide');
-        $('#PAUSE').removeClass('u-hide');
-      } else {
-        doc.canvas.play = false;
-        doc.audio.pause();
-        $('#PAUSE').addClass('u-hide');
-        $('#PLAY').removeClass('u-hide');
-      }
-      $('#PlayButton, #BrickCanvas').css({
-        transform: 'translate3d('+translate+'px,0,0)'
       })
     }
-
-    audio.step = function(){
-      var seek = doc.audio.seek() || 0;
-      var progress = Math.round(seek / doc.duration * 100) + '%';
-      $('#AudioProgress').css({
-        width: progress
-      })
-
-      if (doc.audio.playing()) {
-        requestAnimationFrame(audio.step.bind(this));
-      }
-    }
-
-    geometry.radian = function(degree){
-      return degree * (Math.PI / 180);
-    }
-  </script>
+  });
+</script>
 {% endblock script %}

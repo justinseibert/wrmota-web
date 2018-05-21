@@ -1,0 +1,74 @@
+.dl-badge {
+  height: 40px;
+}
+button.nav-button,
+a.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  span {
+    float: left;
+  }
+  svg {
+    width: 1.3em;
+    fill: color($colors, white);
+
+  }
+}
+
+.player-controls {
+  .play-button {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    svg {
+      fill: white;
+    }
+  }
+  .skip-button {
+    transition: transform 100ms;
+    &:active {
+      transform: scale3d(1.5,1.5,1.5);
+    }
+  }
+  .playback {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg {
+      width: 1em;
+    }
+  }
+  .audio-playback-bar {
+    width: calc(100% - 4em);
+    height: 1em;
+    background: color($colors,green);
+    overflow: hidden;
+  }
+  .audio-progress {
+    height: 100%;
+    width: 100%;
+    transform: translate3d(0,0,0);
+    background: color($colors,dust);
+    transition: transform 100ms;
+  }
+  h1,h2 {
+    display: block;
+  }
+  h1 {
+    font-size: 1.3em;
+    margin: 0;
+  }
+  h2 {
+    font-family: 'Bitter';
+    font-size: 1em;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: $desktop-min){
+  .dl-badge {
+    height: 50px;
+  }
+}

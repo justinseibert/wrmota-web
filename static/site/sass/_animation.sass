@@ -28,7 +28,7 @@
   50%
     opacity: .5
 
-.title-animation
+.title-animation,
   +animate(title, .6s, 1)
 
 @-webkit-keyframes title
@@ -96,3 +96,29 @@
   to
     opacity: 0
     max-height: 0px
+
+.spinning-animation
+  +animate(spinning,1s,infinite)
+  animation-timing-function: linear
+
+@-webkit-keyframes spinning
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(359deg)
+
+@keyframes spinning
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(359deg)
+
+.fade-transition-enter-active, .fade-transition-leave-active
+  transition: all 500ms
+
+.fade-transition-enter
+  // transform: translate3d(0, 50%, 0)
+  opacity: 0
+.fade-transition-enter-to
+  // transform: none
+  opacity: 1
