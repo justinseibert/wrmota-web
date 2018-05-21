@@ -67,8 +67,15 @@ button
   margin-bottom: 3px
   margin-right: 3px
   -webkit-appearance: none
-  &:hover
-    background: $dark-red
+  &.social
+    width: 1.5em
+    height: 1.5em
+    border-radius: 50%
+    padding: 0.4em
+    svg
+      display: block
+      fill: white
+      width: 100%
   &:active
     transform: scale3d(0.97,0.97,1)
   & svg
@@ -92,6 +99,7 @@ button.red
   &:hover
     background: hover(red, 10)
 
+button,
 a.button.blue,
 button.blue
   background: color($colors, blue)

@@ -1,122 +1,83 @@
 {% extends 'site/layout/default.html' %}
 {% block body %}
-<div id="_home" class="page-portion">
-  <section>
-    <h1 class="header">West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
-    <hr>
-    <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
-    <p>Download the app to explore the artwork of WRMOTA and listen to stories from the community that inspired it.</p>
-    <p>
-      <a href="https://itunes.apple.com/us/app/wrmota/id1373824275?mt=8">
-        <img class="dl-badge" alt='Download on the App Store' src="/img/icon/badge-ios.svg"></a>
-      <a href='https://play.google.com/store/apps/details?id=org.wrmota.app'>
-        <img class="dl-badge" alt='Get it on Google Play' src='/img/icon/badge-android.png'/>
-      </a>
-    </p>
-    <p>
-      <a onclick="vHome.show()">Learn more</a>
-    </p>
+{% raw %}
+<header id="_home" class="page-portion">
+  <h1>West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
+  <hr>
+  <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
+  <p>Download the app to explore the artwork of WRMOTA and listen to stories from the community that inspired it.</p>
+  <p>
+    <a href="https://itunes.apple.com/us/app/wrmota/id1373824275?mt=8">
+      <img class="dl-badge" alt='Download on the App Store' src="/img/icon/badge-ios.svg"></a>
+    <a href='https://play.google.com/store/apps/details?id=org.wrmota.app'>
+      <img class="dl-badge" alt='Get it on Google Play' src='/img/icon/badge-android.png'/>
+    </a>
+  </p>
+  <p class="break-heavy frame-heavy unframe-x unframe-top" v-show="!showMore">
+    <a onclick="vInfo.show();vFoot.show()" class="nav-button frame-heavy unframe-x unframe-top">
+      Learn More
+      <svg-arrow-down></svg-arrow-down>
+    </a>
+  </p>
+</header>
+
+<div id="_info" class="page-portion info" ref="_moreInfo" v-show="showMore">
+  <div class="info-row break-medium">
+    <div class="info-block">
+      <h2>About the Project</h2>
+      <p>West Reading Museum of Temporary Art seeks to unearth personal histories of the borough that would otherwise remain unrecorded.</p>
+    </div>
+
+    <section id="_audioPlayer" class="card player-controls info-block" v-show="artist">
+      <img src="/img/sofie-ramos.jpg">
+      <div class="u-flex frame-medium" v-if="artist">
+        <button class="play-button">
+          <svg-loading></svg-loading>
+        </button>
+        <div class="frame-medium unframe-y">
+          <h1>{{ artist.address }}</h1>
+          <h2>{{ artist.artist_name }}</h2>
+        </div>
+      </div>
+      <div class="frame-medium playback">
+        <svg-rewind></svg-rewind>
+        <div class="audio-playback-bar">
+          <div class="audio-progress"></div>
+        </div>
+        <svg-fastforward></svg-fastforward>
+      </div>
+    </section>
+  </div>
+
+  <section class="row">
+    <p class="ten grid">During the summer of 2018, WRMOTA invites neighbors and vistors alike to explore the streets of West Reading, PA in search of a selection of brick-sized murals installed on the walls of homes and businesses.</p>
+    <p class="four grid u-right">
+      <a href="/map" class="button nav-button full-button orange">
+        View Map
+        <svg-arrow-forward></svg-arrow-forward>
+      </a></p>
   </section>
 
-<div id="_info">
-  <transition name="fade-transition">
-    <section v-show="showInfo" ref="_moreInfo">
-      {% raw %}
-      <section id="_audioPlayer" class="card player-controls" v-show="artist">
-        <img src="/img/sofie-ramos.jpg">
-        <div class="u-flex frame-medium" v-if="artist">
-          <button class="play-button">
-            <svg-loading></svg-loading>
-          </button>
-          <div class="frame-medium unframe-y">
-            <h1>{{ artist.address }}</h1>
-            <h2>{{ artist.artist_name }}</h2>
-          </div>
-        </div>
-        <div class="frame-medium playback">
-          <svg-rewind></svg-rewind>
-          <div class="audio-playback-bar">
-            <div class="audio-progress"></div>
-          </div>
-          <svg-fastforward></svg-fastforward>
-        </div>
-      </section>
-      {% endraw %}
-
-      <section class="desktop-right desktop-text">
-        <p>West Reading Museum of Temporary Art seeks to unearth personal histories of the borough that would otherwise remain unrecorded.</p>
-        <p>During the summer of 2018, WRMOTA invites neighbors and vistors alike to explore the streets of West Reading, PA in search of a selection of brick-sized murals installed on the walls of homes and businesses.</p>
-        <p>
-          <a href="/map" class="button nav-button orange">
-            <span>View Map</span>
-            <svg-arrow-forward></svg-arrow-forward>
-          </a></p>
-      </section>
-
-      <section>
-        <p>Each mural is a response to a story told by a local site-owner that reflects a memory related to the specific location.</p>
-        <p>Themes of community, nostalgia, connection and loss arise from the dozens of catalogues stories collected across generations and interpreted by artists from Spain, Germany, the Netherlands, UK and all over the United States, including a selection of local Berks County participants.</p>
-        <p>
-          <a href="/artists" class="button nav-button green">
-            <span>View Artists</span>
-            <svg-arrow-forward></svg-arrow-forward>
-          </a>
-        </p>
-      </section>
-
-      <section>
-        <p>Sign up to receive updates on WRMOTA events this summer:</p>
-        <form id="EmailSubmitForm">
-          {{ template.email.csrf_token }}
-          <div class="row spaced">
-            <input v-model="email.address" class="nine grid" type="email" placeholder="me@email.com" required />
-            <!-- {{ template.email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com",required="required") }} -->
-          </div>
-          <button v-on:click="validateEmail" class="three grid">submit</button>
-        </form>
-      </section>
-
-      <hr>
-
-      <section>
-        <small>
-          <p>WRMOTA is a collaboration between Michael Miller of <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="blank">Berks Community Murals</a>, Kayla Mattes and Justin Seibert of <a href="https://besttest.studio" target="blank">BESTTEST</a> and students in Wyomissing Area High School's Public Art Workshop and Humanities Class.</p>
-          <p>WRMOTA is generously funded by West Reading Elm Street, a program of the West Reading Community Revitalization Foundation <a href="https://wrcrf.org" target="blank">(WRCRF)</a>, along with the Wyomissing Area Education Foundation <a href="https://wyoarea-foundation.org" target="blank">(WAEF)</a> and Wyomissing Area School District.</p>
-        </small>
-      </section>
-
-    </section>
-  </transition>
+  <section class="row">
+    <p>Each mural is a response to a story told by a local site-owner that reflects a memory related to the specific location.</p>
+    <p>Themes of community, nostalgia, connection and loss arise from the dozens of catalogues stories collected across generations and interpreted by artists from Spain, Germany, the Netherlands, UK and all over the United States, including a selection of local Berks County participants.</p>
+    <p class="four grid u-float-right">
+      <a href="/artists" class="button nav-button green full-button">
+        View Artists
+        <svg-arrow-forward></svg-arrow-forward>
+      </a>
+    </p>
+  </section>
 </div>
-
-</div>
-{{ template.email.recaptcha }}
+{% endraw %}
 {% endblock body %}
 
 {% block script %}
-
-
-<script type="text/javascript">
-  var email = new wrmotaForm({
-    form: $('#EmailSubmitForm'),
-    validate_items: [
-      ['email', $('#UserEmail')]
-    ],
-    submit_url: 'api/subscribe',
-    recaptcha: true
-  });
-  // var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
-  //   console.log(el,e);
-  //   e.preventDefault();
-  //   email.validate();
-  // });
-</script>
-
 <script>
-  var vHome = new Vue({
-    el: '#_info',
+  var vInfo = new Vue({
+    el: '#_main',
     data: {
-      showInfo: true,
+      showMore: false,
       codedData: false,
       code: 'AABC',
       artist: false,
@@ -129,7 +90,7 @@
     },
     methods: {
       show: function(){
-        this.showInfo = true;
+        this.showMore = true;
         this.$nextTick(function(){
           window.scroll({
             top: this.$refs._moreInfo.offsetTop,
@@ -160,16 +121,9 @@
           }
         })
       },
-      validateEmail: function(evt){
-        evt.preventDefault();
-        email.validate2();
-      }
     },
     created: function() {
       this.artist = this.getArtist();
-      this.email.submission = new wrmotaForm2({
-
-      })
     }
   });
 </script>

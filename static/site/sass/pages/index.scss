@@ -1,24 +1,43 @@
+.info {
+  padding-top: $heavy;
+}
 .dl-badge {
   height: 40px;
 }
 button.nav-button,
 a.nav-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: relative;
-  width: 100%;
-  span {
-    float: left;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
   svg {
     width: 1.3em;
-    fill: color($colors, white);
+    fill: color($colors, blue);
+  }
+  &.full-button {
+    width: 100%;
+    justify-content: space-between;
+    svg {
+      width: 1.3em;
+      fill: color($colors, white);
+    }
+  }
+}
 
+button.more-button {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  svg {
+    width: 1.3em;
+    fill: color($colors, blue);
   }
 }
 
 .player-controls {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
   .play-button {
     width: 3em;
     height: 3em;
@@ -67,8 +86,22 @@ a.nav-button {
     margin-bottom: 0;
   }
 }
-@media (min-width: $desktop-min){
+
+@media (min-width: $desktop-max){
   .dl-badge {
     height: 50px;
+  }
+  .info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .player-controls {
+    margin: 0;
+    transform: perspective(100px) rotateY(-1deg);
+  }
+  .info-block {
+    position: relative;
+    max-width: 45%;
   }
 }

@@ -7,7 +7,11 @@
       {% include 'site/snippet/ajax-alert.html' %}
       {% include 'site/snippet/navigation.html' %}
 
-      {% block body %}{% endblock body %}
+      <main id="_main">
+        {% block body %}{% endblock body %}
+      </main>
+
+      {% include 'site/snippet/footer.html' %}
 
       {% block script %}{% endblock script %}
   </body>
