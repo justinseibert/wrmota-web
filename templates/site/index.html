@@ -32,7 +32,9 @@
       <img src="/img/sofie-ramos.jpg">
       <div class="u-flex frame-medium" v-if="artist">
         <button class="play-button">
-          <svg-loading></svg-loading>
+          <svg-loading v-if="audio.state=='loading'"></svg-loading>
+          <svg-play v-if="audio.state=='ready'"></svg-play>
+          <svg-pause v-if="audio.state=='playing'"></svg-pause>
         </button>
         <div class="frame-medium unframe-y">
           <h1>{{ artist.address }}</h1>
@@ -86,6 +88,13 @@
       email: {
         submission: null,
         address: '',
+      },
+      audio: {
+        current: null,
+        state: 'loading',
+        progress: 0,
+        files: {},
+        duration: 0,
       }
     },
     methods: {
@@ -105,21 +114,59 @@
           return this.artist;
         }
       },
+      loadAudio: function(){
+        console.log(this.artist);
+        var file = [
+          'https://wrmota.org/media/',
+          this.artist.audio_directory,
+          this.artist.audio_file
+        ].join('');
+
+        console.log(file);
+        var id = this.artist.audio_file;
+        if (!this.audio[id]){
+          this.audio.files[id] = new Howl({
+            src: [
+              file+'.mp3',
+              file+'.webm',
+              file+'.ogg',
+              file+'.m4a'
+            ],
+            html5: true
+          });
+        } else {
+          this.audio.state = 'ready';
+        }
+        this.audio.current = this.audio.files[id];
+        this.progress = 0;
+
+        var $this = this;
+        this.audio.current.on('load', function(){
+          $this.audio.state = 'ready'
+        });
+        this.audio.current.on('end', function(){
+          $this.audio.state = 'ready'
+        });
+      },
       getData: function(){
         var vm = this;
         vm.fetch_attempt++;
-        axios.get('https://wrmota.org/api/v1/get/all')
-        .then(function(resp) {
-          // JSON responses are automatically parsed.
-          vm.codedData = resp.data.codes.data;
-          vm.artist = vm.codedData[vm.code][0];
-        })
-        .catch(function(error) {
-          vm.errors.push(error);
-          if (vm.fetch_attempt < 3){
-            vm.getArtist();
+        $.ajax({
+          type: 'GET',
+          url: 'https://wrmota.org/api/v1/get/all',
+          success: function(data){
+            vm.codedData = data.codes.data;
+            vm.artist = vm.codedData[vm.code][0];
+            vm.loadAudio();
+          },
+          error: function(error){
+            console.log('xhr error');
+            vm.errors.push(error);
+            if (vm.fetch_attempt < 3){
+              vm.getArtist();
+            }
           }
-        })
+        });
       },
     },
     created: function() {
