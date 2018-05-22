@@ -113,11 +113,22 @@
   to
     transform: rotate(359deg)
 
+.appear-transition-enter-active, .appear-transition-leave-active
+  transition: all 200ms
+
 .fade-transition-enter-active, .fade-transition-leave-active
   transition: all 1000ms
 
+.appear-transition-enter
+  opacity: 0
+  transform: translate3d(0, 20px, 0)
+
+.appear-transition-enter-to,
+  opacity: 1
+  transform: translate3d(0, 0, 0)
+
+
 .fade-transition-enter
-  // transform: translate3d(0, 50%, 0)
   opacity: 0
 .fade-transition-enter-to
   // transform: none

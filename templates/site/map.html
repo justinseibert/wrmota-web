@@ -1,39 +1,42 @@
 {% extends 'site/layout/map.html' %}
 {% block body %}
 {% raw %}
-<transition name="fade-transition">
-  <div class="full" v-show="visible">
+<transition name="fade-transition" appear>
+  <div class="full">
     <div ref="_map" class="map" style="height:100%"></div>
 
-    <footer class="page-portion u-lock-bottom break-heavy map-card" v-if="artistData">
-      <div class="row frame-light">
-        <section class="six grid card float-center">
-          <header class="u-flex-evenly card-theme" :class="'theme-'+artistData.theme">
-            <div class="frame-medium">
-              <h1>{{artistData.address}}</h1>
-              <p>
-                <template v-if="artistData.artist_website">
-                  <a class="nav-button" v-bind:href="'http://'+artistData.artist_website">
+    <transition name="appear-transition" appear>
+      <footer class="page-portion u-lock-bottom break-heavy map-card" v-if="artistData">
+        <div class="row frame-light">
+          <section class="six grid card float-center">
+            <header class="u-flex-evenly card-theme" :class="'theme-'+artistData.theme">
+              <div class="frame-medium">
+                <h1>{{artistData.address}}</h1>
+                <p>
+                  <template v-if="artistData.artist_website">
+                    <a class="nav-button" v-bind:href="'http://'+artistData.artist_website">
+                      {{artistData.artist_name}}
+                      <svg-arrow-forward></svg-arrow-forward>
+                    </a>
+                  </template>
+                  <template v-else>
                     {{artistData.artist_name}}
-                    <svg-arrow-forward></svg-arrow-forward>
-                  </a>
-                </template>
-                <template v-else>
-                  {{artistData.artist_name}}
-                </template>
-              </p>
+                  </template>
+                </p>
+              </div>
+              <div class="frame-medium">
+                <button class="icon-only white" v-on:click="cancelHighlight()"><svg-close></svg-close></button>
+              </div>
+            </header>
+            <div class="row frame-medium">
+              <p>Theme: <b :class="'theme-'+artistData.theme">{{artistData.theme}}</b></p>
+              <p><i>{{artistData.audio_story}}</i></p>
             </div>
-            <div class="frame-medium">
-              <button class="icon-only white" v-on:click="cancelHighlight()"><svg-close></svg-close></button>
-            </div>
-          </header>
-          <div class="row frame-medium">
-            <p>Theme: <b :class="'theme-'+artistData.theme">{{artistData.theme}}</b></p>
-            <p><i>{{artistData.audio_story}}</i></p>
-          </div>
-        </section>
-      </div>
-    </footer>
+          </section>
+        </div>
+      </footer>
+    </transition>
+
   </div>
 </transition>
 {% endraw %}
@@ -89,10 +92,9 @@
         marker: null,
         highlight: null
       },
-      visible: true
     },
     methods: {
-      createMap(container){
+      createMap: function(container){
         let center = L.latLng(this.config.center);
         let bounds = L.latLngBounds(
           L.latLng(this.config.bounds.n,this.config.bounds.w),

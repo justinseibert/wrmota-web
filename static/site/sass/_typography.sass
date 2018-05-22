@@ -81,7 +81,6 @@ i,
 em
   font-style: italic
 
-
 ul
   display: flex
   align-items: flex-start
@@ -91,6 +90,18 @@ ul
   padding-left: 1rem
   margin-bottom: $medium
 
+@media (min-width: $tablet-min)
+  ul
+    font-size: 0.85em
+
+li
+  display: block
+  width: 100%;
+  list-style: none
+  margin: 0 0 $light 0
+  padding: 0 $medium
+  line-height: 1.5
+
 hr
   display: block
   width: 100%
@@ -98,16 +109,6 @@ hr
   border: none
   margin: ($grid-padding-width * 0.75) 0
   border-bottom: 10px solid color($colors, red)
-
-@media (min-width: $tablet-min)
-  ul
-    font-size: 0.85em
-
-li
-  list-style: none
-  margin: 0 0 $light 0
-  padding: 0 $medium
-  line-height: 1.5
 
 .no-break
   white-space: nowrap
