@@ -1,0 +1,52 @@
+.map {
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  z-index: 0;
+}
+$map-point: 20px;
+$map-highlight: 24px;
+
+.map-point {
+  display: block;
+  width: $map-point;
+  height: $map-point;
+  margin: $map-point / -2;
+  background: color($colors,light);
+  border-width: $map-point / 3;
+  border-style: solid;
+  border-radius: 50%;
+  opacity: 0.9;
+  transition: opacity 200ms;
+  &.highlight-point {
+    width: $map-highlight;
+    height: $map-highlight;
+    margin: $map-highlight / -2;
+    opacity: 1;
+    border-width: ($map-highlight / 4) + 0.2;
+    // box-shadow: 0 0 10px -3px #FFF;
+  }
+}
+
+.map-card {
+  z-index: 9999;
+  h1 {
+    font-size: 1.4em;
+    margin: 0 0 0.2em;
+  }
+  p {
+    margin: 0 0 0.2em;
+  }
+}
+
+.animate-transitions{
+  transition: all 200ms;
+}
+
+.fade-out {
+  opacity: 0.25;
+}
+
+.leaflet-container {
+  background: #fafafa;
+}

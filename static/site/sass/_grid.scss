@@ -179,7 +179,6 @@ $max-page-width: 1300px;
   width: 100%;
   max-width: $max-page-width - 100px;
   z-index: 10;
-  background: color($colors, white);
   padding: 0 ($grid-padding-width / 2) 0 ($code-block - $grid-padding-width);
   margin: 0 auto;
 }
@@ -205,6 +204,7 @@ $max-page-width: 1300px;
 }
 
 .card {
+  background: white;
   border-radius: 4px;
   margin-bottom: $padding;
   overflow: hidden;

@@ -1,0 +1,237 @@
+{% extends 'site/layout/map.html' %}
+{% block body %}
+{% raw %}
+<transition name="fade-transition">
+  <div class="full" v-show="visible">
+    <div ref="_map" class="map" style="height:100%"></div>
+
+    <footer class="page-portion u-lock-bottom break-heavy map-card" v-if="artistData">
+      <div class="row frame-light">
+        <section class="six grid card float-center">
+          <header class="u-flex-evenly card-theme" :class="'theme-'+artistData.theme">
+            <div class="frame-medium">
+              <h1>{{artistData.address}}</h1>
+              <p>
+                <template v-if="artistData.artist_website">
+                  <a class="nav-button" v-bind:href="'http://'+artistData.artist_website">
+                    {{artistData.artist_name}}
+                    <svg-arrow-forward></svg-arrow-forward>
+                  </a>
+                </template>
+                <template v-else>
+                  {{artistData.artist_name}}
+                </template>
+              </p>
+            </div>
+            <div class="frame-medium">
+              <button class="icon-only white" v-on:click="cancelHighlight()"><svg-close></svg-close></button>
+            </div>
+          </header>
+          <div class="row frame-medium">
+            <p>Theme: <b :class="'theme-'+artistData.theme">{{artistData.theme}}</b></p>
+            <p><i>{{artistData.audio_story}}</i></p>
+          </div>
+        </section>
+      </div>
+    </footer>
+  </div>
+</transition>
+{% endraw %}
+{% endblock body %}
+
+{% block script %}
+<script>
+  var vMap = new Vue({
+    el: '#_main',
+    data: {
+      fetch_attempt: 0,
+      codedData: false,
+      artistData: null,
+      points: false,
+      config: {
+        bounds: {
+          n: 40.35535,
+          s: 40.314719,
+          w: -75.9746,
+          e: -75.922069,
+        },
+        center: [40.3335,-75.9460],
+        zoom: {
+          init: 16,
+          min: 14,
+          max: 21,
+        },
+        allowZoom: true,
+        dragging: true,
+        padding: [20,20],
+        icon: {
+          basic: L.divIcon({
+            className: 'map-point',
+            iconSize: null,
+          }),
+          highlight: L.divIcon({
+            className: 'map-point highlight-point',
+            iconSize: null,
+          }),
+        },
+        map: '/img/map-grey.svg',
+        show_all: true,
+      },
+      map: null,
+      markers: {},
+      layers: {
+        base: null,
+        overlay: null,
+        marker: null,
+        highlight: null,
+      },
+      panes: {
+        marker: null,
+        highlight: null
+      },
+      visible: true
+    },
+    methods: {
+      createMap(container){
+        let center = L.latLng(this.config.center);
+        let bounds = L.latLngBounds(
+          L.latLng(this.config.bounds.n,this.config.bounds.w),
+          L.latLng(this.config.bounds.s,this.config.bounds.e)
+        );
+        let incr = 0.01;
+        let maxBounds = L.latLngBounds(
+          L.latLng(this.config.bounds.n+incr,this.config.bounds.w-incr),
+          L.latLng(this.config.bounds.s-incr,this.config.bounds.e+incr)
+        );
+        this.map = L.map(container, {
+            attributionControl: false,
+            zoomControl: false,
+            zoomSnap: 0,
+            touchZoom: this.config.allowZoom,
+            scrollWheelZoom: this.config.allowZoom,
+            dragging: this.config.dragging,
+            minZoom: this.config.zoom.min,
+            maxZoom: this.config.zoom.max,
+            maxBounds: maxBounds,
+            inertia: true,
+            inertiaDeceleration: 1000,
+        }).setView(center, this.config.zoom.init);
+
+        this.layers.base = L.tileLayer('').addTo(this.map);
+        this.layers.overlay = L.imageOverlay(this.config.map, bounds).addTo(this.map);
+      },
+      createArtistPoints: function(data){
+        let address = data;
+        for (let i in address){
+          let item = address[i][0];
+          let marker = L.marker([item.lat,item.lng], {
+            icon: L.divIcon({
+              className: 'map-point theme-'+item.theme,
+              iconSize: null,
+            }),
+          }).addTo(this.map);
+          marker.data = item;
+          this.markers[i] = marker;
+
+          marker.on('click', function(elem){
+            // this.events.publish('modal:close');
+            console.log(elem);
+            this.findArtist(elem.target.data);
+          }, this);
+        }
+      },
+      createPanes: function(){
+        // TODO: make this happen before points are added
+        this.map.createPane('highlightPane');
+
+        this.panes.highlight = this.map.getPane('highlightPane');
+        this.panes.highlight.style.zIndex = 650;
+        L.DomUtil.addClass(this.panes.highlight, 'animate-transitions');
+
+        this.panes.marker = this.map.getPane('markerPane')
+        L.DomUtil.addClass(this.panes.marker, 'animate-transitions');
+      },
+      showSinglePoint: function(output){
+        let coords = [ L.latLng(output.lat, output.lng) ];
+
+        output.themes = [output.theme];
+        this.highlightMarkers(coords, output.themes);
+        this.artistData = output;
+      },
+      findArtist: function(artist){
+        if (artist.address){
+          this.showSinglePoint(artist);
+        } else {
+          this.showMultiPoint(artist);
+        }
+      },
+      highlightMarkers: function(coords, themes){
+        if (this.layers.highlight){
+          this.layers.highlight.remove();
+        }
+        L.DomUtil.addClass(this.panes.marker,'fade-out');
+        let markers = [];
+
+        if (coords.length > 1){
+          let bounds = L.latLngBounds(coords[0],coords[coords.length-1]);
+          this.map.flyToBounds(bounds, {padding: this.config.padding, duration: 0.1});
+        } else {
+          let currentZoom = this.map.getZoom();
+          let maxZoom = this.config.zoom.max - 3;
+          let zoom = (currentZoom > maxZoom) ? currentZoom : maxZoom;
+          this.map.flyTo(coords[0], zoom, {padding: this.config.padding, duration: 0.4});
+        }
+
+        for (let i = 0,len = coords.length; i < len; i++){
+          markers.push(L.marker(coords[i], {
+            icon: L.divIcon({
+              className: 'map-point highlight-point theme-'+themes[i],
+              iconSize: null,
+            }),
+            pane: 'highlightPane'
+          }));
+        }
+        this.layers.highlight = L.layerGroup(markers).addTo(this.map);
+      },
+      cancelHighlight: function(){
+        if (this.layers.highlight){
+          this.layers.highlight.remove();
+        }
+        L.DomUtil.removeClass(this.panes.marker,'fade-out');
+        this.artistData = null;
+      },
+      getPoints: function(){
+        if (!this.points) {
+          this.getData();
+        } else  {
+          return this.points;
+        }
+      },
+      getData: function(){
+        var vm = this;
+        vm.fetch_attempt++;
+        $.ajax({
+          type: 'GET',
+          url: 'https://wrmota.org/api/v1/get/all',
+          success: function(data){
+            vm.codedData = data.codes.data;
+            vm.createMap(vm.$refs._map);
+            vm.createArtistPoints(data.codes.data);
+            vm.createPanes();
+          },
+          error: function(error){
+            console.log('xhr error');
+            vm.errors.push(error);
+            if (vm.fetch_attempt < 3){
+              vm.getPoints();
+            }
+          }
+        });
+      },
+    },
+    created: function() {
+      this.artist = this.getPoints();
+    },
+  })
+</script>
+{% endblock script %}

@@ -14,11 +14,17 @@ def check_environment():
         TEMPLATE['analytics'] = True
     else:
         TEMPLATE['analytics'] = False
+    TEMPLATE['mapPage'] = 0
 
 @_site.route('/')
 def index():
     TEMPLATE['email'] = Forms.EmailForm()
     return render_template('site/index.html', template=TEMPLATE)
+
+@_site.route('/map')
+def map():
+    TEMPLATE['mapPage'] = 1
+    return render_template('site/map.html', template=TEMPLATE)
 
 @_site.route('/login')
 def admin_login():

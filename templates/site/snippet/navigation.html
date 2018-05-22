@@ -31,6 +31,7 @@
         opacity: 1,
       },
       spacing: 0,
+      mapPage: {{ template.mapPage }} > 0,
     },
     methods: {
       handleScroll: function(){
@@ -49,16 +50,22 @@
     },
     mounted: function(){
       this.$nextTick(function() {
-        var below = this.$refs._belowLogo[0];
-        this.spacing = below.offsetTop;
-        this.logo.min = below.offsetLeft;
+        if (!this.mapPage) {
+          var below = this.$refs._belowLogo[0];
+          this.spacing = below.offsetTop;
+          this.logo.min = below.offsetLeft;
+        }
       })
     },
     created () {
-      window.addEventListener('scroll', this.handleScroll);
+      if (!this.mapPage){
+        window.addEventListener('scroll', this.handleScroll);
+      }
     },
     destroyed () {
-      window.removeEventListener('scroll', this.handleScroll);
+      if (!this.mapPage){
+        window.removeEventListener('scroll', this.handleScroll);
+      }
     }
   });
 </script>

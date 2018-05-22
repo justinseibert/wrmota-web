@@ -30,13 +30,13 @@ $colors: (
 );
 
 $themes: (
-  community: #cb15e4,
-  culture: #efad00,
-  moving: #eeef07,
-  music: #2ECC71,
-  school: #10e4d2,
-  sentimental: #ff0066,
-  water: #03b1ff,
+  community: #823B93,
+  culture: #F89F34,
+  moving: #FDD729,
+  music: #89C54C,
+  school: #00A09B,
+  nostalgia: #DA519C,
+  water: #009EE0
 );
 
 $permutation_map: (
@@ -57,20 +57,28 @@ $theme_color_map: (
   moving: color($themes, moving),
   music: color($themes, music),
   school: color($themes, school),
-  sentimental: color($themes, sentimental),
+  nostalgia: color($themes, nostalgia),
   water: color($themes, water),
 );
 @each $item,$color in $theme_color_map {
-  .theme_#{$item} {
+  .theme-#{$item} {
     border-color: $color;
     color: $color;
     font-weight: bold;
     text-transform: capitalize;
-    &.play-button {
+    background: white;
+    &.play-button,
+    &.card-theme {
       color: color($colors, white);
       background-color: $color;
       font-weight: normal;
       text-transform: none;
+      & a {
+        color: color($colors, white);
+        svg {
+          fill: color($colors, white);
+        }
+      }
     }
   }
 }
