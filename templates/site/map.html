@@ -63,6 +63,7 @@
           init: 16,
           min: 14,
           max: 21,
+          user: -1
         },
         allowZoom: true,
         dragging: true,
@@ -77,7 +78,7 @@
             iconSize: null,
           }),
         },
-        map: '/img/map-grey.svg',
+        map: 'https://wrmota.org/img/map/map.svg',
         show_all: true,
       },
       map: null,
@@ -85,6 +86,7 @@
       layers: {
         base: null,
         overlay: null,
+        streets: [],
         marker: null,
         highlight: null,
       },
@@ -117,10 +119,55 @@
             maxBounds: maxBounds,
             inertia: true,
             inertiaDeceleration: 1000,
+            renderer: L.canvas(),
         }).setView(center, this.config.zoom.init);
 
-        this.layers.base = L.tileLayer('').addTo(this.map);
+        this.layers.streets = [
+          L.imageOverlay('https://wrmota.org/img/map/streets-0.svg', bounds),
+          L.imageOverlay('https://wrmota.org/img/map/streets-1.svg', bounds),
+          L.imageOverlay('https://wrmota.org/img/map/streets-2.svg', bounds),
+          L.imageOverlay('https://wrmota.org/img/map/streets-3.svg', bounds),
+        ];
         this.layers.overlay = L.imageOverlay(this.config.map, bounds).addTo(this.map);
+        this.showStreets();
+
+        let vm = this;
+        this.map.on('zoomend', function(){
+          vm.showStreets();
+        });
+      },
+      showStreets: function(){
+        let zoom = this.map.getZoom();
+        if (this.config.zoom.user != 0 && zoom <= 15.2)
+        {
+          this.removeStreets(0);
+          this.config.zoom.user = 0;
+        }
+        else if (this.config.zoom.user != 1 && zoom > 15.2 && zoom <= 16.6)
+        {
+          this.removeStreets(1);
+          this.config.zoom.user = 1;
+        }
+        else if (this.config.zoom.user != 2 && zoom > 16.6 && zoom <= 18)
+        {
+          this.removeStreets(2);
+          this.config.zoom.user = 2;
+        }
+        else if (this.config.zoom.user != 3 && zoom > 18)
+        {
+          this.removeStreets(3);
+          this.config.zoom.user = 3;
+        }
+      },
+      removeStreets: function(save){
+        for (let i = 0; i < this.layers.streets.length; i++){
+          let iLayer = this.layers.streets[i];
+          if (i != save && this.map.hasLayer(iLayer)){
+            this.map.removeLayer(iLayer);
+          } else if (i == save && !this.map.hasLayer(iLayer)){
+            this.map.addLayer(iLayer);
+          }
+        }
       },
       createArtistPoints: function(data){
         let address = data;
