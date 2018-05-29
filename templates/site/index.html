@@ -39,7 +39,7 @@
 
       <section id="_audioPlayer" class="card player-controls info-block" v-show="artist">
         <img src="/img/sofie-ramos.jpg">
-        <div class="u-flex frame-medium" v-if="artist">
+        <div class="u-flex frame-medium unframe-bottom" v-if="artist">
           <button class="play-button" v-on:click="toggleState()">
             <svg-loading v-if="audio.button=='loading'"></svg-loading>
             <svg-play v-if="audio.button=='paused'"></svg-play>

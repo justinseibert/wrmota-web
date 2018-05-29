@@ -12,7 +12,7 @@ $map-highlight: 24px;
   width: $map-point;
   height: $map-point;
   margin: $map-point / -2;
-  background: color($colors,light);
+  background: color($colors,white);
   border-width: $map-point / 3;
   border-style: solid;
   border-radius: 50%;
@@ -24,7 +24,6 @@ $map-highlight: 24px;
     margin: $map-highlight / -2;
     opacity: 1;
     border-width: ($map-highlight / 4) + 0.2;
-    // box-shadow: 0 0 10px -3px #FFF;
   }
 }
 
