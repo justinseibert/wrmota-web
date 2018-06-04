@@ -28,6 +28,7 @@ def create_app(config='PRODUCTION', app_name=None):
     configure_error_handlers(app)
 
     csrf.exempt('wrmota.views.api.get_json_data')
+    csrf.exempt('wrmota.views.api.post_app_data')
     csrf.exempt('wrmota.views.api.accept_email_data')
 
     return app

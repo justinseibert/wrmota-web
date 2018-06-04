@@ -2,6 +2,7 @@ from pprint import pprint
 from flask import jsonify
 from wrmota import database as Database
 from wrmota.api import sanitize as Sanitize
+from wrmota.api import hashes as Hashes
 
 def all_data():
     db = Database.get_db()
@@ -108,4 +109,13 @@ def readable_data(option):
 
             each['visitor'] = Sanitize.visitor_status(each['visitor'])
 
+    return jsonify(result)
+
+def app_uuid(device):
+    hash = Hashes.store_password(device['uuid'],unique_salt=False)
+    print('device uuid: {}'.format(hash['password']))
+    print('user uuid  : {}'.format(hash['uuid']))
+    result = {
+        'uuid': hash['uuid'].decode('utf-8')
+    }
     return jsonify(result)

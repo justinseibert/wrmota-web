@@ -1,14 +1,17 @@
 from os import urandom
 from binascii import hexlify
 import hashlib, hmac
+from flask import current_app
 
 def hash_password(password,salt):
     password = password.encode('utf-8')
     return hexlify(hashlib.pbkdf2_hmac('sha256', password, salt, 100000))
 
-def store_password(password):
+def store_password(password,unique_salt=True):
     uuid = hexlify(urandom(16))
     salt = hexlify(urandom(16))
+    if not unique_salt:
+        salt = hash_password(current_app.config['SECRET_KEY'],current_app.config['SECRET_SALT'])
     hash = hash_password(password,salt)
     return {
         'password': hash,
@@ -18,7 +21,7 @@ def store_password(password):
 
 def check_password(stored_password,stored_salt,password):
     hash = hash_password(password,stored_salt)
-    return str(stored_password) == str(hash)
+    return stored_password.decode('utf-8') == hash.decode('utf-8')
 
 def generate_token(bits):
     return hexlify(urandom(bits))

@@ -160,11 +160,12 @@ def email_subscribe():
 
     return jsonify(data)
 
-@_api.route('/v1/get/<data>', methods=['GET'], defaults={'option': 'None'})
+@_api.route('/v1/get/<data>', methods=['GET','POST'], defaults={'option': 'None'})
 @_api.route('/v1/get/<data>/<option>', methods=['GET'])
 # see app level for CSRF exemption
 @cross_origin()
 def get_json_data(data,option):
+    print(data)
     if data == 'all':
         return Provide.all_data()
     elif data == 'map':
@@ -188,6 +189,15 @@ def post_json_data(option):
         return Update.website(data)
     elif option == 'location':
         return Update.location(data)
+    else:
+        return abort(400)
+
+@_api.route('/v1/app/post/<option>', methods=['POST'])
+@cross_origin()
+def post_app_data(option):
+    data = request.get_json()
+    if option == 'appId':
+        return Provide.app_uuid(data)
     else:
         return abort(400)
 
