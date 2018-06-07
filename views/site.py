@@ -15,19 +15,21 @@ def check_environment():
     else:
         TEMPLATE['analytics'] = False
     TEMPLATE['mapPage'] = 0
+    TEMPLATE['title'] = None
 
 @_site.route('/')
 def index():
-    TEMPLATE['email'] = Forms.EmailForm()
     return render_template('site/index.html', template=TEMPLATE)
 
 @_site.route('/map')
 def map():
+    TEMPLATE['title'] = 'Map'
     TEMPLATE['mapPage'] = 1
     return render_template('site/map.html', template=TEMPLATE)
 
 @_site.route('/artists')
 def artists():
+    TEMPLATE['title'] = 'Artists'
     artists = Database.get_artists_involved()
     TEMPLATE['artists'] = {
     'visitor' : Database.get_dict_of(artists['visitor'], name='visitor'),
@@ -40,11 +42,19 @@ def artists():
 
 @_site.route('/credits')
 def credits():
+    TEMPLATE['title'] = 'Credits'
     return render_template('site/credits.html', template=TEMPLATE)
 
 @_site.route('/privacy')
 def privacy():
+    TEMPLATE['title'] = 'Privacy Policy'
     return render_template('site/privacy.html', template=TEMPLATE)
+
+@_site.route('/contact')
+def contact():
+    TEMPLATE['title'] = 'Contact'
+    TEMPLATE['email'] = Forms.EmailForm()
+    return render_template('site/email.html', template=TEMPLATE)
 
 @_site.route('/login')
 def admin_login():
