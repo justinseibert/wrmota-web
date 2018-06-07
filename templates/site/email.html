@@ -1,9 +1,22 @@
+{% extends 'site/layout/default.html' %}
+
+{% block body %}
+<div class="page-portion">
+<h1>Contact</h1>
+<hr>
+
 <form id="EmailSubmitForm">
   {{ template.email.csrf_token }}
-  <label>Stay tuned for updates:</label>
-  <div class="row spaced">
-    {{ template.email.email(id="UserEmail",class="nine grid",type="email", placeholder="me@email.com",required="required") }}
-    <button id="EmailSubmit" type="submit" class="three grid">submit</button>
+  <div class="row">
+    <label class="three grid">Email:</label>
+    {{ template.email.email(id="UserEmail", class="nine grid", type="email", placeholder="me@email.com",required="required") }}
+  </div>
+  <div class="row u-hide">
+    <label class="three grid">Message:</label>
+    {{ template.email.message(id="UserMessage", class="nine grid", type="textarea", placeholder="Hello, my name is...") }}
+  </div>
+  <div class="row">
+    <button id="EmailSubmit" type="submit" class="three grid unblock-right float-right">Submit</button>
   </div>
   {{ template.email.recaptcha }}
 </form>
@@ -20,4 +33,10 @@
     e.preventDefault();
     email.validate();
   });
+  function handleRecaptcha(){
+    email.submit();
+  }
 </script>
+</div>
+
+{% endblock body %}

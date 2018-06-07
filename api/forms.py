@@ -1,7 +1,7 @@
 from flask import current_app, request
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import TextField, PasswordField, HiddenField, BooleanField, SelectField
-from wtforms.validators import InputRequired, ValidationError, Email, DataRequired, EqualTo
+from wtforms import TextField, TextAreaField, PasswordField, HiddenField, BooleanField, SelectField
+from wtforms.validators import InputRequired, Optional, ValidationError, Email, DataRequired, EqualTo
 from werkzeug.utils import secure_filename
 
 from wrmota.api import hashes as Hash
@@ -40,6 +40,7 @@ class LoginUserForm(FlaskForm):
 
 class EmailForm(FlaskForm):
     email = TextField('email', validators=[Email(),DataRequired()])
+    message = TextAreaField('message', validators=[Optional()])
     recaptcha = RecaptchaField('recaptcha')
 
 class EditArtistForm(FlaskForm):
