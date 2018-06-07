@@ -42,6 +42,10 @@ def artists():
 def credits():
     return render_template('site/credits.html', template=TEMPLATE)
 
+@_site.route('/privacy')
+def privacy():
+    return render_template('site/privacy.html', template=TEMPLATE)
+
 @_site.route('/login')
 def admin_login():
     return redirect(url_for('_admin.login'))
