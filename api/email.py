@@ -28,14 +28,13 @@ def forward_contact_message(info):
     message = compile_message(message_array)
 
     print('EMAIL: forwarding message from {}'.format(info['address']))
-    print('EMAIL: Message...{}'.format(info['message']))
     return requests.post(
         current_app.config['MAILGUN_SUBSCRIBE_URL'],
         auth=("api", current_app.config['MAILGUN_API_KEY']),
         data={"from": current_app.config['MAILGUN_SUBSCRIBE_ADDRESS'],
               "to": current_app.config['MAILGUN_PERSONAL_ADDRESS'],
               "subject": 'New Message for WRMOTA',
-              "text": info['message']
+              "text": message
             }
         )
 
