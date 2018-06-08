@@ -11,6 +11,7 @@ def store_password(password,unique_salt=True):
     uuid = hexlify(urandom(16))
     salt = hexlify(urandom(16))
     if not unique_salt:
+        # changing these values will renew all device ids (app analytics)
         salt = hash_password(current_app.config['SECRET_KEY'],current_app.config['SECRET_SALT'])
     hash = hash_password(password,salt)
     return {

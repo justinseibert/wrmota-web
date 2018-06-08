@@ -54,8 +54,12 @@ def privacy():
 def contact():
     TEMPLATE['title'] = 'Contact'
     TEMPLATE['email'] = Forms.EmailForm()
-    return render_template('site/email.html', template=TEMPLATE)
+    return render_template('site/contact.html', template=TEMPLATE)
 
 @_site.route('/login')
 def admin_login():
     return redirect(url_for('_admin.login'))
+
+@_site.route('/logout')
+def admin_logout():
+    return redirect(url_for('_admin.logout'))

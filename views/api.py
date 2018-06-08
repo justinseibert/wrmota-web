@@ -149,10 +149,17 @@ def email_subscribe():
             'subscribe': True
         }
 
-        add_list_member(info)
+        Email.add_list_member(info)
+
+        message = Sanitize.spaces(request.form['message'])
+        if (message != '' and len(message) > 0):
+            info['message'] = message
+            data['message'] = 'Thanks! We\'ll be in touch shortly.'
+            Email.forward_contact_message(info)
+        else:
+            data['message'] = 'Success! Be on the look out for emails from <i>{}</i>'.format(current_app.config['MAILGUN_SUBSCRIBE_ADDRESS'])
 
         data['errors'] = False
-        data['message'] = 'Success! Be on the look out for emails from <i>{}</i>'.format(current_app.config['MAILGUN_SUBSCRIBE_ADDRESS'])
     else:
         print(validform.errors)
         data['errors'] = validform.errors
@@ -200,18 +207,6 @@ def post_app_data(option):
         return Provide.app_uuid(data)
     else:
         return abort(400)
-
-def add_list_member(info):
-    print('adding to list')
-    return requests.post(
-        current_app.config['MAILGUN_SUBSCRIBE_LIST'],
-        auth=('api', current_app.config['MAILGUN_API_KEY']),
-        data={
-            'upsert': True,
-            'subscribed': info['subscribe'],
-            'address': info['address'],
-            'vars': '{"app":"wrmota.org","date":"'+info['date']+'","source":"site"}'
-        })
 
 def get_formatted_datetime():
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
