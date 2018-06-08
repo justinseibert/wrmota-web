@@ -21,7 +21,9 @@ def store_password(password,unique_salt=True):
 
 def check_password(stored_password,stored_salt,password):
     hash = hash_password(password,stored_salt)
-    return stored_password.decode('utf-8') == hash.decode('utf-8')
+    print('check_password: {}'.format(str(stored_password)))
+    print('                {}'.format(str(hash)))
+    return str(stored_password) == str(hash)
 
 def generate_token(bits):
     return hexlify(urandom(bits))
