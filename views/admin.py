@@ -36,7 +36,7 @@ def login():
             session['token'] = isUser['token']
 
             flash('logged in as <b>{}</b>'.format(user))
-            return redirect(url_for('_admin.view_data', data='map'))
+            return redirect(url_for('_admin.index'))
         else:
             flash('Unable to log in')
     elif request.method == 'POST':
@@ -161,20 +161,15 @@ def send_artist_emails():
 
     filter_options = {
         'none': 'no filter',
-        'confirmed': 'confirmed',
+        # 'confirmed': 'confirmed',
         'visitor': 'visitor',
-        'touched_base': 'touched base',
-        'art_received': 'art received',
+        # 'touched_base': 'touched base',
+        # 'art_received': 'art received',
     }
     TEMPLATE['options'] = filter_options
 
     data = Database.get_dict_of(Database.get_data_artist(), name='artist')
     TEMPLATE['artist'] = data
-
-    cols = ['id','artist','curator','art_received','visitor','confirmed','touched_base','email']
-    TEMPLATE['tables'] = {
-        'artist' : Database.keep_cols_in_dict(data,cols)
-    }
 
     return render_template('admin/task/send_email.html', template=TEMPLATE)
 

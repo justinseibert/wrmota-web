@@ -2,10 +2,7 @@
 
 {% block body %}
 <div class="row">
-  <div class="four grid">
-    {% include 'admin/snippet/table.html' %}
-  </div>
-  <div class="eight grid frame-light">
+  <div class="grid frame-light">
     <aside class="row">
       <p>Use the dropdown options to narrow a selection of artists. Hitting the <em>draft email</em> button will open up a new email draft in your preferred editor with the selected artists BCC'd and ready to go.</p>
     </aside>
@@ -44,8 +41,6 @@
 <script src="{{ url_for('_admin.static', filename='js/clipboard.min.js') }}"></script>
 <script>
   var all_data = {{ template.artist.data|tojson }};
-  var table_data = {{ template.tables.artist.data|tojson }};
-  var table;
   var elem = {
     list: document.getElementById('List'),
     filter: document.getElementById('Filter'),
@@ -54,12 +49,6 @@
     form: document.getElementById('ArtistForm'),
   }
   $(document).ready(function(){
-    table = new TableData({
-      name: '{{ template.tables.artist.name }}',
-      data: table_data,
-      crop: true,
-      rmCols: ['id']
-    });
     var draft_it = new TouchClick('#DraftIt',draft_email);
     var clipboard = new ClipboardJS('#CopyIt', {
       text: function(el){
