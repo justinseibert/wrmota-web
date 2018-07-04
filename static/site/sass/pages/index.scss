@@ -4,35 +4,6 @@
 .dl-badge {
   height: 40px;
 }
-button.nav-button,
-a.nav-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  svg {
-    width: 1.3em;
-    fill: color($colors, blue);
-  }
-  &.full-button {
-    width: 100%;
-    justify-content: space-between;
-    svg {
-      width: 1.3em;
-      fill: color($colors, white);
-    }
-  }
-}
-
-button.more-button {
-  display: block;
-  margin: 0 auto;
-  background: transparent;
-  svg {
-    width: 1.3em;
-    fill: color($colors, blue);
-  }
-}
 
 .player-controls {
   position: relative;

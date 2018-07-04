@@ -2,3 +2,60 @@
   display: block;
   width: 100%;
 }
+
+button.nav-button,
+a.nav-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  svg {
+    width: 1.3em;
+    fill: color($colors, blue);
+  }
+  &.full-button {
+    width: 100%;
+    justify-content: space-between;
+    svg {
+      width: 1.3em;
+      fill: color($colors, white);
+    }
+  }
+}
+
+.donate-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99999;
+  padding: 2em;
+}
+@media (min-width: $tablet-min){
+  .donate-button {
+    min-width: 200px;
+    bottom: 20px;
+  }
+}
+
+button.more-button {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  svg {
+    width: 1.3em;
+    fill: color($colors, blue);
+  }
+}
+
+.list-item {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
