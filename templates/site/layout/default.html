@@ -4,16 +4,18 @@
     {% include 'site/snippet/head.html' %}
   </head>
   <body>
-      {% include 'site/snippet/ajax-alert.html' %}
-      {% include 'site/snippet/navigation.html' %}
+      <div class="container pad-donation">
+        {% include 'site/snippet/ajax-alert.html' %}
+        {% include 'site/snippet/navigation.html' %}
 
-      <main id="_main">
-        {% block body %}{% endblock body %}
-      </main>
+        <main id="_main">
+          {% block body %}{% endblock body %}
+        </main>
 
-      {% include 'site/snippet/footer.html' %}
-      {% include 'site/snippet/donate.html' %}
-
+        {% include 'site/snippet/footer.html' %}
+        {% include 'site/snippet/donate.html' %}
+      </div>
+      
       {% block script %}{% endblock script %}
   </body>
 </html>

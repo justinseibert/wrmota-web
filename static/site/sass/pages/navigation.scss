@@ -30,6 +30,11 @@ a.nav-button {
   z-index: 99999;
   padding: 2em;
 }
+
+.pad-donation {
+  margin-bottom: 4em;
+}
+
 @media (min-width: $tablet-min){
   .donate-button {
     min-width: 200px;

@@ -1,23 +1,8 @@
 .container,
-.container-medium,
-.container-small,
 .full,
 .row,
 .grid {
   position: relative;
-}
-.container,
-.container-medium,
-.container-small {
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: 0;
-}
-.container-medium{
-  max-width: 34rem;
-}
-.container-small{
-  max-width: 24rem;
 }
 .full{
   width: 100%;
