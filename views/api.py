@@ -167,6 +167,17 @@ def email_subscribe():
 
     return jsonify(data)
 
+@_api.route('/send_newsletter', methods=['POST'])
+@Login.requires_permission(0)
+def send_newsletter():
+    data = request.get_json()
+    try:
+        Email.send_newsletter(data)
+        response = 'success'
+    except:
+        response = 'failure'
+    return jsonify(response)
+
 @_api.route('/v1/get/<data>', methods=['GET','POST'], defaults={'option': 'None'})
 @_api.route('/v1/get/<data>/<option>', methods=['GET'])
 # see app level for CSRF exemption

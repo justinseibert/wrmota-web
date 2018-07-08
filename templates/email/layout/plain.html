@@ -3,15 +3,20 @@
 <head>
   <meta name="viewport" content="width=device-width" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>{{ title }}</title>
+  <title>{{ template.title }}</title>
   {% include 'email/snippet/style.html' %}
+  {% if template.include_analytics %}
+    {% if template.analytics %}
+        {% include 'site/snippet/analytics.html' %}
+    {% endif %}
+  {% endif %}
 </head>
 <body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
   <table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; width: 100%; background-color: #f6f6f6; margin: 0; padding: 0; border: none; outline: none" bgcolor="#f6f6f6" cellpadding="0">
     <tbody>
       <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; margin: 0; border:none">
         <td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">
-          <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
+          <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; max-width: 600px; display: block; margin: 0 auto; padding: 0;">
             <table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; background-color: #fff; margin: 5px 0;" bgcolor="#fff">
               <tbody>
                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 20px; margin: 0;">
@@ -34,6 +39,7 @@
               </tbody>
             </table>
           </div>
+
           {% include 'email/snippet/footer.html' %}
         </td>
       </tr>

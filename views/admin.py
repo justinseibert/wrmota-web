@@ -21,6 +21,12 @@ def restrict_to_admins():
     else:
         TEMPLATE['analytics'] = False
 
+    if Login.check_login_status(0):
+        TEMPLATE['superuser'] = True
+    else:
+        TEMPLATE['superuser'] = False
+
+
 @_admin.route('/login', methods=['GET', 'POST'])
 def login():
     form = Forms.LoginUserForm()
@@ -120,9 +126,19 @@ def view_print_map_data():
 
     return render_template('admin/view/print-map-data.html', template=TEMPLATE)
 
-@_admin.route('/view/<data>')
+@Login.requires_permission(0)
+def view_newsletter(data):
+    TEMPLATE = {
+        'browser_url': data,
+        'analytics': False
+    }
+    letter = 'email/{}.html'.format(data)
+    return render_template(letter, template=TEMPLATE)
+
+@_admin.route('/view/<data>', methods=['GET','POST'], defaults={'option': 'None'})
+@_admin.route('/view/<data>/<option>')
 @Login.requires_permission(10)
-def view_data(data):
+def view_data(data,option):
     if data == 'data':
         return view_all_tables()
     elif data == 'codes':
@@ -131,6 +147,8 @@ def view_data(data):
         return view_google_map()
     elif data == 'paper':
         return view_print_map_data()
+    elif data == 'newsletter':
+        return view_newsletter(option)
     else:
         return abort(404)
 
@@ -179,6 +197,10 @@ def print_color_codes():
     TEMPLATE['codes'] = Database.get_dict_of(codes)
     return render_template('admin/task/print-colors.html', template=TEMPLATE)
 
+@Login.requires_permission(0)
+def send_newsletter():
+    return render_template('admin/task/send_newsletter.html', template=TEMPLATE)
+
 @_admin.route('/task/<data>')
 @Login.requires_permission(10)
 def edit_data(data):
@@ -188,10 +210,13 @@ def edit_data(data):
         return send_artist_emails()
     elif data == 'print-codes':
         return print_color_codes()
+    elif data == 'newsletter':
+        return send_newsletter()
     else:
         return abort(404)
 
 @_admin.route('/lookup')
+@Login.requires_permission(0)
 def code_lookup_for_emails():
     TEMPLATE['tables'] = {}
     codes = Database.get_address_codes()

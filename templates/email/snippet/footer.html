@@ -1,11 +1,14 @@
+{% if template.browser_url %}
 <div class="footer" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 10px;">
   <table width="100%" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
     <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
       <td class="aligncenter content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">
         This is an official newsletter from <a href="https://wrmota.org" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">West Reading Museum of Temporary Art</a>.<br>
-        Please do not reply to this email. You can contact us <a href="https://wrmota.org/contact" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">here</a>.<br>
-        If you did not expect this email, please <a href="%unsubscribe_url%" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">unsubscribe</a>
+          Please do not reply to this email. You can contact us <a href="https://wrmota.org/contact" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">here</a>.<br>
+          If you did not expect this email, please <a href="%mailing_list_unsubscribe_url%" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">unsubscribe</a><br>
+          <a href="https://wrmota.org/news/{{template.browser_url}}" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0;">View message in browser.</a>
       </td>
     </tr>
   </table>
 </div>
+{% endif %}

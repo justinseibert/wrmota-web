@@ -1,0 +1,69 @@
+{% extends 'admin/layout/data.html' %}
+
+{% block body %}
+  {% raw %}
+  <div id="_editor" class="row">
+    <div class="six grid frame-light">
+      <h1>Newsletter</h1>
+      <div class="row">
+        <input v-model="newsletter.title" class="row">
+        <select v-model="newsletter.selected" class="row">
+          <option v-for="option in newsletter.options" v-bind:value="option">
+            {{ option }}
+          </option>
+        </select>
+        <select v-model="lists.selected" class="row">
+          <option v-for="option in lists.options" v-bind:value="option">
+            {{ option }}
+          </option>
+        </select>
+        <button v-on:click="sendNewsletter();" class="row button nav-button">Send Newsletter</button>
+      </div>
+    </div>
+    <div class="six grid full-scroll">
+      <iframe name="_newsletter" v-bind:src="newsletter.url + newsletter.selected"></iframe>
+    </div>
+  </div>
+  {% endraw %}
+{% endblock body %}
+
+{% block script %}
+<script>
+  let util = new Util();
+  let vEdit = new Vue({
+    el: '#_editor',
+    data: {
+      newsletter: {
+        title: 'New from WRMOTA',
+        url: '/admin/view/newsletter/',
+        selected: '180705',
+        options: [
+          '180705'
+        ]
+      },
+      lists: {
+        selected: 'justin',
+        options: [
+          'justin',
+          'test',
+          'subscriber'
+        ]
+      }
+    },
+    methods: {
+      sendNewsletter: function(){
+        let data = {
+          title: this.newsletter.title,
+          list: this.lists.selected,
+          newsletter: this.newsletter.selected
+        }
+        util.postData('/api/send_newsletter', data, csrf_token).then(
+          function(response){
+            console.log(response);
+          }
+        )
+      }
+    },
+  })
+</script>
+{% endblock script %}

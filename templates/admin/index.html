@@ -8,6 +8,11 @@
       <li><a href="/admin/view/map">View/Edit Data</a></li>
       <li><a href="/admin/task/email">Email Artists</a></li>
     </ul>
+    {% if template.superuser %}
+    <ul class="row break-heavy">
+      <li><a href="/admin/task/newsletter">Send Newsletter</a></li>
+    </ul>
+    {% endif %}
     <ul class="row break-heavy">
       <li><a href="/admin/logout">logout</a></li>
     </ul>

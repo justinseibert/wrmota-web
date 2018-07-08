@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, render_template
 import requests
 
 def compile_message(message_array):
@@ -49,3 +49,35 @@ def add_list_member(info):
             'address': info['address'],
             'vars': '{"app":"wrmota.org","date":"'+info['date']+'","source":"site"}'
         })
+
+def send_newsletter(data):
+    subject = data['title']
+    TEMPLATE = {
+        'title': data['title'],
+        'browser_url': data['newsletter'],
+        'analytics': False
+    }
+    recipient = current_app.config['MAILGUN_LIST'][data['list']]
+    message = 'email/{}.html'.format(data['newsletter'])
+    html = render_template(message, template=TEMPLATE)
+    text = [
+        'Thank you for following West Reading Museum of Temporary Art.',
+        'This message is to alert you of our latest newsletter which is available at https://wrmota.org/news/{}.\n'.format(data['newsletter']),
+        'All the best.',
+        'The WRMOTA Team\n',
+        '-------------------------',
+        'Please do not reply to this email. You can contact us here: https://wrmota.org/contact',
+        'If you did not expect this email, please unsubscribe here: %mailing_list_unsubscribe_url%'
+    ]
+
+    return requests.post(
+        current_app.config['MAILGUN_SUBSCRIBE_URL'],
+        auth= ("api", current_app.config['MAILGUN_API_KEY']),
+        data= {
+            "from": current_app.config['MAILGUN_NEWSLETTER_SENDER'],
+            "to": recipient,
+            "subject": subject,
+            "text": compile_message(text),
+            "html": html
+        }
+    )

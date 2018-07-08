@@ -56,6 +56,13 @@ def contact():
     TEMPLATE['email'] = Forms.EmailForm()
     return render_template('site/contact.html', template=TEMPLATE)
 
+@_site.route('/news/<data>')
+def newsletter(data):
+    TEMPLATE['title'] = 'WRMOTA: News {}'.format(data)
+    TEMPLATE['include_analytics'] = True
+    newsletter = 'email/{}.html'.format(data)
+    return render_template(newsletter, template=TEMPLATE)
+
 @_site.route('/login')
 def admin_login():
     return redirect(url_for('_admin.login'))
