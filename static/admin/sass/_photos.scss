@@ -1,0 +1,22 @@
+.photo-guide {
+  .status {
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 5;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #ff384c;
+    }
+    &.good:after {
+      background: #30d056;
+    }
+    &.okay:after {
+      background: #deff00;
+    }
+  }
+}
