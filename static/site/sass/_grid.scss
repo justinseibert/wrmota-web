@@ -14,14 +14,28 @@
   height: 100vh;
   overflow: auto;
 }
-.row,
-.row.spaced {
+.row {
   width: 100%;
   margin: 0;
   overflow: hidden;
+  &.spaced {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    .grid {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
 }
-.grid,
-.row.spaced .grid{
+.row.spaced > div,
+.row.spaced > figure {
+  margin-top: $light;
+  margin-bottom: 3%;
+}
+.grid {
   float: left;
   box-sizing: border-box;
   width: 100%;
@@ -81,9 +95,15 @@
       width: 91.66666%;
     }
   }
-  .row.spaced .grid{
-    margin-left: 1%;
-    margin-right: 1%;
+  .row.spaced .grid {
+    &.full {
+      align-self: stretch;
+      height: auto;
+    }
+    &.auto{
+      margin-left: auto;
+      margin-right: auto;
+    }
     &.one{
       width: 6.5%;
     }&.two{
@@ -106,10 +126,6 @@
       width: 83%;
     }&.eleven{
       width: 91.5%;
-    }&:first-child{
-      margin-left: 0;
-    }&:last-child{
-      margin-right: 0;
     }
   }
 }
