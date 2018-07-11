@@ -99,6 +99,8 @@
     &.full {
       align-self: stretch;
       height: auto;
+      margin-left: 0;
+      margin-right: 0;
     }
     &.auto{
       margin-left: auto;
