@@ -229,6 +229,17 @@ def code_lookup_for_emails():
     TEMPLATE['tables']['codes'] = codes
     return render_template('admin/task/find-codes.html',template=TEMPLATE)
 
+@_admin.route('/photo', defaults={'batch': None})
+@_admin.route('/photo/<batch>')
+def guide_photos(batch):
+    try:
+        if batch == None:
+            batch = 'menu'
+        page = 'admin/photos/{}.html'.format(batch)
+        return render_template(page, template=TEMPLATE)
+    except:
+        abort(404)
+
 @_admin.route('/test')
 @Login.requires_permission(0)
 def test_update():

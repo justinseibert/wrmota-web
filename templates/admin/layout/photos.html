@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>admin: wrmota</title>
+    {% include 'admin/snippet/head.html' %}
+  </head>
+  <body>
+    {% include 'admin/snippet/message.html' %}
+    {% include 'site/snippet/ajax-alert.html' %}
+    <a href="/admin/photo" class="button nav-button">menu</a>
+    {% block body %}
+    {% endblock body %}
+
+    {% block script %}
+    {% endblock script %}
+  </body>
+</html>
