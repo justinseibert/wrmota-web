@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /media/
+Disallow: /privacy/
+Disallow: /news/
+Disallow: /login/
+Disallow: /logout/
