@@ -36,9 +36,15 @@
         </div>
       </footer>
     </transition>
-
   </div>
 </transition>
+<button class="raise button"
+  ref="_beforeFooter"
+  v-on:click="revealFooter()"
+  >
+  <svg-arrow-up v-if="showFooter"></svg-arrow-up>
+  <svg-arrow-down v-if="!showFooter"></svg-arrow-down>
+</button>
 {% endraw %}
 {% endblock body %}
 
@@ -47,6 +53,7 @@
   var vMap = new Vue({
     el: '#_main',
     data: {
+      showFooter: true,
       fetch_attempt: 0,
       codedData: false,
       artistData: null,
@@ -96,6 +103,25 @@
       },
     },
     methods: {
+      revealFooter: function(){
+        let position = this.$refs._map.offsetTop;
+        if (this.showFooter){
+          position = this.$refs._beforeFooter.offsetTop;
+        }
+        this.$nextTick(function(){
+          window.scroll({
+            top: position,
+            behavior: 'smooth'
+          });
+        });
+      },
+      handleScroll: function(){
+        if (window.scrollY < 10){
+          this.showFooter = true;
+        } else {
+          this.showFooter = false;
+        }
+      },
       createMap: function(container){
         let center = L.latLng(this.config.center);
         let bounds = L.latLngBounds(
@@ -269,8 +295,12 @@
       },
     },
     created: function() {
+      window.addEventListener('scroll', this.handleScroll);
       this.artist = this.getData();
     },
+    destroyed: function(){
+      window.removeEventListener('scroll', this.handleScroll);
+    }
   })
 </script>
 {% endblock script %}

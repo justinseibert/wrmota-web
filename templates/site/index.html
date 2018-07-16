@@ -2,29 +2,34 @@
 {% block body %}
 {% raw %}
 <transition name="appear-transition" appear>
-  <header id="_home" class="page-portion" ref="_header">
-    <h1>West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
-    <hr>
-    <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
-    <p>Download the app to explore the artwork of WRMOTA and listen to stories from the community that inspired it.</p>
-    <p>
-      <a href="https://itunes.apple.com/us/app/wrmota/id1373824275?mt=8">
-        <img class="dl-badge" alt='Download on the App Store' src="/img/icon/badge-ios.svg"></a>
-      <a href='https://play.google.com/store/apps/details?id=org.wrmota.app'>
-        <img class="dl-badge" alt='Get it on Google Play' src='/img/icon/badge-android.png'/>
-      </a>
-    </p>
-    <p class="break-heavy frame-heavy unframe-x unframe-top" v-show="!showMore">
-      <a onclick="vInfo.show();vFoot.show()" class="nav-button frame-heavy unframe-x unframe-top">
-        Learn More
-        <svg-arrow-down></svg-arrow-down>
-      </a>
-    </p>
+  <header id="_home" class="page-portion header"
+    ref="_header"
+    v-bind:style="{paddingTop: '0px'}"
+  >
+    <div class="row">
+      <h1>West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
+      <hr>
+      <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
+      <p>Download the app to explore the artwork of WRMOTA and listen to stories from the community that inspired it.</p>
+      <p>
+        <a href="https://itunes.apple.com/us/app/wrmota/id1373824275?mt=8">
+          <img class="dl-badge" alt='Download on the App Store' src="/img/icon/badge-ios.svg"></a>
+        <a href='https://play.google.com/store/apps/details?id=org.wrmota.app'>
+          <img class="dl-badge" alt='Get it on Google Play' src='/img/icon/badge-android.png'/>
+        </a>
+      </p>
+      <p>
+        <a onclick="vInfo.show();" class="nav-button">
+          Learn More
+          <svg-arrow-down></svg-arrow-down>
+        </a>
+      </p>
+    </div>
   </header>
 </transition>
 
 <transition name="fade-transition">
-  <div id="_info" class="page-portion info" ref="_moreInfo" v-show="showMore">
+  <div id="_info" class="page-portion info" ref="_moreInfo">
     <section class="u-flex-evenly" ref="_blockBar">
       <template v-for="(color,index) of blocks.group" >
           <div class="permutation-block" :class="color" v-bind:style="{width: blocks.size+'px', height:blocks.size/3+'px'}"></div>
@@ -96,7 +101,6 @@ var util = new Util();
   var vInfo = new Vue({
     el: '#_main',
     data: {
-      showMore: false,
       codedData: false,
       code: 'AABC',
       artist: false,
@@ -122,7 +126,6 @@ var util = new Util();
     },
     methods: {
       show: function(){
-        this.showMore = true;
         this.$nextTick(function(){
           window.scroll({
             top: this.$refs._blockBar.offsetTop,

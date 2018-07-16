@@ -1,5 +1,8 @@
 {% raw %}
-<div id="_message" class="alert-bar" v-if="message.length > 0">
+<div id="_message"
+  v-if="message.length > 0"
+  :class="'alert-bar'"
+>
   <div class="message"
     v-for="(item, index) of message"
     :class="item.class"
@@ -12,7 +15,7 @@
 <script>
   function Message(args){
     args = args || {};
-    this.class = args.class || 'default';
+    this.class = args.class || 'success';
     this.message = args.message || 'no message';
   }
   var vMessage = new Vue({

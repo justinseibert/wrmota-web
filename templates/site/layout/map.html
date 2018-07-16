@@ -4,17 +4,17 @@
     {% include 'site/snippet/head.html' %}
   </head>
   <body>
-      {% include 'site/snippet/ajax-alert.html' %}
-      {% include 'site/snippet/navigation.html' %}
+      {% include 'site/snippet/scripts.html' %}
 
-      <main id="_main" class="full">
+      <main id="_main" class="full-scroll">
         {% block body %}{% endblock body %}
       </main>
 
       {% include 'site/snippet/footer.html' %}
       {% include 'site/snippet/donate.html' %}
+      {% include 'site/snippet/navigation.html' %}
+      {% include 'site/snippet/message.html' %}
 
-      {% include 'site/snippet/scripts.html' %}
       {% block script %}{% endblock script %}
   </body>
 </html>

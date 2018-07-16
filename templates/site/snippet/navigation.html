@@ -1,19 +1,12 @@
 {% raw %}
-<div id="_nav">
+<div id="_nav" class="nav-container">
   <nav class="code-portion">
-    <template v-for="(item, index) of code">
-      <template v-if="index === 0">
-        <a href="/" :class="item" class="logo-block permutation-block" v-bind:style="{ left:logo.left+'px' }">
-            <img class="logo-svg" src="/img/logo-tile.svg" v-bind:style=" { opacity:logo.opacity }"/>
-          </a>
-      </template>
-      <template v-else-if="index === 1">
-        <div :class="item" class="permutation-block" ref="_belowLogo"></div>
-      </template>
-      <template v-else>
-        <div :class="item" class="permutation-block"></div>
-      </template>
-    </template>
+    <a href="/" class="logo-block permutation-block permutation-A" v-bind:style="{ left:logo.left+'px' }">
+      <img class="logo-svg" src="/img/logo-tile.svg" v-bind:style=" { opacity:logo.opacity }"/>
+    </a>
+    <div class="permutation-block permutation-B" ref="_belowLogo"></div>
+    <div class="permutation-block permutation-C"></div>
+    <div class="permutation-block permutation-D"></div>
   </nav>
   <div v-bind:style="{ height: spacing+'px' }"></div>
 </div>
@@ -51,7 +44,7 @@
     mounted: function(){
       this.$nextTick(function() {
         if (!this.mapPage) {
-          var below = this.$refs._belowLogo[0];
+          var below = this.$refs._belowLogo;
           this.spacing = below.offsetTop;
           this.logo.min = below.offsetLeft;
         }

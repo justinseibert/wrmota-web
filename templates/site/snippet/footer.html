@@ -1,50 +1,42 @@
-<footer id="_footer" class="page-portion" v-show="showMore">
+<footer id="_footer" class="page-portion footer pad-donation">
   <hr class="break-heavy">
 
-  <div class="row break-medium">
-    <a href="https://www.facebook.com/wrmotaevent/" class="social button" target="_blank">
-      <svg-social-facebook></svg-social-facebook>
-    </a>
-    <a href="https://www.instagram.com/wrmota_org/" class="social button" target="_blank">
-      <svg-social-instagram></svg-social-instagram>
-    </a>
-    <a href="https://twitter.com/wrmotaevent" class="social button" target="_blank">
-      <svg-social-twitter></svg-social-twitter>
-    </a>
-    <a href="/contact" class="social button">
-      <svg-social-email></svg-social-email>
-    </a>
-  </div>
-
-  <small class="row">
+  <div class="row">
     <p>A <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="blank">Berks Community Murals</a> project in collaboration with <a href="https://besttest.studio" target="_blank">BESTTEST</a>.</p>
     <p>Funding by West Reading Elm Street, a program of the West Reading Community Revitalization Foundation <a href="http://wrcrf.org" target="blank">(WRCRF)</a>, along with the Wyomissing Area Education Foundation <a href="http://wyoarea-foundation.org" target="blank">(WAEF)</a> and Wyomissing Area School District.</p>
-    <div class="row">
-      <p class="six grid">
-        <a class="nav-button" href="/credits">
-          View All Credits
-          <svg-arrow-forward></svg-arrow-forward>
+    <div class="row spaced">
+      <div class="three grid u-fix">
+        <ul class="six grid unframe unblock">
+          <li><a href="/">Home</a></li>
+          <li><a href="/artists">Artists</a></li>
+          <li><a href="/map">Map</a></li>
+        </ul>
+        <ul class="six grid unframe unblock">
+          <li><a href="/credits">Credits</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="nine grid desktop-align-right ">
+        <a href="https://www.facebook.com/wrmotaevent/" class="social button" target="_blank">
+          <svg-social-facebook></svg-social-facebook>
         </a>
-      </p>
-      <p class="six grid desktop-align-right">
-        <a class="nav-button" href="/privacy">
-          Privacy Policy
+        <a href="https://www.instagram.com/wrmota_org/" class="social button" target="_blank">
+          <svg-social-instagram></svg-social-instagram>
         </a>
-      </p>
-    </div>
-  </small>
+        <a href="https://twitter.com/wrmotaevent" class="social button" target="_blank">
+          <svg-social-twitter></svg-social-twitter>
+        </a>
+        <a href="/contact" class="social button">
+          <svg-social-email></svg-social-email>
+        </a>
+      </div>
+    </ul>
+  </div>
 </footer>
 
 <script>
   var vFoot = new Vue({
-    el: '#_footer',
-    data: {
-      showMore: false,
-    },
-    methods: {
-      show: function(){
-        this.showMore = true;
-      },
-    }
+    el: '#_footer'
   });
 </script>

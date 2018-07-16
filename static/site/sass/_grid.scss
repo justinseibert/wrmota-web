@@ -4,13 +4,13 @@
 .grid {
   position: relative;
 }
-.full{
+.full {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
-.full-scroll{
+.full-scroll {
   height: 100vh;
   overflow: auto;
 }
@@ -24,16 +24,16 @@
     align-content: flex-start;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
     .grid {
       box-sizing: border-box;
       width: 100%;
     }
   }
 }
-.row.spaced > div,
-.row.spaced > figure {
+.row.spaced > * {
   margin-top: $light;
-  margin-bottom: 3%;
+  margin-bottom: $light;
 }
 .grid {
   float: left;
