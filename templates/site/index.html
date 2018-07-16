@@ -2,7 +2,7 @@
 {% block body %}
 {% raw %}
 <transition name="appear-transition" appear>
-  <header id="_home" class="page-portion">
+  <header id="_home" class="page-portion" ref="_header">
     <h1>West Reading <br class="u-mobile">Museum of <br class="u-mobile">Temporary Art</h1>
     <hr>
     <p>A borough-wide mural art project featuring over 100 public works created by artists from around the world</p>
@@ -128,14 +128,16 @@ var util = new Util();
             top: this.$refs._blockBar.offsetTop,
             behavior: 'smooth'
           });
-          var letters = 'ABCD';
-          var width = this.$refs._blockBar.offsetWidth;
-          var amount = width / (this.blocks.size+this.blocks.margin);
-          for (var i = 0; i < amount-1; i++){
-            var letter = Math.floor(Math.random() * letters.length);
-            this.blocks.group.push('permutation-'+letters[letter]);
-          }
         });
+      },
+      generateBrickBar: function(){
+        var letters = 'ABCD';
+        var width = this.$refs._header.offsetWidth;
+        var amount = width / (this.blocks.size+this.blocks.margin);
+        for (var i = 0; i < amount-1; i++){
+          var letter = Math.floor(Math.random() * letters.length);
+          this.blocks.group.push('permutation-'+letters[letter]);
+        }
       },
       loadAudio: function(){
         var file = [
@@ -225,6 +227,7 @@ var util = new Util();
             this.codedData = response.codes.data;
             this.artist = this.codedData[this.code][0];
             this.loadAudio();
+            this.generateBrickBar();
           }.bind(this),
           function(error){
             this.errors.push(error);
