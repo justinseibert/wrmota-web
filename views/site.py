@@ -18,6 +18,13 @@ def check_environment():
     TEMPLATE['title'] = None
     TEMPLATE['description'] = None
 
+@_site.after_request
+def add_http_header(response):
+    # response.cache_control.no_store = True
+    if 'Cache-Control' not in response.headers:
+        response.cache_control.max_age = 60*60*24*7
+    return response
+
 @_site.route('/')
 def index():
     return render_template('site/index.html', template=TEMPLATE)
