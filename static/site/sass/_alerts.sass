@@ -7,17 +7,15 @@
   font-size: 0.75em
   line-height: 1.6
   margin: 0
-  padding: $medium $light
   overflow: hidden
   @extend .z-load
   font-family: 'Bitter', serif
   box-shadow: 0 3px 16px -6px $text
-  &.success
-    color: $text
-    background: $green
-    & i,
-    & em
-      font-weight: 400
-  &.failure
-    color: $white
-    background: $red
+  .message
+    padding: $medium $light
+    background: white
+    color: color($colors, white)
+    &.success
+      background: color($colors, blue)
+    &.failure
+      background: color($colors, red)

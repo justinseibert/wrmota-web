@@ -1,0 +1,44 @@
+{% raw %}
+<div id="_message" class="alert-bar" v-if="message.length > 0">
+  <div class="message"
+    v-for="(item, index) of message"
+    :class="item.class"
+    >
+    {{item.message}}
+  </div>
+</div>
+{% endraw %}
+
+<script>
+  function Message(args){
+    args = args || {};
+    this.class = args.class || 'default';
+    this.message = args.message || 'no message';
+  }
+  var vMessage = new Vue({
+    el: '#_message',
+    data: {
+      message: []
+    },
+    methods: {
+      add: function(message){
+        this.message.push(message);
+      },
+      remove: function(){
+        this.message.pop();
+      },
+      notify: function(message, time){
+        time = time || 3000;
+        this.add(message);
+        let timer = window.setTimeout(function(){
+          this.remove();
+          window.clearTimeout(timer);
+        }.bind(this), time)
+      },
+      log: function(message){
+        this.remove();
+        this.notify(message);
+      }
+    }
+  });
+</script>
