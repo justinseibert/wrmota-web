@@ -2,41 +2,145 @@
 
 {% block body %}
 <div class="page-portion">
-<h1>Contact</h1>
-<hr>
+  <h1>Contact</h1>
+  <hr>
 
-<form id="EmailSubmitForm">
-  {{ template.email.csrf_token }}
-  <div class="row">
-    <label class="three grid">Email:</label>
-    {{ template.email.email(id="UserEmail", class="nine grid", type="email", placeholder="me@email.com",required="required") }}
-  </div>
-  <div class="row">
-    <label class="three grid">Message:</label>
-    {{ template.email.message(id="UserMessage", class="nine grid", type="textarea", placeholder="Hello, my name is...") }}
-  </div>
-  <div class="row">
-    <button id="EmailSubmit" type="submit" class="three grid unblock-right float-right">Submit</button>
-  </div>
+  <form id="_EmailSubmitForm" ref="_form">
+    {{ template.email.csrf_token(ref="_csrf") }}
+    <div class="row">
+      <label class="three grid">Email:</label>
+      <input id="UserEmail" class="nine grid" type="email" placeholder="me@email.com" required
+        v-model="form.email.value"
+        >
+    </div>
+    <div class="row">
+      <label class="three grid">Message:</label>
+      <textarea id="UserMessage" class="nine grid" placeholder="Hello, my name is..."
+        v-model="form.message.value"
+      ></textarea>
+    </div>
+    <div class="row">
+      <button id="EmailSubmit" type="button" class="three grid unblock-right float-right"
+        v-on:click="validate()"
+      >Submit</button>
+    </div>
+  </form>
+
   {{ template.email.recaptcha }}
-</form>
-<script type="text/javascript">
-  var email = new wrmotaForm({
-    form: $('#EmailSubmitForm'),
-    validate_items: [
-      ['email', $('#UserEmail')]
-    ],
-    submit_url: 'api/subscribe',
-    recaptcha: true
-  });
-  var handle_email_subscribe = new TouchClick('#EmailSubmit', function(el,e){
-    e.preventDefault();
-    email.validate();
-  });
-  function handleRecaptcha(){
-    email.submit();
-  }
-</script>
 </div>
 
 {% endblock body %}
+
+{% block script %}
+  <script type="text/javascript">
+    var vForm = new Vue({
+      el: '#_EmailSubmitForm',
+      data: {
+        form: {
+          email: {
+            value: null,
+            validation: 'email'
+          },
+          message: {
+            value: null,
+          }
+        },
+        url: '/api/subscribe',
+        recaptcha: true,
+        valid: {
+          safe: function(val){
+            if (!val){
+              return false;
+            }
+            var hasInput = val.length > 0;
+            var notWeird = val.search(/[:;]/) == -1
+            return (hasInput && notWeird) ? true : false;
+          },
+          text: function(val){
+            if (!val){
+              return false;
+            }
+            var hasInput = val.length > 0;
+            var notWeird = val.search(/[:;.,<>?\/\\`~@#$%^&*\(\)!\{\}\[\]+=-]/) == -1
+            return (hasInput && notWeird) ? true : false;
+          },
+          email: function(val){
+            if (!val){
+              return false;
+            }
+            var hasInput = val.length > 0;
+            var hasAt = val.indexOf('@') > -1;
+            return (hasInput && hasAt) ? true : false;
+          },
+          password: function(val){
+            if (!val){
+              return false;
+            }
+            var has16chars = val.length >= 16;
+            var hasNumber = val.search(/[0-9]/g) > -1;
+            var hasUppercase = val.search(/[A-Z]/g) > -1;
+            var hasLowercase = val.search(/[a-z]/g) > -1;
+            return (has16chars && hasNumber && hasUppercase && hasLowercase) ? true : false;
+          }
+        }
+      },
+      methods: {
+        validate: function(){
+          let invalid = [];
+          for (let i in this.form){
+            let item = this.form[i];
+            if (item.validation && !this.valid[item.validation](item.value)){
+              invalid.push(i);
+            }
+          }
+
+          if (invalid.length > 0){
+            let m = new Message({
+              class: 'failure',
+              message: 'Invalid input for '+invalid.join(', '),
+            });
+            vMessage.notify(m, 5000);
+          } else {
+            if (this.recaptcha){
+              grecaptcha.execute();
+            } else {
+              this.submit();
+            }
+          }
+        },
+        submit: function(){
+          let subscribe = new Util();
+          let status = new Message();
+          let data = this.serialize();
+          let csrf = this.$refs._csrf.value;
+          subscribe.postData(this.url, data, csrf).then(
+            function(response){
+              status.message = response.message;
+              status.class = response.errors ? 'failure':'success';
+              vMessage.log(status);
+              grecaptcha.reset();
+            },
+            function(error){
+              status.message = 'Oops, something went wrong on our end. Please try again later.';
+              status.class = 'failure';
+              vMessage.log(status);
+            }
+          );
+        },
+        serialize: function(){
+          let data = {}
+          for (i in this.form){
+            data[i] = this.form[i].value;
+          }
+          if (this.recaptcha){
+            data['g-recaptcha-response'] = grecaptcha.getResponse();
+          }
+          return data;
+        }
+      },
+    });
+    function handleRecaptcha(){
+      vForm.submit();
+    }
+  </script>
+{% endblock script %}

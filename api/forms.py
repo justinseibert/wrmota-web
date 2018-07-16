@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import TextField, TextAreaField, PasswordField, HiddenField, BooleanField, SelectField
 from wtforms.validators import InputRequired, Optional, ValidationError, Email, DataRequired, EqualTo
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import MultiDict
 
 from wrmota.api import hashes as Hash
 from wrmota.api import sanitize as Sanitize
@@ -99,3 +100,6 @@ def handle_error(form):
         'errors': form.errors,
         'message': 'There was an error with your form.'
     }
+
+def get_multidict(data):
+    return MultiDict(mapping=data)

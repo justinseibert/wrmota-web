@@ -141,17 +141,22 @@ def accept_email_data(data):
 @_api.route('/subscribe', methods=['POST'])
 def email_subscribe():
     data = {}
-    validform = Forms.EmailForm()
+    if request.form:
+        form = request.form
+        validform = Forms.EmailForm()
+    else:
+        form = request.get_json()
+        validform = Forms.EmailForm(Forms.get_multidict(form))
     if validform.validate_on_submit():
         info = {
-            'address' : request.form['email'],
+            'address' : form['email'],
             'date' : get_formatted_datetime(),
             'subscribe': True
         }
 
         Email.add_list_member(info)
 
-        message = Sanitize.spaces(request.form['message'])
+        message = Sanitize.spaces(form['message'])
         if (message != '' and len(message) > 0):
             info['message'] = message
             data['message'] = 'Thanks! We\'ll be in touch shortly.'
