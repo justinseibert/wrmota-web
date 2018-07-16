@@ -2,10 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
       <loc>https://wrmota.org/</loc>
-      <image:image>
-        <image:loc>https://wrmota.org/img/sofie-ramos.jpg</image:loc>
-        <image:caption>WRMOTA featured artwork by Sofie Ramos</image:caption>
-      </image:image>
       <lastmod>2018-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
