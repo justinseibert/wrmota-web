@@ -16,6 +16,7 @@ def check_environment():
         TEMPLATE['analytics'] = False
     TEMPLATE['mapPage'] = 0
     TEMPLATE['title'] = None
+    TEMPLATE['description'] = None
 
 @_site.route('/')
 def index():
@@ -24,6 +25,7 @@ def index():
 @_site.route('/map')
 def map():
     TEMPLATE['title'] = 'Map'
+    TEMPLATE['description'] = "Find the location of every artwork in our current exhibit. View artist information and read a breif preview of the local story."
     TEMPLATE['mapPage'] = 1
     return render_template('site/map.html', template=TEMPLATE)
 
@@ -38,11 +40,13 @@ def artists():
     TEMPLATE['options'] = {
     'tilt' : ['rotate1','rotate-1', '', '', '', '']
     }
+    TEMPLATE['description'] = "A list of over 100 local and visiting artists participating in WRMOTA's current exhibit."
     return render_template('site/artists.html', template=TEMPLATE)
 
 @_site.route('/credits')
 def credits():
     TEMPLATE['title'] = 'Credits'
+    TEMPLATE['description'] = "Learn about the hard working people that made WRMOTA possible."
     return render_template('site/credits.html', template=TEMPLATE)
 
 @_site.route('/privacy')
@@ -53,6 +57,7 @@ def privacy():
 @_site.route('/contact')
 def contact():
     TEMPLATE['title'] = 'Contact'
+    TEMPLATE['description'] = "Sign up for our newsletter to learn about upcoming events. Contact us for more information."
     TEMPLATE['email'] = Forms.EmailForm()
     return render_template('site/contact.html', template=TEMPLATE)
 

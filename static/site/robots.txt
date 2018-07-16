@@ -5,3 +5,5 @@ Disallow: /privacy/
 Disallow: /news/
 Disallow: /login/
 Disallow: /logout/
+
+Sitemap: https://wrmota.org/sitemap.xml
