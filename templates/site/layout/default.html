@@ -5,7 +5,7 @@
   </head>
   <body>
       <div class="container pad-donation">
-        {% include 'site/snippet/ajax-alert.html' %}
+        {% include 'site/snippet/message.html' %}
         {% include 'site/snippet/navigation.html' %}
 
         <main id="_main">
@@ -15,7 +15,8 @@
         {% include 'site/snippet/footer.html' %}
         {% include 'site/snippet/donate.html' %}
       </div>
-      
+
+      {% include 'site/snippet/scripts.html' %}
       {% block script %}{% endblock script %}
   </body>
 </html>

@@ -91,6 +91,7 @@
 
 {% block script %}
 <script>
+var util = new Util();
   var isHomePage = true;
   var vInfo = new Vue({
     el: '#_main',
@@ -132,27 +133,17 @@
           var amount = width / (this.blocks.size+this.blocks.margin);
           for (var i = 0; i < amount-1; i++){
             var letter = Math.floor(Math.random() * letters.length);
-            console.log(letter, letters[letter]);
             this.blocks.group.push('permutation-'+letters[letter]);
           }
         });
       },
-      getArtist: function(){
-        if (!this.artist) {
-          this.getData();
-        } else  {
-          return this.artist;
-        }
-      },
       loadAudio: function(){
-        console.log(this.artist);
         var file = [
           'https://wrmota.org/media/',
           this.artist.audio_directory,
           this.artist.audio_file
         ].join('');
 
-        console.log(file);
         var id = this.artist.audio_file;
         if (!this.audio[id]){
           this.audio.files[id] = new Howl({
@@ -192,7 +183,6 @@
         }
       },
       skipTrack(direction){
-        console.log(direction);
         var skip = 10;
         var position = 0;
         var current = this.audio.current.seek() || 0;
@@ -217,7 +207,6 @@
         this.audio.current.pause();
       },
       toggleState: function() {
-        console.log(this.audio.button);
         switch (this.audio.button){
           case 'playing':
             this.audio.button = 'paused';
@@ -230,28 +219,24 @@
         }
       },
       getData: function(){
-        var vm = this;
-        vm.fetch_attempt++;
-        $.ajax({
-          type: 'GET',
-          url: 'https://wrmota.org/api/v1/get/all',
-          success: function(data){
-            vm.codedData = data.codes.data;
-            vm.artist = vm.codedData[vm.code][0];
-            vm.loadAudio();
-          },
-          error: function(error){
-            console.log('xhr error');
-            vm.errors.push(error);
-            if (vm.fetch_attempt < 3){
-              vm.getArtist();
+        this.fetch_attempt++;
+        util.getData('https://wrmota.org/api/v1/get/all').then(
+          function(response){
+            this.codedData = response.codes.data;
+            this.artist = this.codedData[this.code][0];
+            this.loadAudio();
+          }.bind(this),
+          function(error){
+            this.errors.push(error);
+            if (this.fetch_attempt < 3){
+              this.getData();
             }
-          }
-        });
+          }.bind(this)
+        );
       },
     },
     created: function() {
-      this.artist = this.getArtist();
+      this.getData();
     }
   });
 </script>

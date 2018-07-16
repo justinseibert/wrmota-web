@@ -249,37 +249,27 @@
         L.DomUtil.removeClass(this.panes.marker,'fade-out');
         this.artistData = null;
       },
-      getPoints: function(){
-        if (!this.points) {
-          this.getData();
-        } else  {
-          return this.points;
-        }
-      },
       getData: function(){
-        var vm = this;
-        vm.fetch_attempt++;
-        $.ajax({
-          type: 'GET',
-          url: 'https://wrmota.org/api/v1/get/all',
-          success: function(data){
-            vm.codedData = data.codes.data;
-            vm.createMap(vm.$refs._map);
-            vm.createArtistPoints(data.codes.data);
-            vm.createPanes();
-          },
-          error: function(error){
-            console.log('xhr error');
-            vm.errors.push(error);
-            if (vm.fetch_attempt < 3){
-              vm.getPoints();
+        let util = new Util();
+        this.fetch_attempt++;
+        util.getData('https://wrmota.org/api/v1/get/all').then(
+          function(response){
+            this.codedData = response.codes.data;
+            this.createMap(this.$refs._map);
+            this.createArtistPoints(response.codes.data);
+            this.createPanes();
+          }.bind(this),
+          function(error){
+            this.errors.push(error);
+            if (this.fetch_attempt < 3){
+              this.getData();
             }
-          }
-        });
+          }.bind(this)
+        );
       },
     },
     created: function() {
-      this.artist = this.getPoints();
+      this.artist = this.getData();
     },
   })
 </script>
