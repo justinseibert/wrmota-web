@@ -181,12 +181,16 @@ $code-block: 70px;
 $grid-padding-width: 30px;
 $max-page-width: 1300px;
 
+
 .page-portion {
   width: 100%;
   max-width: $max-page-width - 100px;
   z-index: 10;
   padding: 0 ($grid-padding-width / 2) 0 ($code-block - $grid-padding-width);
   margin: 0 auto;
+}
+.pad-logo {
+  padding-top: 110px;
 }
 @media (min-width: $desktop-min){
   .info section {

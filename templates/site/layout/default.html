@@ -10,11 +10,10 @@
         <main id="_main">
           {% block body %}{% endblock body %}
         </main>
-
+        {% include 'site/snippet/navigation.html' %}
         {% include 'site/snippet/footer.html' %}
         {% include 'site/snippet/donate.html' %}
         {% include 'site/snippet/message.html' %}
-        {% include 'site/snippet/navigation.html' %}
       </div>
 
       {% block script %}{% endblock script %}

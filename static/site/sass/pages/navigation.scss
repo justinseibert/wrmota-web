@@ -32,12 +32,15 @@ a.nav-button {
   }
 }
 
-.donate-button {
+.donate-container {
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 99999;
-  padding: 2em;
+  max-width: 200px;
+  svg {
+    padding-right: 15px;
+  }
 }
 
 .pad-donation {

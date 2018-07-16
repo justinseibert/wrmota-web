@@ -7,10 +7,6 @@
   <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
 {% endassets %}
 
-{% assets 'js_vue' %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
-
 {% if template.analytics %}
   {% include 'site/snippet/analytics.html' %}
 {% endif %}
