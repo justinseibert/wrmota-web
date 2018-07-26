@@ -1,0 +1,67 @@
+{% extends "email/layout/plain.html" %}
+{% block message %}
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <h2 style="font-family:'Londrina Solid','Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;color:#000;font-weight:900;text-align:left;background-color:#FFFFFF;margin:0;padding:0;padding-bottom:5px;border-width: 0;border-bottom-width:3px;border-style:solid;border-color:#ffbb00;">On the Airwaves</h2>
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      Spread the word and tune in to Y-102 Radio for a Community Roundtable interview with creator and coordinator Mike Miller.
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <strong>When:</strong> Sunday, July 29th at 7am<br>
+      <strong>Where:</strong> Y-102 or on <a href="https://www.iheart.com/podcast/139-Roundtable-28030564/" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;font-weight:700;color:#00F;text-decoration:none;">iHeartRadio</a>
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <img src="{{ url_for('_site.static', filename='img/email/mike_radio.jpg', _external=True) }}" width="480" style="display:block;width:100%;">
+    </td>
+  </tr>
+
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      Learn more about Mike's collaborators, Kayla Mattes (curator) and Justin Seibert (developer), as they discuss some of their recent work and inspiration. In the spirit of WRMOTA, they share their own memories of a special place called the internet on a podcast devoted to All Things Cozy.
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <strong>When:</strong> A rainy day when you can't explore WRMOTA<br>
+      <strong>Where:</strong> <a href="https://itunes.apple.com/us/podcast/28-surfing-the-web-w-kayla-mattes-justin-seibert/id1253783033?i=1000415862963&mt=2" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;font-weight:700;color:#00F;text-decoration:none;">All Things Cozy</a> podcast on iTunes
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <img src="{{ url_for('_site.static', filename='img/email/kaylajustin3.jpg', _external=True) }}" width="480" style="display:block;width:100%;">
+    </td>
+  </tr>
+
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <h2 style="font-family:'Londrina Solid','Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:18px;color:#000;font-weight:900;text-align:left;background-color:#FFFFFF;margin:0;padding:0;padding-bottom:5px;border-width: 0;border-bottom-width:3px;border-style:solid;border-color:#50e04a;">Support WRMOTA</h2>
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      WRMOTA is actively seeking contributions to help maintain our app and website, document the installed artworks, archive the stories and hopefully seed future projects like it.
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      <a href="https://gofundme.com/wrmota" class="btn-primary" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;color:#FFF;text-decoration:none;line-height:2em;font-weight:bold;text-align:center;cursor:pointer;display:inline-block;text-transform:capitalize;background-color:#ff384c;margin:0;border-color:#ff384c;border-style:solid;border-width:10px 20px;width:100%;text-align:center">Donate</a>
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      If you've been enjoying learning about the unique personal histories of the West Reading community and seeing artwork from artists all around the world, we hope you'll consider supporting the project.
+    </td>
+  </tr>
+  <tr style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;">
+    <td class="content-block" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;margin:0;padding:0 10px 20px 10px;" valign="top">
+      To learn more about making a contribution, visit our <a href="https://gofundme.com/wrmota" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;margin:0;font-weight:700;color:#00F;text-decoration:none;">GoFundMe</a>.
+    </td>
+  </tr>
+{% endblock message %}
