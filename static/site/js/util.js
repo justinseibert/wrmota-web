@@ -74,30 +74,31 @@ Util.prototype.getData = function(url){
   });
 };
 
-Util.prototype.postData = function(url, data, csrf=''){
+Util.prototype.postData = function(url, data, csrf='', asForm=false) {
   return new Promise(function(resolve, reject) {
-    // Standard XHR to load an image
     var request = new XMLHttpRequest();
     request.open('POST', url);
     request.responseType = 'json';
-    request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader("X-CSRFToken", csrf);
-    // When the request loads, check whether it was successful
     request.onload = function() {
       if (request.status === 200) {
-      // If successful, resolve the promise by passing back the request response
         resolve(request.response);
       } else {
-      // If it fails, reject the promise with a error message
         reject(Error('POST failed with error code:' + request.statusText));
       }
     };
     request.onerror = function() {
-    // Also deal with the case when the entire request fails to begin with
-    // This is probably a network error, so reject the promise with an appropriate message
         reject(Error('There was a network error.'));
     };
-    // Send the request
-    request.send(JSON.stringify(data));
+    if (!asForm){
+      request.setRequestHeader("Content-Type", "application/json");
+      request.send(JSON.stringify(data));
+    } else {
+      let form = new FormData();
+      for (let key in data){
+        form.append(key, data[key]);
+      }
+      request.send(form);
+    }
   });
 };
