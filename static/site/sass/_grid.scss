@@ -102,9 +102,15 @@
       margin-left: 0;
       margin-right: 0;
     }
-    &.auto{
+    &.auto {
       margin-left: auto;
       margin-right: auto;
+    }
+    &.any {
+      width: auto;
+      display: flex;
+      flex-grow: 1;
+      align-self: stretch;
     }
     &.one{
       width: 6.5%;
