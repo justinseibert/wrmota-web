@@ -28,6 +28,21 @@
   50%
     opacity: .5
 
+.loading-stripes-animation
+  background-image: url('/img/load-fff.png')
+  background-repeat: repeat
+  background-color: color($colors, blue)
+  background-size: 75px
+  // align-self: stretch
+  animation-timing-function: linear
+  +animate(loading-stripes,2s,infinite)
+
+@keyframes loading-stripes
+  0%
+    background-position: 0px 0
+  0%
+    background-position: -99px 0
+
 .title-animation,
   +animate(title, .6s, 1)
 
