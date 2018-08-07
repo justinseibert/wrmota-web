@@ -43,10 +43,12 @@ $permutation_map: (
   A: color($colors, blue),
   B: color($colors, green),
   C: color($colors, red),
-  D: color($colors, orange)
+  D: color($colors, orange),
+  E: color($colors, dust),
+  F: color($colors, white)
 );
 @each $item,$color in $permutation_map {
-  .background#{$item},
+  .background-#{$item},
   .permutation-#{$item} {
     background-color: $color;
   }

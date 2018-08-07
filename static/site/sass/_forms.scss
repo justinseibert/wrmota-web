@@ -131,7 +131,7 @@ $button_map: (
   button.#{$item} {
     background-color: $color;
     &:hover {
-      background: hover($item, 5);
+      background-color: hover($item, 5);
     }
   }
 }
