@@ -46,6 +46,7 @@ $permutation_map: (
   D: color($colors, orange)
 );
 @each $item,$color in $permutation_map {
+  .background#{$item},
   .permutation-#{$item} {
     background-color: $color;
   }
@@ -60,6 +61,7 @@ $theme_color_map: (
   nostalgia: color($themes, nostalgia),
   water: color($themes, water),
 );
+
 @each $item,$color in $theme_color_map {
   .theme-#{$item} {
     border-color: $color;
