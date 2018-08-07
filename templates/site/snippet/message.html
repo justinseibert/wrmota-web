@@ -10,6 +10,10 @@
     {{item.message}}
   </div>
 </div>
+<div id="_loadingBar"
+  class="loading-stripes-animation loading-bar"
+  v-if="loading.length > 0"
+></div>
 <noscript>
   <div class="alert-bar">
     <div class="message failure">Please enable javascript to view this website.</div>
@@ -31,6 +35,7 @@
     methods: {
       add: function(message){
         this.message.push(message);
+        return this.message.length;
       },
       remove: function(){
         this.message.pop();
@@ -49,4 +54,18 @@
       }
     }
   });
+  var vLoading = new Vue({
+    el: '#_loadingBar',
+    data: {
+      loading: []
+    },
+    methods: {
+      add: function(){
+        this.loading.push(0);
+      },
+      remove: function(){
+        this.loading.pop();
+      }
+    }
+  })
 </script>

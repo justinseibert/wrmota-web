@@ -1,4 +1,4 @@
-.alert-bar
+.alert-bar,
   position: fixed
   top: 0
   left: 0
@@ -19,3 +19,8 @@
       background: color($colors, blue)
     &.failure
       background: color($colors, red)
+
+.loading-bar
+  @extend .alert-bar
+  box-shadow: none
+  height: 5px
