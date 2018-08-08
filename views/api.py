@@ -193,6 +193,8 @@ def get_json_data(data,option):
         return Provide.all_data()
     elif data == 'map':
         return Provide.map_data()
+    elif data == 'photos':
+        return Provide.photo_data()
     elif data == 'readable':
         return Provide.readable_data(option)
     elif data == 'test':
@@ -223,6 +225,49 @@ def post_app_data(option):
         return Provide.app_uuid(data)
     else:
         return abort(400)
+
+@_api.route('/v1/upload/<media>', methods=['POST'])
+@Login.requires_permission(0)
+def upload_media(media):
+    response = {
+        'error': True,
+        'message': 'Upload Failed'
+    }
+    if media == 'artwork':
+        form = Forms.UploadArtworkForm()
+        if form.validate_on_submit():
+            files = Forms.handle_upload(request.files, 'image')
+            if len(files['uploads']) > 0:
+                upload = files['uploads'][0]
+                new_media = [(
+                    upload['directory'],
+                    upload['name'],
+                    'image',
+                    upload['extension'],
+                    None,
+                    upload['original_filename'],
+                    request.form['notes'],
+                    None,
+                    None
+                )]
+                if Database.add_media(new_media):
+                    # successfully added media to database, update artwork entry
+                    f = request.form
+                    update = Database.add_artwork_to_address(
+                        f['address_id'],
+                        f['artwork_id'],
+                        f['type'],
+                        upload['name']
+                    )
+                    response['error'] = update[0]
+                    response['message'] = update[1]
+                else:
+                    response['message'] = 'Unable to add image to database'
+        else:
+            response['message'] = validform.errors
+
+    return jsonify(response)
+
 
 def get_formatted_datetime():
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')

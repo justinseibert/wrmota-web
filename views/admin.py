@@ -201,6 +201,10 @@ def print_color_codes():
 def send_newsletter():
     return render_template('admin/task/send_newsletter.html', template=TEMPLATE)
 
+@Login.requires_permission(0)
+def edit_photos():
+    return render_template('admin/task/edit_photos.html', template=TEMPLATE)
+
 @_admin.route('/task/<data>')
 @Login.requires_permission(10)
 def edit_data(data):
@@ -212,6 +216,8 @@ def edit_data(data):
         return print_color_codes()
     elif data == 'newsletter':
         return send_newsletter()
+    elif data == 'photos':
+        return edit_photos()
     else:
         return abort(404)
 

@@ -437,6 +437,75 @@ def add_media(uploads):
     except:
         return False
 
+def add_artwork_to_address(address_id, artwork_id, artwork_type, artwork):
+    # determine if safe to add type into artwork table
+    valid_artwork_types = ['original', 'installed1', 'installed2', 'installed3']
+    if artwork_type not in valid_artwork_types:
+        return True, "ERROR: Not a valid artwork scene"
+
+    db= get_db()
+    print(artwork, artwork_type)
+    # artwork = Sanitize.make_unicode(str(artwork))
+    # artwork_type = Sanitize.make_unicode(str(artwork_type))
+
+    # get media by unique filename
+    media_id = db.execute('''
+        SELECT
+            media.id,
+            media.original_filename
+        FROM media
+        WHERE media.name = ?
+    ''', [artwork]).fetchone()
+
+    if media_id is None:
+        return True, "ERROR: not able to find media file to update address"
+    else:
+        filename = media_id['original_filename']
+        media_id = media_id['id']
+
+    # get artwork entry from address table
+    image_id = db.execute('''
+        SELECT address.image
+        FROM address
+        WHERE address.id = ?
+    ''', [address_id]).fetchone()[0]
+
+    if image_id is None:
+        # no artwork entry in address
+        # insert new image in artwork by type
+        db.execute('''
+            INSERT INTO artwork ({})
+            VALUES (?)
+        '''.format(artwork_type), [int(media_id)])
+        db.commit()
+
+        # get id of recent artwork addition
+        image_id = db.execute('''
+            SELECT id
+            FROM artwork
+            ORDER BY id DESC
+            LIMIT 1
+        ''').fetchone()[0]
+
+        # associate artwork entry with address
+        db.execute('''
+            UPDATE address
+            SET image = ?
+            WHERE id = ?
+        ''',[image_id,address_id])
+        db.commit()
+    else:
+        # update artwork image by type at artwork_id
+        print(media_id,image_id)
+        db.execute('''
+            UPDATE artwork
+            SET {} = ?
+            WHERE id = ?
+        '''.format(artwork_type),[media_id,image_id])
+        db.commit()
+
+    return False, "Upload of {} was successful".format(filename)
+
 def set_audio_per_code(media_file=None,code=None):
     db = get_db()
 

@@ -82,8 +82,10 @@ def date_directory(style):
     folders = ''.join('%{}/'.format(i) for i in style)
     return datetime.now().strftime(folders)
 
-def media_file(name):
+def media_file(name, mediatype=None):
     directory = date_directory('MIS')
+    if mediatype:
+        directory = mediatype + '/' + directory
     unique_name = Hash.generate_token(8).decode('utf-8')
     extension = get_extension(name)
     relative_path = '{}{}.{}'.format(directory,unique_name,extension)

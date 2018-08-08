@@ -1,0 +1,177 @@
+{% extends 'admin/layout/uncontained.html' %}
+
+{% block body %}
+  {% raw %}
+  <div id="_photos" class="row">
+    <div class="row break-heavy" v-if="data" v-for="(each,data_index) in data">
+      <div class="frame-light row">
+        <p class="unblock-y">{{ each.address }}<br><i>{{ each.artist }}</i></p>
+      </div>
+      <div class="row spaced evenly">
+        <div class="permutation-stripe unframe-x">
+          <div v-for="block in each.code" :class="block" draggable></div>
+        </div>
+        <div class="any grid unblock-y">
+          <section class="row spaced">
+            <div class="four grid full photo-block unblock-y u-flex"
+              v-for="(image, image_index) in each.artwork.installed"
+              :class="image.url ? '' : 'background-E'"
+              :style="{
+                opacity: image.served ? 1 : 0.75
+              }"
+              >
+              <img v-if="image.url" :src="image.url"/>
+              <div class="full u-lock-top"
+                droppable
+                v-on:dragenter="handleDragEnter"
+                v-on:dragover="handleDragOver"
+                v-on:dragleave="handleDragEnd"
+                v-on:drop="queueImage($event, data_index, image_index)"
+              ></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endraw %}
+
+{% endblock body %}
+
+{% block script %}
+<script type="text/javascript">
+  let util = new Util();
+  let vPhoto = new Vue({
+    el: '#_photos',
+    data: {
+      data: null,
+      title: 'hello',
+      image_types: [
+        'original',
+        'installed1',
+        'installed2',
+        'installed3'
+      ],
+    },
+    methods: {
+      handleDragOver: function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      },
+      handleDragEnter: function(event){
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('dragover');
+        event.target.className += ' loading-stripes-animation';
+      },
+      handleDragEnd: function(event){
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('dragend');
+        event.target.className = event.target.className.replace(' loading-stripes-animation', '');
+      },
+      queueImage: function(event, data_index, image_index){
+        event.stopPropagation();
+        event.preventDefault();
+        let error = new Message({
+          class: 'failure'
+        });
+        let data = this.data[data_index];
+        let type = data.artwork.installed[image_index].type;
+        try {
+          if (!event.dataTransfer.items[0].type.match(/jpe+g/g)) throw 'Not a JPG image';
+
+          let file = event.dataTransfer.items[0].getAsFile();
+          let details = {
+            original_filename: event.dataTransfer.files[0].name,
+            notes: 'artist: ' + data.artist + ', address: ' + data.address + ' uploaded_as: ' + type,
+            type: type,
+            artwork_id: data.artwork_id || -1,
+            address_id: data.address_id,
+            image: file
+          }
+
+          let img = new Image();
+          img.onload = function(){
+            this.data[data_index].artwork.installed[image_index].url = img.src;
+            this.uploadImage(details, data_index, image_index);
+          }.bind(this);
+          img.src = window.URL.createObjectURL(file);
+        }
+        catch(e){
+          if (e instanceof TypeError){
+            error.message = 'Error: Could not determine a file to upload.';
+          } else {
+            error.message = e;
+          }
+          vMessage.notify(error);
+        }
+        this.handleDragEnd(event);
+      },
+      uploadImage: function(data, data_index, image_index){
+        vLoading.add();
+
+        util.postData('/api/v1/upload/artwork', data, csrf_token, true).then(
+          (response) => {
+            if (response.error) throw response;
+            let message = new Message({
+              message: response.message,
+            });
+            window.setTimeout(function(){
+              vLoading.remove();
+              vMessage.notify(message);
+              this.data[data_index].artwork.installed[image_index].served = true;
+            }.bind(this), 1000);
+          },
+          (error) => {
+            throw error;
+          }
+        ).catch((error) => {
+          console.log(error);
+          let message = new Message({
+            message: error.message,
+            class: 'failure'
+          })
+          vMessage.notify(message);
+          vLoading.remove();
+        });
+      },
+      updateData: function(){
+        util.getData('/api/v1/get/photos').then((response) => {
+          this.data = response.data.map(d => {
+            let images = this.image_types.map(type => {
+              let name = 'art' + type[0].toUpperCase() + type.slice(1);
+              let obj = {
+                type: type,
+                url: false,
+                served: false,
+              }
+              if (d[name+'_id']){
+                obj.url = '/media/' + d[name+'_directory'] + d[name+'_filename'] + '-large.jpg';
+                obj.served = true;
+              }
+              return obj;
+            });
+            return {
+              address_id: d.address_id,
+              artwork_id: d.artwork_id,
+              artist: d.artist,
+              address: d.address,
+              code: d.code.split('').map(c => 'permutation-block permutation-'+c),
+              artwork: {
+                original: images.shift(),
+                installed: images
+              }
+            }
+          })
+          console.log(this.data[0]);
+        });
+      }
+    },
+    created: function() {
+      this.updateData();
+    }
+  })
+</script>
+{% endblock script %}

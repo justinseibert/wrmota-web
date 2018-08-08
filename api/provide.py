@@ -111,6 +111,45 @@ def readable_data(option):
 
     return jsonify(result)
 
+def photo_data():
+    db = Database.get_db()
+    data = db.execute('''
+        SELECT
+            color_code.code as code,
+            address.id as address_id,
+            address.address,
+            artist.artist,
+            address.image as artwork_id,
+            artOriginal.id as artOriginal_id,
+            artOriginal.directory as artOriginal_directory,
+            artOriginal.name as artOriginal_filename,
+
+            artInstalled1.id as artInstalled1_id,
+            artInstalled1.directory as artInstalled1_directory,
+            artInstalled1.name as artInstalled1_filename,
+
+            artInstalled2.id as artInstalled2_id,
+            artInstalled2.directory as artInstalled2_directory,
+            artInstalled2.name as artInstalled2_filename,
+
+            artInstalled3.id as artInstalled3_id,
+            artInstalled3.directory as artInstalled3_directory,
+            artInstalled3.name as artInstalled3_filename
+        FROM
+            address
+        LEFT JOIN color_code ON color_code.address = address.id
+        LEFT JOIN artist ON address.artist = artist.id
+        LEFT JOIN artwork ON address.image = artwork.id
+        LEFT JOIN media AS artOriginal ON artwork.original = artOriginal.id
+        LEFT JOIN media AS artInstalled1 ON artwork.installed1 = artInstalled1.id
+        LEFT JOIN media AS artInstalled2 ON artwork.installed2 = artInstalled2.id
+        LEFT JOIN media AS artInstalled3 ON artwork.installed3 = artInstalled3.id
+        WHERE address.artist IS NOT NULL
+    ''').fetchall()
+
+    result = Database.get_dict_of(data)
+    return jsonify(result)
+
 def app_uuid(device):
     hash = Hashes.store_password(device['uuid'],unique_salt=False)
     print('device uuid: {}'.format(hash['password']))

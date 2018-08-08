@@ -1,6 +1,6 @@
 from flask import current_app, request
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import TextField, TextAreaField, PasswordField, HiddenField, BooleanField, SelectField
+from wtforms import TextField, TextAreaField, PasswordField, HiddenField, BooleanField, SelectField, IntegerField, FileField
 from wtforms.validators import InputRequired, Optional, ValidationError, Email, DataRequired, EqualTo
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import MultiDict
@@ -60,12 +60,20 @@ class EditArtistForm(FlaskForm):
     art_received = BooleanField(id="EditArtReceived")
     visitor = BooleanField(id="EditVisitor")
 
+class UploadArtworkForm(FlaskForm):
+    original_filename = TextField()
+    notes = TextField()
+    type = TextField(validators=[InputRequired()])
+    artwork_id = IntegerField(validators=[Optional()])
+    address_id = IntegerField(validators=[InputRequired()])
+    image = FileField(validators=[InputRequired()])
+
 def handle_upload(files,filetypes):
     uploads = []
     failed = []
     for f in files:
         name = secure_filename(files[f].filename)
-        if allowed_file(name, filetypes):
+        if filetypes == 'audio' and allowed_file(name, filetypes):
             media = Sanitize.media_file(name)
             media['filetype'] = filetypes
 
@@ -78,6 +86,16 @@ def handle_upload(files,filetypes):
             except:
                 failed.append(name)
                 print('UPLOAD: failed to save {}'.format(name))
+
+        elif filetypes == 'image' and allowed_file(name, filetypes):
+            media = Sanitize.media_file(name, 'image')
+
+            try:
+                files[f].save(media['full_path'])
+                conversion = Convert.image_files(media['full_path'])
+                uploads.append(media)
+            except:
+                failed.append(name)
         else:
             failed.append(name)
             print('UPLOAD: incorrect filetype, failed to save {}'.format(name))
