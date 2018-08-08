@@ -26,3 +26,23 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.photo-search-block {
+  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.search-menu-button {
+  background: #e4e4e4;
+  padding: 8px;
+  svg {
+    top: 0;
+    left: 0;
+    display: block;
+    fill: #5b5b5b;
+    width: 100%;
+  }
+}

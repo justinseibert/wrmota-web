@@ -3,13 +3,38 @@
 {% block body %}
   {% raw %}
   <div id="_photos" class="row">
-    <div class="row break-heavy" v-if="data" v-for="(each,data_index) in data">
+
+    <section id="_colorsearch" class="photo-search-block">
+      <div class="permutation-stripe" v-if="search.length > 0">
+        <button
+          v-for="color in search"
+          :class="'permutation-block permutation-'+color"
+          v-on:click="removeFromSearch()"
+          ></button>
+      </div>
+      <div class="permutation-stripe">
+        <button
+          v-for="color in code"
+          :class="'permutation-block permutation-'+color"
+          v-on:click="addToSearch(color)"
+          ></button>
+        <button
+          class="permutation-block search-menu-button"
+          v-on:click="search=[];searchData(search)"
+          >
+          <svg-close v-if="search.length > 0"></svg-close>
+          <svg-search v-if="search.length == 0"></svg-search>
+        </button>
+      </div>
+    </section>
+
+    <section class="row break-heavy" v-if="filtered_data" v-for="(each,current) in filtered_data">
       <div class="frame-light row">
         <p class="unblock-y">{{ each.address }}<br><i>{{ each.artist }}</i></p>
       </div>
       <div class="row spaced evenly">
         <div class="permutation-stripe unframe-x">
-          <div v-for="block in each.code" :class="block" draggable></div>
+          <div v-for="block in each.code" :class="'permutation-block permutation-'+block"></div>
         </div>
         <div class="any grid unblock-y">
           <section class="row spaced">
@@ -26,13 +51,14 @@
                 v-on:dragenter="handleDragEnter"
                 v-on:dragover="handleDragOver"
                 v-on:dragleave="handleDragEnd"
-                v-on:drop="queueImage($event, data_index, image_index)"
+                v-on:drop="queueImage($event, each.index, current, image_index)"
               ></div>
             </div>
           </section>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
   {% endraw %}
 
@@ -44,6 +70,7 @@
   let vPhoto = new Vue({
     el: '#_photos',
     data: {
+      filtered_data: null,
       data: null,
       title: 'hello',
       image_types: [
@@ -52,6 +79,8 @@
         'installed2',
         'installed3'
       ],
+      code: 'ABCD'.split(''),
+      search: [],
     },
     methods: {
       handleDragOver: function(event){
@@ -71,7 +100,7 @@
         console.log('dragend');
         event.target.className = event.target.className.replace(' loading-stripes-animation', '');
       },
-      queueImage: function(event, data_index, image_index){
+      queueImage: function(event, data_index, tmp_index, image_index){
         event.stopPropagation();
         event.preventDefault();
         let error = new Message({
@@ -95,9 +124,10 @@
           let img = new Image();
           img.onload = function(){
             this.data[data_index].artwork.installed[image_index].url = img.src;
-            this.uploadImage(details, data_index, image_index);
+            this.filtered_data[tmp_index].artwork.installed[image_index].url = img.src;
           }.bind(this);
           img.src = window.URL.createObjectURL(file);
+          this.uploadImage(details, data_index, image_index);
         }
         catch(e){
           if (e instanceof TypeError){
@@ -137,9 +167,35 @@
           vLoading.remove();
         });
       },
+      addToSearch: function(color){
+        if (this.search.length >= this.code.length){
+          this.search = [];
+        }
+        this.search.push(color);
+        this.searchData(this.search);
+      },
+      removeFromSearch: function(){
+        if (this.search.length > 0){
+          this.search.pop();
+        }
+        this.searchData(this.search);
+      },
+      searchData: function(query){
+        if (query.length > 0){
+          let filter = this.data.filter(data => {
+            for (let i = 0; i < query.length; i++){
+              if (query[i] != data.code[i]) return false;
+            }
+            return true;
+          });
+          this.filtered_data = filter;
+        } else {
+          this.filtered_data = this.data;
+        }
+      },
       updateData: function(){
         util.getData('/api/v1/get/photos').then((response) => {
-          this.data = response.data.map(d => {
+          this.filtered_data = response.data.map((d, index) => {
             let images = this.image_types.map(type => {
               let name = 'art' + type[0].toUpperCase() + type.slice(1);
               let obj = {
@@ -154,17 +210,19 @@
               return obj;
             });
             return {
+              index: index,
               address_id: d.address_id,
               artwork_id: d.artwork_id,
               artist: d.artist,
               address: d.address,
-              code: d.code.split('').map(c => 'permutation-block permutation-'+c),
+              code: d.code.split(''),
               artwork: {
                 original: images.shift(),
                 installed: images
               }
             }
-          })
+          });
+          this.data = JSON.parse(JSON.stringify(this.filtered_data));
           console.log(this.data[0]);
         });
       }
