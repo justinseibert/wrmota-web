@@ -1,6 +1,6 @@
 import os
 import string
-from re import sub, match, search, IGNORECASE
+from re import sub, match, search, escape, IGNORECASE
 from datetime import datetime
 
 from flask import current_app
@@ -54,6 +54,19 @@ def email_sender(item):
             'name': m.group(1),
             'email': m.group(2)
         }
+    else:
+        return False
+
+def media_in_misc(media, misc):
+    if search(r'(^|,)' + escape(str(media)) + ',', misc):
+        return True
+    else:
+        return False
+
+def valid_artwork_type(item):
+    valid_artwork_types = ['original', 'installed1', 'installed2', 'installed3']
+    if item in valid_artwork_types:
+        return True
     else:
         return False
 
