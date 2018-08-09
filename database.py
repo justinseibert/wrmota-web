@@ -417,6 +417,7 @@ def get_color_code_positions():
     return codes
 
 def add_media(uploads):
+    # TODO: MAKE THIS CONSIDER Multiple file uploads vs. Single file uploads
     try:
         db = get_db()
         db.executemany('''
@@ -433,78 +434,94 @@ def add_media(uploads):
             ) VALUES (?,?,?,?,?,?,?,?,?)
         ''', uploads)
         db.commit()
-        return True
+        latest_id = db.execute('''
+            SELECT id
+            FROM media
+            ORDER BY id DESC
+            LIMIT 1
+        ''').fetchone()['id']
+        return latest_id
     except:
         return False
 
-def add_artwork_to_address(address_id, artwork_id, artwork_type, artwork):
+def add_artwork_to_address(address_id, artwork_type, media_id):
     # determine if safe to add type into artwork table
-    valid_artwork_types = ['original', 'installed1', 'installed2', 'installed3']
-    if artwork_type not in valid_artwork_types:
-        return True, "ERROR: Not a valid artwork scene"
+    if not Sanitize.valid_artwork_type(artwork_type):
+        return True, "ERROR: Not a valid artwork type"
 
-    db= get_db()
-    print(artwork, artwork_type)
-    # artwork = Sanitize.make_unicode(str(artwork))
-    # artwork_type = Sanitize.make_unicode(str(artwork_type))
-
-    # get media by unique filename
-    media_id = db.execute('''
-        SELECT
-            media.id,
-            media.original_filename
-        FROM media
-        WHERE media.name = ?
-    ''', [artwork]).fetchone()
-
-    if media_id is None:
-        return True, "ERROR: not able to find media file to update address"
-    else:
-        filename = media_id['original_filename']
-        media_id = media_id['id']
+    db = get_db()
 
     # get artwork entry from address table
-    image_id = db.execute('''
-        SELECT address.image
+    artwork = db.execute('''
+        SELECT
+            address.image,
+            artwork.misc
         FROM address
+        LEFT JOIN artwork ON address.image = artwork.id
         WHERE address.id = ?
-    ''', [address_id]).fetchone()[0]
+    ''', [address_id]).fetchone()
 
-    if image_id is None:
+    artwork_id = artwork['image']
+    artwork_misc = ''
+
+    if artwork['misc']:
+        artwork_misc = artwork['misc']
+
+    if artwork_misc == '' or not Sanitize.media_in_misc(media_id, artwork_misc):
+        artwork_misc += '{},'.format(media_id)
+
+    if artwork_id is None:
         # no artwork entry in address
         # insert new image in artwork by type
         db.execute('''
-            INSERT INTO artwork ({})
-            VALUES (?)
-        '''.format(artwork_type), [int(media_id)])
+            INSERT INTO artwork ({}, misc)
+            VALUES (?, ?)
+        '''.format(artwork_type), [media_id, artwork_misc])
         db.commit()
 
         # get id of recent artwork addition
-        image_id = db.execute('''
+        artwork_id = db.execute('''
             SELECT id
             FROM artwork
             ORDER BY id DESC
             LIMIT 1
-        ''').fetchone()[0]
+        ''').fetchone()['id']
 
         # associate artwork entry with address
         db.execute('''
             UPDATE address
             SET image = ?
             WHERE id = ?
-        ''',[image_id,address_id])
+        ''',[artwork_id,address_id])
         db.commit()
     else:
         # update artwork image by type at artwork_id
-        print(media_id,image_id)
+        db.execute('''
+            UPDATE artwork
+            SET {} = ?,
+                misc = ?
+            WHERE id = ?
+        '''.format(artwork_type),[media_id,artwork_misc,artwork_id])
+        db.commit()
+
+    return False, "Image upload was successful"
+
+def remove_image_from_artwork(artwork_id, artwork_type, replacement_id=None):
+    if not Sanitize.valid_artwork_type(artwork_type):
+        return True, "ERROR: Not a valid artwork type"
+
+    try:
+        db = get_db()
+
         db.execute('''
             UPDATE artwork
             SET {} = ?
             WHERE id = ?
-        '''.format(artwork_type),[media_id,image_id])
+        '''.format(artwork_type), [replacement_id,artwork_id])
         db.commit()
-
-    return False, "Upload of {} was successful".format(filename)
+        return False, 'Image replacement was successful'
+    except:
+        return True, 'Image replacement failed'
 
 def set_audio_per_code(media_file=None,code=None):
     db = get_db()

@@ -68,6 +68,13 @@ class UploadArtworkForm(FlaskForm):
     address_id = IntegerField(validators=[InputRequired()])
     image = FileField(validators=[InputRequired()])
 
+class ReplaceArtworkForm(FlaskForm):
+    from_artwork_id = IntegerField(validators=[InputRequired()])
+    from_artwork_type = TextField(validators=[InputRequired()])
+    this_media_id = IntegerField(validators=[InputRequired()])
+    to_address_id = IntegerField(validators=[InputRequired()])
+    to_artwork_type = TextField(validators=[InputRequired()])
+
 def handle_upload(files,filetypes):
     uploads = []
     failed = []

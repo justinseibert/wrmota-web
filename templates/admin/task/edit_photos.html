@@ -28,7 +28,7 @@
       </div>
     </section>
 
-    <section class="row break-heavy" v-if="filtered_data" v-for="(each,current) in filtered_data">
+    <section class="row break-heavy" v-if="filtered_data" v-for="(each,filtered_index) in filtered_data">
       <div class="frame-light row">
         <p class="unblock-y">{{ each.address }}<br><i>{{ each.artist }}</i></p>
       </div>
@@ -47,11 +47,13 @@
               >
               <img v-if="image.url" :src="image.url"/>
               <div class="full u-lock-top"
+                draggable
                 droppable
+                v-on:dragstart="handleDragStart($event, each.index, filtered_index, image_index, image)"
                 v-on:dragenter="handleDragEnter"
                 v-on:dragover="handleDragOver"
                 v-on:dragleave="handleDragEnd"
-                v-on:drop="queueImage($event, each.index, current, image_index)"
+                v-on:drop="queueImage($event, each.index, filtered_index, image_index)"
               ></div>
             </div>
           </section>
@@ -81,8 +83,23 @@
       ],
       code: 'ABCD'.split(''),
       search: [],
+      replacement: null,
     },
     methods: {
+      handleDragStart: function(event, data_index, filtered_index, image_index, image){
+        if (image.url){
+          this.replacement = {
+            data_index: data_index,
+            image_index: image_index,
+            filtered_index: filtered_index,
+            image: image
+          };
+        } else {
+          this.replacement = null;
+        }
+        console.log(this.replacement);
+        return
+      },
       handleDragOver: function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -91,16 +108,24 @@
       handleDragEnter: function(event){
         event.stopPropagation();
         event.preventDefault();
-        console.log('dragover');
         event.target.className += ' loading-stripes-animation';
+        return;
       },
       handleDragEnd: function(event){
         event.stopPropagation();
         event.preventDefault();
-        console.log('dragend');
+        console.log('drag end');
         event.target.className = event.target.className.replace(' loading-stripes-animation', '');
+        return;
       },
-      queueImage: function(event, data_index, tmp_index, image_index){
+      handleMessage(message, status){
+        let m = new Message({
+          message: message.message,
+          class: status,
+        })
+        vMessage.notify(m);
+      },
+      queueImage: function(event, data_index, filtered_index, image_index){
         event.stopPropagation();
         event.preventDefault();
         let error = new Message({
@@ -109,7 +134,14 @@
         let data = this.data[data_index];
         let type = data.artwork.installed[image_index].type;
         try {
-          if (!event.dataTransfer.items[0].type.match(/jpe+g/g)) throw 'Not a JPG image';
+          if (this.replacement){
+            this.replaceImage(data_index, filtered_index, image_index);
+            return;
+          }
+
+          if (!event.dataTransfer.items[0].type.match(/jpe+g/g)){
+            throw 'Not a JPG image';
+          }
 
           let file = event.dataTransfer.items[0].getAsFile();
           let details = {
@@ -124,10 +156,10 @@
           let img = new Image();
           img.onload = function(){
             this.data[data_index].artwork.installed[image_index].url = img.src;
-            this.filtered_data[tmp_index].artwork.installed[image_index].url = img.src;
+            this.filtered_data[filtered_index].artwork.installed[image_index].url = img.src;
           }.bind(this);
           img.src = window.URL.createObjectURL(file);
-          this.uploadImage(details, data_index, image_index);
+          this.uploadImage(details, data_index, filtered_index, image_index);
         }
         catch(e){
           if (e instanceof TypeError){
@@ -139,32 +171,59 @@
         }
         this.handleDragEnd(event);
       },
-      uploadImage: function(data, data_index, image_index){
+      replaceImage: function(to_data_index, to_filtered_index, to_image_index){
         vLoading.add();
 
-        util.postData('/api/v1/upload/artwork', data, csrf_token, true).then(
+        let replacement_data = {
+          from_artwork_id: this.data[this.replacement.data_index].artwork_id,
+          from_artwork_type: this.replacement.image.type,
+          this_media_id: this.replacement.image.id,
+          to_address_id: this.data[to_data_index].address_id,
+          to_artwork_type: this.data[to_data_index].artwork.installed[to_image_index].type,
+        }
+
+        util.postData('/api/v1/artwork/replace', replacement_data, csrf_token, true).then(
           (response) => {
             if (response.error) throw response;
-            let message = new Message({
-              message: response.message,
-            });
-            window.setTimeout(function(){
-              vLoading.remove();
-              vMessage.notify(message);
-              this.data[data_index].artwork.installed[image_index].served = true;
-            }.bind(this), 1000);
+            vLoading.remove();
+            this.handleMessage(response, 'success');
+
+            // replace first
+            this.filtered_data[to_filtered_index].artwork.installed[to_image_index].url = this.replacement.image.url;
+            this.filtered_data[to_filtered_index].artwork.installed[to_image_index].served = true;
+            this.data[to_data_index].artwork.installed[to_image_index].url = this.replacement.image.url;
+            this.data[to_data_index].artwork.installed[to_image_index].served = true;
+            // remove last
+            this.filtered_data[this.replacement.filtered_index].artwork.installed[this.replacement.image_index].url = null;
+            this.data[this.replacement.data_index].artwork.installed[this.replacement.image_index].url = null;
           },
           (error) => {
             throw error;
           }
         ).catch((error) => {
-          console.log(error);
-          let message = new Message({
-            message: error.message,
-            class: 'failure'
-          })
-          vMessage.notify(message);
           vLoading.remove();
+          this.handleMessage(error, 'failure');
+        });
+
+        this.handleDragEnd(event);
+      },
+      uploadImage: function(data, data_index, filtered_index, image_index){
+        vLoading.add();
+
+        util.postData('/api/v1/artwork/upload', data, csrf_token, true).then(
+          (response) => {
+            if (response.error) throw response;
+            vLoading.remove();
+            this.handleMessage(response, 'success');
+            this.data[data_index].artwork.installed[image_index].served = true;
+            this.filtered_data[filtered_index].artwork.installed[image_index].served = true;
+          },
+          (error) => {
+            throw error;
+          }
+        ).catch((error) => {
+          vLoading.remove();
+          this.handleMessage(error, 'failure');
         });
       },
       addToSearch: function(color){
@@ -199,11 +258,14 @@
             let images = this.image_types.map(type => {
               let name = 'art' + type[0].toUpperCase() + type.slice(1);
               let obj = {
+                id: null,
                 type: type,
-                url: false,
-                served: false,
+                url: null,
+                served: null,
               }
               if (d[name+'_id']){
+                obj.id = d[name+'_id'],
+                obj.name = d[name+'_filename'],
                 obj.url = '/media/' + d[name+'_directory'] + d[name+'_filename'] + '-large.jpg';
                 obj.served = true;
               }

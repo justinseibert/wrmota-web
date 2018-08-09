@@ -226,16 +226,17 @@ def post_app_data(option):
     else:
         return abort(400)
 
-@_api.route('/v1/upload/<media>', methods=['POST'])
+@_api.route('/v1/artwork/<action>', methods=['POST'])
 @Login.requires_permission(0)
-def upload_media(media):
+def upload_media(action):
     response = {
         'error': True,
-        'message': 'Upload Failed'
+        'message': 'The artwork action failed.'
     }
-    if media == 'artwork':
+    if action == 'upload':
         form = Forms.UploadArtworkForm()
         if form.validate_on_submit():
+            f = request.form
             files = Forms.handle_upload(request.files, 'image')
             if len(files['uploads']) > 0:
                 upload = files['uploads'][0]
@@ -250,14 +251,13 @@ def upload_media(media):
                     None,
                     None
                 )]
-                if Database.add_media(new_media):
+                latest_id = Database.add_media(new_media)
+                if latest_id:
                     # successfully added media to database, update artwork entry
-                    f = request.form
                     update = Database.add_artwork_to_address(
                         f['address_id'],
-                        f['artwork_id'],
                         f['type'],
-                        upload['name']
+                        latest_id
                     )
                     response['error'] = update[0]
                     response['message'] = update[1]
@@ -265,7 +265,27 @@ def upload_media(media):
                     response['message'] = 'Unable to add image to database'
         else:
             response['message'] = validform.errors
-
+    elif action == 'replace':
+        form = Forms.ReplaceArtworkForm()
+        if form.validate_on_submit():
+            f = request.form
+            # first add image to new spot
+            status = Database.add_artwork_to_address(
+                f['to_address_id'],
+                f['to_artwork_type'],
+                f['this_media_id']
+            )
+            # second, if successful, remove from original spot
+            print(status[1])
+            if not status[0]:
+                status = Database.remove_image_from_artwork(
+                    f['from_artwork_id'],
+                    f['from_artwork_type'],
+                    None
+                )
+            response['error'] = status[0]
+            response['message'] = status[1]
+    print(response['message'])
     return jsonify(response)
 
 
