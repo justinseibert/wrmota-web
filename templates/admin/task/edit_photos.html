@@ -231,19 +231,19 @@
           this.search = [];
         }
         this.search.push(color);
-        this.searchData(this.search);
+        this.searchData(this.search, this.filtered_data);
       },
       removeFromSearch: function(){
         if (this.search.length > 0){
           this.search.pop();
         }
-        this.searchData(this.search);
+        this.searchData(this.search, this.data);
       },
-      searchData: function(query){
+      searchData: function(query,data){
         if (query.length > 0){
-          let filter = this.data.filter(data => {
+          let filter = data.filter(d => {
             for (let i = 0; i < query.length; i++){
-              if (query[i] != data.code[i]) return false;
+              if (query[i] != d.code[i]) return false;
             }
             return true;
           });
