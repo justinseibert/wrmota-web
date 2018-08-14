@@ -84,6 +84,7 @@
       code: 'ABCD'.split(''),
       search: [],
       replacement: null,
+      missing: null,
     },
     methods: {
       handleDragStart: function(event, data_index, filtered_index, image_index, image){
@@ -228,10 +229,11 @@
       },
       addToSearch: function(color){
         if (this.search.length >= this.code.length){
-          this.search = [];
+          this.search = [color];
+          return this.searchData(this.data);
         }
         this.search.push(color);
-        this.searchData(this.search, this.filtered_data);
+        return this.searchData(this.filtered_data);
       },
       removeFromSearch: function(){
         if (this.search.length > 0){
@@ -239,11 +241,11 @@
         }
         this.searchData(this.search, this.data);
       },
-      searchData: function(query,data){
-        if (query.length > 0){
+      searchData: function(data){
+        if (this.search.length > 0){
           let filter = data.filter(d => {
-            for (let i = 0; i < query.length; i++){
-              if (query[i] != d.code[i]) return false;
+            for (let i = 0; i < this.search.length; i++){
+              if (this.search[i] != d.code[i]) return false;
             }
             return true;
           });
