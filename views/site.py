@@ -12,6 +12,8 @@ TEMPLATE = {}
 def check_environment():
     if current_app.config['ENVIRONMENT'] == 'PRODUCTION':
         TEMPLATE['analytics'] = True
+        TEMPLATE['GOOGLE_ANALYTICS_KEY'] = current_app.config['GOOGLE_ANALYTICS_KEY']
+        TEMPLATE['FACEBOOK_ANALYTICS_KEY'] = current_app.config['FACEBOOK_ANALYTICS_KEY']
     else:
         TEMPLATE['analytics'] = False
     TEMPLATE['mapPage'] = 0
