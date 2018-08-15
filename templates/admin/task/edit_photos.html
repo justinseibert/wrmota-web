@@ -21,6 +21,7 @@
         <button
           class="permutation-block search-menu-button"
           v-on:click="search=[];searchData(search)"
+          :title="search.length > 0 ? 'Clear search results' : 'Click the colors to search by code'"
           >
           <svg-close v-if="search.length > 0"></svg-close>
           <svg-search v-if="search.length == 0"></svg-search>
@@ -28,9 +29,10 @@
         <button
           class="permutation-block search-menu-button"
           v-on:click="toggleMissing()"
+          :title="missing ? 'Show all groups' : 'Show groups that are missing artwork'"
           >
-          <svg-close v-if="missing"></svg-close>
-          <svg-image v-if="!missing"></svg-image>
+          <svg-image v-if="missing"></svg-image>
+          <svg-reverse-camera v-if="!missing"></svg-reverse-camera>
         </button>
       </div>
     </section>
@@ -271,8 +273,10 @@
             return false;
           });
           this.filtered_data = filter;
+          this.handleMessage({message:'Showing all groups that are missing photos'}, 'success');
         } else {
           this.filtered_data = this.data;
+          this.handleMessage({message:'Showing all groups'}, 'success');
         }
       },
       updateData: function(){
