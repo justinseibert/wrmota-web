@@ -5,7 +5,7 @@
   <div id="_photos" class="row">
 
     <section id="_colorsearch" class="photo-search-block">
-      <div class="permutation-stripe" v-if="search.length > 0">
+      <div class="permutation-stripe">
         <button
           v-for="color in search"
           :class="'permutation-block permutation-'+color"
@@ -24,6 +24,13 @@
           >
           <svg-close v-if="search.length > 0"></svg-close>
           <svg-search v-if="search.length == 0"></svg-search>
+        </button>
+        <button
+          class="permutation-block search-menu-button"
+          v-on:click="toggleMissing()"
+          >
+          <svg-close v-if="missing"></svg-close>
+          <svg-invisible v-if="!missing"></svg-invisible>
         </button>
       </div>
     </section>
@@ -84,7 +91,7 @@
       code: 'ABCD'.split(''),
       search: [],
       replacement: null,
-      missing: null,
+      missing: false,
     },
     methods: {
       handleDragStart: function(event, data_index, filtered_index, image_index, image){
@@ -248,6 +255,20 @@
               if (this.search[i] != d.code[i]) return false;
             }
             return true;
+          });
+          this.filtered_data = filter;
+        } else {
+          this.filtered_data = this.data;
+        }
+      },
+      toggleMissing(){
+        this.missing = !this.missing;
+        if (this.missing){
+          let filter = this.data.filter(d => {
+            for (let i = 0; i < d.artwork.installed.length; i++){
+              if (!d.artwork.installed[i].url) return true;
+            }
+            return false;
           });
           this.filtered_data = filter;
         } else {
