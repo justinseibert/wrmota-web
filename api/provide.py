@@ -140,11 +140,13 @@ def photo_data():
         LEFT JOIN color_code ON color_code.address = address.id
         LEFT JOIN artist ON address.artist = artist.id
         LEFT JOIN artwork ON address.image = artwork.id
+        LEFT JOIN address_meta as status on address.meta = status.id
         LEFT JOIN media AS artOriginal ON artwork.original = artOriginal.id
         LEFT JOIN media AS artInstalled1 ON artwork.installed1 = artInstalled1.id
         LEFT JOIN media AS artInstalled2 ON artwork.installed2 = artInstalled2.id
         LEFT JOIN media AS artInstalled3 ON artwork.installed3 = artInstalled3.id
         WHERE address.artist IS NOT NULL
+        AND status.installed = 1
     ''').fetchall()
 
     result = Database.get_dict_of(data)
