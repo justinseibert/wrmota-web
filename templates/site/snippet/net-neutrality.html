@@ -1,0 +1,63 @@
+<aside class="row">
+  <h4>Protect the Internet</h4>
+  <p>West Reading Museum of Temporary Art is a small, community-run project focused on bringing together artists, businesses, neighbors and volunteers. Our goal is to strengthen the bonds of our community and foster an appreciation for our surroundings. We could not have done it without the technology of the internet.</p>
+  <p> This project and others like it would struggle immensely or even cease to exist if forced to compete at the level of giant media conglomerates. If you are an individual or small business that relies on the internet or if you just love seeing projects like this, <a href="#" onclick="FightForTheFuture(event);">let your representatives know!</a></p>
+</aside>
+
+<div id="_fftf_container" style="display:none;">
+  <script type="text/javascript" id="fftf">
+    var BFTN_WIDGET_OPTIONS = {
+      /*
+       * Choose from 'fp' for Free Press, 'dp' for Demand Progress or
+       * 'fftf' for Fight for the Future. Omit this property to randomly split
+       * form submissions between all organizations in the Battle for the Net
+       * coalition. Defaults to null.
+       */
+      org: null, // @type {string}
+
+      /*
+       * Specify view cookie expiration. After initial view, modal will not be
+       * displayed to a user again until after this cookie expires. Defaults to
+       * one day.
+       */
+      cookieExpirationDays: 1, // @type {number}
+
+      /*
+       * Prevents the widget iframe from loading Google Analytics. Defaults to
+       * false. (Google Analytics will also be disabled if doNotTrack is set on
+       * the user's browser.)
+       */
+      disableGoogleAnalytics: false, // @type {boolean}
+
+      /*
+       * Prevent the donate button from showing. Defaults to false.
+       */
+      disableDonations: false, // @type {boolean}
+
+      /*
+       * Always show the widget. Useful for testing. Defaults to false.
+       */
+      alwaysShow: true, // @type {boolean}
+
+      /*
+       * Custom: removes duplication of script element in DOM
+       */
+      alreadyShown: false,
+    };
+
+    function FightForTheFuture(event){
+      event.preventDefault();
+      let url = 'https://july23.battleforthenet.com/widget.js',
+          id = '_fftf_script',
+          script = document.createElement('script'),
+          container = document.getElementById('_fftf_container');
+      if (BFTN_WIDGET_OPTIONS.alreadyShown){
+        document.getElementById(id).remove();
+      }
+      script.id = id;
+      script.src = url;
+      container.appendChild(script);
+      BFTN_WIDGET_OPTIONS.alreadyShown = true;
+    };
+  </script>
+</div>

@@ -1,7 +1,8 @@
+{% raw %}
 <footer id="_footer" class="page-portion footer pad-donation">
   <hr class="break-heavy">
 
-  <div class="row">
+  <section class="row">
     <p>A <a href="https://www.facebook.com/Berks-Community-Murals-303283199762632/" target="blank">Berks Community Murals</a> project in collaboration with <a href="https://besttest.studio" target="_blank">BESTTEST</a>.</p>
     <p>Funding by West Reading Elm Street, a program of the West Reading Community Revitalization Foundation <a href="http://wrcrf.org" target="blank">(WRCRF)</a>, along with the Wyomissing Area Education Foundation <a href="http://wyoarea-foundation.org" target="blank">(WAEF)</a> and Wyomissing Area School District.</p>
     <div class="row spaced">
@@ -31,12 +32,20 @@
           <svg-social-email></svg-social-email>
         </a>
       </div>
-    </ul>
-  </div>
+    </div>
+  </section>
+  {% endraw %}
+
+  {% include 'site/snippet/net-neutrality.html' %}
+
+  {% raw %}
 </footer>
+{% endraw %}
+
+
 
 <script>
   var vFoot = new Vue({
-    el: '#_footer'
+    el: '#_footer',
   });
 </script>
