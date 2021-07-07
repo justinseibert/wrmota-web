@@ -3,7 +3,7 @@ chardet==3.0.4
 click==6.7
 cssmin==0.2.0
 ffmpy==0.2.2
-Flask==0.12.2
+Flask==1.0
 Flask-Assets==0.12
 Flask-Cors==3.0.9
 Flask-WTF==0.14.2
