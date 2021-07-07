@@ -9,7 +9,7 @@ Flask-Cors==3.0.3
 Flask-WTF==0.14.2
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 jsmin==2.2.2
 libsass==0.13.3
 MarkupSafe==1.0
